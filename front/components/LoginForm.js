@@ -12,6 +12,10 @@ const ButtonWrapper = styled.div`
   margin-top: 10px;
 `;
 
+const LoginButton = styled(Button)`
+  width: 100%;
+`;
+
 const FormWrapper = styled(Form)`
   padding: 10px;
   margin-right: 10px; // gutter
@@ -47,14 +51,9 @@ const LoginForm = () => {
       </div>
 
       <ButtonWrapper>
-        <Button
-          type="primary"
-          htmlType="submit"
-          loading={false}
-          style={{ width: "100%" }}
-        >
+        <LoginButton type="primary" htmlType="submit" loading={false}>
           로그인
-        </Button>
+        </LoginButton>
         {/* <Link href="/signup">
           <a>
             <Button>회원가입</Button>

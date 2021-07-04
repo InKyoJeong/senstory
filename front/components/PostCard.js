@@ -9,12 +9,19 @@ import {
   MessageFilled,
   RetweetOutlined,
 } from "@ant-design/icons";
+import styled from "styled-components";
+
 import { useSelector } from "react-redux";
 
 import useToggle from "../hooks/useToggle";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
 import Conditional from "../hocs/Conditional";
+
+const PostCardWrapper = styled.div`
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
@@ -27,7 +34,7 @@ const PostCard = ({ post }) => {
   }, []);
 
   return (
-    <div style={{ marginBottom: 20, marginTop: 10 }}>
+    <PostCardWrapper>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         // bodyStyle={{ background: "skyblue" }}
@@ -102,7 +109,7 @@ const PostCard = ({ post }) => {
           />
         </div>
       </Conditional>
-    </div>
+    </PostCardWrapper>
   );
 };
 

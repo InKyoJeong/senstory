@@ -1,7 +1,13 @@
 import React, { useCallback, useRef, useState } from "react";
 import { Form, Input, Button } from "antd";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../reducers/post";
+
+const FormWrapper = styled(Form)`
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
 
 const PostWriteForm = () => {
   const imagePaths = useSelector((state) => state.post.imagePaths);
@@ -24,11 +30,7 @@ const PostWriteForm = () => {
   }, [imageInput.current]);
 
   return (
-    <Form
-      style={{ marginBottom: "20px", marginTop: "10px" }}
-      encType="multipart/form-data"
-      onFinish={onSubmit}
-    >
+    <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
         style={{ marginBottom: 5 }}
         value={text}
@@ -53,7 +55,7 @@ const PostWriteForm = () => {
           </div>
         ))}
       </div>
-    </Form>
+    </FormWrapper>
   );
 };
 

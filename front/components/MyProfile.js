@@ -1,8 +1,14 @@
 import React, { useCallback } from "react";
 import { Card, Avatar, Button } from "antd";
+import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../reducers/user";
+
+const CardWrapper = styled(Card)`
+  margin-right: 10px;
+  margin-top: 10px;
+`;
 
 const MyProfile = () => {
   const dispatch = useDispatch();
@@ -12,8 +18,7 @@ const MyProfile = () => {
   }, []);
 
   return (
-    <Card
-      style={{ marginRight: 10, marginTop: 10 }}
+    <CardWrapper
       actions={[
         <div key="post">
           등록
@@ -31,7 +36,7 @@ const MyProfile = () => {
     >
       <Card.Meta avatar={<Avatar>KYO</Avatar>} title="INKYO" />
       <Button onClick={onLogOut}>로그아웃</Button>
-    </Card>
+    </CardWrapper>
   );
 };
 
