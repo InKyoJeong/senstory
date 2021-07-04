@@ -1,11 +1,17 @@
 import React from "react";
+import Head from "next/head";
 import Layout from "../components/Layout";
 
 const Profile = () => {
   return (
-    <Layout>
-      <div>Hello, Next</div>
-    </Layout>
+    <>
+      <Head>
+        <title>프로필 | SceneryBook</title>
+      </Head>
+      <Layout>
+        <div>프로필</div>
+      </Layout>
+    </>
   );
 };
 
