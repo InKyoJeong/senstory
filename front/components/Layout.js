@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Menu } from "antd";
+import { Menu, Input, Row, Col } from "antd";
 
 const Layout = ({ children }) => {
   return (
@@ -11,6 +11,9 @@ const Layout = ({ children }) => {
           <Link href="/">
             <a>SceneryBook</a>
           </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Input.Search style={{ verticalAlign: "middle" }} />
         </Menu.Item>
         <Menu.Item>
           <Link href="/profile">
@@ -23,7 +26,17 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
       </Menu>
-      {children}
+      <Row gutter={8}>
+        <Col xs={24} md={6}>
+          왼쪽
+        </Col>
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          오른쪽
+        </Col>
+      </Row>
     </div>
   );
 };
