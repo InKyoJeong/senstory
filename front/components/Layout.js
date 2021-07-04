@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
-import styled from "styled-components";
 
 import MyProfile from "./MyProfile";
 import LoginForm from "./LoginForm";
 
 const Layout = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const searchStyle = useMemo(
     () => ({
@@ -47,11 +47,7 @@ const Layout = ({ children }) => {
           {children}
         </Col>
         <Col xs={0} md={6}>
-          {isLoggedIn ? (
-            <MyProfile setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginForm setIsLoggedIn={setIsLoggedIn} />
-          )}
+          {isLoggedIn ? <MyProfile /> : <LoginForm />}
         </Col>
       </Row>
     </div>
