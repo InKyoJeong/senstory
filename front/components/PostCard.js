@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import useToggle from "../hooks/useToggle";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
+import Conditional from "../hocs/Conditional";
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
@@ -26,7 +27,7 @@ const PostCard = ({ post }) => {
   }, []);
 
   return (
-    <div style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 20, marginTop: 10 }}>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         // bodyStyle={{ background: "skyblue" }}
@@ -40,6 +41,7 @@ const PostCard = ({ post }) => {
           ) : (
             <HeartOutlined key="like" onClick={onToggleLike} />
           ),
+
           commentOpen ? (
             <MessageFilled
               style={{ color: "#1890ff" }}
@@ -75,7 +77,8 @@ const PostCard = ({ post }) => {
           description={post.content}
         />
       </Card>
-      {commentOpen && (
+
+      <Conditional condition={commentOpen}>
         <div
           style={{
             border: "1px solid rgba(0,0,0, 0.1)",
@@ -98,7 +101,7 @@ const PostCard = ({ post }) => {
             )}
           />
         </div>
-      )}
+      </Conditional>
     </div>
   );
 };

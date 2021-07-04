@@ -5,7 +5,7 @@ const NickNameEditForm = () => {
   const style = useMemo(
     () => ({
       marginBottom: "20px",
-      marginTop: "20px",
+      marginTop: "10px",
       border: "1px solid #d9d9d9",
       padding: "10px",
     }),

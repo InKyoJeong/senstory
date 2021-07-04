@@ -6,6 +6,7 @@ import { Menu, Input, Row, Col } from "antd";
 
 import MyProfile from "./MyProfile";
 import LoginForm from "./LoginForm";
+import Conditional from "../hocs/Conditional";
 
 const Layout = ({ children }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -47,7 +48,12 @@ const Layout = ({ children }) => {
           {children}
         </Col>
         <Col xs={0} sm={0} md={6}>
-          {isLoggedIn ? <MyProfile /> : <LoginForm />}
+          <Conditional condition={isLoggedIn}>
+            <MyProfile />
+          </Conditional>
+          <Conditional condition={!isLoggedIn}>
+            <LoginForm />
+          </Conditional>
         </Col>
       </Row>
     </div>
