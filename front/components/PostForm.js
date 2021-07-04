@@ -16,6 +16,7 @@ const PostForm = () => {
 
   const onSubmit = useCallback(() => {
     dispatch(addPost);
+    setText("");
   }, []);
 
   const onClickImageUpload = useCallback(() => {
@@ -29,6 +30,7 @@ const PostForm = () => {
       onFinish={onSubmit}
     >
       <Input.TextArea
+        style={{ marginBottom: 5 }}
         value={text}
         onChange={onChangeText}
         maxLength={140}
