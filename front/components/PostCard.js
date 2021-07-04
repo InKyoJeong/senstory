@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Input, Button, Avatar, Popover } from "antd";
+import { Card, Button, Avatar, Popover } from "antd";
 import {
   EllipsisOutlined,
   HeartOutlined,
   MessageOutlined,
   RetweetOutlined,
+  HeartFilled,
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import PostImages from "./PostImages";
+import useToggle from "../hooks/useToggle";
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
+
+  const [liked, setLiked] = useState(false);
+  const [commentOpen, onToggleComment] = useToggle(false);
+
+  const onToggleLike = useCallback(() => {
+    setLiked((prev) => !prev);
+  }, []);
 
   return (
     <div style={{ marginBottom: 20 }}>
@@ -19,9 +28,17 @@ const PostCard = ({ post }) => {
         cover={post.Images[0] && <PostImages images={post.Images} />}
         // bodyStyle={{ background: "skyblue" }}
         actions={[
+          liked ? (
+            <HeartFilled
+              style={{ color: "red" }}
+              key="like"
+              onClick={onToggleLike}
+            />
+          ) : (
+            <HeartOutlined key="like" onClick={onToggleLike} />
+          ),
+          <MessageOutlined key="comment" onClick={onToggleComment} />,
           <RetweetOutlined key="re" />,
-          <HeartOutlined key="like" />,
-          <MessageOutlined key="comment" />,
           <Popover
             key="more"
             content={
@@ -47,8 +64,7 @@ const PostCard = ({ post }) => {
           description={post.content}
         />
       </Card>
-      {/* <CommentForm />
-      <Comments /> */}
+      {commentOpen && <div>댓글 창</div>}
     </div>
   );
 };
