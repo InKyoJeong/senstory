@@ -40,11 +40,15 @@ const Layout = ({ children }) => {
         <Col xs={0} md={6}>
           왼쪽 (여백)
         </Col>
-        <Col xs={18} md={12}>
+        <Col xs={24} md={12}>
           {children}
         </Col>
-        <Col xs={6} md={6}>
-          {isLoggedIn ? <MyProfile /> : <LoginForm />}
+        <Col xs={0} md={6}>
+          {isLoggedIn ? (
+            <MyProfile setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LoginForm setIsLoggedIn={setIsLoggedIn} />
+          )}
         </Col>
       </Row>
     </div>
