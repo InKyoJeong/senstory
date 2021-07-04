@@ -9,7 +9,7 @@ const Signup = () => {
         <title>회원가입 | SceneryBook</title>
       </Head>
       <Layout>
-        <div>Hello, Next</div>
+        <div>회원가입페이지</div>
       </Layout>
     </>
   );
