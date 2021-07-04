@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
       </Menu>
-      <Row gutter={8}>
+      <Row gutter={10}>
         <Col xs={0} sm={2} md={6}>
           왼쪽 (여백)
         </Col>

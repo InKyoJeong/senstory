@@ -13,6 +13,7 @@ const MyProfile = () => {
 
   return (
     <Card
+      style={{ marginRight: 10, marginTop: 10 }}
       actions={[
         <div key="post">
           등록

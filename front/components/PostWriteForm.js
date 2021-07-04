@@ -3,7 +3,7 @@ import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../reducers/post";
 
-const PostForm = () => {
+const PostWriteForm = () => {
   const imagePaths = useSelector((state) => state.post.imagePaths);
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const PostForm = () => {
 
   return (
     <Form
-      style={{ margin: "10px 0 20px" }}
+      style={{ marginBottom: "20px", marginTop: "10px" }}
       encType="multipart/form-data"
       onFinish={onSubmit}
     >
@@ -57,4 +57,4 @@ const PostForm = () => {
   );
 };
 
-export default PostForm;
+export default PostWriteForm;

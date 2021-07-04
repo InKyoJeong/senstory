@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
-import PostForm from "../components/PostForm";
+import PostWriteForm from "../components/PostWriteForm";
 
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <Layout>
-      {isLoggedIn && <PostForm />}
+      {isLoggedIn && <PostWriteForm />}
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

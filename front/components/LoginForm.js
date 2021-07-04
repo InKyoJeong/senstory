@@ -14,6 +14,7 @@ const ButtonWrapper = styled.div`
 
 const FormWrapper = styled(Form)`
   padding: 10px;
+  margin-right: 10px; // gutter
 `;
 
 const LoginForm = () => {
