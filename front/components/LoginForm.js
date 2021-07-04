@@ -33,7 +33,7 @@ const LoginForm = () => {
         <br />
         <Input name="user-id" value={id} onChange={onChangeId} required />
       </div>
-      <div>
+      <div style={{ marginTop: 10 }}>
         <label htmlFor="user-password">비밀번호</label>
         <br />
         <Input
@@ -46,14 +46,19 @@ const LoginForm = () => {
       </div>
 
       <ButtonWrapper>
-        <Button htmlType="submit" loading={false}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={false}
+          style={{ width: "100%" }}
+        >
           로그인
         </Button>
-        <Link href="/signup">
+        {/* <Link href="/signup">
           <a>
             <Button>회원가입</Button>
           </a>
-        </Link>
+        </Link> */}
       </ButtonWrapper>
     </FormWrapper>
   );

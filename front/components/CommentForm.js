@@ -16,39 +16,25 @@ const CommentForm = ({ post }) => {
 
   return (
     <Form onFinish={onSubmitComment}>
-      <Form.Item
-        style={{
-          position: "relative",
-          margin: 0,
-          // margin: 10,
-        }}
-      >
-        <Input.TextArea
-          value={commentText}
-          onChange={onChangeCommentText}
-          rows={2}
-        />
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ position: "absolute", bottom: -40, right: 0 }}
-        >
-          <EditFilled />
-        </Button>
+      <Form.Item>
+        <div style={{ display: "flex" }}>
+          <Input.TextArea
+            value={commentText}
+            onChange={onChangeCommentText}
+            style={{ width: "100%", height: 50 }}
+            placeholder="댓글을 입력하세요."
+          />
+          <Button type="primary" htmlType="submit" style={{ height: 50 }}>
+            <EditFilled />
+          </Button>
+        </div>
       </Form.Item>
     </Form>
   );
 };
 
 CommentForm.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    User: PropTypes.object,
-    content: PropTypes.string,
-    createdAt: PropTypes.object,
-    Comments: PropTypes.arrayOf(PropTypes.object),
-    Images: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+  post: PropTypes.object.isRequired,
 };
 
 export default CommentForm;
