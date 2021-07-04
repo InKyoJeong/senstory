@@ -1,16 +1,19 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Avatar, Popover } from "antd";
+import { Card, Button, Avatar, Popover, List, Comment } from "antd";
 import {
   EllipsisOutlined,
   HeartOutlined,
-  MessageOutlined,
-  RetweetOutlined,
   HeartFilled,
+  MessageOutlined,
+  MessageFilled,
+  RetweetOutlined,
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import PostImages from "./PostImages";
+
 import useToggle from "../hooks/useToggle";
+import PostImages from "./PostImages";
+import CommentForm from "./CommentForm";
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
@@ -37,7 +40,15 @@ const PostCard = ({ post }) => {
           ) : (
             <HeartOutlined key="like" onClick={onToggleLike} />
           ),
-          <MessageOutlined key="comment" onClick={onToggleComment} />,
+          commentOpen ? (
+            <MessageFilled
+              style={{ color: "#1890ff" }}
+              key="comment"
+              onClick={onToggleComment}
+            />
+          ) : (
+            <MessageOutlined key="comment" onClick={onToggleComment} />
+          ),
           <RetweetOutlined key="re" />,
           <Popover
             key="more"
@@ -64,7 +75,30 @@ const PostCard = ({ post }) => {
           description={post.content}
         />
       </Card>
-      {commentOpen && <div>댓글 창</div>}
+      {commentOpen && (
+        <div
+          style={{
+            border: "1px solid rgba(0,0,0, 0.1)",
+          }}
+        >
+          <CommentForm post={post} />
+          <List
+            style={{ padding: "0px 10px" }}
+            header={`${post.Comments.length}개의 댓글`}
+            itemLayout="horizontal"
+            dataSource={post.Comments}
+            renderItem={(item) => (
+              <li>
+                <Comment
+                  author={item.User.nickname}
+                  avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                  content={item.content}
+                />
+              </li>
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -40,13 +40,13 @@ const Layout = ({ children }) => {
         </Menu.Item>
       </Menu>
       <Row gutter={8}>
-        <Col xs={0} md={6}>
+        <Col xs={0} sm={2} md={6}>
           왼쪽 (여백)
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={20} md={12}>
           {children}
         </Col>
-        <Col xs={0} md={6}>
+        <Col xs={0} sm={0} md={6}>
           {isLoggedIn ? <MyProfile /> : <LoginForm />}
         </Col>
       </Row>
