@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
@@ -7,12 +7,15 @@ import styled from "styled-components";
 import MyProfile from "./MyProfile";
 import LoginForm from "./LoginForm";
 
-const SearchInput = styled(Input.Search)`
-  vertical-align: middle;
-`;
-
 const Layout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const searchStyle = useMemo(
+    () => ({
+      verticalAlign: "middle",
+    }),
+    []
+  );
 
   return (
     <div>
@@ -23,7 +26,7 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <SearchInput />
+          <Input.Search style={searchStyle} />
         </Menu.Item>
         <Menu.Item>
           <Link href="/profile">

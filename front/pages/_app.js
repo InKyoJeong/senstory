@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Head from "next/head";
 import "antd/dist/antd.css";
 
+import wrapper from "../store/configureStore";
+
 const SceneryBook = ({ Component }) => {
   return (
     <>
@@ -19,4 +21,4 @@ SceneryBook.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default SceneryBook;
+export default wrapper.withRedux(SceneryBook);

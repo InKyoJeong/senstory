@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import Head from "next/head";
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 
@@ -8,6 +8,10 @@ import useInput from "../hooks/useInput";
 
 const ErrorMessage = styled.div`
   color: red;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 10px;
 `;
 
 const Signup = () => {
@@ -27,8 +31,11 @@ const Signup = () => {
   );
 
   const onSubmit = useCallback(() => {
-    //
-  }, []);
+    if (password !== passwordCheck) {
+      return setPasswordError(true);
+    }
+    console.log(id, nickname, password);
+  }, [password, passwordCheck]);
 
   return (
     <Layout>
@@ -76,6 +83,11 @@ const Signup = () => {
             <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
           )}
         </div>
+        <ButtonWrapper>
+          <Button type="primary" htmlType="submit">
+            가입하기
+          </Button>
+        </ButtonWrapper>
       </Form>
     </Layout>
   );
