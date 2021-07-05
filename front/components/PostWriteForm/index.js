@@ -1,13 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Form, Input, Button } from "antd";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../reducers/post";
+import { Input, Button } from "antd";
 
-const FormWrapper = styled(Form)`
-  margin-top: 10px;
-  margin-bottom: 20px;
-`;
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "../../reducers/post";
+
+import { FormWrapper } from "./styles";
 
 const PostWriteForm = () => {
   const imagePaths = useSelector((state) => state.post.imagePaths);

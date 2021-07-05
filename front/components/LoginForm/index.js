@@ -1,25 +1,12 @@
 import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import { Form, Input, Button } from "antd";
-import styled from "styled-components";
 
-import useInput from "../hooks/useInput";
-
+import useInput from "../../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers/user";
+import { loginAction } from "../../reducers/user";
 
-const ButtonWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const LoginButton = styled(Button)`
-  width: 100%;
-`;
-
-const FormWrapper = styled(Form)`
-  padding: 10px;
-  margin-right: 10px; // gutter
-`;
+import { FormWrapper, ButtonWrapper, LoginButton } from "./styles";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

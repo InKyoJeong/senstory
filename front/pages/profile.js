@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 
 import Layout from "../components/Layout";
-import NickNameEditForm from "../components/NickNameEditForm";
+import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
 import MyProfile from "../components/MyProfile";
 
@@ -25,7 +25,7 @@ const Profile = () => {
       </Head>
       <Layout>
         {/* <MyProfile /> */}
-        <NickNameEditForm />
+        <NickEditForm />
         {/* 자기소개 Form */}
         <FollowList header="팔로잉" data={followingList} />
         <FollowList header="팔로워" data={followerList} />

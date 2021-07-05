@@ -1,14 +1,10 @@
 import React, { useCallback } from "react";
 import { Card, Avatar, Button } from "antd";
-import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
-import { logoutAction } from "../reducers/user";
+import { logoutAction } from "../../reducers/user";
 
-const CardWrapper = styled(Card)`
-  margin-right: 10px;
-  margin-top: 10px;
-`;
+import { CardWrapper } from "./styles";
 
 const MyProfile = () => {
   const dispatch = useDispatch();

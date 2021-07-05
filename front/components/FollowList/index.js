@@ -1,21 +1,8 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { List, Card, Button } from "antd";
+import { Card, Button } from "antd";
 import { StopOutlined } from "@ant-design/icons";
-
-const ButtonWrapper = styled.div`
-  text-align: center;
-  margin: 10px 0px;
-`;
-
-const ListWrapper = styled(List)`
-  margin-bottom: 20px;
-`;
-
-const ListItem = styled(List.Item)`
-  margin-top: 10px;
-`;
+import { ListWrapper, ListItem, ButtonWrapper } from "./styles";
 
 const FollowList = ({ header, data }) => {
   const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);

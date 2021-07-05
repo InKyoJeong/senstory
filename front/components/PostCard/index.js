@@ -9,19 +9,15 @@ import {
   MessageFilled,
   RetweetOutlined,
 } from "@ant-design/icons";
-import styled from "styled-components";
 
 import { useSelector } from "react-redux";
 
-import useToggle from "../hooks/useToggle";
-import PostImages from "./PostImages";
-import CommentForm from "./CommentForm";
-import Conditional from "../hocs/Conditional";
+import useToggle from "../../hooks/useToggle";
+import PostImages from "../PostImages";
+import CommentForm from "../CommentForm";
+import Conditional from "../../hocs/Conditional";
 
-const PostCardWrapper = styled.div`
-  margin-top: 10px;
-  margin-bottom: 20px;
-`;
+import { PostCardWrapper, PostCardBorder } from "./styles";
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
@@ -86,15 +82,11 @@ const PostCard = ({ post }) => {
       </Card>
 
       <Conditional condition={commentOpen}>
-        <div
-          style={{
-            border: "1px solid rgba(0,0,0, 0.1)",
-          }}
-        >
+        <PostCardBorder>
           <CommentForm post={post} />
           <List
             style={{ padding: "0px 10px" }}
-            header={`${post.Comments.length}개의 댓글`}
+            // header={`${post.Comments.length}개의 댓글`}
             itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
@@ -107,7 +99,7 @@ const PostCard = ({ post }) => {
               </li>
             )}
           />
-        </div>
+        </PostCardBorder>
       </Conditional>
     </PostCardWrapper>
   );
