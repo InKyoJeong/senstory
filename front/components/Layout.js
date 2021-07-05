@@ -3,10 +3,24 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
+import { createGlobalStyle } from "styled-components";
 
 import MyProfile from "./MyProfile";
 import LoginForm from "./LoginForm";
 import Conditional from "../hocs/Conditional";
+
+const Global = createGlobalStyle`
+  .ant-row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  .ant-col:first-child{
+    padding-left: 0 !important;
+  }
+  .ant-col:last-child{
+    padding-right: 0 !important;
+  }
+`;
 
 const Layout = ({ children }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -20,6 +34,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
+      <Global />
       <Menu mode="horizontal">
         <Menu.Item key="home">
           <Link href="/">
