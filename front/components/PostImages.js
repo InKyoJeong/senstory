@@ -2,11 +2,18 @@ import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { PlusOutlined, PlusCircleFilled } from "@ant-design/icons";
 
+import Conditional from "../hocs/Conditional";
+import ImagesZoom from "./ImagesZoom";
+
 const PostImages = ({ images }) => {
   const [showImagesZoom, serShowImagesZoom] = useState(false);
 
   const onZoom = useCallback(() => {
-    //
+    serShowImagesZoom(true);
+  }, []);
+
+  const onClose = useCallback(() => {
+    serShowImagesZoom(false);
   }, []);
 
   if (images.length === 1) {
@@ -18,6 +25,9 @@ const PostImages = ({ images }) => {
           alt={images[0].src}
           onClick={onZoom}
         />
+        <Conditional condition={showImagesZoom}>
+          <ImagesZoom images={images} onClose={onClose} />
+        </Conditional>
       </>
     );
   }
@@ -39,6 +49,9 @@ const PostImages = ({ images }) => {
           alt={images[1].src}
           onClick={onZoom}
         />
+        <Conditional condition={showImagesZoom}>
+          <ImagesZoom images={images} onClose={onClose} />
+        </Conditional>
       </>
     );
   }
@@ -61,12 +74,16 @@ const PostImages = ({ images }) => {
             textAlign: "center",
             verticalAlign: "middle",
           }}
+          onClick={onZoom}
         >
           <PlusCircleFilled />
           <br />
           {images.length - 1}개의 사진 더보기
         </div>
       </div>
+      <Conditional condition={showImagesZoom}>
+        <ImagesZoom images={images} onClose={onClose} />
+      </Conditional>
     </>
   );
 };
