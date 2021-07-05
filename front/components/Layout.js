@@ -56,9 +56,7 @@ const Layout = ({ children }) => {
         </Menu.Item>
       </Menu>
       <Row gutter={10}>
-        <Col xs={0} sm={2} md={6}>
-          왼쪽 (여백)
-        </Col>
+        <Col xs={0} sm={2} md={6}></Col>
         <Col xs={24} sm={20} md={12}>
           {children}
         </Col>

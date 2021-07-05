@@ -11,11 +11,12 @@ import {
 } from "@ant-design/icons";
 
 import { useSelector } from "react-redux";
-
 import useToggle from "../../hooks/useToggle";
+import Conditional from "../../hocs/Conditional";
+
 import PostImages from "../PostImages";
 import CommentForm from "../CommentForm";
-import Conditional from "../../hocs/Conditional";
+import PostTag from "../PostTag";
 
 import { PostCardWrapper, PostCardBorder } from "./styles";
 
@@ -77,7 +78,7 @@ const PostCard = ({ post }) => {
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.nickname}
-          description={post.content}
+          description={<PostTag postData={post.content} />}
         />
       </Card>
 

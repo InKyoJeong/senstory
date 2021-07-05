@@ -20,7 +20,7 @@ const ImagesZoom = ({ images, onClose }) => {
       <Global />
       <Header>
         <h1>상세 이미지</h1>
-        <CloseBtn onClick={onClose}>X</CloseBtn>
+        <CloseBtn onClick={onClose} />
       </Header>
       <SlickWrapper>
         <div>

@@ -12,22 +12,22 @@ export const Overlay = styled.div`
 
 export const Header = styled.header`
   height: 44px;
-  background: white;
+  background: gray;
   position: relative;
   padding: 0;
   text-align: center;
 
   & h1 {
     margin: 0;
-    font-size: 17px;
-    color: #333;
+    font-size: 15px;
+    color: black;
     line-height: 44px;
   }
 `;
 
 export const CloseBtn = styled(CloseCircleOutlined)`
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 0;
   padding: 15px;
   line-height: 14px;
