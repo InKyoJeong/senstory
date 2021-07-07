@@ -5,53 +5,95 @@ import {
   LOG_OUT_FAILURE,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
 } from "../actions/user";
 
 export const initialState = {
-  isLoggingIn: false, // 로그인 시도중
-  isLoggedIn: false,
-  isLoggingOut: false, // 로그아웃 시도중
+  logInLoading: false, // 로그인 시도중
+  logInFinish: false,
+  logInError: null,
+  logOutLoading: false, // 로그아웃 시도중
+  logOutFinish: false,
+  logOutError: null,
+  signUpLoading: false, // 회원가입 시도중
+  signUpFinish: false,
+  signUpError: null,
   me: null,
   signUpData: {},
   loginData: {},
 };
+
+const dummyUser = (data) => ({
+  ...data,
+  nickname: "KKYYOO",
+  id: 1,
+  Posts: [],
+  Followings: [],
+  Followers: [],
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST:
       return {
         ...state,
-        isLoggingIn: true,
+        logInLoading: true,
+        logInFinish: false,
+        logInError: null,
       };
     case LOG_IN_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: true,
-        me: { ...action.data, nickname: "Uyo" },
+        logInLoading: false,
+        logInFinish: true,
+        me: dummyUser(action.data),
       };
     case LOG_IN_FAILURE:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: false,
+        logInLoading: false,
+        logInError: action.error,
       };
     case LOG_OUT_REQUEST:
       return {
         ...state,
-        isLoggingOut: true,
+        logOutLoading: true,
+        logOutFinish: false,
+        logOutError: null,
       };
     case LOG_OUT_SUCCESS:
       return {
         ...state,
-        isLoggingOut: false,
-        isLoggedIn: false,
+        logOutLoading: false,
+        logOutFinish: true,
         me: null,
       };
     case LOG_OUT_FAILURE:
       return {
         ...state,
-        isLoggingOut: true,
+        logOutLoading: false,
+        logOutError: action.error,
+      };
+    case SIGN_UP_REQUEST:
+      return {
+        ...state,
+        signUpLoading: true,
+        signUpFinish: false,
+        signUpError: null,
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        signUpLoading: false,
+        signUpFinish: true,
+      };
+    case SIGN_UP_FAILURE:
+      return {
+        ...state,
+        signUpLoading: false,
+        signUpError: action.error,
       };
     default:
       return state;
