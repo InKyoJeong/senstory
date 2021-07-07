@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import styled from "styled-components";
 
 import useInput from "../hooks/useInput";
+import Conditional from "../hocs/Conditional";
 
 const ErrorMessage = styled.div`
   color: red;
@@ -79,9 +80,9 @@ const Signup = () => {
             onChange={onChangePasswordCheck}
             required
           />
-          {passwordError && (
+          <Conditional condition={passwordError}>
             <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
-          )}
+          </Conditional>
         </div>
 
         <ButtonWrapper>

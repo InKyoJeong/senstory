@@ -58,7 +58,7 @@ const PostImages = ({ images }) => {
 
   return (
     <>
-      <div>
+      <div style={{ background: "rgba(0,0,0,0.1)" }}>
         <img
           role="presentation"
           style={{ width: "50%" }}
