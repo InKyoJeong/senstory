@@ -23,7 +23,7 @@ const Global = createGlobalStyle`
 `;
 
 const Layout = ({ children }) => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const { me } = useSelector((state) => state.user);
 
   const searchStyle = useMemo(
     () => ({
@@ -61,10 +61,10 @@ const Layout = ({ children }) => {
           {children}
         </Col>
         <Col xs={0} sm={0} md={6}>
-          <Conditional condition={isLoggedIn}>
+          <Conditional condition={me}>
             <MyProfile />
           </Conditional>
-          <Conditional condition={!isLoggedIn}>
+          <Conditional condition={!me}>
             <LoginForm />
           </Conditional>
         </Col>

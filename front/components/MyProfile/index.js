@@ -8,7 +8,7 @@ import { CardWrapper } from "./styles";
 
 const MyProfile = () => {
   const dispatch = useDispatch();
-  const { me, isLoggingOut } = useSelector((state) => state.user);
+  const { me, logOutLoading } = useSelector((state) => state.user);
 
   const onLogOut = useCallback(() => {
     dispatch(logoutRequestAction());
@@ -19,15 +19,18 @@ const MyProfile = () => {
       actions={[
         <div key="post">
           등록
-          <br />0
+          <br />
+          {me.Posts.length}
         </div>,
         <div key="followings">
           팔로잉
-          <br />0
+          <br />
+          {me.Followings.length}
         </div>,
         <div key="followers">
           팔로워
-          <br />0
+          <br />
+          {me.Followers.length}
         </div>,
       ]}
     >
@@ -35,7 +38,7 @@ const MyProfile = () => {
         avatar={<Avatar>{me.nickname[0]}</Avatar>}
         title={me.nickname}
       />
-      <Button onClick={onLogOut} loading={isLoggingOut}>
+      <Button onClick={onLogOut} loading={logOutLoading}>
         로그아웃
       </Button>
     </CardWrapper>
