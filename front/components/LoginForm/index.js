@@ -4,7 +4,7 @@ import { Form, Input, Button } from "antd";
 
 import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
-import { loginRequestAction } from "../../reducers/user";
+import { loginRequestAction } from "../../actions/user";
 
 import { FormWrapper, ButtonWrapper, LoginButton } from "./styles";
 

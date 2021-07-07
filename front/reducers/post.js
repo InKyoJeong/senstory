@@ -1,3 +1,9 @@
+import {
+  ADD_POST_FAILURE,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+} from "../actions/post";
+
 export const initialState = {
   mainPosts: [
     {
@@ -32,11 +38,6 @@ export const initialState = {
   postAdded: false,
 };
 
-const ADD_POST = "ADD_POST";
-
-export const addPost = {
-  type: ADD_POST,
-};
 const dummyPost = {
   id: 2,
   content: "더미 포스트",
@@ -50,11 +51,19 @@ const dummyPost = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST_REQUEST:
+      return {
+        //
+      };
+    case ADD_POST_SUCCESS:
       return {
         ...state,
         mainPosts: [dummyPost, ...state.mainPosts],
         postAdded: true,
+      };
+    case ADD_POST_FAILURE:
+      return {
+        //
       };
     default:
       return state;

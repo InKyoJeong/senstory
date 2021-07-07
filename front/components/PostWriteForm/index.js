@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { Input, Button } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../../reducers/post";
+import { addPost } from "../../actions/post";
 
 import { FormWrapper } from "./styles";
 
