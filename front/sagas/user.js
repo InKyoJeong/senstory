@@ -1,4 +1,4 @@
-import { all, fork, takeLatest } from "redux-saga/effects";
+import { all, fork, takeLatest, put, delay } from "redux-saga/effects";
 import axios from "axios";
 
 function loginAPI(data) {
@@ -7,16 +7,18 @@ function loginAPI(data) {
 
 function* logIn(action) {
   try {
+    console.log("saga login");
     // const result = yield call(loginAPI, action.data); //아직서버없으므로 주석처리하고 딜레이로 처리
     yield delay(1000);
     yield put({
       type: "LOG_IN_SUCCESS",
-      //   data: result.data,
+      data: action.data,
+      // data: result.data,
     });
   } catch (err) {
     yield put({
       type: "LOG_IN_FAILURE",
-      //   data: err.response.data,
+      data: err.response.data,
     });
   }
 }
@@ -41,7 +43,7 @@ function* logOut() {
   }
 }
 
-function* watchLogin() {
+function* watchLogIn() {
   yield takeLatest("LOG_IN_REQUEST", logIn);
 }
 
