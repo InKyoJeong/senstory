@@ -18,7 +18,7 @@ const MyProfile = () => {
     <CardWrapper
       actions={[
         <div key="post">
-          등록
+          게시물
           <br />
           {me.Posts.length}
         </div>,

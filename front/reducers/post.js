@@ -19,19 +19,32 @@ export const initialState = {
       },
       content: "첫번째 게시글 #해시태그",
       Images: [
-        { src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4" },
-        { src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4" },
-        { src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4" },
+        {
+          id: shortid.generate(),
+          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
+        },
+        {
+          id: shortid.generate(),
+          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
+        },
+        {
+          id: shortid.generate(),
+          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
+        },
       ],
       Comments: [
         {
+          id: shortid.generate(),
           User: {
+            id: shortid.generate(),
             nickname: "Tak",
           },
           content: "안녕하세요",
         },
         {
+          id: shortid.generate(),
           User: {
+            id: shortid.generate(),
             nickname: "Mike",
           },
           content: "반가워요",
@@ -49,8 +62,8 @@ export const initialState = {
 };
 
 const dummyPost = (data) => ({
-  id: shortid.generate(),
-  content: data,
+  id: data.id,
+  content: data.content,
   User: {
     id: 1,
     nickname: "INGG",
@@ -119,6 +132,7 @@ const reducer = (state = initialState, action) => {
         addCommentLoading: false,
         addCommentError: action.error,
       };
+
     default:
       return state;
   }

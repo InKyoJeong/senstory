@@ -1,4 +1,5 @@
 import {
+  ADD_POST_TO_ME,
   CHANGE_NICK_FAILURE,
   CHANGE_NICK_REQUEST,
   CHANGE_NICK_SUCCESS,
@@ -35,9 +36,9 @@ const dummyUser = (data) => ({
   ...data,
   nickname: "KKYYOO",
   id: 1,
-  Posts: [],
-  Followings: [],
-  Followers: [],
+  Posts: [{ id: 1 }],
+  Followings: [{ nickname: "zllzl" }, { nickname: "hhh" }],
+  Followers: [{ nickname: "zllzl" }, { nickname: "hhh" }],
 });
 
 const reducer = (state = initialState, action) => {
@@ -119,6 +120,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         changeNickLoading: false,
         changeNickError: action.error,
+      };
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: [{ id: action.data }, ...state.me.Posts],
+        },
       };
     default:
       return state;
