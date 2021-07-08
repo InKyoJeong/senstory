@@ -41,9 +41,9 @@ const Layout = ({ children }) => {
             <a>SceneryBook</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="search">
+        {/* <Menu.Item key="search">
           <Input.Search style={searchStyle} />
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="profile">
           <Link href="/profile">
             <a>프로필</a>
@@ -66,6 +66,10 @@ const Layout = ({ children }) => {
           </Conditional>
           <Conditional condition={!me}>
             <LoginForm />
+            <div>
+              <label>해시태그 검색</label>
+              <Input.Search style={searchStyle} />
+            </div>
           </Conditional>
         </Col>
       </Row>

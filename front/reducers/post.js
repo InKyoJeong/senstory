@@ -9,55 +9,21 @@ import {
   ADD_POST_FAILURE,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
+  LOAD_POST_FAILURE,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
 } from "../actions/post";
 
 export const initialState = {
-  mainPosts: [
-    {
-      id: 1,
-      User: {
-        id: 1,
-        nickname: "Kyo",
-      },
-      content: "첫번째 게시글 #해시태그",
-      Images: [
-        {
-          id: shortid.generate(),
-          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
-        },
-        {
-          id: shortid.generate(),
-          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
-        },
-        {
-          id: shortid.generate(),
-          src: "https://avatars.githubusercontent.com/u/48676844?s=120&v=4",
-        },
-      ],
-      Comments: [
-        {
-          id: shortid.generate(),
-          User: {
-            id: shortid.generate(),
-            nickname: "Tak",
-          },
-          content: "안녕하세요",
-        },
-        {
-          id: shortid.generate(),
-          User: {
-            id: shortid.generate(),
-            nickname: "Mike",
-          },
-          content: "반가워요",
-        },
-      ],
-    },
-  ],
+  mainPosts: [],
   imagePaths: [],
+  hasMorePosts: true,
+  loadPostLoading: false,
+  loadPostFinish: false,
+  loadPostError: null,
   addPostLoading: false,
   addPostFinish: false,
   addPostError: null,
@@ -69,8 +35,8 @@ export const initialState = {
   addCommentError: null,
 };
 
-initialState.mainPosts = initialState.mainPosts.concat(
-  Array(20)
+export const generateDummyPosts = (number) =>
+  Array(number)
     .fill()
     .map(() => ({
       id: shortid.generate(),
@@ -93,8 +59,7 @@ initialState.mainPosts = initialState.mainPosts.concat(
           content: faker.lorem.sentence(),
         },
       ],
-    }))
-);
+    }));
 
 const dummyPost = (data) => ({
   id: data.id,
@@ -119,6 +84,21 @@ const dummyComment = (data) => ({
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
+      case LOAD_POST_REQUEST:
+        draft.loadPostLoading = true;
+        draft.loadPostFinish = false;
+        draft.loadPostError = null;
+        break;
+      case LOAD_POST_SUCCESS:
+        draft.loadPostLoading = false;
+        draft.loadPostFinish = true;
+        draft.mainPosts = action.data.concat(draft.mainPosts);
+        draft.hasMorePosts = draft.mainPosts.length < 50;
+        break;
+      case LOAD_POST_FAILURE:
+        draft.loadPostLoading = false;
+        draft.loadPostError = action.error;
+        break;
       case ADD_POST_REQUEST:
         draft.addPostLoading = true;
         draft.addPostFinish = false;
@@ -127,7 +107,7 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_SUCCESS:
         draft.addPostLoading = false;
         draft.addPostFinish = true;
-        draft.mainPosts = [dummyPost(action.data), ...state.mainPosts];
+        draft.mainPosts.unshift(dummyPost(action.data));
         break;
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;

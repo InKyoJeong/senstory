@@ -5,7 +5,7 @@ import Router from "next/router";
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
-import MyProfile from "../components/MyProfile";
+// import MyProfile from "../components/MyProfile";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
