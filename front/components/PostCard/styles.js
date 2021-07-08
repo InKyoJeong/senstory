@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PostCardWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
 `;
 

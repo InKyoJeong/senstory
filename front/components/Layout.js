@@ -28,6 +28,7 @@ const Layout = ({ children }) => {
   const searchStyle = useMemo(
     () => ({
       verticalAlign: "middle",
+      marginTop: "5px",
     }),
     []
   );
@@ -71,7 +72,7 @@ const Layout = ({ children }) => {
           <Conditional condition={!me}>
             <LoginForm />
             <div>
-              <label>해시태그 검색</label>
+              <label style={{ color: "white" }}>해시태그 검색</label>
               <Input.Search style={searchStyle} />
             </div>
           </Conditional>

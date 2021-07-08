@@ -6,7 +6,7 @@ import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../actions/user";
 
-import { FormWrapper, ButtonWrapper, LoginButton } from "./styles";
+import { FormWrapper, ButtonWrapper, LoginButton, LoginInput } from "./styles";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const LoginForm = () => {
       <div>
         <label htmlFor="user-email">이메일</label>
         <br />
-        <Input
+        <LoginInput
           name="user-email"
           type="email"
           value={email}
@@ -35,7 +35,7 @@ const LoginForm = () => {
       <div style={{ marginTop: 10 }}>
         <label htmlFor="user-password">비밀번호</label>
         <br />
-        <Input
+        <LoginInput
           name="user-password"
           type="password"
           value={password}

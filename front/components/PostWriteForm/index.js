@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../actions/post";
 import useInput from "../../hooks/useInput";
 
-import { FormWrapper } from "./styles";
-import { EditFilled } from "@ant-design/icons";
+import { FormWrapper, ImageButton, PostWriteButton } from "./styles";
+import { EditFilled, PictureFilled } from "@ant-design/icons";
 
 const PostWriteForm = () => {
   const { imagePaths, addPostFinish, addPostLoading } = useSelector(
@@ -36,30 +36,29 @@ const PostWriteForm = () => {
     <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
         style={{
-          marginBottom: 5,
+          marginBottom: 8,
           backgroundColor: "gray",
           borderColor: "#6f6f70",
           color: "white",
-          borderRadius: 5,
+          borderRadius: 10,
         }}
         value={text}
         onChange={onChangeText}
         maxLength={140}
         placeholder="내용을 입력하세요."
       />
-      <div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <input type="file" multiple hidden ref={imageInput} />
-        <Button onClick={onClickImageUpload} style={{ borderRadius: 5 }}>
-          이미지 업로드
-        </Button>
-        <Button
-          style={{ float: "right", borderRadius: 10 }}
+        <ImageButton onClick={onClickImageUpload}>
+          <PictureFilled />
+        </ImageButton>
+        <PostWriteButton
           type="primary"
           htmlType="submit"
           loading={addPostLoading}
         >
           <EditFilled />
-        </Button>
+        </PostWriteButton>
       </div>
       <div>
         {imagePaths.map((v) => (

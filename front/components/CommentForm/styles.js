@@ -24,6 +24,6 @@ export const WriteInput = styled(Input)`
 export const WriteButton = styled(Button)`
   height: 40px;
   border-radius: 10px;
-  margin-left: 3px;
+  margin-left: 5px;
   /* color: black; */
 `;
