@@ -1,4 +1,4 @@
-import { all, fork, takeLatest } from "redux-saga/effects";
+import { all, fork, takeLatest, put, delay } from "redux-saga/effects";
 import axios from "axios";
 
 import {
@@ -20,7 +20,7 @@ function* addPost(action) {
     yield delay(1000);
     yield put({
       type: ADD_POST_SUCCESS,
-      // data: result.data,
+      data: action.data,
     });
   } catch (err) {
     yield put({

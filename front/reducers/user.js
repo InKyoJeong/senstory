@@ -1,4 +1,7 @@
 import {
+  CHANGE_NICK_FAILURE,
+  CHANGE_NICK_REQUEST,
+  CHANGE_NICK_SUCCESS,
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
@@ -14,12 +17,15 @@ export const initialState = {
   logInLoading: false, // 로그인 시도중
   logInFinish: false,
   logInError: null,
-  logOutLoading: false, // 로그아웃 시도중
+  logOutLoading: false, // 로그아웃
   logOutFinish: false,
   logOutError: null,
-  signUpLoading: false, // 회원가입 시도중
+  signUpLoading: false, // 회원가입
   signUpFinish: false,
   signUpError: null,
+  changeNickLoading: false, // 닉네임
+  changeNickFinish: false,
+  changeNickError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -94,6 +100,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         signUpLoading: false,
         signUpError: action.error,
+      };
+    case CHANGE_NICK_REQUEST:
+      return {
+        ...state,
+        changeNickLoading: true,
+        changeNickFinish: false,
+        changeNickError: null,
+      };
+    case CHANGE_NICK_SUCCESS:
+      return {
+        ...state,
+        changeNickLoading: false,
+        changeNickFinish: true,
+      };
+    case CHANGE_NICK_FAILURE:
+      return {
+        ...state,
+        changeNickLoading: false,
+        changeNickError: action.error,
       };
     default:
       return state;

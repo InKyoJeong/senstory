@@ -7,12 +7,12 @@ import PostWriteForm from "../components/PostWriteForm";
 import Conditional from "../hocs/Conditional";
 
 const Home = () => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const mainPosts = useSelector((state) => state.post.mainPosts);
+  const { me } = useSelector((state) => state.user);
+  const { mainPosts } = useSelector((state) => state.post);
 
   return (
     <Layout>
-      <Conditional condition={isLoggedIn}>
+      <Conditional condition={me}>
         <PostWriteForm />
       </Conditional>
 

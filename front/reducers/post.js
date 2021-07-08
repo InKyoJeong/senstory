@@ -41,18 +41,21 @@ export const initialState = {
   addPostLoading: false,
   addPostFinish: false,
   addPostError: null,
+  addCommentLoading: false,
+  addCommentFinish: false,
+  addCommentError: null,
 };
 
-const dummyPost = {
+const dummyPost = (data) => ({
   id: 2,
-  content: "더미 포스트",
+  content: data,
   User: {
     id: 1,
     nickname: "INGG",
   },
   Images: [],
   Comments: [],
-};
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,7 +69,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostFinish: true,
       };
