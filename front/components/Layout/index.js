@@ -1,35 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
-import { createGlobalStyle } from "styled-components";
 
-import MyProfile from "./MyProfile";
-import LoginForm from "./LoginForm";
-import Conditional from "../hocs/Conditional";
-
-const Global = createGlobalStyle`
-  .ant-row{
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-  }
-  .ant-col:first-child{
-    padding-left: 0 !important;
-  }
-  .ant-col:last-child{
-    padding-right: 0 !important;
-  }
-
-  // card icon style
-  .ant-card-actions{
-    border-color: gray  !important; 
-    background-color: #bfbfbf  !important; 
-  }
-  .ant-card-actions > li {
-    border-color: gray  !important; 
-  }
-`;
+import MyProfile from "../MyProfile";
+import LoginForm from "../LoginForm";
+import Conditional from "../../hocs/Conditional";
+import { Global } from "./styles";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
@@ -37,7 +15,11 @@ const Layout = ({ children }) => {
   const searchStyle = useMemo(
     () => ({
       verticalAlign: "middle",
-      marginTop: "5px",
+      backgroundColor: "gray",
+      marginTop: 5,
+      borderRadius: 10,
+      padding: "5px 0px",
+      color: "white",
     }),
     []
   );
@@ -78,11 +60,12 @@ const Layout = ({ children }) => {
           <Conditional condition={me}>
             <MyProfile />
           </Conditional>
+
           <Conditional condition={!me}>
             <LoginForm />
-            <div>
+            <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
-              <Input.Search style={searchStyle} />
+              <Input.Search style={searchStyle} size="small" bordered={false} />
             </div>
           </Conditional>
         </Col>
