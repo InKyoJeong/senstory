@@ -17,6 +17,7 @@ import Conditional from "../../hocs/Conditional";
 import PostImages from "../PostImages";
 import CommentForm from "../CommentForm";
 import PostTag from "../PostTag";
+import FollowButton from "../FollowButton";
 
 import { PostCardWrapper, PostCardBorder } from "./styles";
 import { REMOVE_POST_REQUEST } from "../../actions/post";
@@ -90,6 +91,7 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
+        extra={id && <FollowButton post={post} />}
       >
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}

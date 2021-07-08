@@ -8,6 +8,7 @@ import wrapper from "../store/configureStore";
 const SceneryBook = ({ Component }) => {
   return (
     <>
+      {/* <Global /> */}
       <Head>
         <meta charSet="utf-8" />
         <title>SceneryBook</title>

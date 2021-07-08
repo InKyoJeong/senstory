@@ -5,6 +5,9 @@ import {
   CHANGE_NICK_FAILURE,
   CHANGE_NICK_REQUEST,
   CHANGE_NICK_SUCCESS,
+  FOLLOW_FAILURE,
+  FOLLOW_REQUEST,
+  FOLLOW_SUCCESS,
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
@@ -15,10 +18,13 @@ import {
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
+  UNFOLLOW_FAILURE,
+  UNFOLLOW_REQUEST,
+  UNFOLLOW_SUCCESS,
 } from "../actions/user";
 
 export const initialState = {
-  logInLoading: false, // 로그인 시도중
+  logInLoading: false, // 로그인
   logInFinish: false,
   logInError: null,
   logOutLoading: false, // 로그아웃
@@ -30,6 +36,12 @@ export const initialState = {
   changeNickLoading: false, // 닉네임
   changeNickFinish: false,
   changeNickError: null,
+  followLoading: false, // 팔로우
+  followFinish: false,
+  followError: null,
+  unfollowLoading: false, // 언팔
+  unfollowFinish: false,
+  unfollowError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -100,6 +112,36 @@ const reducer = (state = initialState, action) => {
       case CHANGE_NICK_FAILURE:
         draft.changeNickLoading = false;
         draft.changeNickError = action.error;
+        break;
+      case FOLLOW_REQUEST:
+        draft.followLoading = true;
+        draft.followFinish = false;
+        draft.followError = null;
+        break;
+      case FOLLOW_SUCCESS:
+        draft.followLoading = false;
+        draft.followFinish = true;
+        draft.me.Followings.push({ id: action.data });
+        break;
+      case FOLLOW_FAILURE:
+        draft.followLoading = false;
+        draft.followError = action.error;
+        break;
+      case UNFOLLOW_REQUEST:
+        draft.unfollowLoading = true;
+        draft.unfollowFinish = false;
+        draft.unfollowError = null;
+        break;
+      case UNFOLLOW_SUCCESS:
+        draft.unfollowLoading = false;
+        draft.unfollowFinish = true;
+        draft.me.Followings = draft.me.Followings.filter(
+          (v) => v.id !== action.data
+        );
+        break;
+      case UNFOLLOW_FAILURE:
+        draft.unfollowLoading = false;
+        draft.unfollowError = action.error;
         break;
       case ADD_POST_TO_ME:
         draft.me.Posts.unshift({ id: action.data });
