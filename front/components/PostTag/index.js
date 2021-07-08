@@ -13,7 +13,7 @@ const PostTag = ({ postData }) => {
             </Link>
           );
         }
-        return v;
+        return <p style={{ color: "white" }}>{v}</p>;
       })}
     </div>
   );

@@ -35,7 +35,11 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Global />
-      <Menu mode="horizontal">
+      <Menu
+        mode="horizontal"
+        theme="dark"
+        style={{ backgroundColor: "#2d2d2e" }}
+      >
         <Menu.Item key="home">
           <Link href="/">
             <a>SceneryBook</a>

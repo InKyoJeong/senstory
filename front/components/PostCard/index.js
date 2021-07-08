@@ -44,8 +44,10 @@ const PostCard = ({ post }) => {
   return (
     <PostCardWrapper>
       <Card
+        style={{ borderRadius: 10, overflow: "hidden" }}
+        bodyStyle={{ background: "#2d2d2e" }}
+        bordered={false}
         cover={post.Images[0] && <PostImages images={post.Images} />}
-        // bodyStyle={{ background: "skyblue" }}
         actions={[
           liked ? (
             <HeartFilled
@@ -95,7 +97,7 @@ const PostCard = ({ post }) => {
       >
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-          title={post.User.nickname}
+          title={<div style={{ color: "white" }}>{post.User.nickname}</div>}
           description={<PostTag postData={post.content} />}
         />
       </Card>
@@ -104,14 +106,32 @@ const PostCard = ({ post }) => {
         <PostCardBorder>
           <CommentForm post={post} />
           <List
-            style={{ padding: "0px 10px" }}
+            style={{
+              padding: "0px 10px",
+              marginTop: "10px",
+              marginBottom: "15px",
+              color: "white",
+              backgroundColor: "#2d2d2e",
+              borderRadius: 10,
+            }}
             // header={`${post.Comments.length}개의 댓글`}
             itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={item.User.nickname}
+                  author={
+                    <div
+                      style={{
+                        color: "white",
+                        backgroundColor: "#1A1B1B",
+                        padding: "3px 5px",
+                        borderRadius: 5,
+                      }}
+                    >
+                      {item.User.nickname}
+                    </div>
+                  }
                   avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                   content={item.content}
                 />

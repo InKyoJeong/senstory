@@ -3,9 +3,10 @@ import { Input, Button } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../actions/post";
+import useInput from "../../hooks/useInput";
 
 import { FormWrapper } from "./styles";
-import useInput from "../../hooks/useInput";
+import { EditFilled } from "@ant-design/icons";
 
 const PostWriteForm = () => {
   const { imagePaths, addPostFinish, addPostLoading } = useSelector(
@@ -34,7 +35,13 @@ const PostWriteForm = () => {
   return (
     <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
-        style={{ marginBottom: 5 }}
+        style={{
+          marginBottom: 5,
+          backgroundColor: "gray",
+          borderColor: "#6f6f70",
+          color: "white",
+          borderRadius: 5,
+        }}
         value={text}
         onChange={onChangeText}
         maxLength={140}
@@ -42,14 +49,16 @@ const PostWriteForm = () => {
       />
       <div>
         <input type="file" multiple hidden ref={imageInput} />
-        <Button onClick={onClickImageUpload}>이미지 업로드</Button>
+        <Button onClick={onClickImageUpload} style={{ borderRadius: 5 }}>
+          이미지 업로드
+        </Button>
         <Button
-          style={{ float: "right" }}
+          style={{ float: "right", borderRadius: 10 }}
           type="primary"
           htmlType="submit"
           loading={addPostLoading}
         >
-          등록
+          <EditFilled />
         </Button>
       </div>
       <div>
