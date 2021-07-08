@@ -20,6 +20,15 @@ const Global = createGlobalStyle`
   .ant-col:last-child{
     padding-right: 0 !important;
   }
+
+  // card icon style
+  .ant-card-actions{
+    border-color: gray  !important; 
+    background-color: #bfbfbf  !important; 
+  }
+  .ant-card-actions > li {
+    border-color: gray  !important; 
+  }
 `;
 
 const Layout = ({ children }) => {
