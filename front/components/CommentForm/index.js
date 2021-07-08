@@ -11,7 +11,9 @@ import { ADD_COMMENT_REQUEST } from "../../actions/post";
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
-  const { addCommentFinish } = useSelector((state) => state.post);
+  const { addCommentFinish, addCommentLoading } = useSelector(
+    (state) => state.post
+  );
 
   const [commentText, onChangeCommentText, setCommentText] = useInput("");
 
@@ -39,7 +41,11 @@ const CommentForm = ({ post }) => {
             // style={{ width: "100%", height: 50 }}
             placeholder="댓글을 입력하세요."
           />
-          <WriteButton type="primary" htmlType="submit">
+          <WriteButton
+            type="primary"
+            htmlType="submit"
+            loading={addCommentLoading}
+          >
             <EditFilled />
           </WriteButton>
         </WriteWrapper>

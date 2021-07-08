@@ -1,3 +1,5 @@
+import shortid from "shortid";
+
 import {
   ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
@@ -47,7 +49,7 @@ export const initialState = {
 };
 
 const dummyPost = (data) => ({
-  id: 2,
+  id: shortid.generate(),
   content: data,
   User: {
     id: 1,
@@ -55,6 +57,15 @@ const dummyPost = (data) => ({
   },
   Images: [],
   Comments: [],
+});
+
+const dummyComment = (data) => ({
+  id: shortid.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: "INGG",
+  },
 });
 
 const reducer = (state = initialState, action) => {
@@ -86,12 +97,22 @@ const reducer = (state = initialState, action) => {
         addCommentFinish: false,
         addCommentError: null,
       };
-    case ADD_COMMENT_SUCCESS:
+    case ADD_COMMENT_SUCCESS: {
+      // 게시글 아이디 찾고, Comments로 접근해서 추가
+      const postIndex = state.mainPosts.findIndex(
+        (v) => v.id === action.data.postId
+      );
+      const post = { ...state.mainPosts[postIndex] };
+      post.Comments = [dummyComment(action.data.content), ...post.Comments];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIndex] = post;
       return {
         ...state,
+        mainPosts,
         addCommentLoading: false,
         addCommentFinish: true,
       };
+    }
     case ADD_COMMENT_FAILURE:
       return {
         ...state,

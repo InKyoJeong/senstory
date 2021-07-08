@@ -8,7 +8,9 @@ import { FormWrapper } from "./styles";
 import useInput from "../../hooks/useInput";
 
 const PostWriteForm = () => {
-  const { imagePaths, addPostFinish } = useSelector((state) => state.post);
+  const { imagePaths, addPostFinish, addPostLoading } = useSelector(
+    (state) => state.post
+  );
   const dispatch = useDispatch();
 
   const [text, onChangeText, setText] = useInput("");
@@ -41,7 +43,12 @@ const PostWriteForm = () => {
       <div>
         <input type="file" multiple hidden ref={imageInput} />
         <Button onClick={onClickImageUpload}>이미지 업로드</Button>
-        <Button style={{ float: "right" }} type="primary" htmlType="submit">
+        <Button
+          style={{ float: "right" }}
+          type="primary"
+          htmlType="submit"
+          loading={addPostLoading}
+        >
           등록
         </Button>
       </div>
