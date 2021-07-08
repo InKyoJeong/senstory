@@ -10,7 +10,7 @@ import {
   RetweetOutlined,
 } from "@ant-design/icons";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useToggle from "../../hooks/useToggle";
 import Conditional from "../../hocs/Conditional";
 
@@ -19,15 +19,25 @@ import CommentForm from "../CommentForm";
 import PostTag from "../PostTag";
 
 import { PostCardWrapper, PostCardBorder } from "./styles";
+import { REMOVE_POST_REQUEST } from "../../actions/post";
 
 const PostCard = ({ post }) => {
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
+  const { removePostLoading } = useSelector((state) => state.post);
 
   const [liked, setLiked] = useState(false);
   const [commentOpen, onToggleComment] = useToggle(false);
 
   const onToggleLike = useCallback(() => {
     setLiked((prev) => !prev);
+  }, []);
+
+  const onRemovePost = useCallback(() => {
+    dispatch({
+      type: REMOVE_POST_REQUEST,
+      data: post.id,
+    });
   }, []);
 
   return (
@@ -63,7 +73,13 @@ const PostCard = ({ post }) => {
                 {id && post.User.id === id ? (
                   <>
                     <Button>수정</Button>
-                    <Button type="danger">삭제</Button>
+                    <Button
+                      type="danger"
+                      onClick={onRemovePost}
+                      loading={removePostLoading}
+                    >
+                      삭제
+                    </Button>
                   </>
                 ) : (
                   <Button>공유</Button>
