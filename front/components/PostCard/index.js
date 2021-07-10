@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Avatar, Popover, List, Comment } from "antd";
+import { Card, Button, Avatar, Popover, Comment } from "antd";
 import {
   EllipsisOutlined,
   HeartOutlined,
@@ -11,16 +11,22 @@ import {
 } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
+import { REMOVE_POST_REQUEST } from "../../actions/post";
+
 import useToggle from "../../hooks/useToggle";
 import Conditional from "../../hocs/Conditional";
-
 import PostImages from "../PostImages";
-import CommentForm from "../CommentForm";
+import CommentWriteForm from "../CommentWriteForm";
 import PostTag from "../PostTag";
 import FollowButton from "../FollowButton";
 
-import { PostCardWrapper, PostCardBorder } from "./styles";
-import { REMOVE_POST_REQUEST } from "../../actions/post";
+import {
+  PostCardWrapper,
+  PostCardBorder,
+  CommentList,
+  CommentAuthor,
+  PostAuthor,
+} from "./styles";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -41,11 +47,17 @@ const PostCard = ({ post }) => {
     });
   }, []);
 
+  const cardStyle = useMemo(
+    () => ({ borderRadius: 10, overflow: "hidden" }),
+    []
+  );
+  const cardBodyStyle = useMemo(() => ({ background: "#2d2d2e" }), []);
+
   return (
     <PostCardWrapper>
       <Card
-        style={{ borderRadius: 10, overflow: "hidden" }}
-        bodyStyle={{ background: "#2d2d2e" }}
+        style={cardStyle}
+        bodyStyle={cardBodyStyle}
         bordered={false}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -97,41 +109,22 @@ const PostCard = ({ post }) => {
       >
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-          title={<div style={{ color: "white" }}>{post.User.nickname}</div>}
+          title={<PostAuthor>{post.User.nickname}</PostAuthor>}
           description={<PostTag postData={post.content} />}
         />
       </Card>
 
       <Conditional condition={commentOpen}>
         <PostCardBorder>
-          <CommentForm post={post} />
-          <List
-            style={{
-              padding: "0px 10px",
-              marginTop: "10px",
-              marginBottom: "15px",
-              color: "white",
-              backgroundColor: "#2d2d2e",
-              borderRadius: 10,
-            }}
+          <CommentWriteForm post={post} />
+          <CommentList
             // header={`${post.Comments.length}개의 댓글`}
             itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
               <li>
                 <Comment
-                  author={
-                    <div
-                      style={{
-                        color: "white",
-                        backgroundColor: "#1A1B1B",
-                        padding: "3px 5px",
-                        borderRadius: 5,
-                      }}
-                    >
-                      {item.User.nickname}
-                    </div>
-                  }
+                  author={<CommentAuthor>{item.User.nickname}</CommentAuthor>}
                   avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                   content={item.content}
                 />

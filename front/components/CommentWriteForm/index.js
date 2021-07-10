@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Global, WriteWrapper, WriteButton, WriteInput } from "./styles";
 import { ADD_COMMENT_REQUEST } from "../../actions/post";
 
-const CommentForm = ({ post }) => {
+const CommentWriteForm = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const { addCommentFinish, addCommentLoading } = useSelector(
@@ -54,8 +54,8 @@ const CommentForm = ({ post }) => {
   );
 };
 
-CommentForm.propTypes = {
+CommentWriteForm.propTypes = {
   post: PropTypes.object.isRequired,
 };
 
-export default CommentForm;
+export default CommentWriteForm;

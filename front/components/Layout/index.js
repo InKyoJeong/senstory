@@ -51,12 +51,13 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
       </Menu>
+
       <Row gutter={10}>
-        <Col xs={0} sm={2} md={6}></Col>
-        <Col xs={24} sm={20} md={12}>
+        <Col xs={0} sm={2} md={6} lg={7}></Col>
+        <Col xs={24} sm={20} md={12} lg={10}>
           {children}
         </Col>
-        <Col xs={0} sm={0} md={6}>
+        <Col xs={0} sm={0} md={6} lg={7}>
           <Conditional condition={me}>
             <MyProfile />
           </Conditional>
