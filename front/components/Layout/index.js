@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
 
-import MyProfile from "../MyProfile";
+import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
 import { Global } from "./styles";
@@ -57,9 +57,13 @@ const Layout = ({ children }) => {
         <Col xs={24} sm={20} md={12} lg={10}>
           {children}
         </Col>
-        <Col xs={0} sm={0} md={6} lg={7}>
+        <Col xs={0} sm={0} md={0} lg={7}>
           <Conditional condition={me}>
-            <MyProfile />
+            <ProfileForm />
+            <div style={{ padding: 20 }}>
+              <label style={{ color: "white" }}>해시태그 검색</label>
+              <Input.Search style={searchStyle} size="small" bordered={false} />
+            </div>
           </Conditional>
 
           <Conditional condition={!me}>

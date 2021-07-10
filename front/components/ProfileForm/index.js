@@ -4,9 +4,9 @@ import { Card, Avatar, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestAction } from "../../actions/user";
 
-import { CardWrapper } from "./styles";
+import { CardWrapper, LogoutButton, UserInfoWrapper } from "./styles";
 
-const MyProfile = () => {
+const ProfileForm = () => {
   const dispatch = useDispatch();
   const { me, logOutLoading } = useSelector((state) => state.user);
 
@@ -16,33 +16,26 @@ const MyProfile = () => {
 
   return (
     <CardWrapper
-      actions={[
-        <div key="post">
-          게시물
-          <br />
-          {me.Posts.length}
-        </div>,
-        <div key="followers">
-          팔로워
-          <br />
-          {me.Followers.length}
-        </div>,
-        <div key="followings">
-          팔로잉
-          <br />
-          {me.Followings.length}
-        </div>,
-      ]}
+    // actions={[]}
     >
       <Card.Meta
         avatar={<Avatar>{me.nickname[0]}</Avatar>}
         title={me.nickname}
       />
-      <Button onClick={onLogOut} loading={logOutLoading}>
+      <LogoutButton onClick={onLogOut} loading={logOutLoading}>
         로그아웃
-      </Button>
+      </LogoutButton>
+
+      <UserInfoWrapper>
+        <div>게시물</div>
+        <div>팔로워</div>
+        <div>팔로잉</div>
+        <div>{me.Posts.length}</div>
+        <div>{me.Followers.length}</div>
+        <div>{me.Followings.length}</div>
+      </UserInfoWrapper>
     </CardWrapper>
   );
 };
 
-export default MyProfile;
+export default ProfileForm;

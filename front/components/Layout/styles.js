@@ -17,9 +17,13 @@ export const Global = createGlobalStyle`
   // ant-card icon style
   .ant-card-actions{
     border-color: gray; 
-    background-color: #bfbfbf; 
+    background-color: #d1d1d1; 
+
+    & ul{
+      color: #404042; 
+    }
   }
-  
+ 
   .ant-card-actions > li {
     border-color: gray !important; 
 
