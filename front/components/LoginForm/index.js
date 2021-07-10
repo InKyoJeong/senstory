@@ -30,6 +30,7 @@ const LoginForm = () => {
           value={email}
           onChange={onChangeEmail}
           required
+          autoComplete="off"
         />
       </div>
       <div style={{ marginTop: 10 }}>
