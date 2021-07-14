@@ -43,10 +43,6 @@ app.get("/", (req, res) => {
   res.send("hello express");
 });
 
-app.listen(3065, () => {
-  console.log("서버 실행중");
-});
-
 app.get("/posts", (req, res) => {
   res.json([
     { id: 1, content: "hello" },
@@ -57,3 +53,7 @@ app.get("/posts", (req, res) => {
 
 app.use("/post", postRouter);
 app.use("/user", userRouter);
+
+app.listen(3065, () => {
+  console.log("서버 실행중");
+});
