@@ -72,7 +72,7 @@ const SignUpForm = () => {
         <br />
         <SignUpInput
           name="user-password"
-          type={password}
+          type="password"
           value={password}
           onChange={onChangePassword}
           required
@@ -83,7 +83,7 @@ const SignUpForm = () => {
         <br />
         <SignUpInput
           name="user-password"
-          type={password}
+          type="password"
           value={passwordCheck}
           onChange={onChangePasswordCheck}
           required
