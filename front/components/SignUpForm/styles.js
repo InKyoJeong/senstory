@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { Input } from "antd";
+import { Input, Form } from "antd";
+
+export const SignUpFormWrapper = styled(Form)`
+  margin: 0px 20px;
+`;
 
 export const ErrorMessage = styled.div`
   color: red;
@@ -8,15 +12,16 @@ export const ErrorMessage = styled.div`
 export const ButtonWrapper = styled.div`
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 
   & Button {
     border-radius: 10px;
+    width: 30%;
   }
 `;
 
 export const InputWrapper = styled.div`
-  margin: 30px 20px 0px 20px;
+  margin-top: 30px;
 
   & label {
     color: white;

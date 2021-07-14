@@ -5,7 +5,7 @@ import Router from "next/router";
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
-// import MyProfile from "../components/MyProfile";
+import ProfileForm from "../components/ProfileForm";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
@@ -27,7 +27,7 @@ const Profile = () => {
         <title>프로필 | SceneryBook</title>
       </Head>
       <Layout>
-        {/* <MyProfile /> */}
+        {/* <ProfileForm /> */}
         <NickEditForm />
         {/* 자기소개 Form */}
         <FollowList header="팔로잉" data={me.Followings} />

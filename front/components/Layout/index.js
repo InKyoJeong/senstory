@@ -42,11 +42,13 @@ const Layout = ({ children }) => {
         </Menu.Item> */}
 
         {/* <Conditional condition={me && me.id}> */}
-        <Menu.Item key="profile">
-          <Link href="/profile">
-            <a>프로필</a>
-          </Link>
-        </Menu.Item>
+        {me && me.id && (
+          <Menu.Item key="profile">
+            <Link href="/profile">
+              <a>프로필</a>
+            </Link>
+          </Menu.Item>
+        )}
         {/* </Conditional> */}
 
         {/* <Conditional condition={!(me && me.id)}> */}

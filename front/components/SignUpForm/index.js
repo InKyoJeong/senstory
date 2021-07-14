@@ -12,6 +12,7 @@ import {
   ButtonWrapper,
   SignUpInput,
   InputWrapper,
+  SignUpFormWrapper,
 } from "./styles";
 
 const SignUpForm = () => {
@@ -59,7 +60,7 @@ const SignUpForm = () => {
   }, [email, password, passwordCheck]);
 
   return (
-    <Form onFinish={onSubmit}>
+    <SignUpFormWrapper onFinish={onSubmit}>
       <InputWrapper>
         <label htmlFor="user-email">이메일</label>
         <br />
@@ -113,7 +114,7 @@ const SignUpForm = () => {
           가입하기
         </Button>
       </ButtonWrapper>
-    </Form>
+    </SignUpFormWrapper>
   );
 };
 
