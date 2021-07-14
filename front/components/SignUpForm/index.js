@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Form, Button } from "antd";
+import Router from "next/router";
 
 import useInput from "../../hooks/useInput";
 import Conditional from "../../hocs/Conditional";
@@ -15,7 +16,9 @@ import {
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  const { signUpLoading } = useSelector((state) => state.user);
+  const { signUpLoading, signUpFinish, signUpError } = useSelector(
+    (state) => state.user
+  );
 
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
@@ -23,6 +26,18 @@ const SignUpForm = () => {
 
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+
+  useEffect(() => {
+    if (signUpFinish) {
+      Router.push("/");
+    }
+  }, [signUpFinish]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   const onChangePasswordCheck = useCallback(
     (e) => {
@@ -94,7 +109,7 @@ const SignUpForm = () => {
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={signUpLoading}>
           가입하기
         </Button>
       </ButtonWrapper>
