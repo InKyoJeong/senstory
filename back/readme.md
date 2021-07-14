@@ -1,3 +1,9 @@
+## Start
+
+```bash
+$ npm run dev
+```
+
 ## sequelize setting
 
 ```bash
