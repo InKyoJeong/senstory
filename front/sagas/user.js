@@ -20,17 +20,15 @@ import {
 } from "../actions/user";
 
 function loginAPI(data) {
-  return axios.post("/api/login", data);
+  return axios.post("/user/login", data);
 }
 
 function* logIn(action) {
   try {
-    // const result = yield call(loginAPI, action.data); //아직서버없으므로 주석처리하고 딜레이로 처리
-    yield delay(1000);
+    const result = yield call(loginAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
-      // data: result.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -41,7 +39,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post("/user/logout");
 }
 
 function* logOut() {
@@ -61,7 +59,7 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post("http://localhost:3065/user", data);
+  return axios.post("/user", data);
 }
 
 function* signUp(action) {
