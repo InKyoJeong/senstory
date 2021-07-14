@@ -20,7 +20,7 @@ export const ImageButton = styled(Button)`
 
   &:hover,
   &:focus {
-    background-color: #f5b0b0;
+    background-color: #e89b9b;
     color: #823030;
     border-color: #f5b0b0;
   }

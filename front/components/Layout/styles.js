@@ -49,4 +49,9 @@ export const Global = createGlobalStyle`
   .ant-input-group > .ant-input:first-child {
     color: white;
   }
+
+  .ant-empty-description{
+    color: white;
+    opacity: 0.7;
+  }
 `;
