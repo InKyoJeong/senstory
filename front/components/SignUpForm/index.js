@@ -29,7 +29,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (signUpFinish) {
-      Router.push("/");
+      Router.replace("/");
     }
   }, [signUpFinish]);
 

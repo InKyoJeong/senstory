@@ -40,16 +40,22 @@ const Layout = ({ children }) => {
         {/* <Menu.Item key="search">
           <Input.Search style={searchStyle} />
         </Menu.Item> */}
+
+        {/* <Conditional condition={me && me.id}> */}
         <Menu.Item key="profile">
           <Link href="/profile">
             <a>프로필</a>
           </Link>
         </Menu.Item>
+        {/* </Conditional> */}
+
+        {/* <Conditional condition={!(me && me.id)}> */}
         <Menu.Item key="signup">
           <Link href="/signup">
             <a>회원가입</a>
           </Link>
         </Menu.Item>
+        {/* </Conditional> */}
       </Menu>
 
       <Row gutter={10}>
@@ -58,7 +64,7 @@ const Layout = ({ children }) => {
           {children}
         </Col>
         <Col xs={0} sm={0} md={0} lg={7}>
-          <Conditional condition={me}>
+          <Conditional condition={me && me.id}>
             <ProfileForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
@@ -66,7 +72,7 @@ const Layout = ({ children }) => {
             </div>
           </Conditional>
 
-          <Conditional condition={!me}>
+          <Conditional condition={!(me && me.id)}>
             <LoginForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>

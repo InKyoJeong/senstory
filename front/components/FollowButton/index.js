@@ -3,6 +3,7 @@ import { Button } from "antd";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../actions/user";
+import { FollowButtonContainer } from "./styles";
 
 const FollowButton = ({ post }) => {
   const { me, followLoading, unfollowLoading } = useSelector(
@@ -26,9 +27,12 @@ const FollowButton = ({ post }) => {
   }, [isFollowing]);
 
   return (
-    <Button loading={followLoading || unfollowLoading} onClick={onClickButton}>
+    <FollowButtonContainer
+      loading={followLoading || unfollowLoading}
+      onClick={onClickButton}
+    >
       {isFollowing ? "Unfollow" : "Follow"}
-    </Button>
+    </FollowButtonContainer>
   );
 };
 

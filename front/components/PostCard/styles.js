@@ -11,6 +11,9 @@ export const PostCardBorder = styled.div`
 `;
 
 export const PostAuthor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
 `;
 
