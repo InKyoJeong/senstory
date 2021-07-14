@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_POST_REQUEST } from "../actions/post";
+import { LOAD_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
 import Layout from "../components/Layout";
@@ -15,6 +16,12 @@ const Home = () => {
     (state) => state.post
   );
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_USER_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadPostLoading) {
