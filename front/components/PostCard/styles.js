@@ -24,6 +24,10 @@ export const CommentList = styled(List)`
   color: white;
   background-color: #2d2d2e;
   border-radius: 10px;
+
+  & li:not(:last-child) {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  }
 `;
 
 export const CommentAuthor = styled.div`
