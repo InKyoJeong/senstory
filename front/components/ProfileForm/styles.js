@@ -31,13 +31,13 @@ export const UserInfoWrapper = styled.div`
 export const LogoutButton = styled(Button)`
   border-radius: 8px;
   background-color: #2a2a2b;
-  border-color: black;
+  border-color: #2a2a2b;
   color: white;
 
   &:hover {
     background-color: #4f2d32;
     color: white;
-    border-color: black;
+    border-color: #2a2a2b;
   }
   &:focus {
     background-color: #4f2d32;
