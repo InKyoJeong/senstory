@@ -1,15 +1,29 @@
 import styled from "styled-components";
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 
 export const NickFormWrapper = styled(Form)`
   margin-bottom: 20px;
   margin-top: 20px;
-  /* border: 1px solid #d9d9d9; */
-  /* padding: 10px; */
+
+  & label {
+    color: white;
+  }
+
+  & div {
+    display: flex;
+    margin-top: 5px;
+  }
 `;
 
 export const NickInput = styled(Input)`
-  background-color: gray;
+  background-color: #404042;
+  border-color: gray;
+  color: white;
   border-radius: 10px;
   overflow: hidden;
+`;
+
+export const NickEditButton = styled(Button)`
+  border-radius: 10px;
+  margin-left: 5px;
 `;

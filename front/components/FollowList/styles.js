@@ -4,6 +4,10 @@ import { List } from "antd";
 export const ButtonWrapper = styled.div`
   text-align: center;
   margin: 10px 0px;
+
+  & Button {
+    border-radius: 10px;
+  }
 `;
 
 export const ListWrapper = styled(List)`

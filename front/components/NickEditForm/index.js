@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo } from "react";
-import { Button, Input } from "antd";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../../hooks/useInput";
 import { CHANGE_NICK_REQUEST } from "../../actions/user";
 
-import { NickFormWrapper, NickInput } from "./styles";
+import { NickFormWrapper, NickInput, NickEditButton } from "./styles";
 
 const NickEditForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const NickEditForm = () => {
     <NickFormWrapper onFinish={onSubmit}>
       <label htmlFor="user-nickname">닉네임</label>
       <br />
-      <div style={{ display: "flex" }}>
+      <div>
         <NickInput
           name="nickname"
           value={nickname}
@@ -30,9 +29,13 @@ const NickEditForm = () => {
           type="text"
           // bordered={false}
         />
-        <Button type="primary" htmlType="submit" loading={changeNickLoading}>
+        <NickEditButton
+          type="primary"
+          htmlType="submit"
+          loading={changeNickLoading}
+        >
           수정
-        </Button>
+        </NickEditButton>
       </div>
     </NickFormWrapper>
   );
