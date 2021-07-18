@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { PostContent } from "./styles";
 
 const PostTag = ({ postData }) => {
   return (
@@ -13,11 +14,7 @@ const PostTag = ({ postData }) => {
             </Link>
           );
         }
-        return (
-          <p style={{ color: "white" }} key={i}>
-            {v}
-          </p>
-        );
+        return <PostContent key={i}>{v}</PostContent>;
       })}
     </div>
   );

@@ -10,13 +10,8 @@ const FollowList = ({ header, data }) => {
   return (
     <ListWrapper
       grid={gridStyle}
-      style={{
-        borderRadius: 10,
-        backgroundColor: "#404042",
-        borderColor: "gray",
-      }}
       size="small"
-      header={<div style={{ color: "white" }}>{header}</div>}
+      header={<div>{header}</div>}
       loadMore={
         <ButtonWrapper>
           <Button>더 보기</Button>

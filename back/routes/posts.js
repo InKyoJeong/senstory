@@ -20,7 +20,18 @@ router.get("/", async (req, res, next) => {
 
         {
           model: Comment,
-          include: [{ model: User, attributes: ["id", "nickname"] }],
+          include: [
+            {
+              model: User,
+              attributes: ["id", "nickname"],
+              order: [["createdAt", "DESC"]],
+            },
+          ],
+        },
+        {
+          model: User, // 좋아요
+          as: "Likers",
+          attributes: ["id"],
         },
       ],
     });

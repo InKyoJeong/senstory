@@ -8,6 +8,13 @@ export const ButtonWrapper = styled.div`
 
 export const ListWrapper = styled(List)`
   margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #404042;
+  border-color: gray;
+
+  & div {
+    color: white;
+  }
 `;
 
 export const ListItem = styled(List.Item)`
