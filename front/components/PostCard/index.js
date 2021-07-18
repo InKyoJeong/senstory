@@ -61,7 +61,10 @@ const PostCard = ({ post }) => {
   }, []);
 
   const cardStyle = useMemo(
-    () => ({ borderRadius: 10, overflow: "hidden" }),
+    () => ({
+      borderRadius: 10,
+      overflow: "hidden",
+    }),
     []
   );
   const cardBodyStyle = useMemo(() => ({ background: "#2d2d2e" }), []);
