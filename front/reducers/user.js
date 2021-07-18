@@ -53,14 +53,14 @@ export const initialState = {
   loginData: {},
 };
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: "KKYYOO",
-  id: 1,
-  Posts: [{ id: 1 }],
-  Followings: [{ nickname: "zllzl" }, { nickname: "hhh" }],
-  Followers: [{ nickname: "zllzl" }, { nickname: "hhh" }],
-});
+// const dummyUser = (data) => ({
+//   ...data,
+//   nickname: "KKYYOO",
+//   id: 1,
+//   Posts: [{ id: 1 }],
+//   Followings: [{ nickname: "zllzl" }, { nickname: "hhh" }],
+//   Followers: [{ nickname: "zllzl" }, { nickname: "hhh" }],
+// });
 
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
@@ -126,6 +126,7 @@ const reducer = (state = initialState, action) => {
         draft.changeNickError = null;
         break;
       case CHANGE_NICK_SUCCESS:
+        draft.me.nickname = action.data.nickname;
         draft.changeNickLoading = false;
         draft.changeNickFinish = true;
         break;
