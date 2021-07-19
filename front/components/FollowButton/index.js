@@ -6,7 +6,6 @@ import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../actions/user";
 import { FollowButtonContainer } from "./styles";
 
 const FollowButton = ({ post }) => {
-  console.log(post);
   const { me, followLoading, unfollowLoading } = useSelector(
     (state) => state.user
   );
@@ -33,7 +32,7 @@ const FollowButton = ({ post }) => {
 
   return (
     <FollowButtonContainer
-      unfollow={isFollowing ? true : false}
+      unfollow={isFollowing}
       loading={followLoading || unfollowLoading}
       onClick={onClickButton}
     >
