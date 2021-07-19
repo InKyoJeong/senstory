@@ -163,7 +163,7 @@ router.get("/followers", isLoggedIn, async (req, res, next) => {
 // GET /user/followings
 router.get("/followings", isLoggedIn, async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { id: req.params.userId } });
+    const user = await User.findOne({ where: { id: req.user.id } });
     if (!user) {
       res.status(403).send("존재하지 않는 사용자입니다.");
     }
