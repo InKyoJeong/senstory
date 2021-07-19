@@ -5,11 +5,24 @@ import Router from "next/router";
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
-import ProfileForm from "../components/ProfileForm";
-import { useSelector } from "react-redux";
+// import ProfileForm from "../components/ProfileForm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  LOAD_FOLLOWERS_REQUEST,
+  LOAD_FOLLOWINGS_REQUEST,
+} from "../actions/user";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: LOAD_FOLLOWERS_REQUEST,
+    });
+    dispatch({
+      type: LOAD_FOLLOWINGS_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     if (!(me && me.id)) {

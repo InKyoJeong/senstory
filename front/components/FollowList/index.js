@@ -3,9 +3,19 @@ import PropTypes from "prop-types";
 import { Card, Button } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { ListWrapper, ListItem, ButtonWrapper } from "./styles";
+import { UNFOLLOW_REQUEST } from "../../actions/user";
+import { useDispatch } from "react-redux";
 
 const FollowList = ({ header, data }) => {
   const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);
+  const dispatch = useDispatch();
+
+  const onCancel = (id) => () => {
+    dispatch({
+      type: UNFOLLOW_REQUEST,
+      data: id,
+    });
+  };
 
   return (
     <ListWrapper
@@ -21,7 +31,9 @@ const FollowList = ({ header, data }) => {
       dataSource={data}
       renderItem={(item) => (
         <ListItem>
-          <Card actions={[<StopOutlined key="stop" />]}>
+          <Card
+            actions={[<StopOutlined key="stop" onClick={onCancel(item.id)} />]}
+          >
             <Card.Meta description={item.nickname} />
           </Card>
         </ListItem>
