@@ -33,6 +33,7 @@ const FollowButton = ({ post }) => {
 
   return (
     <FollowButtonContainer
+      unfollow={isFollowing ? true : false}
       loading={followLoading || unfollowLoading}
       onClick={onClickButton}
     >

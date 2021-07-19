@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button } from "antd";
+
+const Unfollow = css`
+  border-color: ${(props) => props.unfollow && "#d43578"};
+  color: ${(props) => props.unfollow && "#d43578"};
+`;
 
 export const FollowButtonContainer = styled(Button)`
   background-color: black;
@@ -9,8 +14,10 @@ export const FollowButtonContainer = styled(Button)`
 
   &:hover {
     background-color: black;
+    ${Unfollow}
   }
   &:focus {
     background-color: black;
+    ${Unfollow}
   }
 `;
