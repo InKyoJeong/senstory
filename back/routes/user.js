@@ -176,7 +176,7 @@ router.get("/followings", isLoggedIn, async (req, res, next) => {
 });
 
 // DELETE /user/follower/2
-router.get("/follower/:userId", isLoggedIn, async (req, res, next) => {
+router.delete("/follower/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.params.userId } });
     if (!user) {
