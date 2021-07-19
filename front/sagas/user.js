@@ -180,6 +180,7 @@ function* loadFollowers(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOAD_FOLLOWERS_FAILURE,
       error: err.response.data,
@@ -199,6 +200,7 @@ function* loadFollowings(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOAD_FOLLOWINGS_FAILURE,
       error: err.response.data,
@@ -268,14 +270,14 @@ function* watchRemoveFollower() {
 export default function* userSaga() {
   yield all([
     fork(watchLoadUser),
+    fork(watchLoadFollowers),
+    fork(watchLoadFollowings),
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchSignUp),
     fork(watchChangeNickname),
     fork(watchFollow),
     fork(watchUnfollow),
-    fork(watchLoadFollowers),
-    fork(watchLoadFollowings),
     fork(watchRemoveFollower),
   ]);
 }

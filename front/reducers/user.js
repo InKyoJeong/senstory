@@ -182,33 +182,33 @@ const reducer = (state = initialState, action) => {
         draft.unfollowLoading = false;
         draft.unfollowError = action.error;
         break;
-      case LOAD_FOLLOWERS_REQUEST:
-        draft.loadFollowersLoading = true;
-        draft.loadFollowersFinish = false;
-        draft.loadFollowersError = null;
-        break;
-      case LOAD_FOLLOWERS_SUCCESS:
-        draft.loadFollowersLoading = false;
-        draft.me.Followers = action.data;
-        draft.loadFollowersFinish = true;
-        break;
-      case LOAD_FOLLOWERS_FAILURE:
-        draft.loadFollowersLoading = false;
-        draft.loadFollowersError = action.error;
-        break;
       case LOAD_FOLLOWINGS_REQUEST:
         draft.loadFollowingsLoading = true;
-        draft.loadFollowingsFinish = false;
         draft.loadFollowingsError = null;
+        draft.loadFollowingsDone = false;
         break;
       case LOAD_FOLLOWINGS_SUCCESS:
         draft.loadFollowingsLoading = false;
         draft.me.Followings = action.data;
-        draft.loadFollowingsFinish = true;
+        draft.loadFollowingsDone = true;
         break;
       case LOAD_FOLLOWINGS_FAILURE:
         draft.loadFollowingsLoading = false;
         draft.loadFollowingsError = action.error;
+        break;
+      case LOAD_FOLLOWERS_REQUEST:
+        draft.loadFollowersLoading = true;
+        draft.loadFollowersError = null;
+        draft.loadFollowersDone = false;
+        break;
+      case LOAD_FOLLOWERS_SUCCESS:
+        draft.loadFollowersLoading = false;
+        draft.me.Followers = action.data;
+        draft.loadFollowersDone = true;
+        break;
+      case LOAD_FOLLOWERS_FAILURE:
+        draft.loadFollowersLoading = false;
+        draft.loadFollowersError = action.error;
         break;
       case REMOVE_FOLLOWER_REQUEST:
         draft.removeFollowerLoading = true;

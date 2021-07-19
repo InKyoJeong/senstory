@@ -15,6 +15,7 @@ import {
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({
       type: LOAD_FOLLOWERS_REQUEST,
