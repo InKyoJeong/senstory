@@ -2,10 +2,15 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { Input, Button } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../../actions/post";
+import { addPost, UPLOAD_IMAGES_REQUEST } from "../../actions/post";
 import useInput from "../../hooks/useInput";
 
-import { FormWrapper, ImageButton, PostWriteButton } from "./styles";
+import {
+  FormWrapper,
+  ImageButton,
+  PostWriteButton,
+  WriteButtonWrapper,
+} from "./styles";
 import { EditFilled, PictureFilled } from "@ant-design/icons";
 
 const PostWriteForm = () => {
@@ -32,6 +37,19 @@ const PostWriteForm = () => {
     imageInput.current.click();
   }, [imageInput.current]);
 
+  const onChangeImages = useCallback((e) => {
+    console.log("images", e.target.files);
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (f) => {
+      imageFormData.append("image", f);
+    });
+
+    dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData,
+    });
+  }, []);
+
   return (
     <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
@@ -47,8 +65,16 @@ const PostWriteForm = () => {
         maxLength={140}
         placeholder="내용을 입력하세요."
       />
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <input type="file" multiple hidden ref={imageInput} />
+
+      <WriteButtonWrapper>
+        <input
+          type="file"
+          name="image"
+          multiple
+          hidden
+          ref={imageInput}
+          onChange={onChangeImages}
+        />
         <ImageButton onClick={onClickImageUpload}>
           <PictureFilled />
         </ImageButton>
@@ -59,7 +85,8 @@ const PostWriteForm = () => {
         >
           <EditFilled />
         </PostWriteButton>
-      </div>
+      </WriteButtonWrapper>
+
       <div>
         {imagePaths.map((v) => (
           <div key={v} style={{ display: "inline-block" }}>

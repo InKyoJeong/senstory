@@ -19,6 +19,9 @@ import {
   UNLIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
+  UPLOAD_IMAGES_FAILURE,
+  UPLOAD_IMAGES_REQUEST,
+  UPLOAD_IMAGES_SUCCESS,
 } from "../actions/post";
 
 export const initialState = {
@@ -43,6 +46,9 @@ export const initialState = {
   addCommentLoading: false,
   addCommentFinish: false,
   addCommentError: null,
+  uploadImagesLoading: false,
+  uploadImagesFinish: false,
+  uploadImagesError: null,
 };
 
 // export const generateDummyPosts = (number) =>
@@ -164,6 +170,21 @@ const reducer = (state = initialState, action) => {
         break;
       }
       case ADD_COMMENT_FAILURE:
+        draft.uploadImagesLoading = false;
+        draft.uploadImagesError = action.error;
+        break;
+      case UPLOAD_IMAGES_REQUEST:
+        draft.uploadImagesLoading = true;
+        draft.uploadImagesFinish = false;
+        draft.uploadImagesError = null;
+        break;
+      case UPLOAD_IMAGES_SUCCESS: {
+        draft.imagePaths = action.data;
+        draft.uploadImagesLoading = false;
+        draft.uploadImagesFinish = true;
+        break;
+      }
+      case UPLOAD_IMAGES_FAILURE:
         draft.addCommentLoading = false;
         draft.addCommentError = action.error;
         break;

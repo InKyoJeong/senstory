@@ -6,6 +6,11 @@ export const FormWrapper = styled(Form)`
   margin-bottom: 40px;
 `;
 
+export const WriteButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export const PostWriteButton = styled(Button)`
   border-radius: 10px;
   margin-left: 8px;
