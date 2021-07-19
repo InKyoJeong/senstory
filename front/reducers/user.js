@@ -30,6 +30,9 @@ import {
   LOAD_FOLLOWINGS_SUCCESS,
   LOAD_FOLLOWINGS_FAILURE,
   LOAD_FOLLOWINGS_REQUEST,
+  REMOVE_FOLLOWER_REQUEST,
+  REMOVE_FOLLOWER_SUCCESS,
+  REMOVE_FOLLOWER_FAILURE,
 } from "../actions/user";
 
 export const initialState = {
@@ -60,6 +63,9 @@ export const initialState = {
   loadFollowingsLoading: false, // 팔로잉 가져오기
   loadFollowingsFinish: false,
   loadFollowingsError: null,
+  removeFollowerLoading: false, // 팔로워 차단
+  removeFollowerFinish: false,
+  removeFollowerError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -203,6 +209,22 @@ const reducer = (state = initialState, action) => {
       case LOAD_FOLLOWINGS_FAILURE:
         draft.loadFollowingsLoading = false;
         draft.loadFollowingsError = action.error;
+        break;
+      case REMOVE_FOLLOWER_REQUEST:
+        draft.removeFollowerLoading = true;
+        draft.removeFollowerFinish = false;
+        draft.removeFollowerError = null;
+        break;
+      case REMOVE_FOLLOWER_SUCCESS:
+        draft.removeFollowerLoading = false;
+        draft.me.Followers = draft.me.Followers.filter(
+          (v) => v.id !== action.data.UserId
+        );
+        draft.removeFollowerFinish = true;
+        break;
+      case REMOVE_FOLLOWER_FAILURE:
+        draft.removeFollowerLoading = false;
+        draft.removeFollowerError = action.error;
         break;
       case ADD_POST_TO_ME:
         draft.me.Posts.unshift({ id: action.data });

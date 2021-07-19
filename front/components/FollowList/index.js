@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Card, Button } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { ListWrapper, ListItem, ButtonWrapper } from "./styles";
-import { UNFOLLOW_REQUEST } from "../../actions/user";
+import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from "../../actions/user";
 import { useDispatch } from "react-redux";
 
 const FollowList = ({ header, data }) => {
@@ -11,8 +11,15 @@ const FollowList = ({ header, data }) => {
   const dispatch = useDispatch();
 
   const onCancel = (id) => () => {
+    if (header === "팔로잉") {
+      dispatch({
+        type: UNFOLLOW_REQUEST,
+        data: id,
+      });
+    }
+
     dispatch({
-      type: UNFOLLOW_REQUEST,
+      type: REMOVE_FOLLOWER_REQUEST,
       data: id,
     });
   };
