@@ -34,7 +34,7 @@ const NickEditForm = () => {
           htmlType="submit"
           loading={changeNickLoading}
         >
-          수정
+          변경
         </NickEditButton>
       </div>
     </NickFormWrapper>

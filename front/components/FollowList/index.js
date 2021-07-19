@@ -2,9 +2,10 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Card, Button } from "antd";
 import { StopOutlined } from "@ant-design/icons";
-import { ListWrapper, ListItem, ButtonWrapper } from "./styles";
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from "../../actions/user";
 import { useDispatch } from "react-redux";
+
+import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
 
 const FollowList = ({ header, data }) => {
   const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);
@@ -30,19 +31,20 @@ const FollowList = ({ header, data }) => {
       size="small"
       header={<div>{header}</div>}
       loadMore={
-        <ButtonWrapper>
+        <MoreButtonWrapper>
           <Button>더 보기</Button>
-        </ButtonWrapper>
+        </MoreButtonWrapper>
       }
       bordered
       dataSource={data}
       renderItem={(item) => (
         <ListItem>
-          <Card
+          <FollowCard
+            bordered={false}
             actions={[<StopOutlined key="stop" onClick={onCancel(item.id)} />]}
           >
-            <Card.Meta description={item.nickname} />
-          </Card>
+            <Card.Meta description={<div>{item.nickname}</div>} />
+          </FollowCard>
         </ListItem>
       )}
     />
