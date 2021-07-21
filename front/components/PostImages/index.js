@@ -6,14 +6,14 @@ import Conditional from "../../hocs/Conditional";
 import ImagesZoom from "../ImagesZoom";
 
 const PostImages = ({ images }) => {
-  const [showImagesZoom, serShowImagesZoom] = useState(false);
+  const [showImagesZoom, setShowImagesZoom] = useState(false);
 
   const onZoom = useCallback(() => {
-    serShowImagesZoom(true);
+    setShowImagesZoom(true);
   }, []);
 
   const onClose = useCallback(() => {
-    serShowImagesZoom(false);
+    setShowImagesZoom(false);
   }, []);
 
   if (images.length === 1) {
@@ -37,14 +37,14 @@ const PostImages = ({ images }) => {
       <>
         <img
           role="presentation"
-          style={{ width: "50%", display: "inline-block" }}
+          style={{ width: "50%", height: "300px", display: "inline-block" }}
           src={`http://localhost:3065/${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
         <img
           role="presentation"
-          style={{ width: "50%", display: "inline-block" }}
+          style={{ width: "50%", height: "300px", display: "inline-block" }}
           src={`http://localhost:3065/${images[1].src}`}
           alt={images[1].src}
           onClick={onZoom}
@@ -58,13 +58,12 @@ const PostImages = ({ images }) => {
 
   return (
     <>
-      <div style={{ background: "rgba(0,0,0,0.1)" }}>
+      <div style={{ background: "rgba(0,0,0,0.3)" }} onClick={onZoom}>
         <img
           role="presentation"
-          style={{ width: "50%" }}
+          style={{ width: "50%", height: "300px" }}
           src={`http://localhost:3065/${images[0].src}`}
           alt={images[0].src}
-          onClick={onZoom}
         />
         <div
           role="presentation"
@@ -74,13 +73,14 @@ const PostImages = ({ images }) => {
             textAlign: "center",
             verticalAlign: "middle",
           }}
-          onClick={onZoom}
         >
-          <PlusCircleFilled />
-          <br />
-          {images.length - 1}개의 사진 더보기
+          <PlusOutlined />{" "}
+          <span style={{ fontSize: "20px", color: "#191A1A" }}>
+            {images.length - 1}장
+          </span>
         </div>
       </div>
+
       <Conditional condition={showImagesZoom}>
         <ImagesZoom images={images} onClose={onClose} />
       </Conditional>

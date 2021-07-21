@@ -8,22 +8,26 @@ import { useDispatch } from "react-redux";
 import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
 
 const FollowList = ({ header, data }) => {
-  const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);
   const dispatch = useDispatch();
 
-  const onCancel = (id) => () => {
-    if (header === "팔로잉") {
+  const onCancel = useCallback(
+    (id) => () => {
+      if (header === "팔로잉") {
+        dispatch({
+          type: UNFOLLOW_REQUEST,
+          data: id,
+        });
+      }
+
       dispatch({
-        type: UNFOLLOW_REQUEST,
+        type: REMOVE_FOLLOWER_REQUEST,
         data: id,
       });
-    }
+    },
+    []
+  );
 
-    dispatch({
-      type: REMOVE_FOLLOWER_REQUEST,
-      data: id,
-    });
-  };
+  const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);
 
   return (
     <ListWrapper

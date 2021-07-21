@@ -12,17 +12,17 @@ export const Overlay = styled.div`
 
 export const Header = styled.header`
   height: 44px;
-  background: gray;
+  background: linear-gradient(0deg, #607882, gray);
   position: relative;
   padding: 0;
   text-align: center;
 
-  & h1 {
+  /* & h1 {
     margin: 0;
     font-size: 15px;
     color: black;
     line-height: 44px;
-  }
+  } */
 `;
 
 export const CloseBtn = styled(CloseCircleOutlined)`

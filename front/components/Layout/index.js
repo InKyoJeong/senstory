@@ -61,8 +61,8 @@ const Layout = ({ children }) => {
       </Menu>
 
       <Row gutter={10}>
-        <Col xs={0} sm={2} md={6} lg={7}></Col>
-        <Col xs={24} sm={20} md={12} lg={10}>
+        <Col xs={0} sm={2} md={6} lg={8}></Col>
+        <Col xs={24} sm={20} md={12} lg={9}>
           {children}
         </Col>
         <Col xs={0} sm={0} md={0} lg={7}>

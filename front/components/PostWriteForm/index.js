@@ -20,11 +20,10 @@ import {
 } from "./styles";
 
 const PostWriteForm = () => {
+  const dispatch = useDispatch();
   const { imagePaths, addPostFinish, addPostLoading } = useSelector(
     (state) => state.post
   );
-  const dispatch = useDispatch();
-
   const [text, onChangeText, setText] = useInput("");
 
   useEffect(() => {
@@ -67,12 +66,15 @@ const PostWriteForm = () => {
     });
   }, []);
 
-  const onRemoveImage = useCallback((index) => () => {
-    dispatch({
-      type: REMOVE_IMAGE,
-      data: index,
-    });
-  });
+  const onRemoveImage = useCallback(
+    (index) => () => {
+      dispatch({
+        type: REMOVE_IMAGE,
+        data: index,
+      });
+    },
+    []
+  );
 
   const TextAreaStyles = useMemo(
     () => ({
