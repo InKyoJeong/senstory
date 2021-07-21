@@ -40,7 +40,7 @@ export const SlickWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  padding: 32px;
+  /* padding-top: 20px; */
   text-align: center;
 
   & img {
@@ -51,7 +51,7 @@ export const ImageWrapper = styled.div`
 
 export const Indicator = styled.div`
   text-align: center;
-
+  margin-top: 15px;
   & > div {
     width: 75px;
     height: 30px;

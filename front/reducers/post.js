@@ -105,6 +105,7 @@ const reducer = (state = initialState, action) => {
         draft.addPostLoading = false;
         draft.addPostFinish = true;
         draft.mainPosts.unshift(action.data);
+        draft.imagePaths = [];
         break;
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;

@@ -3,9 +3,9 @@ import { Input } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addPost,
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
+  ADD_POST_REQUEST,
 } from "../../actions/post";
 import useInput from "../../hooks/useInput";
 import { EditFilled, PictureFilled } from "@ant-design/icons";
@@ -34,8 +34,19 @@ const PostWriteForm = () => {
   }, [addPostFinish]);
 
   const onSubmit = useCallback(() => {
-    dispatch(addPost(text));
-  }, [text]);
+    if (!text || !text.trim()) {
+      return alert("내용을 입력해주세요.");
+    }
+    const formData = new FormData();
+    imagePaths.forEach((v) => {
+      formData.append("image", v);
+    });
+    formData.append("content", text);
+    return dispatch({
+      type: ADD_POST_REQUEST,
+      data: formData,
+    });
+  }, [text, imagePaths]);
 
   const imageInput = useRef();
 
