@@ -2,12 +2,11 @@ import styled from "styled-components";
 import { Card, Button } from "antd";
 
 export const CardWrapper = styled(Card)`
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  border-color: ${(props) => props.theme.MIDDLE_GRAY};
   margin: 20px 5% 20px 5%;
   border-radius: 10px;
-  border-color: #404042;
   overflow: hidden;
-  background-color: #404042;
-
   & div {
     color: #e3e3e6;
   }

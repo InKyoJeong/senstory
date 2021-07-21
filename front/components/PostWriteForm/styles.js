@@ -3,9 +3,9 @@ import { Form, Button } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 export const FormWrapper = styled(Form)`
+  background-color: ${(props) => props.theme.DARK_GRAY};
   margin-top: 20px;
   margin-bottom: 40px;
-  background-color: #2d2d2e;
   padding: 10px;
   border-radius: 10px;
 `;

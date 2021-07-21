@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export const Global = createGlobalStyle`
+  body{
+     background-color: ${(props) => props.theme.BLACK};
+   }
+   
   .ant-row{
     margin-right: 0 !important;
     margin-left: 0 !important;
@@ -28,7 +32,7 @@ export const Global = createGlobalStyle`
     border-color: gray !important; 
 
     & > span > .anticon {
-      color: #191A1A;
+       color: ${(props) => props.theme.BLACK};
     }
   }
 

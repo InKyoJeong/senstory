@@ -22,7 +22,7 @@ export const CommentList = styled(List)`
   margin-top: 10px;
   margin-bottom: 15px;
   color: white;
-  background-color: #2d2d2e;
+  background-color: ${(props) => props.theme.DARK_GRAY};
   border-radius: 10px;
 
   & li:not(:last-child) {

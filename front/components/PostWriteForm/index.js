@@ -79,7 +79,7 @@ const PostWriteForm = () => {
   const TextAreaStyles = useMemo(
     () => ({
       marginBottom: 8,
-      backgroundColor: "gray",
+      backgroundColor: "#808080",
       borderColor: "#6f6f70",
       color: "white",
       borderRadius: 10,
