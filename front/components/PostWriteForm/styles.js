@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import { Form, Button } from "antd";
-import {
-  CloseCircleOutlined,
-  CloseOutlined,
-  EditFilled,
-  PictureFilled,
-} from "@ant-design/icons";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 export const FormWrapper = styled(Form)`
   margin-top: 20px;
   margin-bottom: 40px;
+  background-color: #2d2d2e;
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 export const WriteButtonWrapper = styled.div`
@@ -41,25 +39,40 @@ export const ImagesWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  overflow: auto;
+
+  & div:not(:last-child) {
+    margin-right: 20px;
+  }
+
   & div {
     position: relative;
     display: inline-block;
-
+    margin-top: 8px;
     & img {
       width: 100px;
       height: 100px;
       border-radius: 10px;
+    }
+    @media screen and (max-width: 567px) {
+      & img {
+        width: 80px;
+        height: 80px;
+      }
     }
   }
 `;
 
 export const ImageDeleteBtn = styled(CloseCircleOutlined)`
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -8px;
+  right: -8px;
   font-size: 20px;
   border-radius: 10px;
   background-color: black;
   color: #d66565;
+
+  &:hover {
+    color: #e03d3d;
+  }
 `;

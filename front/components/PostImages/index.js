@@ -58,7 +58,7 @@ const PostImages = ({ images }) => {
 
   return (
     <>
-      <div style={{ background: "rgba(0,0,0,0.3)" }} onClick={onZoom}>
+      <div style={{ background: "rgba(0,0,0,0.5)" }} onClick={onZoom}>
         <img
           role="presentation"
           style={{ width: "50%", height: "300px" }}
@@ -75,7 +75,7 @@ const PostImages = ({ images }) => {
           }}
         >
           <PlusOutlined />{" "}
-          <span style={{ fontSize: "20px", color: "#191A1A" }}>
+          <span style={{ fontSize: "20px", color: "black" }}>
             {images.length - 1}장
           </span>
         </div>
