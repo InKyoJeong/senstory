@@ -2,8 +2,8 @@ import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { PlusOutlined, PlusCircleFilled } from "@ant-design/icons";
 
-import Conditional from "../hocs/Conditional";
-import ImagesZoom from "./ImagesZoom";
+import Conditional from "../../hocs/Conditional";
+import ImagesZoom from "../ImagesZoom";
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, serShowImagesZoom] = useState(false);

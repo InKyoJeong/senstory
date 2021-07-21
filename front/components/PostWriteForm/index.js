@@ -1,17 +1,23 @@
-import React, { useCallback, useEffect, useRef } from "react";
-import { Input, Button } from "antd";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { Input } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, UPLOAD_IMAGES_REQUEST } from "../../actions/post";
+import {
+  addPost,
+  UPLOAD_IMAGES_REQUEST,
+  REMOVE_IMAGE,
+} from "../../actions/post";
 import useInput from "../../hooks/useInput";
+import { EditFilled, PictureFilled } from "@ant-design/icons";
 
 import {
   FormWrapper,
-  ImageButton,
+  ImageDeleteBtn,
+  ImageEnrollBtn,
+  ImagesWrapper,
   PostWriteButton,
   WriteButtonWrapper,
 } from "./styles";
-import { EditFilled, PictureFilled } from "@ant-design/icons";
 
 const PostWriteForm = () => {
   const { imagePaths, addPostFinish, addPostLoading } = useSelector(
@@ -50,16 +56,28 @@ const PostWriteForm = () => {
     });
   }, []);
 
+  const onRemoveImage = useCallback((index) => () => {
+    dispatch({
+      type: REMOVE_IMAGE,
+      data: index,
+    });
+  });
+
+  const TextAreaStyles = useMemo(
+    () => ({
+      marginBottom: 8,
+      backgroundColor: "gray",
+      borderColor: "#6f6f70",
+      color: "white",
+      borderRadius: 10,
+    }),
+    []
+  );
+
   return (
     <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
-        style={{
-          marginBottom: 8,
-          backgroundColor: "gray",
-          borderColor: "#6f6f70",
-          color: "white",
-          borderRadius: 10,
-        }}
+        style={TextAreaStyles}
         value={text}
         onChange={onChangeText}
         maxLength={140}
@@ -75,9 +93,10 @@ const PostWriteForm = () => {
           ref={imageInput}
           onChange={onChangeImages}
         />
-        <ImageButton onClick={onClickImageUpload}>
+        <ImageEnrollBtn onClick={onClickImageUpload}>
           <PictureFilled />
-        </ImageButton>
+        </ImageEnrollBtn>
+
         <PostWriteButton
           type="primary"
           htmlType="submit"
@@ -87,16 +106,14 @@ const PostWriteForm = () => {
         </PostWriteButton>
       </WriteButtonWrapper>
 
-      <div>
-        {imagePaths.map((v) => (
-          <div key={v} style={{ display: "inline-block" }}>
-            <img src={v} style={{ width: "200px" }} alt={v} />
-            <div>
-              <Button>제거</Button>
-            </div>
+      <ImagesWrapper>
+        {imagePaths.map((v, i) => (
+          <div key={v}>
+            <img src={`http://localhost:3065/${v}`} alt={v} />
+            <ImageDeleteBtn onClick={onRemoveImage(i)} />
           </div>
         ))}
-      </div>
+      </ImagesWrapper>
     </FormWrapper>
   );
 };
