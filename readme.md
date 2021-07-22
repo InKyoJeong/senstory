@@ -39,3 +39,7 @@ function* repost(action) {
 ```
 
 그래서 `REPOST_ERROR_FINISH`라는 액션을 하나 더 만들어서 finally로 에러가 뜬이후 error data를 null로 변경해서 해결했다.
+
+- finally안의 코드는 다음과 같은 상황에서 실행
+  - 에러가 없는 경우: try 실행이 끝난 후
+  - 에러가 있는 경우: catch 실행이 끝난 후

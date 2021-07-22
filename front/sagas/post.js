@@ -75,6 +75,7 @@ function repostAPI(data) {
 function* repost(action) {
   try {
     const result = yield call(repostAPI, action.data);
+    console.log(result);
     yield put({
       type: REPOST_SUCCESS,
       data: result.data,
@@ -84,10 +85,6 @@ function* repost(action) {
       type: REPOST_FAILURE,
       error: err.response.data,
     });
-    // yield put({
-    //   type: REPOST_ERROR_FINISH,
-    //   error: null,
-    // });
   } finally {
     yield put({
       type: REPOST_ERROR_FINISH,

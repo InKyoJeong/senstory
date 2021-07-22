@@ -20,8 +20,7 @@ export const Global = createGlobalStyle`
 
   // ant-card icon style
   .ant-card-actions{
-    border-color: gray; 
-    /* background-color: #d1d1d1;  */
+    border-color: #696666; 
     background-color: #3e3e40;
 
     & ul{
@@ -33,7 +32,6 @@ export const Global = createGlobalStyle`
     border-color: gray !important; 
 
     & > span > .anticon {
-       /* color: ${(props) => props.theme.BLACK}; */
        color: white;
     }
   }
@@ -59,5 +57,10 @@ export const Global = createGlobalStyle`
   .ant-empty-description{
     color: white;
     opacity: 0.7;
+  } 
+
+  // ant-popover
+  .ant-popover-inner-content, .ant-popover-arrow-content{
+    background-color: #8c8181;
   }
 `;

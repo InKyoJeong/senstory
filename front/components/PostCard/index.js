@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Card, Button, Avatar, Popover, Comment } from "antd";
 import {
@@ -8,6 +8,7 @@ import {
   MessageOutlined,
   MessageFilled,
   RetweetOutlined,
+  ShareAltOutlined,
 } from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -94,7 +95,8 @@ const PostCard = ({ post }) => {
       borderRadius: 10,
       overflow: "hidden",
       backgroundColor: "#2d2d2e",
-      borderColor: "gray",
+      borderColor: "#404042",
+      borderWidth: 4,
     }),
     []
   );
@@ -124,24 +126,52 @@ const PostCard = ({ post }) => {
             padding: "8px 10px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ marginRight: 5 }}>
-              {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
-              <Avatar>{post.User.nickname[0]}</Avatar>
-            </span>
-            <span style={{ color: "#c5c5c7" }}>
-              {post.User.nickname}님이 공유했습니다.
-            </span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginRight: 10,
+            }}
+          >
+            <div>
+              <span style={{ marginRight: 5 }}>
+                {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
+                <Avatar>{post.User.nickname[0]}</Avatar>
+              </span>
+              <span style={{ color: "#c5c5c7" }}>
+                {post.User.nickname}님이 공유했습니다.
+              </span>
+            </div>
 
-            {/* {id && <FollowButton post={post} />} */}
+            <Conditional condition={id && post.User.id === id}>
+              <Popover
+                key="more"
+                trigger="click"
+                content={
+                  <Button.Group>
+                    <>
+                      <Button type="primary">수정</Button>
+                      <Button
+                        type="danger"
+                        onClick={onRemovePost}
+                        loading={removePostLoading}
+                      >
+                        삭제
+                      </Button>
+                    </>
+                  </Button.Group>
+                }
+              >
+                <EllipsisOutlined />
+              </Popover>
+            </Conditional>
           </div>
         </div>
       )}
 
       <Card
-        // title={post.RepostId && post.Repost && post.User.nickname}
         style={post.RepostId && post.Repost ? repostCardStyle : cardStyle}
-        // bodyStyle={cardBodyStyle}
         bordered={false}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -165,37 +195,12 @@ const PostCard = ({ post }) => {
             <MessageOutlined key="comment" onClick={onToggleComment} />
           ),
           <RetweetOutlined key="re" onClick={onRepost} />,
-          <Popover
-            key="more"
-            content={
-              <Button.Group>
-                {id && post.User.id === id ? (
-                  <>
-                    <Button>수정</Button>
-                    <Button
-                      type="danger"
-                      onClick={onRemovePost}
-                      loading={removePostLoading}
-                    >
-                      삭제
-                    </Button>
-                  </>
-                ) : (
-                  <Button>공유</Button>
-                )}
-              </Button.Group>
-            }
-          >
-            <EllipsisOutlined />
-          </Popover>,
+          <ShareAltOutlined />,
         ]}
-        // extra={id && <FollowButton post={post} />}
       >
         {post.RepostId && post.Repost ? (
           <Card
             style={repostInnerStyle}
-            // bodyStyle={cardBodyStyle}
-            // bordered={false}
             cover={
               post.Repost.Images[0] && (
                 <PostImages images={post.Repost.Images} />
@@ -204,12 +209,7 @@ const PostCard = ({ post }) => {
           >
             <Card.Meta
               avatar={<Avatar>{post.Repost.User.nickname[0]}</Avatar>}
-              title={
-                <PostAuthor>
-                  {post.Repost.User.nickname}
-                  {/* {id && <FollowButton post={post} />} */}
-                </PostAuthor>
-              }
+              title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
               description={<PostTag postData={post.Repost.content} />}
             />
           </Card>
@@ -219,7 +219,32 @@ const PostCard = ({ post }) => {
             title={
               <PostAuthor>
                 {post.User.nickname}
-                {id && <FollowButton post={post} />}
+                <Conditional condition={id && post.User.id === id}>
+                  <Popover
+                    key="more"
+                    trigger="click"
+                    content={
+                      <Button.Group>
+                        <>
+                          <Button type="primary">수정</Button>
+                          <Button
+                            type="danger"
+                            onClick={onRemovePost}
+                            loading={removePostLoading}
+                          >
+                            삭제
+                          </Button>
+                        </>
+                      </Button.Group>
+                    }
+                  >
+                    <EllipsisOutlined />
+                  </Popover>
+                </Conditional>
+
+                <Conditional condition={id}>
+                  <FollowButton post={post} />
+                </Conditional>
               </PostAuthor>
             }
             description={<PostTag postData={post.content} />}

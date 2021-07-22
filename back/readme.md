@@ -26,4 +26,13 @@ $ npx sequelize db:create
 
 ```
 
-<br>
+## db 재생성
+
+```js
+db.sequelize
+  .sync({ alter: true }) // 테이블수정
+  .then(() => {
+    console.log("db 연결성공");
+  })
+  .catch(console.error);
+```
