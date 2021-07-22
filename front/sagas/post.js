@@ -17,6 +17,7 @@ import {
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
+  REPOST_ERROR_FINISH,
   REPOST_FAILURE,
   REPOST_REQUEST,
   REPOST_SUCCESS,
@@ -82,6 +83,15 @@ function* repost(action) {
     yield put({
       type: REPOST_FAILURE,
       error: err.response.data,
+    });
+    // yield put({
+    //   type: REPOST_ERROR_FINISH,
+    //   error: null,
+    // });
+  } finally {
+    yield put({
+      type: REPOST_ERROR_FINISH,
+      error: null,
     });
   }
 }

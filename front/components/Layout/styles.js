@@ -21,7 +21,8 @@ export const Global = createGlobalStyle`
   // ant-card icon style
   .ant-card-actions{
     border-color: gray; 
-    background-color: #d1d1d1; 
+    /* background-color: #d1d1d1;  */
+    background-color: #3e3e40;
 
     & ul{
       color: #404042; 
@@ -32,7 +33,8 @@ export const Global = createGlobalStyle`
     border-color: gray !important; 
 
     & > span > .anticon {
-       color: ${(props) => props.theme.BLACK};
+       /* color: ${(props) => props.theme.BLACK}; */
+       color: white;
     }
   }
 

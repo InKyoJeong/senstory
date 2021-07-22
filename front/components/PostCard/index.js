@@ -121,7 +121,7 @@ const PostCard = ({ post }) => {
             color: "white",
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
-            padding: "5px 10px",
+            padding: "8px 10px",
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>

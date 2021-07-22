@@ -17,6 +17,7 @@ import {
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
+  REPOST_ERROR_FINISH,
   REPOST_FAILURE,
   REPOST_REQUEST,
   REPOST_SUCCESS,
@@ -129,6 +130,9 @@ const reducer = (state = initialState, action) => {
         break;
       case REPOST_FAILURE:
         draft.repostLoading = false;
+        draft.repostError = action.error;
+        break;
+      case REPOST_ERROR_FINISH:
         draft.repostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
