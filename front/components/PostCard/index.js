@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Button, Avatar, Popover, Comment } from "antd";
 import {
@@ -15,6 +15,7 @@ import {
   LIKE_POST_REQUEST,
   REMOVE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
+  REPOST_REQUEST,
 } from "../../actions/post";
 
 import useToggle from "../../hooks/useToggle";
@@ -40,40 +41,107 @@ const PostCard = ({ post }) => {
   const liked = post.Likers.find((v) => v.id === id);
 
   const onLike = useCallback(() => {
-    dispatch({
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    return dispatch({
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [id]);
 
   const onUnlike = useCallback(() => {
-    dispatch({
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    return dispatch({
       type: UNLIKE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [id]);
 
   const onRemovePost = useCallback(() => {
-    dispatch({
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    return dispatch({
       type: REMOVE_POST_REQUEST,
       data: post.id,
     });
-  }, []);
+  }, [id]);
+
+  const onRepost = useCallback(() => {
+    if (!id) {
+      return alert("로그인이 필요합니다.");
+    }
+    return dispatch({
+      type: REPOST_REQUEST,
+      data: post.id,
+    });
+  }, [id]);
 
   const cardStyle = useMemo(
     () => ({
       borderRadius: 10,
       overflow: "hidden",
+      backgroundColor: "#2d2d2e",
     }),
     []
   );
-  const cardBodyStyle = useMemo(() => ({ background: "#2d2d2e" }), []);
+
+  const repostInnerStyle = useMemo(
+    () => ({
+      borderRadius: 10,
+      overflow: "hidden",
+      backgroundColor: "#2d2d2e",
+      borderColor: "gray",
+    }),
+    []
+  );
+
+  const repostCardStyle = useMemo(
+    () => ({
+      // borderRadius: 10,
+      overflow: "hidden",
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+      backgroundColor: "#2d2d2e",
+    }),
+    []
+  );
+
+  // const cardBodyStyle = useMemo(() => ({ background: "#2d2d2e" }), []);
 
   return (
     <PostCardWrapper>
+      {post.RepostId && post.Repost && (
+        <div
+          style={{
+            backgroundColor: "#39393b",
+            color: "white",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            padding: "5px 10px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ marginRight: 5 }}>
+              {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
+              <Avatar>{post.User.nickname[0]}</Avatar>
+            </span>
+            <span style={{ color: "#c5c5c7" }}>
+              {post.User.nickname}님이 공유했습니다.
+            </span>
+
+            {/* {id && <FollowButton post={post} />} */}
+          </div>
+        </div>
+      )}
+
       <Card
-        style={cardStyle}
-        bodyStyle={cardBodyStyle}
+        // title={post.RepostId && post.Repost && post.User.nickname}
+        style={post.RepostId && post.Repost ? repostCardStyle : cardStyle}
+        // bodyStyle={cardBodyStyle}
         bordered={false}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -96,7 +164,7 @@ const PostCard = ({ post }) => {
           ) : (
             <MessageOutlined key="comment" onClick={onToggleComment} />
           ),
-          <RetweetOutlined key="re" />,
+          <RetweetOutlined key="re" onClick={onRepost} />,
           <Popover
             key="more"
             content={
@@ -123,16 +191,40 @@ const PostCard = ({ post }) => {
         ]}
         // extra={id && <FollowButton post={post} />}
       >
-        <Card.Meta
-          avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-          title={
-            <PostAuthor>
-              {post.User.nickname}
-              {id && <FollowButton post={post} />}
-            </PostAuthor>
-          }
-          description={<PostTag postData={post.content} />}
-        />
+        {post.RepostId && post.Repost ? (
+          <Card
+            style={repostInnerStyle}
+            // bodyStyle={cardBodyStyle}
+            // bordered={false}
+            cover={
+              post.Repost.Images[0] && (
+                <PostImages images={post.Repost.Images} />
+              )
+            }
+          >
+            <Card.Meta
+              avatar={<Avatar>{post.Repost.User.nickname[0]}</Avatar>}
+              title={
+                <PostAuthor>
+                  {post.Repost.User.nickname}
+                  {/* {id && <FollowButton post={post} />} */}
+                </PostAuthor>
+              }
+              description={<PostTag postData={post.Repost.content} />}
+            />
+          </Card>
+        ) : (
+          <Card.Meta
+            avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+            title={
+              <PostAuthor>
+                {post.User.nickname}
+                {id && <FollowButton post={post} />}
+              </PostAuthor>
+            }
+            description={<PostTag postData={post.content} />}
+          />
+        )}
       </Card>
 
       <Conditional condition={commentOpen}>
@@ -167,6 +259,8 @@ PostCard.propTypes = {
     Comments: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
     Likers: PropTypes.arrayOf(PropTypes.object),
+    RepostId: PropTypes.number,
+    Repost: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
 };
 

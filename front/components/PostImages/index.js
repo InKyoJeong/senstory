@@ -58,7 +58,12 @@ const PostImages = ({ images }) => {
 
   return (
     <>
-      <div style={{ background: "rgba(0,0,0,0.5)" }} onClick={onZoom}>
+      <div
+        style={{
+          background: "linear-gradient(-45deg, #505f66, gray)",
+        }}
+        onClick={onZoom}
+      >
         <img
           role="presentation"
           style={{ width: "50%", height: "300px" }}

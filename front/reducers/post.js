@@ -17,6 +17,9 @@ import {
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
+  REPOST_FAILURE,
+  REPOST_REQUEST,
+  REPOST_SUCCESS,
   UNLIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
@@ -50,6 +53,9 @@ export const initialState = {
   uploadImagesLoading: false,
   uploadImagesFinish: false,
   uploadImagesError: null,
+  repostLoading: false,
+  repostFinish: false,
+  repostError: null,
 };
 
 // export const generateDummyPosts = (number) =>
@@ -110,6 +116,20 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
         draft.addPostError = action.error;
+        break;
+      case REPOST_REQUEST:
+        draft.repostLoading = true;
+        draft.repostFinish = false;
+        draft.repostError = null;
+        break;
+      case REPOST_SUCCESS:
+        draft.mainPosts.unshift(action.data);
+        draft.repostLoading = false;
+        draft.repostFinish = true;
+        break;
+      case REPOST_FAILURE:
+        draft.repostLoading = false;
+        draft.repostError = action.error;
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;

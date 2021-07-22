@@ -17,6 +17,9 @@ import {
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
+  REPOST_FAILURE,
+  REPOST_REQUEST,
+  REPOST_SUCCESS,
   UNLIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
@@ -59,6 +62,25 @@ function* unlikePost(action) {
   } catch (err) {
     yield put({
       type: UNLIKE_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function repostAPI(data) {
+  return axios.post(`/post/${data}/repost`);
+}
+
+function* repost(action) {
+  try {
+    const result = yield call(repostAPI, action.data);
+    yield put({
+      type: REPOST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: REPOST_FAILURE,
       error: err.response.data,
     });
   }
@@ -197,6 +219,10 @@ function* watchUnlikePost() {
   yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
 }
 
+function* watchRepost() {
+  yield takeLatest(REPOST_REQUEST, repost);
+}
+
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
@@ -207,6 +233,7 @@ export default function* postSaga() {
     fork(watchUnlikePost),
     fork(watchLoadPosts),
     fork(watchAddPost),
+    fork(watchRepost),
     fork(watchAddComment),
     fork(watchRemovePost),
     fork(watchUploadImages),

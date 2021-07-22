@@ -12,10 +12,16 @@ import Conditional from "../hocs/Conditional";
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
-  const { mainPosts, hasMorePosts, loadPostLoading } = useSelector(
+  const { mainPosts, hasMorePosts, loadPostLoading, repostError } = useSelector(
     (state) => state.post
   );
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (repostError) {
+      alert(repostError);
+    }
+  }, [repostError]);
 
   useEffect(() => {
     dispatch({

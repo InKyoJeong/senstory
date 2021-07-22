@@ -99,6 +99,87 @@ router.post(
   }
 );
 
+// POST /post/1/repost
+router.post("/:postId/repost", isLoggedIn, async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+      include: [
+        {
+          model: Post,
+          as: "Repost",
+        },
+      ],
+    });
+    if (!post) {
+      return res.status(403).send("존재하지 않는 게시글입니다.");
+    }
+    if (
+      req.user.id === post.UserId ||
+      (post.Repost && post.Repost.UserId === req.user.id)
+    ) {
+      return res.status(403).send("자신의 글은 공유할 수 없습니다.");
+    }
+    const repostOriginId = post.RepostId || post.id;
+    const exPost = await Post.findOne({
+      where: {
+        UserId: req.user.id,
+        RepostId: repostOriginId,
+      },
+    });
+    if (exPost) {
+      return res.status(403).send("이미 공유한 게시물입니다.");
+    }
+    const repost = await Post.create({
+      UserId: req.user.id,
+      RepostId: repostOriginId,
+      content: "repost",
+    });
+    const repostWithPostId = await Post.findOne({
+      where: { id: repost.id },
+      include: [
+        {
+          model: Post,
+          as: "Repost",
+          include: [
+            {
+              model: User,
+              attributes: ["id", "nickname"],
+            },
+            { model: Image },
+          ],
+        },
+        {
+          model: User,
+          attributes: ["id", "nickname"],
+        },
+        {
+          model: Image,
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["id", "nickname"],
+            },
+          ],
+        },
+        {
+          model: User,
+          as: "Likers",
+          attributes: ["id"],
+        },
+      ],
+    });
+
+    res.status(201).json(repostWithPostId);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 // POST /post/1/comment
 router.post("/:postId/comment", isLoggedIn, async (req, res, next) => {
   try {
