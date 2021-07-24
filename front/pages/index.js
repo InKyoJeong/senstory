@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_POST_REQUEST } from "../actions/post";
-import { LOAD_USER_REQUEST } from "../actions/user";
+import { LOAD_ME_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
 import Layout from "../components/Layout";
@@ -27,7 +27,7 @@ const Home = () => {
 
   // useEffect(() => {
   //   dispatch({
-  //     type: LOAD_USER_REQUEST,
+  //     type: LOAD_ME_REQUEST,
   //   });
   // }, []);
 
@@ -85,7 +85,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   async (context) => {
     console.log("context", context);
     context.store.dispatch({
-      type: LOAD_USER_REQUEST,
+      type: LOAD_ME_REQUEST,
     });
     context.store.dispatch({
       type: LOAD_POST_REQUEST,

@@ -14,6 +14,9 @@ import {
   LOAD_FOLLOWINGS_FAILURE,
   LOAD_FOLLOWINGS_REQUEST,
   LOAD_FOLLOWINGS_SUCCESS,
+  LOAD_ME_FAILURE,
+  LOAD_ME_REQUEST,
+  LOAD_ME_SUCCESS,
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
@@ -35,8 +38,27 @@ import {
   UNFOLLOW_SUCCESS,
 } from "../actions/user";
 
-function loadUserAPI() {
+function loadMeAPI() {
   return axios.get("/user");
+}
+
+function* loadMe() {
+  try {
+    const result = yield call(loadMeAPI);
+    yield put({
+      type: LOAD_ME_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_ME_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadUserAPI(data) {
+  return axios.get(`/user/${data}`);
 }
 
 function* loadUser(action) {
@@ -232,6 +254,10 @@ function* removeFollower(action) {
   }
 }
 
+function* watchLoadMe() {
+  yield takeLatest(LOAD_ME_REQUEST, loadMe);
+}
+
 function* watchLoadUser() {
   yield takeLatest(LOAD_USER_REQUEST, loadUser);
 }
@@ -274,6 +300,7 @@ function* watchRemoveFollower() {
 
 export default function* userSaga() {
   yield all([
+    fork(watchLoadMe),
     fork(watchLoadUser),
     fork(watchLoadFollowers),
     fork(watchLoadFollowings),

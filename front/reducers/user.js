@@ -37,6 +37,9 @@ import {
 } from "../actions/user";
 
 export const initialState = {
+  loadMeLoading: false, // 내 정보 가져오기
+  loadMeFinish: false,
+  loadMeError: null,
   loadUserLoading: false, // 유저 정보 가져오기
   loadUserFinish: false,
   loadUserError: null,
@@ -68,8 +71,7 @@ export const initialState = {
   removeFollowerFinish: false,
   removeFollowerError: null,
   me: null,
-  signUpData: {},
-  loginData: {},
+  userInfo: null,
 };
 
 // const dummyUser = (data) => ({
@@ -84,6 +86,20 @@ export const initialState = {
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
+      case LOAD_ME_REQUEST:
+        draft.loadMeLoading = true;
+        draft.loadMeFinish = false;
+        draft.loadMeError = null;
+        break;
+      case LOAD_ME_SUCCESS:
+        draft.loadMeLoading = false;
+        draft.loadMeFinish = true;
+        draft.me = action.data;
+        break;
+      case LOAD_ME_FAILURE:
+        draft.loadMeLoading = false;
+        draft.loadMeError = action.error;
+        break;
       case LOAD_USER_REQUEST:
         draft.loadUserLoading = true;
         draft.loadUserFinish = false;
@@ -92,7 +108,7 @@ const reducer = (state = initialState, action) => {
       case LOAD_USER_SUCCESS:
         draft.loadUserLoading = false;
         draft.loadUserFinish = true;
-        draft.me = action.data;
+        draft.userInfo = action.data;
         break;
       case LOAD_USER_FAILURE:
         draft.loadUserLoading = false;
