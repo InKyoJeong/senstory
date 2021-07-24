@@ -176,14 +176,19 @@ const PostCard = ({ post }) => {
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
+            // <div>
             <HeartFilled
               style={{ color: "red" }}
               key="like"
               onClick={onUnlike}
             />
           ) : (
+            //   <span> {post.Likers.length}</span>
+            // </div>
+            // <div>
             <HeartOutlined key="like" onClick={onLike} />
-            // <div>{post.Likers.length}</div>  // 좋아요 카운트
+            //   <span> {post.Likers.length}</span>
+            // </div>
           ),
           commentOpen ? (
             <MessageFilled
@@ -194,7 +199,11 @@ const PostCard = ({ post }) => {
           ) : (
             <MessageOutlined key="comment" onClick={onToggleComment} />
           ),
-          <RetweetOutlined key="re" onClick={onRepost} />,
+          <RetweetOutlined
+            key="re"
+            onClick={onRepost}
+            style={{ color: post.User.id === id && post.RepostId && "#1890FF" }}
+          />,
           <ShareAltOutlined key="share" />,
         ]}
       >

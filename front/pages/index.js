@@ -23,11 +23,11 @@ const Home = () => {
     }
   }, [repostError]);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_USER_REQUEST,
-  //   });
-  // }, []);
+  useEffect(() => {
+    dispatch({
+      type: LOAD_USER_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadPostLoading) {
