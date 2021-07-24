@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_FOLLOWERS_REQUEST,
   LOAD_FOLLOWINGS_REQUEST,
+  LOAD_USER_REQUEST,
 } from "../actions/user";
-import { Test } from "../components/ProfileForm/styles";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
@@ -45,8 +45,8 @@ const Profile = () => {
         <ProfileForm hide />
         <NickEditForm />
         {/* 자기소개 Form */}
-        <FollowList header="팔로잉" data={me.Followings} />
-        <FollowList header="팔로워" data={me.Followers} />
+        <FollowList header="팔로잉" data={me?.Followings} />
+        <FollowList header="팔로워" data={me?.Followers} />
       </Layout>
     </>
   );

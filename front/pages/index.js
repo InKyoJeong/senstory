@@ -8,6 +8,8 @@ import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
 import PostWriteForm from "../components/PostWriteForm";
 import Conditional from "../hocs/Conditional";
+import wrapper from "../store/configureStore";
+import { END } from "redux-saga";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,11 +25,11 @@ const Home = () => {
     }
   }, [repostError]);
 
-  useEffect(() => {
-    dispatch({
-      type: LOAD_USER_REQUEST,
-    });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: LOAD_USER_REQUEST,
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadPostLoading) {
@@ -78,5 +80,19 @@ const Home = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    console.log("context", context);
+    context.store.dispatch({
+      type: LOAD_USER_REQUEST,
+    });
+    context.store.dispatch({
+      type: LOAD_POST_REQUEST,
+    });
+    context.store.dispatch(END);
+    await context.store.sagaTask.toPromise();
+  }
+);
 
 export default Home;
