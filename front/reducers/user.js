@@ -34,6 +34,9 @@ import {
   REMOVE_FOLLOWER_SUCCESS,
   REMOVE_FOLLOWER_FAILURE,
   LOG_IN_ERROR_FINISH,
+  LOAD_ME_REQUEST,
+  LOAD_ME_SUCCESS,
+  LOAD_ME_FAILURE,
 } from "../actions/user";
 
 export const initialState = {

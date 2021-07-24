@@ -10,6 +10,7 @@ import PostWriteForm from "../components/PostWriteForm";
 import Conditional from "../hocs/Conditional";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
+import axios from "axios";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -83,7 +84,12 @@ const Home = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   async (context) => {
-    console.log("context", context);
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+
     context.store.dispatch({
       type: LOAD_ME_REQUEST,
     });

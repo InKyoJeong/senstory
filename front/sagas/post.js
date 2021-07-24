@@ -75,7 +75,7 @@ function repostAPI(data) {
 function* repost(action) {
   try {
     const result = yield call(repostAPI, action.data);
-    console.log(result);
+    // console.log(result);
     yield put({
       type: REPOST_SUCCESS,
       data: result.data,
@@ -119,9 +119,9 @@ function addPostAPI(data) {
 function* addPost(action) {
   try {
     const result = yield call(addPostAPI, action.data);
-    console.log("action.data: " + action.data);
-    console.log(result);
-    console.log(result.data);
+    // console.log("action.data: " + action.data);
+    // console.log(result);
+    // console.log(result.data);
     yield put({
       type: ADD_POST_SUCCESS,
       data: result.data,
