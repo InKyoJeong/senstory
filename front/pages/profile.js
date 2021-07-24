@@ -11,7 +11,7 @@ import {
   LOAD_FOLLOWERS_REQUEST,
   LOAD_FOLLOWINGS_REQUEST,
 } from "../actions/user";
-import { Test } from "../components/ProfileForm/Test";
+import { Test } from "../components/ProfileForm/styles";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
@@ -42,9 +42,7 @@ const Profile = () => {
         <title>프로필 | SceneryBook</title>
       </Head>
       <Layout>
-        <Test>
-          <ProfileForm />
-        </Test>
+        <ProfileForm hide />
         <NickEditForm />
         {/* 자기소개 Form */}
         <FollowList header="팔로잉" data={me.Followings} />
