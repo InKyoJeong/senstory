@@ -58,6 +58,12 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
         {/* </Conditional> */}
+
+        {/* <Menu.Item key="login" style={{ display: "none" }}>
+          <Link href="/">
+            <a>로그인</a>
+          </Link>
+        </Menu.Item> */}
       </Menu>
 
       <Row gutter={10}>
