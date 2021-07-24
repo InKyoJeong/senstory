@@ -7,7 +7,7 @@ export const PostCardWrapper = styled.div`
 `;
 
 export const PostCardBorder = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* border: 1px solid red; */
 `;
 
 export const PostAuthor = styled.div`
@@ -20,9 +20,9 @@ export const PostAuthor = styled.div`
 export const CommentList = styled(List)`
   padding: 0px 20px;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   color: white;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
   border-radius: 10px;
 
   & li:not(:last-child) {
