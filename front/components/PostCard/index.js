@@ -195,7 +195,7 @@ const PostCard = ({ post }) => {
             <MessageOutlined key="comment" onClick={onToggleComment} />
           ),
           <RetweetOutlined key="re" onClick={onRepost} />,
-          <ShareAltOutlined />,
+          <ShareAltOutlined key="share" />,
         ]}
       >
         {post.RepostId && post.Repost ? (
