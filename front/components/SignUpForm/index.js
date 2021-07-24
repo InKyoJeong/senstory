@@ -27,6 +27,7 @@ const SignUpForm = () => {
 
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (signUpFinish) {
@@ -40,6 +41,16 @@ const SignUpForm = () => {
     }
   }, [signUpError]);
 
+  useEffect(() => {
+    setIsValid(
+      email.length != 0 &&
+        password.length != 0 &&
+        passwordCheck.length != 0 &&
+        nickname.length != 0 &&
+        !passwordError
+    );
+  }, [email, password, passwordCheck, nickname]);
+
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -49,15 +60,17 @@ const SignUpForm = () => {
   );
 
   const onSubmit = useCallback(() => {
+    if (!isValid) return;
+
     if (password !== passwordCheck) {
       return setPasswordError(true);
     }
-    console.log(email, nickname, password);
+    // console.log(email, nickname, password);
     dispatch({
       type: SIGN_UP_REQUEST,
       data: { email, password, nickname },
     });
-  }, [email, password, passwordCheck]);
+  }, [email, password, passwordCheck, isValid]);
 
   return (
     <SignUpFormWrapper onFinish={onSubmit}>
@@ -109,7 +122,7 @@ const SignUpForm = () => {
         </Conditional>
       </InputWrapper>
 
-      <ButtonWrapper>
+      <ButtonWrapper isValid={isValid}>
         <Button type="primary" htmlType="submit" loading={signUpLoading}>
           가입하기
         </Button>

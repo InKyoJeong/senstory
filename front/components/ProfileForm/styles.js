@@ -4,11 +4,16 @@ import { Card, Button } from "antd";
 export const CardWrapper = styled(Card)`
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
   border-color: ${(props) => props.theme.MIDDLE_GRAY};
-  margin: 20px 5% 20px 5%;
   border-radius: 10px;
   overflow: hidden;
+  margin-top: 20px;
+
   & div {
     color: #e3e3e6;
+  }
+
+  @media screen and (min-width: 992px) {
+    margin: 20px 5% 20px 5%;
   }
 `;
 

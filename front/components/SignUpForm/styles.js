@@ -6,7 +6,7 @@ export const SignUpFormWrapper = styled(Form)`
 `;
 
 export const ErrorMessage = styled.div`
-  color: red;
+  color: #d43578;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -17,6 +17,8 @@ export const ButtonWrapper = styled.div`
   & Button {
     border-radius: 10px;
     width: 30%;
+    background-color: ${(props) => props.isValid || props.theme.INVALID};
+    border-color: ${(props) => props.isValid || props.theme.INVALID};
   }
 `;
 
@@ -32,6 +34,7 @@ export const SignUpInput = styled(Input)`
   border-radius: 10px;
   margin-top: 5px;
   color: white;
-  background-color: gray;
-  border-color: #6f6f70;
+  border-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  /* border-color: #6f6f70; */
 `;

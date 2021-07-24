@@ -5,12 +5,13 @@ import Router from "next/router";
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
-// import ProfileForm from "../components/ProfileForm";
+import ProfileForm from "../components/ProfileForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_FOLLOWERS_REQUEST,
   LOAD_FOLLOWINGS_REQUEST,
 } from "../actions/user";
+import { Test } from "../components/ProfileForm/Test";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
@@ -41,7 +42,9 @@ const Profile = () => {
         <title>프로필 | SceneryBook</title>
       </Head>
       <Layout>
-        {/* <ProfileForm /> */}
+        <Test>
+          <ProfileForm />
+        </Test>
         <NickEditForm />
         {/* 자기소개 Form */}
         <FollowList header="팔로잉" data={me.Followings} />
