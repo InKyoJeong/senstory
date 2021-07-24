@@ -17,6 +17,7 @@ import {
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
+  LOG_IN_ERROR_FINISH,
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
@@ -68,6 +69,11 @@ function* logIn(action) {
     yield put({
       type: LOG_IN_FAILURE,
       error: err.response.data,
+    });
+  } finally {
+    yield put({
+      type: LOG_IN_ERROR_FINISH,
+      // error: null,
     });
   }
 }

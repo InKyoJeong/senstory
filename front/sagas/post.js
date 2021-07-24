@@ -88,7 +88,7 @@ function* repost(action) {
   } finally {
     yield put({
       type: REPOST_ERROR_FINISH,
-      error: null,
+      // error: null,
     });
   }
 }

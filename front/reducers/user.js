@@ -33,6 +33,7 @@ import {
   REMOVE_FOLLOWER_REQUEST,
   REMOVE_FOLLOWER_SUCCESS,
   REMOVE_FOLLOWER_FAILURE,
+  LOG_IN_ERROR_FINISH,
 } from "../actions/user";
 
 export const initialState = {
@@ -110,6 +111,9 @@ const reducer = (state = initialState, action) => {
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
         draft.logInError = action.error;
+        break;
+      case LOG_IN_ERROR_FINISH:
+        draft.logInError = null;
         break;
       case LOG_OUT_REQUEST:
         draft.logOutLoading = true;

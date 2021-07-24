@@ -133,7 +133,7 @@ const reducer = (state = initialState, action) => {
         draft.repostError = action.error;
         break;
       case REPOST_ERROR_FINISH:
-        draft.repostError = action.error;
+        draft.repostError = null;
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;
