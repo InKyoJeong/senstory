@@ -11,37 +11,6 @@ export const PostCardWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-export const PostAuthor = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-`;
-
-export const CommentList = styled(List)`
-  padding: 0px 20px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  color: white;
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
-  border-radius: 10px;
-
-  & li:not(:last-child) {
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
-  }
-`;
-
-export const CommentAuthor = styled.div`
-  padding: 3px 5px;
-  border-radius: 5px;
-  color: white;
-  background-color: #1a1b1b;
-
-  &:hover {
-    color: white;
-  }
-`;
-
 export const RepostHeader = styled.div`
   background-color: #39393b;
   color: white;
@@ -79,6 +48,37 @@ export const RepostInnerCard = styled(Card)`
   border: 4px solid #404042;
 `;
 
+export const PostAuthor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+`;
+
+export const CommentList = styled(List)`
+  padding: 0px 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: white;
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  border-radius: 10px;
+
+  & li:not(:last-child) {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  }
+`;
+
+export const CommentAuthor = styled.div`
+  padding: 3px 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #1a1b1b;
+
+  &:hover {
+    color: white;
+  }
+`;
+
 // ----- PostDropdown -----
 export const DropdownWrapper = styled.div`
   background-color: gray;
@@ -97,8 +97,8 @@ export const DropdownButton = styled(Button)`
   border-color: white;
 
   &:hover {
-    background-color: ${(props) => props.edit || "#e89b9b"};
-    border-color: ${(props) => props.edit || "#e89b9b"};
+    background-color: ${(props) => props.edit === "true" || "#e89b9b"};
+    border-color: ${(props) => props.edit === "true" || "#e89b9b"};
     color: white;
   }
 `;

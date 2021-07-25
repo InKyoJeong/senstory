@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { Card, Avatar, Comment } from "antd";
 import {
@@ -34,8 +34,8 @@ import {
   RepostHeader,
   RepostTitleWrapper,
   RepostTitle,
-  CommonCard,
   RepostInnerCard,
+  CommonCard,
 } from "./styles";
 
 const PostCard = ({ post }) => {
