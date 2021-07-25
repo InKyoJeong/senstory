@@ -7,10 +7,11 @@ import ImagesZoom from "../ImagesZoom";
 import {
   ImgWrapper,
   LeftImg,
+  RightImg,
   MoreImgWrapper,
   MoreText,
   MoreTextWrapper,
-  RightImg,
+  SigleImg,
 } from "./styles";
 
 const PostImages = ({ images }) => {
@@ -27,12 +28,13 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <>
-        <img
+        <SigleImg
           role="presentation"
           src={`http://localhost:3065/${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
+
         <Conditional condition={showImagesZoom}>
           <ImagesZoom images={images} onClose={onClose} />
         </Conditional>

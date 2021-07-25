@@ -37,6 +37,9 @@ import {
   LOAD_ME_REQUEST,
   LOAD_ME_SUCCESS,
   LOAD_ME_FAILURE,
+  CHANGE_INTRO_REQUEST,
+  CHANGE_INTRO_SUCCESS,
+  CHANGE_INTRO_FAILURE,
 } from "../actions/user";
 
 export const initialState = {
@@ -58,6 +61,9 @@ export const initialState = {
   changeNickLoading: false, // 닉네임
   changeNickFinish: false,
   changeNickError: null,
+  changeIntroLoading: false, // 소개
+  changeIntroFinish: false,
+  changeIntroError: null,
   followLoading: false, // 팔로우
   followFinish: false,
   followError: null,
@@ -174,6 +180,20 @@ const reducer = (state = initialState, action) => {
       case CHANGE_NICK_FAILURE:
         draft.changeNickLoading = false;
         draft.changeNickError = action.error;
+        break;
+      case CHANGE_INTRO_REQUEST:
+        draft.changeIntroLoading = true;
+        draft.changeIntroFinish = false;
+        draft.changeIntroError = null;
+        break;
+      case CHANGE_INTRO_SUCCESS:
+        draft.me.intro = action.data.intro;
+        draft.changeIntroLoading = false;
+        draft.changeIntroFinish = true;
+        break;
+      case CHANGE_INTRO_FAILURE:
+        draft.changeIntroLoading = false;
+        draft.changeIntroError = action.error;
         break;
       case FOLLOW_REQUEST:
         draft.followLoading = true;

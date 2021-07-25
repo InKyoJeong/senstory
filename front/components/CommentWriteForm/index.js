@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Button, Form, Input } from "antd";
+import { Form } from "antd";
 import { EditFilled } from "@ant-design/icons";
 import useInput from "../../hooks/useInput";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Global, WriteWrapper, WriteButton, WriteInput } from "./styles";
+import { WriteWrapper, WriteButton, WriteInput } from "./styles";
 import { ADD_COMMENT_REQUEST } from "../../actions/post";
 
 const CommentWriteForm = ({ post }) => {
@@ -36,7 +36,6 @@ const CommentWriteForm = ({ post }) => {
 
   return (
     <Form onFinish={onSubmitComment}>
-      <Global />
       <Form.Item>
         <WriteWrapper>
           <WriteInput

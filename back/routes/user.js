@@ -99,6 +99,7 @@ router.post("/logout", isLoggedIn, (req, res) => {
   res.send("ok");
 });
 
+// PATCH /user/nickname
 router.patch("/nickname", isLoggedIn, async (req, res, next) => {
   try {
     await User.update(
@@ -110,6 +111,24 @@ router.patch("/nickname", isLoggedIn, async (req, res, next) => {
       }
     );
     res.status(200).json({ nickname: req.body.nickname });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+// PATCH /user/intro
+router.patch("/intro", isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        intro: req.body.intro,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ intro: req.body.intro });
   } catch (error) {
     console.error(error);
     next(error);

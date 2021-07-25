@@ -61,7 +61,6 @@ const SignUpForm = () => {
 
   const onSubmit = useCallback(() => {
     if (!isValid) return;
-
     if (password !== passwordCheck) {
       return setPasswordError(true);
     }

@@ -1,12 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { Button, Input } from "antd";
-
-export const Global = createGlobalStyle`
-  .ant-form-item{
-      margin-bottom: 0px;
-      margin-top: 10px;
-  }
-`;
 
 export const WriteWrapper = styled.div`
   display: flex;

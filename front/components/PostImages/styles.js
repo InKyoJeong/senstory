@@ -5,13 +5,26 @@ const imgStyle = css`
   height: 300px;
 `;
 
+const hoverOpacity = css`
+  transition: 0.5s;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
 export const ImgWrapper = styled.div`
   display: flex;
   cursor: pointer;
 `;
 
+export const SigleImg = styled.img`
+  cursor: pointer;
+  ${hoverOpacity}
+`;
+
 export const LeftImg = styled.div`
   border-right: 1px solid ${(props) => props.theme.DARK_GRAY};
+  ${hoverOpacity}
 
   & img {
     ${imgStyle}
@@ -20,6 +33,7 @@ export const LeftImg = styled.div`
 
 export const RightImg = styled.div`
   border-left: 1px solid ${(props) => props.theme.DARK_GRAY};
+  ${hoverOpacity}
 
   & img {
     ${imgStyle}

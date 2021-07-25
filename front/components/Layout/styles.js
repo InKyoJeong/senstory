@@ -18,6 +18,11 @@ export const Global = createGlobalStyle`
     padding-right: 0 !important;
   }
 
+  .ant-form-item{
+      margin-bottom: 0px;
+      margin-top: 10px;
+  }
+
   // ant-card icon style
   .ant-card-actions{
     border-color: #696666; 

@@ -11,11 +11,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(30),
         allowNull: false,
       },
+      intro: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+      },
       password: {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
-      // 내 소개컬럼 추가하기
     },
     {
       charset: "utf8",
