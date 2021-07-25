@@ -11,6 +11,12 @@ const NickEditForm = () => {
   const [nickname, onChangeNickname] = useInput(me?.nickname || "");
 
   const onSubmit = useCallback(() => {
+    if (!nickname || !nickname.trim()) {
+      return alert("닉네임을 입력해주세요.");
+    }
+    if (nickname.includes(" ")) {
+      return alert("닉네임에 빈칸을 포함할 수 없어요.");
+    }
     dispatch({
       type: CHANGE_NICK_REQUEST,
       data: nickname,
