@@ -1,13 +1,9 @@
 import styled from "styled-components";
-import { List } from "antd";
+import { List, Button } from "antd";
 
 export const PostCardWrapper = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
-`;
-
-export const PostCardBorder = styled.div`
-  /* border: 1px solid red; */
 `;
 
 export const PostAuthor = styled.div`
@@ -37,6 +33,44 @@ export const CommentAuthor = styled.div`
   background-color: #1a1b1b;
 
   &:hover {
+    color: white;
+  }
+`;
+
+export const RepostWrapper = styled.div`
+  background-color: #39393b;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 8px 10px;
+`;
+
+export const RepostHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 10px;
+`;
+
+// ----- PostDropdown -----
+export const DropdownWrapper = styled.div`
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border-radius: 10px;
+`;
+
+export const DropdownButton = styled(Button)`
+  background-color: ${(props) => (props.isEdit ? "#1890FF" : "#eb7575")};
+  color: white;
+  margin: 5px 0px;
+  border-radius: 10px;
+  border-color: white;
+
+  &:hover {
+    background-color: ${(props) => props.isEdit || "#e89b9b"};
+    border-color: ${(props) => props.isEdit || "#e89b9b"};
     color: white;
   }
 `;

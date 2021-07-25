@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import { Card, Button, Avatar, Popover, Comment } from "antd";
+import { Card, Avatar, Comment } from "antd";
 import {
-  EllipsisOutlined,
   HeartOutlined,
   HeartFilled,
   MessageOutlined,
@@ -25,21 +24,23 @@ import PostImages from "../PostImages";
 import CommentWriteForm from "../CommentWriteForm";
 import PostTag from "../PostTag";
 import FollowButton from "../FollowButton";
+import PostDropdown from "./PostDropdown";
 
 import {
   PostCardWrapper,
-  PostCardBorder,
   CommentList,
   CommentAuthor,
   PostAuthor,
+  RepostWrapper,
+  RepostHeader,
 } from "./styles";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const { removePostLoading } = useSelector((state) => state.post);
-  const [commentOpen, onToggleComment] = useToggle(false);
   const liked = post.Likers.find((v) => v.id === id);
+  const [commentOpen, onToggleComment] = useToggle(false);
 
   const onLike = useCallback(() => {
     if (!id) {
@@ -117,57 +118,26 @@ const PostCard = ({ post }) => {
   return (
     <PostCardWrapper>
       {post.RepostId && post.Repost && (
-        <div
-          style={{
-            backgroundColor: "#39393b",
-            color: "white",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
-            padding: "8px 10px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginRight: 10,
-            }}
-          >
+        <RepostWrapper>
+          <RepostHeader>
             <div>
-              <span style={{ marginRight: 5 }}>
-                {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
-                <Avatar>{post.User.nickname[0]}</Avatar>
-              </span>
+              {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
+              <Avatar style={{ marginRight: 5 }}>
+                {post.User.nickname[0]}
+              </Avatar>
               <span style={{ color: "#c5c5c7" }}>
                 {post.User.nickname}님이 공유했습니다.
               </span>
             </div>
 
             <Conditional condition={id && post.User.id === id}>
-              <Popover
-                key="more"
-                trigger="click"
-                content={
-                  <Button.Group>
-                    <>
-                      <Button type="primary">수정</Button>
-                      <Button
-                        type="danger"
-                        onClick={onRemovePost}
-                        loading={removePostLoading}
-                      >
-                        삭제
-                      </Button>
-                    </>
-                  </Button.Group>
-                }
-              >
-                <EllipsisOutlined />
-              </Popover>
+              <PostDropdown
+                onRemovePost={onRemovePost}
+                removePostLoading={removePostLoading}
+              />
             </Conditional>
-          </div>
-        </div>
+          </RepostHeader>
+        </RepostWrapper>
       )}
 
       <Card
@@ -229,28 +199,11 @@ const PostCard = ({ post }) => {
               <PostAuthor>
                 {post.User.nickname}
                 <Conditional condition={id && post.User.id === id}>
-                  <Popover
-                    key="more"
-                    trigger="click"
-                    content={
-                      <Button.Group>
-                        <>
-                          <Button type="primary">수정</Button>
-                          <Button
-                            type="danger"
-                            onClick={onRemovePost}
-                            loading={removePostLoading}
-                          >
-                            삭제
-                          </Button>
-                        </>
-                      </Button.Group>
-                    }
-                  >
-                    <EllipsisOutlined />
-                  </Popover>
+                  <PostDropdown
+                    onRemovePost={onRemovePost}
+                    removePostLoading={removePostLoading}
+                  />
                 </Conditional>
-
                 <Conditional condition={id}>
                   <FollowButton post={post} />
                 </Conditional>
@@ -262,7 +215,7 @@ const PostCard = ({ post }) => {
       </Card>
 
       <Conditional condition={commentOpen}>
-        <PostCardBorder>
+        <div>
           <CommentWriteForm post={post} />
           <CommentList
             // header={`${post.Comments.length}개의 댓글`}
@@ -278,7 +231,7 @@ const PostCard = ({ post }) => {
               </li>
             )}
           />
-        </PostCardBorder>
+        </div>
       </Conditional>
     </PostCardWrapper>
   );
