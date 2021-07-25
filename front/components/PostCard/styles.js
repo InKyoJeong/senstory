@@ -1,5 +1,10 @@
-import styled from "styled-components";
-import { List, Button } from "antd";
+import styled, { css } from "styled-components";
+import { List, Button, Card } from "antd";
+
+const cardStyle = css`
+  overflow: hidden;
+  background-color: #2d2d2e;
+`;
 
 export const PostCardWrapper = styled.div`
   margin-top: 20px;
@@ -37,7 +42,7 @@ export const CommentAuthor = styled.div`
   }
 `;
 
-export const RepostWrapper = styled.div`
+export const RepostHeader = styled.div`
   background-color: #39393b;
   color: white;
   border-top-left-radius: 10px;
@@ -45,11 +50,33 @@ export const RepostWrapper = styled.div`
   padding: 8px 10px;
 `;
 
-export const RepostHeader = styled.div`
+export const RepostTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-right: 10px;
+`;
+
+export const RepostTitle = styled.span`
+  color: #c5c5c7;
+  margin-left: 5px;
+`;
+
+export const CommonCard = styled(Card)`
+  ${cardStyle}
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: ${(props) =>
+    props.repost === "true" ? "0px" : "10px"};
+  border-top-right-radius: ${(props) =>
+    props.repost === "true" ? "0px" : "10px"};
+`;
+
+export const RepostInnerCard = styled(Card)`
+  ${cardStyle}
+  border-radius: 10px;
+  border: 4px solid #404042;
 `;
 
 // ----- PostDropdown -----
@@ -62,15 +89,16 @@ export const DropdownWrapper = styled.div`
 `;
 
 export const DropdownButton = styled(Button)`
-  background-color: ${(props) => (props.isEdit ? "#1890FF" : "#eb7575")};
+  background-color: ${(props) =>
+    props.edit === "true" ? "#1890FF" : "#eb7575"};
   color: white;
   margin: 5px 0px;
   border-radius: 10px;
   border-color: white;
 
   &:hover {
-    background-color: ${(props) => props.isEdit || "#e89b9b"};
-    border-color: ${(props) => props.isEdit || "#e89b9b"};
+    background-color: ${(props) => props.edit || "#e89b9b"};
+    border-color: ${(props) => props.edit || "#e89b9b"};
     color: white;
   }
 `;

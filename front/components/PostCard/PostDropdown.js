@@ -13,7 +13,7 @@ const PostDropdown = ({ onRemovePost, removePostLoading }) => {
   const menu = (
     <DropdownWrapper>
       <DropdownButton
-        isEdit
+        edit="true"
         type="primary"
         onClick={() => {
           console.log("edit");

@@ -31,8 +31,11 @@ import {
   CommentList,
   CommentAuthor,
   PostAuthor,
-  RepostWrapper,
   RepostHeader,
+  RepostTitleWrapper,
+  RepostTitle,
+  CommonCard,
+  RepostInnerCard,
 } from "./styles";
 
 const PostCard = ({ post }) => {
@@ -82,52 +85,15 @@ const PostCard = ({ post }) => {
     });
   }, [id]);
 
-  const cardStyle = useMemo(
-    () => ({
-      borderRadius: 10,
-      overflow: "hidden",
-      backgroundColor: "#2d2d2e",
-    }),
-    []
-  );
-
-  const repostInnerStyle = useMemo(
-    () => ({
-      borderRadius: 10,
-      overflow: "hidden",
-      backgroundColor: "#2d2d2e",
-      borderColor: "#404042",
-      borderWidth: 4,
-    }),
-    []
-  );
-
-  const repostCardStyle = useMemo(
-    () => ({
-      // borderRadius: 10,
-      overflow: "hidden",
-      borderBottomLeftRadius: 10,
-      borderBottomRightRadius: 10,
-      backgroundColor: "#2d2d2e",
-    }),
-    []
-  );
-
-  // const cardBodyStyle = useMemo(() => ({ background: "#2d2d2e" }), []);
-
   return (
     <PostCardWrapper>
       {post.RepostId && post.Repost && (
-        <RepostWrapper>
-          <RepostHeader>
+        <RepostHeader>
+          <RepostTitleWrapper>
             <div>
               {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
-              <Avatar style={{ marginRight: 5 }}>
-                {post.User.nickname[0]}
-              </Avatar>
-              <span style={{ color: "#c5c5c7" }}>
-                {post.User.nickname}님이 공유했습니다.
-              </span>
+              <Avatar>{post.User.nickname[0]}</Avatar>
+              <RepostTitle>{post.User.nickname}님이 공유했습니다.</RepostTitle>
             </div>
 
             <Conditional condition={id && post.User.id === id}>
@@ -136,13 +102,12 @@ const PostCard = ({ post }) => {
                 removePostLoading={removePostLoading}
               />
             </Conditional>
-          </RepostHeader>
-        </RepostWrapper>
+          </RepostTitleWrapper>
+        </RepostHeader>
       )}
 
-      <Card
-        style={post.RepostId && post.Repost ? repostCardStyle : cardStyle}
-        bordered={false}
+      <CommonCard
+        repost={post.RepostId && post.Repost && "true"}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
@@ -178,8 +143,7 @@ const PostCard = ({ post }) => {
         ]}
       >
         {post.RepostId && post.Repost ? (
-          <Card
-            style={repostInnerStyle}
+          <RepostInnerCard
             cover={
               post.Repost.Images[0] && (
                 <PostImages images={post.Repost.Images} />
@@ -191,7 +155,7 @@ const PostCard = ({ post }) => {
               title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
               description={<PostTag postData={post.Repost.content} />}
             />
-          </Card>
+          </RepostInnerCard>
         ) : (
           <Card.Meta
             avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
@@ -212,7 +176,7 @@ const PostCard = ({ post }) => {
             description={<PostTag postData={post.content} />}
           />
         )}
-      </Card>
+      </CommonCard>
 
       <Conditional condition={commentOpen}>
         <div>
