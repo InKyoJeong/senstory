@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { LOAD_POST_REQUEST } from "../actions/post";
+import { LOAD_ALL_POST_REQUEST } from "../actions/post";
 import { LOAD_ME_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
@@ -15,9 +15,8 @@ import axios from "axios";
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
-  const { mainPosts, hasMorePosts, loadPostLoading, repostError } = useSelector(
-    (state) => state.post
-  );
+  const { mainPosts, hasMorePosts, loadAllPostLoading, repostError } =
+    useSelector((state) => state.post);
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -33,18 +32,18 @@ const Home = () => {
   // }, []);
 
   useEffect(() => {
-    if (inView && hasMorePosts && !loadPostLoading) {
+    if (inView && hasMorePosts && !loadAllPostLoading) {
       const lastId = mainPosts[mainPosts.length - 1]?.id;
       dispatch({
-        type: LOAD_POST_REQUEST,
+        type: LOAD_ALL_POST_REQUEST,
         lastId,
       });
     }
-  }, [inView, hasMorePosts, loadPostLoading, mainPosts]);
+  }, [inView, hasMorePosts, loadAllPostLoading, mainPosts]);
 
   // useEffect(() => {
   //   dispatch({
-  //     type: LOAD_POST_REQUEST,
+  //     type: LOAD_ALL_POST_REQUEST,
   //   });
   // }, []);
 
@@ -54,9 +53,9 @@ const Home = () => {
   //       window.scrollY + document.documentElement.clientHeight >
   //       document.documentElement.scrollHeight - 300
   //     ) {
-  //       if (hasMorePosts && !loadPostLoading) {
+  //       if (hasMorePosts && !loadAllPostLoading) {
   //         dispatch({
-  //           type: LOAD_POST_REQUEST,
+  //           type: LOAD_ALL_POST_REQUEST,
   //         });
   //       }
   //     }
@@ -66,7 +65,7 @@ const Home = () => {
   //   return () => {
   //     window.removeEventListener("scroll", onScroll);
   //   };
-  // }, [hasMorePosts, loadPostLoading]);
+  // }, [hasMorePosts, loadAllPostLoading]);
 
   return (
     <Layout>
@@ -77,7 +76,7 @@ const Home = () => {
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-      <div ref={hasMorePosts && !loadPostLoading ? ref : undefined} />
+      <div ref={hasMorePosts && !loadAllPostLoading ? ref : undefined} />
     </Layout>
   );
 };
@@ -94,7 +93,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       type: LOAD_ME_REQUEST,
     });
     context.store.dispatch({
-      type: LOAD_POST_REQUEST,
+      type: LOAD_ALL_POST_REQUEST,
     });
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();

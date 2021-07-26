@@ -39,6 +39,7 @@ import {
 } from "./styles";
 
 const PostCard = ({ post }) => {
+  // console.log(post);
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const { removePostLoading } = useSelector((state) => state.post);

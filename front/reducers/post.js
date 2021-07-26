@@ -10,9 +10,12 @@ import {
   LIKE_POST_FAILURE,
   LIKE_POST_REQUEST,
   LIKE_POST_SUCCESS,
-  LOAD_POST_FAILURE,
-  LOAD_POST_REQUEST,
-  LOAD_POST_SUCCESS,
+  LOAD_ALL_POST_FAILURE,
+  LOAD_ALL_POST_REQUEST,
+  LOAD_ALL_POST_SUCCESS,
+  LOAD_SINGLE_POST_FAILURE,
+  LOAD_SINGLE_POST_REQUEST,
+  LOAD_SINGLE_POST_SUCCESS,
   REMOVE_IMAGE,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
@@ -31,11 +34,15 @@ import {
 
 export const initialState = {
   mainPosts: [],
+  singlePost: null,
   imagePaths: [],
   hasMorePosts: true,
-  loadPostLoading: false,
-  loadPostFinish: false,
-  loadPostError: null,
+  loadAllPostLoading: false,
+  loadAllPostFinish: false,
+  loadAllPostError: null,
+  loadSinglePostLoading: false,
+  loadSinglePostFinish: false,
+  loadSinglePostError: null,
   addPostLoading: false,
   addPostFinish: false,
   addPostError: null,
@@ -88,20 +95,34 @@ export const initialState = {
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
-      case LOAD_POST_REQUEST:
-        draft.loadPostLoading = true;
-        draft.loadPostFinish = false;
-        draft.loadPostError = null;
+      case LOAD_ALL_POST_REQUEST:
+        draft.loadAllPostLoading = true;
+        draft.loadAllPostFinish = false;
+        draft.loadAllPostError = null;
         break;
-      case LOAD_POST_SUCCESS:
-        draft.loadPostLoading = false;
-        draft.loadPostFinish = true;
+      case LOAD_ALL_POST_SUCCESS:
+        draft.loadAllPostLoading = false;
+        draft.loadAllPostFinish = true;
         draft.mainPosts = draft.mainPosts.concat(action.data);
         draft.hasMorePosts = action.data.length === 10;
         break;
-      case LOAD_POST_FAILURE:
-        draft.loadPostLoading = false;
-        draft.loadPostError = action.error;
+      case LOAD_ALL_POST_FAILURE:
+        draft.loadAllPostLoading = false;
+        draft.loadAllPostError = action.error;
+        break;
+      case LOAD_SINGLE_POST_REQUEST:
+        draft.loadSinglePostLoading = true;
+        draft.loadSinglePostFinish = false;
+        draft.loadSinglePostError = null;
+        break;
+      case LOAD_SINGLE_POST_SUCCESS:
+        draft.loadSinglePostLoading = false;
+        draft.loadSinglePostFinish = true;
+        draft.singlePost = action.data;
+        break;
+      case LOAD_SINGLE_POST_FAILURE:
+        draft.loadSinglePostLoading = false;
+        draft.loadSinglePostError = action.error;
         break;
       case ADD_POST_REQUEST:
         draft.addPostLoading = true;
