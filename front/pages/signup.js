@@ -7,6 +7,11 @@ import { useDispatch } from "react-redux";
 // import Router from "next/router";
 // import { useSelector } from "react-redux";
 
+import wrapper from "../store/configureStore";
+import { END } from "redux-saga";
+import axios from "axios";
+import { LOAD_ME_REQUEST } from "../actions/user";
+
 const Signup = () => {
   // const { me } = useSelector((state) => state.user);
   // useEffect(() => {
@@ -33,5 +38,21 @@ const Signup = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+
+    context.store.dispatch({
+      type: LOAD_ME_REQUEST,
+    });
+    context.store.dispatch(END);
+    await context.store.sagaTask.toPromise();
+  }
+);
 
 export default Signup;

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   LOAD_FOLLOWERS_REQUEST,
   LOAD_FOLLOWINGS_REQUEST,
+  LOAD_ME_REQUEST,
   LOAD_USER_REQUEST,
 } from "../actions/user";
 
@@ -13,6 +14,9 @@ import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
 import ProfileForm from "../components/ProfileForm";
 import IntroEditForm from "../components/IntroEditForm";
+import wrapper from "../store/configureStore";
+import { END } from "redux-saga";
+import axios from "axios";
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
@@ -53,5 +57,21 @@ const Profile = () => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+
+    context.store.dispatch({
+      type: LOAD_ME_REQUEST,
+    });
+    context.store.dispatch(END);
+    await context.store.sagaTask.toPromise();
+  }
+);
 
 export default Profile;
