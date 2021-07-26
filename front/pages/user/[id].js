@@ -38,6 +38,8 @@ const User = () => {
     }
   }, [inView, hasMorePosts, loadUserAllPostLoading, mainPosts, id]);
 
+  console.log(userInfo);
+
   return (
     <Layout>
       {userInfo && (
@@ -68,23 +70,23 @@ const User = () => {
           />
         </Head>
       )}
-      {userInfo && userInfo.id !== me?.id ? (
-        <Card style={{ marginBottom: 20 }}>
-          <Card.Meta
-            avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
-            title={userInfo.nickname}
-          />
-
-          <div>
-            <div>게시물</div>
-            <div>팔로워</div>
-            <div>팔로잉</div>
-            <div>{userInfo.Posts}</div>
-            <div>{userInfo.Followers}</div>
-            <div>{userInfo.Followings}</div>
-          </div>
-        </Card>
-      ) : null}
+      {/* {userInfo && userInfo.id !== me?.id ? ( */}
+      <Card style={{ marginBottom: 20 }}>
+        <Card.Meta
+          avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
+          title={userInfo.nickname}
+        />
+        <div>
+          <div>게시물</div>
+          <div>팔로워</div>
+          <div>팔로잉</div>
+          <div>{userInfo.Posts}</div>
+          <div>{userInfo.Followers}</div>
+          <div>{userInfo.Followings}</div>
+        </div>
+        <div>{userInfo.intro}</div>
+      </Card>
+      {/* ) : null} */}
       {mainPosts.map((c) => (
         <PostCard key={c.id} post={c} />
       ))}
