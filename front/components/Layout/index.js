@@ -8,6 +8,7 @@ import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
 import { Global } from "./styles";
+import Logo from "../../public/sb.png";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
@@ -24,24 +25,85 @@ const Layout = ({ children }) => {
     []
   );
 
+  const menuStyle = useMemo(
+    () => ({
+      backgroundColor: "#2d2d2e",
+    }),
+    []
+  );
+
+  const logoWrapperStyle = useMemo(
+    () => ({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: "auto",
+      backgroundColor: "#2d2d2e",
+    }),
+    []
+  );
+
+  const logoStyle = useMemo(
+    () => ({
+      width: 40,
+      height: 40,
+      display: "flex",
+      alignItems: "center",
+    }),
+    []
+  );
+
+  const logoTitleLeft = useMemo(
+    () => ({
+      color: "#1890FF",
+      fontWeight: "bolder",
+    }),
+    []
+  );
+
+  const logoTitleRight = useMemo(
+    () => ({
+      fontWeight: "bolder",
+    }),
+    []
+  );
+
+  const HeaderRightMargin = useMemo(() => ({ marginRight: "auto" }), []);
+
   return (
     <div>
       <Global />
       <Menu
         mode="horizontal"
         theme="dark"
-        style={{ backgroundColor: "#2d2d2e" }}
+        style={menuStyle}
+        triggerSubMenuAction="click"
       >
-        <Menu.Item key="home">
+        <Menu.Item
+          key="home"
+          icon={
+            <>
+              <img role="presentation" src={Logo} style={logoStyle} />
+              <Link href="/">
+                <a>
+                  <i style={logoTitleLeft}>cenery</i>
+                </a>
+              </Link>
+            </>
+          }
+          style={logoWrapperStyle}
+        >
           <Link href="/">
-            <a>SceneryBook</a>
+            <a>
+              <i style={logoTitleRight}>Book</i>
+            </a>
           </Link>
         </Menu.Item>
+
         {/* <Menu.Item key="search">
           <Input.Search style={searchStyle} />
         </Menu.Item> */}
 
-        {/* <Conditional condition={me && me.id}> */}
         {me && me.id && (
           <Menu.Item key="profile">
             <Link href="/profile">
@@ -49,15 +111,12 @@ const Layout = ({ children }) => {
             </Link>
           </Menu.Item>
         )}
-        {/* </Conditional> */}
 
-        {/* <Conditional condition={!(me && me.id)}> */}
-        <Menu.Item key="signup">
+        <Menu.Item key="signup" style={HeaderRightMargin}>
           <Link href="/signup">
             <a>회원가입</a>
           </Link>
         </Menu.Item>
-        {/* </Conditional> */}
 
         {/* <Menu.Item key="login" style={{ display: "none" }}>
           <Link href="/">

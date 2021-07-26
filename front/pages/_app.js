@@ -22,6 +22,7 @@ const SceneryBook = ({ Component }) => {
         <Head>
           <meta charSet="utf-8" />
           <title>SceneryBook</title>
+          {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
         </Head>
         <Component />
       </ThemeProvider>

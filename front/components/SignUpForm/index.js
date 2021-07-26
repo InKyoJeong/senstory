@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Button } from "antd";
 import Router from "next/router";
-
 import useInput from "../../hooks/useInput";
 import Conditional from "../../hocs/Conditional";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
   InputWrapper,
   SignUpFormWrapper,
 } from "./styles";
+import Logo from "../../public/sb.png";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -73,6 +73,9 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormWrapper onFinish={onSubmit}>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
+        <img role="presentation" src={Logo} style={{ width: 80, height: 80 }} />
+      </div>
       <InputWrapper>
         <label htmlFor="user-email">이메일</label>
         <br />
