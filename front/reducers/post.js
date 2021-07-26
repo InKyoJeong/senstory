@@ -16,6 +16,9 @@ import {
   LOAD_SINGLE_POST_FAILURE,
   LOAD_SINGLE_POST_REQUEST,
   LOAD_SINGLE_POST_SUCCESS,
+  LOAD_USER_ALL_POST_FAILURE,
+  LOAD_USER_ALL_POST_REQUEST,
+  LOAD_USER_ALL_POST_SUCCESS,
   REMOVE_IMAGE,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
@@ -40,6 +43,9 @@ export const initialState = {
   loadAllPostLoading: false,
   loadAllPostFinish: false,
   loadAllPostError: null,
+  loadUserAllPostLoading: false,
+  loadUserAllPostFinish: false,
+  loadUserAllPostError: null,
   loadSinglePostLoading: false,
   loadSinglePostFinish: false,
   loadSinglePostError: null,
@@ -109,6 +115,21 @@ const reducer = (state = initialState, action) => {
       case LOAD_ALL_POST_FAILURE:
         draft.loadAllPostLoading = false;
         draft.loadAllPostError = action.error;
+        break;
+      case LOAD_USER_ALL_POST_REQUEST:
+        draft.loadUserAllPostLoading = true;
+        draft.loadUserAllPostFinish = false;
+        draft.loadUserAllPostError = null;
+        break;
+      case LOAD_USER_ALL_POST_SUCCESS:
+        draft.loadUserAllPostLoading = false;
+        draft.loadUserAllPostFinish = true;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.hasMorePosts = action.data.length === 10;
+        break;
+      case LOAD_USER_ALL_POST_FAILURE:
+        draft.loadUserAllPostLoading = false;
+        draft.loadUserAllPostError = action.error;
         break;
       case LOAD_SINGLE_POST_REQUEST:
         draft.loadSinglePostLoading = true;
