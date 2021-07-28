@@ -1,11 +1,11 @@
 const express = require("express");
 const { Op } = require("sequelize");
-const { Post, User, Image, Comment } = require("../models");
+const { Post, User, Image, Comment, Hashtag } = require("../models");
 
 const router = express.Router();
 
-// GET /posts
-router.get("/", async (req, res, next) => {
+// GET /hashtag/태그
+router.get("/:hashtag", async (req, res, next) => {
   try {
     const where = {};
     if (parseInt(req.query.lastId, 10)) {
@@ -19,6 +19,10 @@ router.get("/", async (req, res, next) => {
         [Comment, "createdAt", "DESC"], // 댓글 정렬
       ],
       include: [
+        {
+          model: Hashtag,
+          where: { name: decodeURIComponent(req.params.hashtag) },
+        },
         {
           model: User,
           attributes: ["id", "nickname"],
@@ -36,7 +40,7 @@ router.get("/", async (req, res, next) => {
           ],
         },
         {
-          model: User, // 좋아요
+          model: User,
           as: "Likers",
           attributes: ["id"],
         },

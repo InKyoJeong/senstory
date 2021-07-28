@@ -35,8 +35,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET /user/1
 router.get("/:userId", async (req, res, next) => {
-  // GET /user/1
   try {
     const userWithoutPassword = await User.findOne({
       where: { id: req.params.userId },

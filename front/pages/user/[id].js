@@ -44,10 +44,7 @@ const User = () => {
     <Layout>
       {userInfo && (
         <Head>
-          <title>
-            {userInfo.nickname}
-            님의 글
-          </title>
+          <title>{userInfo.nickname}님의 게시글 | SceneryBook</title>
           <meta
             name="description"
             content={`${userInfo.nickname}님의 게시글`}

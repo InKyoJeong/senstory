@@ -14,6 +14,9 @@ import {
   LOAD_ALL_POST_FAILURE,
   LOAD_ALL_POST_REQUEST,
   LOAD_ALL_POST_SUCCESS,
+  LOAD_HASHTAG_POSTS_FAILURE,
+  LOAD_HASHTAG_POSTS_REQUEST,
+  LOAD_HASHTAG_POSTS_SUCCESS,
   LOAD_SINGLE_POST_FAILURE,
   LOAD_SINGLE_POST_REQUEST,
   LOAD_SINGLE_POST_SUCCESS,
@@ -48,6 +51,7 @@ function* likePost(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LIKE_POST_FAILURE,
       error: err.response.data,
@@ -67,6 +71,7 @@ function* unlikePost(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: UNLIKE_POST_FAILURE,
       error: err.response.data,
@@ -87,6 +92,7 @@ function* repost(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: REPOST_FAILURE,
       error: err.response.data,
@@ -111,6 +117,7 @@ function* loadPosts(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOAD_ALL_POST_FAILURE,
       error: err.response.data,
@@ -130,6 +137,7 @@ function* loadPost(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOAD_SINGLE_POST_FAILURE,
       error: err.response.data,
@@ -149,8 +157,31 @@ function* loadUserPosts(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: LOAD_USER_ALL_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadHashtagPostsAPI(data, lastId) {
+  return axios.get(
+    `/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`
+  );
+}
+
+function* loadHashtagPosts(action) {
+  try {
+    const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
+    yield put({
+      type: LOAD_HASHTAG_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_HASHTAG_POSTS_FAILURE,
       error: err.response.data,
     });
   }
@@ -199,6 +230,7 @@ function* removePost(action) {
       data: action.data,
     });
   } catch (err) {
+    console.error(err);
     yield put({
       type: REMOVE_POST_FAILURE,
       error: err.response.data,
@@ -258,6 +290,10 @@ function* watchLoadUserPosts() {
   yield throttle(5000, LOAD_USER_ALL_POST_REQUEST, loadUserPosts);
 }
 
+function* watchLoadHashtagPosts() {
+  yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
+}
+
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
@@ -293,6 +329,7 @@ export default function* postSaga() {
     fork(watchLoadPosts),
     fork(watchLoadPost),
     fork(watchLoadUserPosts),
+    fork(watchLoadHashtagPosts),
     fork(watchAddPost),
     fork(watchRepost),
     fork(watchAddComment),
