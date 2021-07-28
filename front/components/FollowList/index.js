@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import { Card, Button } from "antd";
+import { List, Card, Button, Avatar } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from "../../actions/user";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
 
 const FollowList = ({ header, data }) => {
+  console.log(data);
   const dispatch = useDispatch();
 
   const onCancel = useCallback(
@@ -27,13 +28,19 @@ const FollowList = ({ header, data }) => {
     []
   );
 
-  const gridStyle = useMemo(() => ({ gutter: 4, xs: 2, md: 3 }), []);
+  // const gridStyle = useMemo(() => ({ xs: 2, md: 2 }), []);
 
   return (
     <ListWrapper
-      grid={gridStyle}
+      // style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
+      // grid={gridStyle}
       size="small"
-      header={<div>{header}</div>}
+      header={
+        <div>
+          {header}
+          {/* {data.length} */}
+        </div>
+      }
       loadMore={
         <MoreButtonWrapper>
           <Button>더 보기</Button>
@@ -43,12 +50,28 @@ const FollowList = ({ header, data }) => {
       dataSource={data}
       renderItem={(item) => (
         <ListItem>
-          <FollowCard
+          {/* <FollowCard
+            style={{ display: "flex" }}
             bordered={false}
             actions={[<StopOutlined key="stop" onClick={onCancel(item.id)} />]}
           >
             <Card.Meta description={<div>{item.nickname}</div>} />
-          </FollowCard>
+          </FollowCard> */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ marginRight: 5 }}>
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            </div>
+            <div>{item.nickname}</div>
+
+            <div>
+              <StopOutlined key="stop" onClick={onCancel(item.id)} />
+            </div>
+          </div>
         </ListItem>
       )}
     />

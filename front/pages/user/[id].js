@@ -11,7 +11,7 @@ import PostCard from "../../components/PostCard";
 import Layout from "../../components/Layout";
 import wrapper from "../../store/configureStore";
 import {
-  LOAD_ALL_POST_REQUEST,
+  // LOAD_ALL_POST_REQUEST,
   LOAD_USER_ALL_POST_REQUEST,
 } from "../../actions/post";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../actions/user";
@@ -20,12 +20,17 @@ const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
-  const { mainPosts, hasMorePosts, loadUserAllPostLoading } = useSelector(
-    (state) => state.post
-  );
+  const { repostError, mainPosts, hasMorePosts, loadUserAllPostLoading } =
+    useSelector((state) => state.post);
   const { userInfo, me } = useSelector((state) => state.user);
 
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (repostError) {
+      alert(repostError);
+    }
+  });
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadUserAllPostLoading) {
@@ -38,7 +43,7 @@ const User = () => {
     }
   }, [inView, hasMorePosts, loadUserAllPostLoading, mainPosts, id]);
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   return (
     <Layout>

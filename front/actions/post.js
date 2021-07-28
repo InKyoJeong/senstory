@@ -44,13 +44,3 @@ export const REPOST_FAILURE = "REPOST_FAILURE ";
 export const REPOST_ERROR_FINISH = "REPOST_ERROR_FINISH";
 
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
-
-export const addPost = (data) => ({
-  type: ADD_POST_REQUEST,
-  data,
-});
-
-export const addComment = (data) => ({
-  type: ADD_COMMENT_REQUEST,
-  data,
-});

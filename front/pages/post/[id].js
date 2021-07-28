@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -15,7 +15,13 @@ import PostCard from "../../components/PostCard";
 const Post = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { singlePost } = useSelector((state) => state.post);
+  const { singlePost, repostError } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    if (repostError) {
+      alert(repostError);
+    }
+  }, [repostError]);
 
   return (
     <Layout>

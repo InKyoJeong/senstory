@@ -17,8 +17,6 @@ const Hashtag = () => {
   const { mainPosts, hasMorePosts, loadHashtagPostsLoading } = useSelector(
     (state) => state.post
   );
-  const { userInfo, me } = useSelector((state) => state.user);
-
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -31,8 +29,6 @@ const Hashtag = () => {
       });
     }
   }, [inView, hasMorePosts, loadHashtagPostsLoading, mainPosts, tag]);
-
-  console.log(userInfo);
 
   return (
     <Layout>

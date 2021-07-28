@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { PostContent } from "./styles";
+import { PostContent, TagWrapper } from "./styles";
 
 const PostTag = ({ postData }) => {
   return (
-    <div>
+    <TagWrapper>
       {postData.split(/(#[^\s#]+)/g).map((v, i) => {
         if (v.match(/(#[^\s#]+)/g)) {
           return (
@@ -16,7 +16,7 @@ const PostTag = ({ postData }) => {
         }
         return <PostContent key={i}>{v}</PostContent>;
       })}
-    </div>
+    </TagWrapper>
   );
 };
 

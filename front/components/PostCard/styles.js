@@ -72,7 +72,7 @@ export const CommentAuthor = styled.div`
   padding: 3px 5px;
   border-radius: 5px;
   color: white;
-  background-color: #1a1b1b;
+  background-color: ${(props) => props.theme.DARK_GRAY};
 
   &:hover {
     color: white;

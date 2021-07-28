@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { Menu } from "antd";
+import { Input } from "antd";
 
 export const Global = createGlobalStyle`
   body{
@@ -69,4 +69,13 @@ export const Global = createGlobalStyle`
   .ant-popover-inner-content, .ant-popover-arrow-content{
     background-color: #8c8181;
   }
+`;
+
+export const TagSearchInput = styled(Input.Search)`
+  vertical-align: middle;
+  background-color: gray;
+  color: white;
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 5px 0px;
 `;

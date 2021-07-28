@@ -35,7 +35,7 @@ export const ListWrapper = styled(List)`
 `;
 
 export const ListItem = styled(List.Item)`
-  margin-top: 10px;
+  /* margin-top: 10px; */
 `;
 
 export const FollowCard = styled(Card)`

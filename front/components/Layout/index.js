@@ -7,23 +7,11 @@ import { Menu, Input, Row, Col } from "antd";
 import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
-import { Global } from "./styles";
+import { Global, SearchInput, TagSearchInput } from "./styles";
 import Logo from "../../public/sb.png";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
-
-  const searchStyle = useMemo(
-    () => ({
-      verticalAlign: "middle",
-      backgroundColor: "gray",
-      marginTop: 5,
-      borderRadius: 10,
-      padding: "5px 0px",
-      color: "white",
-    }),
-    []
-  );
 
   const menuStyle = useMemo(
     () => ({
@@ -135,7 +123,7 @@ const Layout = ({ children }) => {
             <ProfileForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
-              <Input.Search style={searchStyle} size="small" bordered={false} />
+              <TagSearchInput size="small" bordered={false} />
             </div>
           </Conditional>
 
@@ -143,7 +131,7 @@ const Layout = ({ children }) => {
             <LoginForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
-              <Input.Search style={searchStyle} size="small" bordered={false} />
+              <TagSearchInput size="small" bordered={false} />
             </div>
           </Conditional>
         </Col>
