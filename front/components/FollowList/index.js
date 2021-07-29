@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
 
-const FollowList = ({ header, data, onClickMore, loading }) => {
+const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
   console.log(data);
   const dispatch = useDispatch();
 
@@ -18,12 +18,14 @@ const FollowList = ({ header, data, onClickMore, loading }) => {
           type: UNFOLLOW_REQUEST,
           data: id,
         });
+        mutate((prev) => prev.filter((data) => data.id !== id));
       }
 
       dispatch({
         type: REMOVE_FOLLOWER_REQUEST,
         data: id,
       });
+      mutate((prev) => prev.filter((data) => data.id !== id));
     },
     []
   );

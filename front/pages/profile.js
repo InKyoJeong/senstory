@@ -28,13 +28,21 @@ const Profile = () => {
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
-  const { data: followerData, error: followerError } = useSWR(
+  const {
+    data: followerData,
+    error: followerError,
+    mutate: mutateFollower,
+  } = useSWR(
     `http://localhost:3065/user/followers?limit=${followerLimit}`,
     fetcher
     // { refreshInterval: 1000 }
   );
 
-  const { data: followingData, error: followingError } = useSWR(
+  const {
+    data: followingData,
+    error: followingError,
+    mutate: mutateFollowing,
+  } = useSWR(
     `http://localhost:3065/user/followings?limit=${followingLimit}`,
     fetcher
     // { refreshInterval: 1000 }
@@ -87,12 +95,14 @@ const Profile = () => {
           data={followingData}
           onClickMore={loadMoreFollowings}
           loading={!followingData && !followingError}
+          mutate={mutateFollowing}
         />
         <FollowList
           header="팔로워"
           data={followerData}
           onClickMore={loadMoreFollowers}
           loading={!followerData && followerError}
+          mutate={mutateFollower}
         />
       </Layout>
     </>
