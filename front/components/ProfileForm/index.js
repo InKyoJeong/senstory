@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { Card, Avatar, Button } from "antd";
+import Link from "next/link";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestAction } from "../../actions/user";
@@ -25,7 +26,13 @@ const ProfileForm = (props) => {
       // actions={[]}
       >
         <Card.Meta
-          avatar={<Avatar>{me.nickname[0]}</Avatar>}
+          avatar={
+            <Link href={`/user/${me.id}`}>
+              <a>
+                <Avatar>{me.nickname[0]}</Avatar>
+              </a>
+            </Link>
+          }
           title={me.nickname}
         />
         <LogoutButton onClick={onLogOut} loading={logOutLoading}>
@@ -33,12 +40,30 @@ const ProfileForm = (props) => {
         </LogoutButton>
 
         <UserInfoWrapper>
-          <div>게시물</div>
-          <div>팔로워</div>
-          <div>팔로잉</div>
-          <div>{me.Posts.length}</div>
-          <div>{me.Followers.length}</div>
-          <div>{me.Followings.length}</div>
+          <div>
+            <Link href={`/user/${me.id}`}>
+              <a>
+                <div>게시물</div>
+                <div>{me.Posts.length}</div>
+              </a>
+            </Link>
+          </div>
+          <div>
+            <Link href="/profile">
+              <a>
+                <div>팔로워</div>
+                <div>{me.Followers.length}</div>
+              </a>
+            </Link>
+          </div>
+          <div>
+            <Link href="/profile">
+              <a>
+                <div>팔로잉</div>
+                <div>{me.Followings.length}</div>
+              </a>
+            </Link>
+          </div>
         </UserInfoWrapper>
       </CardWrapper>
     </HideWrapper>

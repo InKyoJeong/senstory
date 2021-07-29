@@ -26,6 +26,8 @@ const User = () => {
 
   const [ref, inView] = useInView();
 
+  console.log(userInfo);
+
   useEffect(() => {
     if (repostError) {
       alert(repostError);
@@ -42,8 +44,6 @@ const User = () => {
       });
     }
   }, [inView, hasMorePosts, loadUserAllPostLoading, mainPosts, id]);
-
-  // console.log(userInfo);
 
   return (
     <Layout>
@@ -72,23 +72,33 @@ const User = () => {
           />
         </Head>
       )}
+
+      {/* userInfo && 부분이없으면 null에러 : 
+      NEXT_REDUX_WRAPPER_HYDRATE가 실행되기 전 잠깐 동안 redux state가 비어있음
+      userInfo가 존재할 때만 렌더링해야함 */}
+
+      {/* 내 게시물일때는 정보표시x */}
       {/* {userInfo && userInfo.id !== me?.id ? ( */}
-      <Card style={{ marginBottom: 20 }}>
-        <Card.Meta
-          avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
-          title={userInfo.nickname}
-        />
-        <div>
-          <div>게시물</div>
-          <div>팔로워</div>
-          <div>팔로잉</div>
-          <div>{userInfo.Posts}</div>
-          <div>{userInfo.Followers}</div>
-          <div>{userInfo.Followings}</div>
-        </div>
-        <div>{userInfo.intro}</div>
-      </Card>
-      {/* ) : null} */}
+
+      {/* 내 게시물일때도 표시 */}
+      {userInfo && (
+        <Card style={{ marginBottom: 20 }}>
+          <Card.Meta
+            avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
+            title={userInfo.nickname}
+          />
+          <div>
+            <div>게시물</div>
+            <div>팔로워</div>
+            <div>팔로잉</div>
+            <div>{userInfo.Posts}</div>
+            <div>{userInfo.Followers}</div>
+            <div>{userInfo.Followings}</div>
+          </div>
+          <div>{userInfo.intro}</div>
+        </Card>
+        // ) : null}
+      )}
       {mainPosts.map((c) => (
         <PostCard key={c.id} post={c} />
       ))}

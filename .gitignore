@@ -2,4 +2,6 @@ node_modules/
 .next
 .env
 uploads/
+/front/build/
+
 errorimage

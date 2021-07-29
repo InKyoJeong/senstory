@@ -95,7 +95,11 @@ const PostCard = ({ post }) => {
           <RepostTitleWrapper>
             <div>
               {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
-              <Avatar>{post.User.nickname[0]}</Avatar>
+              <Link href={`/user/${post.User.id}`}>
+                <a>
+                  <Avatar>{post.User.nickname[0]}</Avatar>
+                </a>
+              </Link>
               <RepostTitle>{post.User.nickname}님이 공유했습니다.</RepostTitle>
             </div>
 
@@ -154,14 +158,26 @@ const PostCard = ({ post }) => {
             }
           >
             <Card.Meta
-              avatar={<Avatar>{post.Repost.User.nickname[0]}</Avatar>}
+              avatar={
+                <Link href={`/user/${post.Repost.User.id}`}>
+                  <a>
+                    <Avatar>{post.Repost.User.nickname[0]}</Avatar>
+                  </a>
+                </Link>
+              }
               title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
               description={<PostTag postData={post.Repost.content} />}
             />
           </RepostInnerCard>
         ) : (
           <Card.Meta
-            avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+            avatar={
+              <Link href={`/user/${post.User.id}`}>
+                <a>
+                  <Avatar>{post.User.nickname[0]}</Avatar>
+                </a>
+              </Link>
+            }
             title={
               <PostAuthor>
                 {post.User.nickname}
@@ -192,7 +208,13 @@ const PostCard = ({ post }) => {
               <li>
                 <Comment
                   author={<CommentAuthor>{item.User.nickname}</CommentAuthor>}
-                  avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                  avatar={
+                    <Link href={`/user/${item.User.id}`}>
+                      <a>
+                        <Avatar>{item.User.nickname[0]}</Avatar>
+                      </a>
+                    </Link>
+                  }
                   content={item.content}
                 />
               </li>
