@@ -1,17 +1,24 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
+import Router from "next/router";
 import { Menu, Input, Row, Col } from "antd";
 
 import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
-import { Global, SearchInput, TagSearchInput } from "./styles";
+import { Global, TagSearchInput } from "./styles";
 import Logo from "../../public/sb.png";
+import useInput from "../../hooks/useInput";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
+  const [tagSearch, onChangeTagSearch] = useInput("");
+
+  const onSearch = useCallback(() => {
+    Router.push(`/hashtag/${tagSearch}`);
+  }, [tagSearch]);
 
   const menuStyle = useMemo(
     () => ({
@@ -123,7 +130,13 @@ const Layout = ({ children }) => {
             <ProfileForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
-              <TagSearchInput size="small" bordered={false} />
+              <TagSearchInput
+                size="small"
+                bordered={false}
+                value={tagSearch}
+                onChange={onChangeTagSearch}
+                onSearch={onSearch}
+              />
             </div>
           </Conditional>
 
@@ -131,7 +144,14 @@ const Layout = ({ children }) => {
             <LoginForm />
             <div style={{ padding: 20 }}>
               <label style={{ color: "white" }}>해시태그 검색</label>
-              <TagSearchInput size="small" bordered={false} />
+              <TagSearchInput
+                size="small"
+                bordered={false}
+                // enterButton
+                value={tagSearch}
+                onChange={onChangeTagSearch}
+                onSearch={onSearch}
+              />
             </div>
           </Conditional>
         </Col>

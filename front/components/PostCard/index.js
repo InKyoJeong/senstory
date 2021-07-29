@@ -1,6 +1,8 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { Card, Avatar, Comment } from "antd";
+import Link from "next/link";
+
 import {
   HeartOutlined,
   HeartFilled,

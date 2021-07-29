@@ -69,3 +69,46 @@ const followings = await user.getFollowings({
 
 params, query등으로 데이터를 받을때 숫자가아니여서 생기는 에러
 숫자로 변환해줘야한다는 것을 알았다.
+
+<br>
+
+## 3
+
+팔로워&팔로우 목록을 받아올때 데이터를 쉽게 받아올 수 있는 SWR을 사용해봤는데,
+취소시 갱신이 바로 되지않고 새로고침해야 반영되는 문제.
+
+```js
+const {
+  data: followerData,
+  error: followerError,
+  mutate: mutateFollower,
+} = useSWR(
+  `http://localhost:3065/user/followers?limit=${followerLimit}`,
+  fetcher
+);
+
+const {
+  data: followingData,
+  error: followingError,
+  mutate: mutateFollowing,
+} = useSWR(
+  `http://localhost:3065/user/followings?limit=${followingLimit}`,
+  fetcher
+);
+
+  return (
+    <>
+        <FollowList
+          //...
+          mutate={mutateFollowing}
+        />
+        <FollowList
+          //...
+          mutate={mutateFollower}
+        />
+    </>
+  );
+};
+```
+
+`mutate`를 추가하여 갱신하였다.
