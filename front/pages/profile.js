@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Head from "next/head";
 import Router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import {
   LOAD_ME_REQUEST,
   LOAD_USER_REQUEST,
 } from "../actions/user";
+import useSWR from "swr";
 
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
@@ -18,18 +19,35 @@ import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
 
+const fetcher = (url) =>
+  axios.get(url, { withCredentials: true }).then((result) => result.data);
+
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [followerLimit, setFollowerLimit] = useState(3);
+  const [followingLimit, setFollowingLimit] = useState(3);
 
-  useEffect(() => {
-    dispatch({
-      type: LOAD_FOLLOWERS_REQUEST,
-    });
-    dispatch({
-      type: LOAD_FOLLOWINGS_REQUEST,
-    });
-  }, []);
+  const { data: followerData, error: followerError } = useSWR(
+    `http://localhost:3065/user/followers?limit=${followerLimit}`,
+    fetcher
+    // { refreshInterval: 1000 }
+  );
+
+  const { data: followingData, error: followingError } = useSWR(
+    `http://localhost:3065/user/followings?limit=${followingLimit}`,
+    fetcher
+    // { refreshInterval: 1000 }
+  );
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: LOAD_FOLLOWERS_REQUEST,
+  //   });
+  //   dispatch({
+  //     type: LOAD_FOLLOWINGS_REQUEST,
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (!(me && me.id)) {
@@ -37,8 +55,21 @@ const Profile = () => {
     }
   }, [me && me.id]);
 
+  const loadMoreFollowings = useCallback(() => {
+    setFollowingLimit((prev) => prev + 3);
+  }, []);
+
+  const loadMoreFollowers = useCallback(() => {
+    setFollowerLimit((prev) => prev + 3);
+  }, []);
+
   if (!me) {
-    return null;
+    return "프로필 로딩중...";
+  }
+
+  if (followerError || followingError) {
+    console.error(followerError || followingError);
+    return <div>다시 시도하세요.</div>;
   }
 
   return (
@@ -51,8 +82,18 @@ const Profile = () => {
         <NickEditForm />
         <IntroEditForm />
         {/* 자기소개 Form */}
-        <FollowList header="팔로잉" data={me?.Followings} />
-        <FollowList header="팔로워" data={me?.Followers} />
+        <FollowList
+          header="팔로잉"
+          data={followingData}
+          onClickMore={loadMoreFollowings}
+          loading={!followingData && !followingError}
+        />
+        <FollowList
+          header="팔로워"
+          data={followerData}
+          onClickMore={loadMoreFollowers}
+          loading={!followerData && followerError}
+        />
       </Layout>
     </>
   );

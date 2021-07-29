@@ -49,3 +49,23 @@ case REPOST_ERROR_FINISH:
 - finally안의 코드는 다음과 같은 상황에서 실행
   - 에러가 없는 경우: try 실행이 끝난 후
   - 에러가 있는 경우: catch 실행이 끝난 후
+
+<br>
+
+## 2
+
+```js
+//SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''3'' at line 1
+
+const comment = await Comment.create({
+  PostId: parseInt(req.params.postId, 10),
+});
+
+//
+const followings = await user.getFollowings({
+  limit: parseInt(req.query.limit, 10),
+});
+```
+
+params, query등으로 데이터를 받을때 숫자가아니여서 생기는 에러
+숫자로 변환해줘야한다는 것을 알았다.

@@ -69,6 +69,10 @@ export const Global = createGlobalStyle`
   .ant-popover-inner-content, .ant-popover-arrow-content{
     background-color: #8c8181;
   }
+
+  .ant-empty{
+    opacity: 0.4;
+  }
 `;
 
 export const TagSearchInput = styled(Input.Search)`

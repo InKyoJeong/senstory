@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
 
-const FollowList = ({ header, data }) => {
+const FollowList = ({ header, data, onClickMore, loading }) => {
   console.log(data);
   const dispatch = useDispatch();
 
@@ -43,7 +43,9 @@ const FollowList = ({ header, data }) => {
       }
       loadMore={
         <MoreButtonWrapper>
-          <Button>더 보기</Button>
+          <Button onClick={onClickMore} loading={loading}>
+            More
+          </Button>
         </MoreButtonWrapper>
       }
       bordered
@@ -80,7 +82,9 @@ const FollowList = ({ header, data }) => {
 
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  // data: PropTypes.any.isRequired,
+  onClickMore: PropTypes.func.isRequired,
+  // loading: PropTypes.bool.isRequired,
 };
 
 export default FollowList;
