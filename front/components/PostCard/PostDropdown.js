@@ -9,18 +9,20 @@ import { DropdownButton, DropdownWrapper } from "./styles";
 //  removePostLading: boolean;
 // }
 
-const PostDropdown = ({ onRemovePost, removePostLoading }) => {
+const PostDropdown = ({ onRemovePost, removePostLoading, isRepost }) => {
   const menu = (
     <DropdownWrapper>
-      <DropdownButton
-        edit="true"
-        type="primary"
-        onClick={() => {
-          console.log("edit");
-        }}
-      >
-        수정
-      </DropdownButton>
+      {isRepost && (
+        <DropdownButton
+          edit="true"
+          type="primary"
+          onClick={() => {
+            console.log("edit");
+          }}
+        >
+          수정
+        </DropdownButton>
+      )}
 
       <DropdownButton onClick={onRemovePost} loading={removePostLoading}>
         삭제
@@ -42,6 +44,7 @@ const PostDropdown = ({ onRemovePost, removePostLoading }) => {
 PostDropdown.propTypes = {
   onRemovePost: PropTypes.func,
   removePostLoading: PropTypes.bool,
+  isRepost: PropTypes.bool,
 };
 
 export default PostDropdown;

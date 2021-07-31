@@ -185,6 +185,7 @@ const PostCard = ({ post }) => {
                   <PostDropdown
                     onRemovePost={onRemovePost}
                     removePostLoading={removePostLoading}
+                    isRepost={!post.RepostId}
                   />
                 </Conditional>
                 <Conditional condition={id}>
