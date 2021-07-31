@@ -9,17 +9,16 @@ import { DropdownButton, DropdownWrapper } from "./styles";
 //  removePostLading: boolean;
 // }
 
-const PostDropdown = ({ onRemovePost, removePostLoading, isRepost }) => {
+const PostDropdown = ({
+  onRemovePost,
+  removePostLoading,
+  isRepost,
+  onClickUpdate,
+}) => {
   const menu = (
     <DropdownWrapper>
       {isRepost && (
-        <DropdownButton
-          edit="true"
-          type="primary"
-          onClick={() => {
-            console.log("edit");
-          }}
-        >
+        <DropdownButton edit="true" type="primary" onClick={onClickUpdate}>
           수정
         </DropdownButton>
       )}
@@ -43,6 +42,7 @@ const PostDropdown = ({ onRemovePost, removePostLoading, isRepost }) => {
 
 PostDropdown.propTypes = {
   onRemovePost: PropTypes.func,
+  onClickUpdate: PropTypes.func,
   removePostLoading: PropTypes.bool,
   isRepost: PropTypes.bool,
 };

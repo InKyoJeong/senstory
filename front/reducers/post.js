@@ -33,6 +33,9 @@ import {
   UNLIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
+  UPDATE_POST_FAILURE,
+  UPDATE_POST_REQUEST,
+  UPDATE_POST_SUCCESS,
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
@@ -61,6 +64,9 @@ export const initialState = {
   removePostLoading: false,
   removePostFinish: false,
   removePostError: null,
+  updatePostLoading: false,
+  updatePostFinish: false,
+  updatePostError: null,
   likePostLoading: false,
   likePostFinish: false,
   likePostError: null,
@@ -180,6 +186,21 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
         draft.addPostError = action.error;
+        break;
+      case UPDATE_POST_REQUEST:
+        draft.updatePostLoading = true;
+        draft.updatePostFinish = false;
+        draft.updatePostError = null;
+        break;
+      case UPDATE_POST_SUCCESS:
+        draft.updatePostLoading = false;
+        draft.updatePostFinish = true;
+        draft.mainPosts.find((v) => v.id === action.data.PostId).content =
+          action.data.content;
+        break;
+      case UPDATE_POST_FAILURE:
+        draft.updatePostLoading = false;
+        draft.updatePostError = action.error;
         break;
       case REPOST_REQUEST:
         draft.repostLoading = true;

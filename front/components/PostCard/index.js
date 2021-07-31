@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Avatar, Comment } from "antd";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import {
   REMOVE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
   REPOST_REQUEST,
+  UPDATE_POST_REQUEST,
 } from "../../actions/post";
 
 import useToggle from "../../hooks/useToggle";
@@ -41,12 +42,12 @@ import {
 } from "./styles";
 
 const PostCard = ({ post }) => {
-  // console.log(post);
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
-  const { removePostLoading } = useSelector((state) => state.post);
   const liked = post.Likers.find((v) => v.id === id);
+  const { removePostLoading } = useSelector((state) => state.post);
   const [commentOpen, onToggleComment] = useToggle(false);
+  const [editMode, setEditMode] = useState(false);
 
   const onLike = useCallback(() => {
     if (!id) {
@@ -87,6 +88,27 @@ const PostCard = ({ post }) => {
       data: post.id,
     });
   }, [id]);
+
+  const onClickUpdate = useCallback(() => {
+    setEditMode(true);
+  }, []);
+
+  const onCancelChange = useCallback(() => {
+    setEditMode(false);
+  }, []);
+
+  const onChangePost = useCallback(
+    (textEdit) => () => {
+      dispatch({
+        type: UPDATE_POST_REQUEST,
+        data: {
+          PostId: post.id,
+          content: textEdit,
+        },
+      });
+    },
+    [post]
+  );
 
   return (
     <PostCardWrapper>
@@ -166,7 +188,13 @@ const PostCard = ({ post }) => {
                 </Link>
               }
               title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
-              description={<PostTag postData={post.Repost.content} />}
+              description={
+                <PostTag
+                  onChangePost={onChangePost}
+                  postData={post.Repost.content}
+                  onCancelChange={onCancelChange}
+                />
+              }
             />
           </RepostInnerCard>
         ) : (
@@ -184,6 +212,7 @@ const PostCard = ({ post }) => {
                 <Conditional condition={id && post.User.id === id}>
                   <PostDropdown
                     onRemovePost={onRemovePost}
+                    onClickUpdate={onClickUpdate}
                     removePostLoading={removePostLoading}
                     isRepost={!post.RepostId}
                   />
@@ -193,13 +222,20 @@ const PostCard = ({ post }) => {
                 </Conditional>
               </PostAuthor>
             }
-            description={<PostTag postData={post.content} />}
+            description={
+              <PostTag
+                onChangePost={onChangePost}
+                editMode={editMode}
+                onCancelChange={onCancelChange}
+                postData={post.content}
+              />
+            }
           />
         )}
       </CommonCard>
 
       <Conditional condition={commentOpen}>
-        <div>
+        <>
           <CommentWriteForm post={post} />
           <CommentList
             // header={`${post.Comments.length}개의 댓글`}
@@ -221,7 +257,7 @@ const PostCard = ({ post }) => {
               </li>
             )}
           />
-        </div>
+        </>
       </Conditional>
     </PostCardWrapper>
   );
