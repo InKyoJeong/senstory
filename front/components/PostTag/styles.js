@@ -25,10 +25,16 @@ export const EditBtnWrapper = styled.div`
     color: white;
     border: none;
     border-radius: 10px;
+
+    &:hover {
+      background-color: #4ea1ed;
+      color: white;
+    }
   }
   & Button:last-child {
     background-color: #6b7987;
   }
+
   & div {
     height: 5px;
   }

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Button, Input } from "antd";
+import { Button } from "antd";
 
 import {
   EditBtnWrapper,
@@ -34,9 +34,9 @@ const PostTag = ({
   }, [updatePostFinish]);
 
   return (
-    <TagWrapper>
+    <div>
       <Conditional condition={editMode}>
-        <>
+        <div style={{ display: "flex" }}>
           <PostEditInput value={textEdit} onChange={onChangeText} />
           <EditBtnWrapper>
             <Button
@@ -48,7 +48,7 @@ const PostTag = ({
             <div />
             <Button onClick={onCancelChange}>취소</Button>
           </EditBtnWrapper>
-        </>
+        </div>
       </Conditional>
 
       <Conditional condition={!editMode}>
@@ -63,7 +63,7 @@ const PostTag = ({
           return <PostContent key={i}>{v}</PostContent>;
         })}
       </Conditional>
-    </TagWrapper>
+    </div>
   );
 };
 

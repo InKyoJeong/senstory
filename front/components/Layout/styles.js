@@ -24,6 +24,10 @@ export const Global = createGlobalStyle`
       margin-top: 10px;
   }
 
+  .ant-card-body{
+    padding: 20px 20px 10px 20px;  
+  }
+
   // ant-card icon style
   .ant-card-actions{
     border-color: #696666; 

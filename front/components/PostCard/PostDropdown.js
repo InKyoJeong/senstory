@@ -7,6 +7,8 @@ import { DropdownButton, DropdownWrapper } from "./styles";
 // interface PostDropdownProps ={
 //   onRemovePost: () => void;
 //  removePostLading: boolean;
+//  isRepost: boolean;
+//   onClickUpdate: () => void;
 // }
 
 const PostDropdown = ({

@@ -38,16 +38,6 @@ const Layout = ({ children }) => {
     []
   );
 
-  const logoStyle = useMemo(
-    () => ({
-      width: 40,
-      height: 40,
-      display: "flex",
-      alignItems: "center",
-    }),
-    []
-  );
-
   const logoTitleLeft = useMemo(
     () => ({
       color: "#1890FF",

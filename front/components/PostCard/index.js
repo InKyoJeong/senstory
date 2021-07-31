@@ -41,6 +41,8 @@ import {
   CommonCard,
 } from "./styles";
 
+import { fromNow } from "../../utils";
+
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
@@ -172,31 +174,43 @@ const PostCard = ({ post }) => {
         ]}
       >
         {post.RepostId && post.Repost ? (
-          <RepostInnerCard
-            cover={
-              post.Repost.Images[0] && (
-                <PostImages images={post.Repost.Images} />
-              )
-            }
-          >
-            <Card.Meta
-              avatar={
-                <Link href={`/user/${post.Repost.User.id}`}>
-                  <a>
-                    <Avatar>{post.Repost.User.nickname[0]}</Avatar>
-                  </a>
-                </Link>
+          <>
+            <RepostInnerCard
+              cover={
+                post.Repost.Images[0] && (
+                  <PostImages images={post.Repost.Images} />
+                )
               }
-              title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
-              description={
-                <PostTag
-                  postData={post.Repost.content}
-                  onChangePost={onChangePost}
-                  onCancelChange={onCancelChange}
-                />
-              }
-            />
-          </RepostInnerCard>
+            >
+              <Card.Meta
+                avatar={
+                  <Link href={`/user/${post.Repost.User.id}`}>
+                    <a>
+                      <Avatar>{post.Repost.User.nickname[0]}</Avatar>
+                    </a>
+                  </Link>
+                }
+                title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
+                description={
+                  <PostTag
+                    postData={post.Repost.content}
+                    onChangePost={onChangePost}
+                    onCancelChange={onCancelChange}
+                  />
+                }
+              />
+            </RepostInnerCard>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                color: "gray",
+                paddingTop: 10,
+              }}
+            >
+              {fromNow(post.createdAt)}
+            </div>
+          </>
         ) : (
           <Card.Meta
             avatar={
@@ -223,12 +237,24 @@ const PostCard = ({ post }) => {
               </PostAuthor>
             }
             description={
-              <PostTag
-                postData={post.content}
-                editMode={editMode}
-                onChangePost={onChangePost}
-                onCancelChange={onCancelChange}
-              />
+              <>
+                <PostTag
+                  postData={post.content}
+                  editMode={editMode}
+                  onChangePost={onChangePost}
+                  onCancelChange={onCancelChange}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    color: "gray",
+                    paddingTop: 10,
+                  }}
+                >
+                  {fromNow(post.createdAt)}
+                </div>
+              </>
             }
           />
         )}
