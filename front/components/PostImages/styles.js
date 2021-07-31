@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const imgStyle = css`
   width: 100%;
-  height: 300px;
+  height: 100%;
 `;
 
 const hoverOpacity = css`
@@ -15,6 +15,8 @@ const hoverOpacity = css`
 export const ImgWrapper = styled.div`
   display: flex;
   cursor: pointer;
+  width: 100%;
+  max-height: 300px;
 `;
 
 export const SigleImg = styled.img`
@@ -25,6 +27,7 @@ export const SigleImg = styled.img`
 export const LeftImg = styled.div`
   border-right: 1px solid ${(props) => props.theme.DARK_GRAY};
   ${hoverOpacity}
+  width:50%;
 
   & img {
     ${imgStyle}
@@ -34,6 +37,7 @@ export const LeftImg = styled.div`
 export const RightImg = styled.div`
   border-left: 1px solid ${(props) => props.theme.DARK_GRAY};
   ${hoverOpacity}
+  width:50%;
 
   & img {
     ${imgStyle}
