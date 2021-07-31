@@ -1,9 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 
-import { PostContent, TagWrapper } from "./styles";
+import {
+  EditBtnWrapper,
+  PostContent,
+  PostEditInput,
+  TagWrapper,
+} from "./styles";
 import Conditional from "../../hocs/Conditional";
 import { useSelector } from "react-redux";
 
@@ -32,11 +37,17 @@ const PostTag = ({
     <TagWrapper>
       <Conditional condition={editMode}>
         <>
-          <textarea value={textEdit} onChange={onChangeText} />
-          <Button loading={updatePostLoading} onClick={onChangePost(textEdit)}>
-            완료
-          </Button>
-          <Button onClick={onCancelChange}>취소</Button>
+          <PostEditInput value={textEdit} onChange={onChangeText} />
+          <EditBtnWrapper>
+            <Button
+              loading={updatePostLoading}
+              onClick={onChangePost(textEdit)}
+            >
+              완료
+            </Button>
+            <div />
+            <Button onClick={onCancelChange}>취소</Button>
+          </EditBtnWrapper>
         </>
       </Conditional>
 

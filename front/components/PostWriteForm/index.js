@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import { Input } from "antd";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,6 +15,7 @@ import {
   ImageEnrollBtn,
   ImagesWrapper,
   PostWriteButton,
+  PostWriteInput,
   WriteButtonWrapper,
 } from "./styles";
 
@@ -76,21 +76,9 @@ const PostWriteForm = () => {
     []
   );
 
-  const TextAreaStyles = useMemo(
-    () => ({
-      marginBottom: 8,
-      backgroundColor: "#808080",
-      borderColor: "#6f6f70",
-      color: "white",
-      borderRadius: 10,
-    }),
-    []
-  );
-
   return (
     <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
-      <Input.TextArea
-        style={TextAreaStyles}
+      <PostWriteInput
         value={text}
         onChange={onChangeText}
         maxLength={140}

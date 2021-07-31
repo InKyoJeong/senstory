@@ -23,11 +23,9 @@ const SignUpForm = () => {
   const { signUpLoading, signUpFinish, signUpError } = useSelector(
     (state) => state.user
   );
-
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
-
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -67,7 +65,6 @@ const SignUpForm = () => {
     if (password !== passwordCheck) {
       return setPasswordError(true);
     }
-    // console.log(email, nickname, password);
     dispatch({
       type: SIGN_UP_REQUEST,
       data: { email, password, nickname },

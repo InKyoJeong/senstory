@@ -190,8 +190,8 @@ const PostCard = ({ post }) => {
               title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
               description={
                 <PostTag
-                  onChangePost={onChangePost}
                   postData={post.Repost.content}
+                  onChangePost={onChangePost}
                   onCancelChange={onCancelChange}
                 />
               }
@@ -212,9 +212,9 @@ const PostCard = ({ post }) => {
                 <Conditional condition={id && post.User.id === id}>
                   <PostDropdown
                     onRemovePost={onRemovePost}
-                    onClickUpdate={onClickUpdate}
                     removePostLoading={removePostLoading}
                     isRepost={!post.RepostId}
+                    onClickUpdate={onClickUpdate}
                   />
                 </Conditional>
                 <Conditional condition={id}>
@@ -224,10 +224,10 @@ const PostCard = ({ post }) => {
             }
             description={
               <PostTag
-                onChangePost={onChangePost}
-                editMode={editMode}
-                onCancelChange={onCancelChange}
                 postData={post.content}
+                editMode={editMode}
+                onChangePost={onChangePost}
+                onCancelChange={onCancelChange}
               />
             }
           />
