@@ -10,7 +10,6 @@ import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
 import { Global, TagSearchInput } from "./styles";
-import Logo from "../../public/logo.png";
 import useInput from "../../hooks/useInput";
 
 const Layout = ({ children }) => {
@@ -79,7 +78,9 @@ const Layout = ({ children }) => {
           key="home"
           icon={
             <>
-              <img role="presentation" src={Logo} style={logoStyle} />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Image src="/logo.png" alt="mainLogo" width="40" height="40" />
+              </div>
               <Link href="/">
                 <a>
                   <i style={logoTitleLeft}>cenery</i>

@@ -1,8 +1,31 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Input, Form } from "antd";
+
+const signupText = css`
+  font-weight: bolder;
+  font-size: 18px;
+`;
 
 export const SignUpFormWrapper = styled(Form)`
   margin: 0px 20px;
+`;
+
+export const SignUpTitile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+`;
+
+export const TextSign = styled.i`
+  ${signupText}
+  color: ${(props) => props.theme.MAIN};
+  margin: 0px 3px;
+`;
+
+export const TextUp = styled.i`
+  ${signupText}
+  color: ${(props) => props.theme.LIGHT_GRAY};
 `;
 
 export const ErrorMessage = styled.div`
