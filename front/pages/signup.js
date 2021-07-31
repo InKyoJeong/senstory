@@ -40,19 +40,22 @@ const Signup = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : "";
-    axios.defaults.headers.Cookie = "";
-    if (context.req && cookie) {
-      axios.defaults.headers.Cookie = cookie;
+  (store) =>
+    async ({ req }) => {
+      console.log("signup 페이지 getServerSideProps 시작");
+      console.log(req.headers);
+      const cookie = req ? req.headers.cookie : "";
+      axios.defaults.headers.Cookie = "";
+      if (req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+      }
+      store.dispatch({
+        type: LOAD_ME_REQUEST,
+      });
+      store.dispatch(END);
+      console.log("signup 페이지 getServerSideProps 끝");
+      await store.sagaTask.toPromise();
     }
-
-    context.store.dispatch({
-      type: LOAD_ME_REQUEST,
-    });
-    context.store.dispatch(END);
-    await context.store.sagaTask.toPromise();
-  }
 );
 
 export default Signup;

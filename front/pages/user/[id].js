@@ -108,26 +108,32 @@ const User = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : "";
-    axios.defaults.headers.Cookie = "";
-    if (context.req && cookie) {
-      axios.defaults.headers.Cookie = cookie;
+  (store) =>
+    async ({ req, params }) => {
+      console.log("user/id 페이지 getServerSideProps 시작");
+
+      const cookie = req ? req.headers.cookie : "";
+      axios.defaults.headers.Cookie = "";
+      if (req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+      }
+      store.dispatch({
+        type: LOAD_USER_ALL_POST_REQUEST,
+        data: params.id,
+      });
+      store.dispatch({
+        type: LOAD_ME_REQUEST,
+      });
+      store.dispatch({
+        type: LOAD_USER_REQUEST,
+        data: params.id,
+      });
+      store.dispatch(END);
+
+      console.log("user/id 페이지 getServerSideProps 끝");
+
+      await store.sagaTask.toPromise();
     }
-    context.store.dispatch({
-      type: LOAD_USER_ALL_POST_REQUEST,
-      data: context.params.id,
-    });
-    context.store.dispatch({
-      type: LOAD_ME_REQUEST,
-    });
-    context.store.dispatch({
-      type: LOAD_USER_REQUEST,
-      data: context.params.id,
-    });
-    context.store.dispatch(END);
-    await context.store.sagaTask.toPromise();
-  }
 );
 
 export default User;

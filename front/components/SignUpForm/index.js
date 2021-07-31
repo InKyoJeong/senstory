@@ -13,7 +13,7 @@ import {
   InputWrapper,
   SignUpFormWrapper,
 } from "./styles";
-import Logo from "../../public/sb.png";
+import Logo from "../../public/logo.png";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();

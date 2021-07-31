@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import Router from "next/router";
+import Image from "next/image";
 import { Menu, Input, Row, Col } from "antd";
 
 import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
 import { Global, TagSearchInput } from "./styles";
-import Logo from "../../public/sb.png";
+import Logo from "../../public/logo.png";
 import useInput from "../../hooks/useInput";
 
 const Layout = ({ children }) => {
