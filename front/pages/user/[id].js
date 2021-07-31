@@ -84,7 +84,13 @@ const User = () => {
       {userInfo && (
         <Card style={{ marginBottom: 20 }}>
           <Card.Meta
-            avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
+            avatar={
+              userInfo.avatar ? (
+                <Avatar src={`http://localhost:3065/${userInfo.avatar}`} />
+              ) : (
+                <Avatar>{userInfo.nickname[0]}</Avatar>
+              )
+            }
             title={userInfo.nickname}
           />
           <div>

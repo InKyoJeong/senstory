@@ -22,6 +22,10 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(100),
           allowNull: false,
         },
+        avatar: {
+          type: DataTypes.STRING(200),
+          allowNull: false,
+        },
       },
       {
         modelName: "User",

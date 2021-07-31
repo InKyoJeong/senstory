@@ -41,6 +41,20 @@ export const UserInfoWrapper = styled.div`
   }
 `;
 
+export const AvatarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & div {
+    font-size: 12px;
+    font-weight: bolder;
+    color: ${(props) => props.theme.MAIN};
+    margin-top: 4px;
+    cursor: pointer;
+  }
+`;
+
 export const LogoutButton = styled(Button)`
   border-radius: 8px;
   background-color: #2a2a2b;

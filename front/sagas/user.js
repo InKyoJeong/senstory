@@ -33,12 +33,18 @@ import {
   REMOVE_FOLLOWER_FAILURE,
   REMOVE_FOLLOWER_REQUEST,
   REMOVE_FOLLOWER_SUCCESS,
+  SAVE_AVATAR_FAILURE,
+  SAVE_AVATAR_REQUEST,
+  SAVE_AVATAR_SUCCESS,
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   UNFOLLOW_FAILURE,
   UNFOLLOW_REQUEST,
   UNFOLLOW_SUCCESS,
+  UPLOAD_AVATAR_FAILURE,
+  UPLOAD_AVATAR_REQUEST,
+  UPLOAD_AVATAR_SUCCESS,
 } from "../actions/user";
 
 function loadMeAPI() {
@@ -276,6 +282,51 @@ function* removeFollower(action) {
   }
 }
 
+function uploadAvatarAPI(data) {
+  return axios.post("/user/images", data);
+}
+
+function* uploadAvatar(action) {
+  try {
+    const result = yield call(uploadAvatarAPI, action.data);
+    console.log("result.data", result.data); // data:["파일명"]
+    yield put({
+      type: UPLOAD_AVATAR_SUCCESS,
+      data: result.data,
+    });
+    yield put({
+      type: SAVE_AVATAR_REQUEST,
+      data: result.data[0], // "파일명"
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPLOAD_AVATAR_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function saveAvatarAPI(data) {
+  return axios.patch("/user/avatar", { avatar: data }); // avatar: "파일명"
+}
+
+function* saveAvatar(action) {
+  try {
+    const result = yield call(saveAvatarAPI, action.data);
+    yield put({
+      type: SAVE_AVATAR_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: SAVE_AVATAR_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLoadMe() {
   yield takeLatest(LOAD_ME_REQUEST, loadMe);
 }
@@ -324,6 +375,14 @@ function* watchRemoveFollower() {
   yield takeLatest(REMOVE_FOLLOWER_REQUEST, removeFollower);
 }
 
+function* watchUploadAvatar() {
+  yield takeLatest(UPLOAD_AVATAR_REQUEST, uploadAvatar);
+}
+
+function* watchSaveAvatar() {
+  yield takeLatest(SAVE_AVATAR_REQUEST, saveAvatar);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLoadMe),
@@ -338,5 +397,7 @@ export default function* userSaga() {
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchRemoveFollower),
+    fork(watchUploadAvatar),
+    fork(watchSaveAvatar),
   ]);
 }

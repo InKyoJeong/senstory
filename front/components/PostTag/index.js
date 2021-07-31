@@ -34,7 +34,7 @@ const PostTag = ({
   }, [updatePostFinish]);
 
   return (
-    <div>
+    <TagWrapper>
       <Conditional condition={editMode}>
         <div style={{ display: "flex" }}>
           <PostEditInput value={textEdit} onChange={onChangeText} />
@@ -63,7 +63,7 @@ const PostTag = ({
           return <PostContent key={i}>{v}</PostContent>;
         })}
       </Conditional>
-    </div>
+    </TagWrapper>
   );
 };
 

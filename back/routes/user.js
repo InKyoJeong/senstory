@@ -5,6 +5,31 @@ const { Post, User, Image, Comment } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 const { Op } = require("sequelize");
 
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+
+try {
+  fs.accessSync("uploads");
+} catch (error) {
+  console.log("uploads 폴더 없으므로 생성됨");
+  fs.mkdirSync("uploads");
+}
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, "uploads");
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      const basename = path.basename(file.originalname, ext);
+      done(null, basename + "_" + new Date().getTime() + ext);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
+});
+
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -127,7 +152,7 @@ router.get("/:userId/posts", async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ["id", "nickname"],
+          attributes: ["id", "nickname", "avatar"],
         },
         { model: Image },
 
@@ -136,7 +161,7 @@ router.get("/:userId/posts", async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
               order: [["createdAt", "DESC"]],
             },
           ],
@@ -152,7 +177,7 @@ router.get("/:userId/posts", async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
             },
             { model: Image },
           ],
@@ -306,6 +331,35 @@ router.delete("/follower/:userId", isLoggedIn, async (req, res, next) => {
     }
     await user.removeFollowings(req.user.id);
     res.status(200).json({ UserId: parseInt(req.params.userId, 10) });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+// POST /user/images
+router.post(
+  "/images",
+  isLoggedIn,
+  upload.array("image"),
+  async (req, res, next) => {
+    console.log(req.files);
+    res.json(req.files.map((v) => v.filename));
+  }
+);
+
+// PATCH /user/avatar
+router.patch("/avatar", isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        avatar: req.body.avatar,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ avatar: req.body.avatar });
   } catch (error) {
     console.error(error);
     next(error);

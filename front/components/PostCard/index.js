@@ -121,7 +121,11 @@ const PostCard = ({ post }) => {
               {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
               <Link href={`/user/${post.User.id}`}>
                 <a>
-                  <Avatar>{post.User.nickname[0]}</Avatar>
+                  {post.User.avatar ? (
+                    <Avatar src={`http://localhost:3065/${post.User.avatar}`} />
+                  ) : (
+                    <Avatar>{post.User.nickname[0]}</Avatar>
+                  )}
                 </a>
               </Link>
               <RepostTitle>{post.User.nickname}님이 공유했습니다.</RepostTitle>
@@ -186,7 +190,13 @@ const PostCard = ({ post }) => {
                 avatar={
                   <Link href={`/user/${post.Repost.User.id}`}>
                     <a>
-                      <Avatar>{post.Repost.User.nickname[0]}</Avatar>
+                      {post.Repost.User.avatar ? (
+                        <Avatar
+                          src={`http://localhost:3065/${post.Repost.User.avatar}`}
+                        />
+                      ) : (
+                        <Avatar>{post.User.nickname[0]}</Avatar>
+                      )}
                     </a>
                   </Link>
                 }
@@ -216,7 +226,11 @@ const PostCard = ({ post }) => {
             avatar={
               <Link href={`/user/${post.User.id}`}>
                 <a>
-                  <Avatar>{post.User.nickname[0]}</Avatar>
+                  {post.User.avatar ? (
+                    <Avatar src={`http://localhost:3065/${post.User.avatar}`} />
+                  ) : (
+                    <Avatar>{post.User.nickname[0]}</Avatar>
+                  )}
                 </a>
               </Link>
             }
@@ -274,7 +288,13 @@ const PostCard = ({ post }) => {
                   avatar={
                     <Link href={`/user/${item.User.id}`}>
                       <a>
-                        <Avatar>{item.User.nickname[0]}</Avatar>
+                        {item.User.avatar ? (
+                          <Avatar
+                            src={`http://localhost:3065/${item.User.avatar}`}
+                          />
+                        ) : (
+                          <Avatar>{item.User.nickname[0]}</Avatar>
+                        )}
                       </a>
                     </Link>
                   }

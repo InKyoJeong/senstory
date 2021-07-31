@@ -1,23 +1,44 @@
-import React, { useCallback } from "react";
-import { Card, Avatar, Button } from "antd";
+import React, { useCallback, useRef } from "react";
+import { Card, Avatar, Form } from "antd";
 import Link from "next/link";
 
 import { useDispatch, useSelector } from "react-redux";
-import { logoutRequestAction } from "../../actions/user";
+import { logoutRequestAction, UPLOAD_AVATAR_REQUEST } from "../../actions/user";
 
 import {
   HideWrapper,
   CardWrapper,
   LogoutButton,
   UserInfoWrapper,
+  AvatarWrapper,
 } from "./styles";
+import { UserOutlined } from "@ant-design/icons";
 
 const ProfileForm = (props) => {
   const dispatch = useDispatch();
   const { me, logOutLoading } = useSelector((state) => state.user);
 
+  const avatarInput = useRef();
+
   const onLogOut = useCallback(() => {
     dispatch(logoutRequestAction());
+  }, []);
+
+  const onClickAvatarUpload = useCallback(() => {
+    avatarInput.current.click();
+  }, [avatarInput.current]);
+
+  const onChangeAvatar = useCallback((e) => {
+    console.log("images", e.target.files);
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (f) => {
+      imageFormData.append("image", f);
+    });
+
+    dispatch({
+      type: UPLOAD_AVATAR_REQUEST,
+      data: imageFormData,
+    });
   }, []);
 
   return (
@@ -27,11 +48,27 @@ const ProfileForm = (props) => {
       >
         <Card.Meta
           avatar={
-            <Link href={`/user/${me.id}`}>
-              <a>
-                <Avatar>{me.nickname[0]}</Avatar>
-              </a>
-            </Link>
+            <AvatarWrapper>
+              <Link href={`/user/${me.id}`}>
+                <a>
+                  {me.avatar ? (
+                    <Avatar src={`http://localhost:3065/${me.avatar}`} />
+                  ) : (
+                    <Avatar icon={<UserOutlined />} />
+                  )}
+                </a>
+              </Link>
+              <Form encType="multipart/form-data">
+                <input
+                  type="file"
+                  name="image"
+                  hidden
+                  ref={avatarInput}
+                  onChange={onChangeAvatar}
+                />
+                <div onClick={onClickAvatarUpload}>사진 변경</div>
+              </Form>
+            </AvatarWrapper>
           }
           title={me.nickname}
         />

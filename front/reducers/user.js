@@ -40,6 +40,12 @@ import {
   CHANGE_INTRO_REQUEST,
   CHANGE_INTRO_SUCCESS,
   CHANGE_INTRO_FAILURE,
+  UPLOAD_AVATAR_REQUEST,
+  UPLOAD_AVATAR_SUCCESS,
+  UPLOAD_AVATAR_FAILURE,
+  SAVE_AVATAR_REQUEST,
+  SAVE_AVATAR_SUCCESS,
+  SAVE_AVATAR_FAILURE,
 } from "../actions/user";
 
 export const initialState = {
@@ -79,8 +85,15 @@ export const initialState = {
   removeFollowerLoading: false, // 팔로워 차단
   removeFollowerFinish: false,
   removeFollowerError: null,
+  uploadAvatarLoading: false,
+  uploadAvatarFinish: false,
+  uploadAvatarError: null,
+  saveAvatarLoading: false,
+  saveAvatarFinish: false,
+  saveAvatarError: null,
   me: null,
   userInfo: null,
+  avatarPaths: [],
 };
 
 // const dummyUser = (data) => ({
@@ -95,6 +108,34 @@ export const initialState = {
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
+      case UPLOAD_AVATAR_REQUEST:
+        draft.uploadAvatarLoading = true;
+        draft.uploadAvatarFinish = false;
+        draft.uploadAvatarError = null;
+        break;
+      case UPLOAD_AVATAR_SUCCESS:
+        draft.uploadAvatarLoading = false;
+        draft.uploadAvatarFinish = true;
+        draft.avatarPaths = draft.avatarPaths.concat(action.data);
+        break;
+      case UPLOAD_AVATAR_FAILURE:
+        draft.uploadAvatarLoading = false;
+        draft.uploadAvatarError = action.error;
+        break;
+      case SAVE_AVATAR_REQUEST:
+        draft.saveAvatarLoading = true;
+        draft.saveAvatarFinish = false;
+        draft.saveAvatarError = null;
+        break;
+      case SAVE_AVATAR_SUCCESS:
+        draft.saveAvatarLoading = false;
+        draft.saveAvatarFinish = true;
+        draft.me.avatar = action.data.avatar;
+        break;
+      case SAVE_AVATAR_FAILURE:
+        draft.saveAvatarLoading = false;
+        draft.saveAvatarError = action.error;
+        break;
       case LOAD_ME_REQUEST:
         draft.loadMeLoading = true;
         draft.loadMeFinish = false;

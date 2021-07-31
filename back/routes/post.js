@@ -66,13 +66,13 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
           include: [
             {
               model: User, // 댓글 작성자
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
             },
           ],
         },
         {
           model: User, // 글 작성자
-          attributes: ["id", "nickname"],
+          attributes: ["id", "nickname", "avatar"],
         },
         {
           model: User, // 좋아요
@@ -107,7 +107,7 @@ router.get("/:postId", async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ["id", "nickname"],
+          attributes: ["id", "nickname", "avatar"],
         },
         {
           model: Image,
@@ -117,7 +117,7 @@ router.get("/:postId", async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
               order: [["createdAt", "DESC"]],
             },
           ],
@@ -181,14 +181,14 @@ router.post("/:postId/repost", isLoggedIn, async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
             },
             { model: Image },
           ],
         },
         {
           model: User,
-          attributes: ["id", "nickname"],
+          attributes: ["id", "nickname", "avatar"],
         },
         {
           model: Image,
@@ -198,7 +198,7 @@ router.post("/:postId/repost", isLoggedIn, async (req, res, next) => {
           include: [
             {
               model: User,
-              attributes: ["id", "nickname"],
+              attributes: ["id", "nickname", "avatar"],
             },
           ],
         },
@@ -236,7 +236,7 @@ router.post("/:postId/comment", isLoggedIn, async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ["id", "nickname"],
+          attributes: ["id", "nickname", "avatar"],
         },
       ],
     });
