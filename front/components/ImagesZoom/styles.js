@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, CloseOutlined } from "@ant-design/icons";
 
 export const Overlay = styled.div`
   position: fixed;
@@ -25,17 +25,24 @@ export const Header = styled.header`
   } */
 `;
 
-export const CloseBtn = styled(CloseCircleOutlined)`
+export const CloseBtn = styled(CloseOutlined)`
   position: absolute;
+  font-size: 20px;
   right: 10px;
-  top: 0;
-  padding: 15px;
+  top: 10px;
+  padding: 10px;
   line-height: 14px;
   cursor: pointer;
+  z-index: 999;
+  background-color: #e89b9b;
+  color: black;
+  border-radius: 100px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 `;
 
 export const SlickWrapper = styled.div`
-  height: calc(100% - 44px);
+  /* height: calc(100% - 44px); */
+  height: 100%;
   background: #090909;
 `;
 
@@ -50,14 +57,23 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Indicator = styled.div`
+  display: flex;
   text-align: center;
-  margin-top: 15px;
+  /* margin-top: 15px; */
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  z-index: 999;
   & > div {
     width: 75px;
     height: 30px;
     line-height: 30px;
     border-radius: 15px;
-    background: #313131;
+    background-color: ${(props) => props.theme.MIDDLE_GRAY};
+    /* background: #313131; */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+
     display: inline-block;
     text-align: center;
     color: white;
