@@ -3,6 +3,7 @@ const cors = require("cors");
 const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
 const userRouter = require("./routes/user");
+const usersRouter = require("./routes/users");
 const hashtagRouter = require("./routes/hashtag");
 const db = require("./models");
 const passport = require("passport");
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 
 app.use("/posts", postsRouter);
 app.use("/post", postRouter);
+app.use("/users", usersRouter);
 app.use("/user", userRouter);
 app.use("/hashtag", hashtagRouter);
 

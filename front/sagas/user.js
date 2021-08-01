@@ -30,6 +30,9 @@ import {
   LOG_OUT_FAILURE,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
+  RANDOM_USER_FAILURE,
+  RANDOM_USER_REQUEST,
+  RANDOM_USER_SUCCESS,
   REMOVE_FOLLOWER_FAILURE,
   REMOVE_FOLLOWER_REQUEST,
   REMOVE_FOLLOWER_SUCCESS,
@@ -327,6 +330,27 @@ function* saveAvatar(action) {
   }
 }
 
+function randomUsersAPI() {
+  return axios.get(`/users`);
+}
+
+function* randomUsers() {
+  try {
+    const result = yield call(randomUsersAPI);
+    console.log("randomSaga: ", result.data);
+    yield put({
+      type: RANDOM_USER_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: RANDOM_USER_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLoadMe() {
   yield takeLatest(LOAD_ME_REQUEST, loadMe);
 }
@@ -383,6 +407,10 @@ function* watchSaveAvatar() {
   yield takeLatest(SAVE_AVATAR_REQUEST, saveAvatar);
 }
 
+function* watchRandomUsers() {
+  yield takeLatest(RANDOM_USER_REQUEST, randomUsers);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLoadMe),
@@ -399,5 +427,6 @@ export default function* userSaga() {
     fork(watchRemoveFollower),
     fork(watchUploadAvatar),
     fork(watchSaveAvatar),
+    fork(watchRandomUsers),
   ]);
 }

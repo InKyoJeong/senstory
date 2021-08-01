@@ -9,6 +9,8 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
+const router = express.Router();
+
 try {
   fs.accessSync("uploads");
 } catch (error) {
@@ -30,8 +32,7 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-const router = express.Router();
-
+// GET /user (loadMe)
 router.get("/", async (req, res, next) => {
   console.log(req.headers);
   try {
@@ -226,7 +227,7 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
   })(req, res, next);
 });
 
-// POST /user/
+// POST /user/ (signUp)
 router.post("/", isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({

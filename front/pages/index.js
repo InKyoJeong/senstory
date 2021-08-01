@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_ALL_POST_REQUEST } from "../actions/post";
-import { LOAD_ME_REQUEST } from "../actions/user";
+import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
 import Layout from "../components/Layout";
@@ -24,12 +24,6 @@ const Home = () => {
       alert(repostError);
     }
   }, [repostError]);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_ME_REQUEST,
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadAllPostLoading) {
@@ -94,6 +88,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       });
       store.dispatch({
         type: LOAD_ALL_POST_REQUEST,
+      });
+      store.dispatch({
+        type: RANDOM_USER_REQUEST,
       });
       store.dispatch(END);
       await store.sagaTask.toPromise();

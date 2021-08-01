@@ -46,6 +46,9 @@ import {
   SAVE_AVATAR_REQUEST,
   SAVE_AVATAR_SUCCESS,
   SAVE_AVATAR_FAILURE,
+  RANDOM_USER_SUCCESS,
+  RANDOM_USER_FAILURE,
+  RANDOM_USER_REQUEST,
 } from "../actions/user";
 
 export const initialState = {
@@ -85,15 +88,19 @@ export const initialState = {
   removeFollowerLoading: false, // 팔로워 차단
   removeFollowerFinish: false,
   removeFollowerError: null,
-  uploadAvatarLoading: false,
+  uploadAvatarLoading: false, // 업로드 프사
   uploadAvatarFinish: false,
   uploadAvatarError: null,
-  saveAvatarLoading: false,
+  saveAvatarLoading: false, // 프사 저장
   saveAvatarFinish: false,
   saveAvatarError: null,
+  randomUsersLoading: false, // 유저 추천
+  randomUsersFinish: false,
+  randomUsersError: null,
   me: null,
   userInfo: null,
   avatarPaths: [],
+  randomUsers: [],
 };
 
 // const dummyUser = (data) => ({
@@ -163,6 +170,20 @@ const reducer = (state = initialState, action) => {
       case LOAD_USER_FAILURE:
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
+        break;
+      case RANDOM_USER_REQUEST:
+        draft.randomUsersLoading = true;
+        draft.randomUsersFinish = false;
+        draft.randomUsersError = null;
+        break;
+      case RANDOM_USER_SUCCESS:
+        draft.randomUsersLoading = false;
+        draft.randomUsersFinish = true;
+        draft.randomUsers = draft.randomUsers.concat(action.data);
+        break;
+      case RANDOM_USER_FAILURE:
+        draft.randomUsersLoading = false;
+        draft.randomUsersError = action.error;
         break;
       case LOG_IN_REQUEST:
         draft.logInLoading = true;

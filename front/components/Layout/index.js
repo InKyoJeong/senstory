@@ -11,6 +11,7 @@ import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
 import { Global, TagSearchInput } from "./styles";
 import useInput from "../../hooks/useInput";
+import RandomUserForm from "../RandomUserForm";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
@@ -114,38 +115,30 @@ const Layout = ({ children }) => {
 
       <Row gutter={10}>
         <Col xs={0} sm={2} md={6} lg={8} xxl={9}></Col>
+
         <Col xs={24} sm={20} md={12} lg={9} xxl={7}>
           {children}
         </Col>
         <Col xs={0} sm={0} md={0} lg={7} xxl={6}>
           <Conditional condition={me && me.id}>
             <ProfileForm />
-            <div style={{ padding: 20 }}>
-              <label style={{ color: "white" }}>해시태그 검색</label>
-              <TagSearchInput
-                size="small"
-                bordered={false}
-                value={tagSearch}
-                onChange={onChangeTagSearch}
-                onSearch={onSearch}
-              />
-            </div>
+            <RandomUserForm />
           </Conditional>
 
           <Conditional condition={!(me && me.id)}>
             <LoginForm />
-            <div style={{ padding: 20 }}>
-              <label style={{ color: "white" }}>해시태그 검색</label>
-              <TagSearchInput
-                size="small"
-                bordered={false}
-                // enterButton
-                value={tagSearch}
-                onChange={onChangeTagSearch}
-                onSearch={onSearch}
-              />
-            </div>
           </Conditional>
+
+          <div style={{ padding: 20 }}>
+            <label style={{ color: "white" }}>해시태그 검색</label>
+            <TagSearchInput
+              size="small"
+              bordered={false}
+              value={tagSearch}
+              onChange={onChangeTagSearch}
+              onSearch={onSearch}
+            />
+          </div>
         </Col>
       </Row>
     </div>
