@@ -116,7 +116,7 @@ const reducer = (state = initialState, action) => {
       case UPLOAD_AVATAR_SUCCESS:
         draft.uploadAvatarLoading = false;
         draft.uploadAvatarFinish = true;
-        draft.avatarPaths = draft.avatarPaths.concat(action.data);
+        draft.avatarPaths = action.data;
         break;
       case UPLOAD_AVATAR_FAILURE:
         draft.uploadAvatarLoading = false;

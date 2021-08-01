@@ -11,6 +11,7 @@ import {
   RetweetOutlined,
   ShareAltOutlined,
 } from "@ant-design/icons";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -28,7 +29,6 @@ import CommentWriteForm from "../CommentWriteForm";
 import PostTag from "../PostTag";
 import FollowButton from "../FollowButton";
 import PostDropdown from "./PostDropdown";
-
 import {
   PostCardWrapper,
   CommentList,
@@ -40,16 +40,18 @@ import {
   RepostInnerCard,
   CommonCard,
 } from "./styles";
-
 import { fromNow } from "../../utils";
+import Modal from "../Modal";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
-  const liked = post.Likers.find((v) => v.id === id);
   const { removePostLoading } = useSelector((state) => state.post);
-  const [commentOpen, onToggleComment] = useToggle(false);
+  const liked = post.Likers.find((v) => v.id === id);
+
   const [editMode, setEditMode] = useState(false);
+  const [commentOpen, onToggleComment] = useToggle(false);
+  const [modalOpen, onToggleModal] = useToggle(false);
 
   const onLike = useCallback(() => {
     if (!id) {
@@ -174,7 +176,9 @@ const PostCard = ({ post }) => {
             onClick={onRepost}
             style={{ color: post.User.id === id && post.RepostId && "#1890FF" }}
           />,
-          <ShareAltOutlined key="share" />,
+          <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
+            <ShareAltOutlined key="share" onClick={onToggleModal} />
+          </CopyToClipboard>,
         ]}
       >
         {post.RepostId && post.Repost ? (
@@ -305,6 +309,12 @@ const PostCard = ({ post }) => {
           />
         </>
       </Conditional>
+
+      <Modal
+        title="게시글 링크가 복사되었습니다!"
+        modalOpen={modalOpen}
+        onToggleModal={onToggleModal}
+      />
     </PostCardWrapper>
   );
 };
