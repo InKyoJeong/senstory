@@ -5,7 +5,6 @@ import Slick from "react-slick";
 import {
   Overlay,
   Global,
-  Header,
   CloseBtn,
   ImageWrapper,
   Indicator,

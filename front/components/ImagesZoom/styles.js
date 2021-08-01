@@ -10,21 +10,6 @@ export const Overlay = styled.div`
   right: 0;
 `;
 
-export const Header = styled.header`
-  height: 44px;
-  background: linear-gradient(0deg, #607882, gray);
-  position: relative;
-  padding: 0;
-  text-align: center;
-
-  /* & h1 {
-    margin: 0;
-    font-size: 15px;
-    color: black;
-    line-height: 44px;
-  } */
-`;
-
 export const CloseBtn = styled(CloseOutlined)`
   position: absolute;
   font-size: 20px;
@@ -35,7 +20,7 @@ export const CloseBtn = styled(CloseOutlined)`
   cursor: pointer;
   z-index: 999;
   background-color: #e89b9b;
-  color: black;
+  color: ${(props) => props.theme.MIDDLE_GRAY};
   border-radius: 100px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 `;

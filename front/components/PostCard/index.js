@@ -155,11 +155,13 @@ const PostCard = ({ post }) => {
               onClick={onUnlike}
             />
           ) : (
-            //   <span> {post.Likers.length}</span>
+            // <span> {post.Likers.length}</span>
             // </div>
             // <div>
-            <HeartOutlined key="like" onClick={onLike} />
-            //   <span> {post.Likers.length}</span>
+            <>
+              <HeartOutlined key="like" onClick={onLike} />
+              {/* <span> {post.Likers.length}</span> */}
+            </>
             // </div>
           ),
           commentOpen ? (

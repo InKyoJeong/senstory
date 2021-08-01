@@ -103,15 +103,6 @@ export const initialState = {
   randomUsers: [],
 };
 
-// const dummyUser = (data) => ({
-//   ...data,
-//   nickname: "KKYYOO",
-//   id: 1,
-//   Posts: [{ id: 1 }],
-//   Followings: [{ nickname: "zllzl" }, { nickname: "hhh" }],
-//   Followers: [{ nickname: "zllzl" }, { nickname: "hhh" }],
-// });
-
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {

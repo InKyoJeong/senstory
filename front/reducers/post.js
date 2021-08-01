@@ -84,32 +84,6 @@ export const initialState = {
   repostError: null,
 };
 
-// export const generateDummyPosts = (number) =>
-//   Array(number)
-//     .fill()
-//     .map(() => ({
-//       id: shortid.generate(),
-//       User: {
-//         id: shortid.generate(),
-//         nickname: faker.name.findName(),
-//       },
-//       content: faker.lorem.paragraph(),
-//       Images: [
-//         {
-//           src: faker.image.image(),
-//         },
-//       ],
-//       Comments: [
-//         {
-//           User: {
-//             id: shortid.generate(),
-//             nickname: faker.name.findName(),
-//           },
-//           content: faker.lorem.sentence(),
-//         },
-//       ],
-//     }));
-
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
     switch (action.type) {

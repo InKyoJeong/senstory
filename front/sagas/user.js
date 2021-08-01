@@ -337,7 +337,6 @@ function randomUsersAPI() {
 function* randomUsers() {
   try {
     const result = yield call(randomUsersAPI);
-    console.log("randomSaga: ", result.data);
     yield put({
       type: RANDOM_USER_SUCCESS,
       data: result.data,

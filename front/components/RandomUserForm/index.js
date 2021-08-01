@@ -1,9 +1,15 @@
-import Avatar from "antd/lib/avatar/avatar";
+import { Avatar } from "antd";
 import React from "react";
 import Link from "next/link";
+import { TeamOutlined } from "@ant-design/icons";
 
 import { useSelector } from "react-redux";
-import { RandomUserWrapper, RandomTitle, UserItem } from "./styles";
+import {
+  RandomUserWrapper,
+  RandomTitle,
+  UserItem,
+  RandomUsers,
+} from "./styles";
 
 const RandomUserForm = () => {
   const { randomUsers } = useSelector((state) => state.user);
@@ -12,22 +18,27 @@ const RandomUserForm = () => {
 
   return (
     <RandomUserWrapper>
-      <RandomTitle>팔로우 추천</RandomTitle>
+      <RandomTitle>
+        <TeamOutlined />
+        사용자 추천
+      </RandomTitle>
 
-      {randomUsers.map((user) => (
-        <UserItem key={user.id}>
-          <Link href={`/user/${user.id}`}>
-            <a>
-              {user.avatar ? (
-                <Avatar src={`http://localhost:3065/${user.avatar}`} />
-              ) : (
-                <Avatar>{user.nickname[0]}</Avatar>
-              )}
-            </a>
-          </Link>
-          <div>{user.nickname}</div>
-        </UserItem>
-      ))}
+      <RandomUsers>
+        {randomUsers.map((user) => (
+          <UserItem key={user.id}>
+            <Link href={`/user/${user.id}`}>
+              <a>
+                {user.avatar ? (
+                  <Avatar src={`http://localhost:3065/${user.avatar}`} />
+                ) : (
+                  <Avatar>{user.nickname[0]}</Avatar>
+                )}
+              </a>
+            </Link>
+            <div>{user.nickname}</div>
+          </UserItem>
+        ))}
+      </RandomUsers>
     </RandomUserWrapper>
   );
 };
