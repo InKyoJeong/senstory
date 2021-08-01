@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   try {
     const randomUsers = await User.findAll({
       order: sequelize.random(),
-      limit: 5,
+      limit: 4,
       attributes: {
         exclude: ["password"],
       },

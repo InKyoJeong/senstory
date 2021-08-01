@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import { Button } from "antd";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../actions/user";
