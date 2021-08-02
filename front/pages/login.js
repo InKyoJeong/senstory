@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Router from "next/router";
-import LoginForm from "../components/LoginForm";
-import Layout from "../components/Layout";
 import { useSelector } from "react-redux";
-import { LoadingOutlined } from "@ant-design/icons";
-import wrapper from "../store/configureStore";
 import { LOAD_ME_REQUEST } from "../actions/user";
+import wrapper from "../store/configureStore";
 import axios from "axios";
 import { END } from "redux-saga";
+
+import LoginForm from "../components/LoginForm";
+import Layout from "../components/Layout";
+import Loader from "../components/Loader";
 
 const Login = () => {
   const { me, logInFinish, logInLoading } = useSelector((state) => state.user);
@@ -26,69 +27,11 @@ const Login = () => {
   }, [logInFinish]);
 
   if (logInLoading) {
-    return (
-      <div
-        style={{
-          alignItems: "center",
-          backgroundColor: "rgba(0,0,0,.8)",
-          padding: 20,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            height: "calc(100vh - 40px)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-          }}
-        >
-          <div
-            style={{ display: "flex", flexDirection: "column", fontSize: 15 }}
-          >
-            <div style={{ paddingBottom: 10 }}>로그인 중...</div>
-            <LoadingOutlined />
-          </div>
-        </div>
-      </div>
-    );
+    return <Loader text="로그인 중..." />;
   }
 
   if (me && me.id) {
-    return (
-      <div
-        style={{
-          alignItems: "center",
-          backgroundColor: "rgba(0,0,0,.8)",
-          padding: 20,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            height: "calc(100vh - 40px)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-          }}
-        >
-          <div
-            style={{ display: "flex", flexDirection: "column", fontSize: 15 }}
-          >
-            <div style={{ paddingBottom: 10 }}>
-              로그인 되었습니다. 홈으로 이동합니다.
-            </div>
-            <LoadingOutlined />
-          </div>
-        </div>
-      </div>
-    );
+    return <Loader text="로그인 되었습니다. 홈으로 이동합니다." />;
   }
 
   return (
