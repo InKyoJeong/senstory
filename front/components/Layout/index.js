@@ -142,6 +142,7 @@ const Layout = ({ children }) => {
               onSearch={onSearch}
             />
           </div>
+          {/* <HashtagSearch /> */}
         </Col>
       </Row>
     </div>
