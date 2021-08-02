@@ -59,5 +59,4 @@ export const SignUpInput = styled(Input)`
   color: white;
   border-color: ${(props) => props.theme.LIGHT_GRAY};
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
-  /* border-color: #6f6f70; */
 `;

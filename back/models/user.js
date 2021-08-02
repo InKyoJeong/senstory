@@ -24,7 +24,7 @@ module.exports = class User extends Model {
         },
         avatar: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
         },
         // allowRecommend:{
         //   type:DataTypes.BOOLEAN,

@@ -13,7 +13,7 @@ import Loader from "../components/Loader";
 
 const Login = () => {
   const { me, logInFinish, logInLoading } = useSelector((state) => state.user);
-  console.log(me);
+  //   console.log(me);
   useEffect(() => {
     if (me && me.id) {
       Router.replace("/");

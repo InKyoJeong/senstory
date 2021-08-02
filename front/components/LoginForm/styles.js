@@ -5,6 +5,7 @@ const loginText = css`
   font-weight: bolder;
   font-size: 18px;
 `;
+
 export const LogInTitle = styled.div`
   display: flex;
   justify-content: center;
@@ -32,11 +33,11 @@ export const FormWrapper = styled(Form)`
 `;
 
 export const LoginInput = styled(Input)`
-  background-color: gray;
   border-radius: 10px;
-  color: white;
-  border-color: #6f6f70;
   margin-top: 5px;
+  color: white;
+  border-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
 `;
 
 export const InputWrapper = styled.div`

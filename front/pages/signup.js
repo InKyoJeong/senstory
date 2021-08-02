@@ -3,17 +3,21 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import SignUpForm from "../components/SignUpForm";
 import { useDispatch } from "react-redux";
+import Router from "next/router";
+
 // import { LOAD_USER_REQUEST } from "../actions/user";
-// import Router from "next/router";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
 import { LOAD_ME_REQUEST } from "../actions/user";
+import Loader from "../components/Loader";
 
 const Signup = () => {
-  // const { me } = useSelector((state) => state.user);
+  const { signUpLoading, signUpFinish, signUpError } = useSelector(
+    (state) => state.user
+  );
   // useEffect(() => {
   //   if (me && me.id) {
   //     Router.replace("/");
@@ -21,6 +25,21 @@ const Signup = () => {
   // }, [me && me.id]);
 
   // const dispatch = useDispatch();
+  useEffect(() => {
+    if (signUpFinish) {
+      Router.replace("/login");
+    }
+  }, [signUpFinish]);
+
+  if (signUpLoading) {
+    return <Loader text="회원가입 중..." />;
+  }
+
+  if (signUpFinish) {
+    return (
+      <Loader text="회원가입이 완료되었습니다. 로그인 페이지로 이동합니다." />
+    );
+  }
 
   // useEffect(() => {
   //   dispatch({

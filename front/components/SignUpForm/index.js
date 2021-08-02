@@ -98,6 +98,7 @@ const SignUpForm = () => {
           value={nickname}
           onChange={onChangeNickname}
           required
+          autoComplete="off"
         />
       </InputWrapper>
       <InputWrapper>

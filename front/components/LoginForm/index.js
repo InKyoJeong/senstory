@@ -51,7 +51,9 @@ const LoginForm = () => {
             autoComplete="off"
           />
         </div>
-        <div style={{ marginTop: 10 }}>
+      </InputWrapper>
+      <InputWrapper>
+        <div>
           <label htmlFor="user-password">비밀번호</label>
           <br />
           <LoginInput
