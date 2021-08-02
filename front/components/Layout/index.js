@@ -1,26 +1,19 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import Router from "next/router";
 import Image from "next/image";
-import { Menu, Input, Row, Col } from "antd";
+import { Menu, Row, Col } from "antd";
 
 import ProfileForm from "../ProfileForm";
 import LoginForm from "../LoginForm";
 import Conditional from "../../hocs/Conditional";
-import { Global, TagSearchInput } from "./styles";
-import useInput from "../../hooks/useInput";
+import { Global } from "./styles";
 import RandomUserForm from "../RandomUserForm";
 import HashtagSearch from "../HashtagSearch";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
-  const [tagSearch, onChangeTagSearch] = useInput("");
-
-  const onSearch = useCallback(() => {
-    Router.push(`/hashtag/${tagSearch}`);
-  }, [tagSearch]);
 
   const menuStyle = useMemo(
     () => ({
@@ -94,18 +87,28 @@ const Layout = ({ children }) => {
         </Menu.Item> */}
 
         {me && me.id && (
-          <Menu.Item key="profile">
+          <Menu.Item key="profile" style={HeaderRightMargin}>
             <Link href="/profile">
               <a>프로필</a>
             </Link>
           </Menu.Item>
         )}
 
-        <Menu.Item key="signup" style={HeaderRightMargin}>
-          <Link href="/signup">
-            <a>회원가입</a>
-          </Link>
-        </Menu.Item>
+        {/* {!me && (
+          <Menu.Item key="login">
+            <Link href="/login">
+              <a>로그인</a>
+            </Link>
+          </Menu.Item>
+        )} */}
+
+        {!me && (
+          <Menu.Item key="signup" style={HeaderRightMargin}>
+            <Link href="/signup">
+              <a>회원가입</a>
+            </Link>
+          </Menu.Item>
+        )}
 
         {/* <Menu.Item key="login" style={{ display: "none" }}>
           <Link href="/">

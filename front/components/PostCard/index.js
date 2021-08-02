@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Avatar, Comment } from "antd";
 import Link from "next/link";
@@ -43,7 +43,7 @@ import {
 import { fromNow } from "../../utils";
 import Modal from "../Modal";
 
-const PostCard = ({ post }) => {
+const PostCard = forwardRef(({ post }, ref) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
   const { removePostLoading } = useSelector((state) => state.post);
@@ -317,9 +317,11 @@ const PostCard = ({ post }) => {
         modalOpen={modalOpen}
         onToggleModal={onToggleModal}
       />
+
+      <div ref={ref} />
     </PostCardWrapper>
   );
-};
+});
 
 PostCard.propTypes = {
   post: PropTypes.shape({
