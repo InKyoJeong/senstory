@@ -13,10 +13,11 @@ import {
   SignUpInput,
   InputWrapper,
   SignUpFormWrapper,
-  SignUpTitile,
-  TextSign,
-  TextUp,
+  // SignUpTitile,
+  // TextSign,
+  // TextUp,
 } from "./styles";
+import MiniTitle from "../MiniTitle";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -73,10 +74,7 @@ const SignUpForm = () => {
 
   return (
     <SignUpFormWrapper onFinish={onSubmit}>
-      <SignUpTitile>
-        <TextSign>Sign</TextSign>
-        <TextUp>Up</TextUp>
-      </SignUpTitile>
+      <MiniTitle title1="Sign" title2="Up" />
 
       <InputWrapper>
         <label htmlFor="user-email">이메일</label>

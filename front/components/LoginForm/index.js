@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-// import Link from "next/link";
 import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../actions/user";
@@ -9,11 +8,9 @@ import {
   ButtonWrapper,
   LoginButton,
   LoginInput,
-  LogInTitle,
-  TextLog,
-  TextIn,
   InputWrapper,
 } from "./styles";
+import MiniTitle from "../MiniTitle";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -33,10 +30,7 @@ const LoginForm = () => {
 
   return (
     <FormWrapper onFinish={onSubmitForm}>
-      <LogInTitle>
-        <TextLog>Log</TextLog>
-        <TextIn>In</TextIn>
-      </LogInTitle>
+      <MiniTitle title1="Log" title2="In" />
 
       <InputWrapper>
         <div>

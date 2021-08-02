@@ -31,15 +31,15 @@ const Login = () => {
   }
 
   if (me && me.id) {
-    return <Loader text="로그인 되었습니다. 홈으로 이동합니다." />;
+    return <Loader text="로그인 되었습니다. 홈으로 이동 중..." />;
   }
 
   return (
     <>
-      <Head>
-        <title>로그인 | SceneryBook</title>
-      </Head>
       <Layout>
+        <Head>
+          <title>로그인 | SceneryBook</title>
+        </Head>
         <LoginForm />
       </Layout>
     </>
