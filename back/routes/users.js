@@ -1,5 +1,6 @@
 const express = require("express");
 const { User, sequelize } = require("../models");
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ router.get("/", async (req, res, next) => {
       attributes: {
         exclude: ["password"],
       },
+      where: { id: { [Op.ne]: req.user.id } },
     });
     res.status(200).json(randomUsers);
   } catch (error) {
