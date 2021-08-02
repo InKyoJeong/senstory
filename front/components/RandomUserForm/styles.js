@@ -15,12 +15,13 @@ export const RandomUserWrapper = styled.div`
 
 export const RandomTitle = styled.div`
   border-radius: 5px;
+  background-color: #428bcf;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px 0px;
-  background-color: #428bcf;
+  margin-bottom: 10px;
 
   & > span {
     margin-right: 3px;
@@ -35,12 +36,18 @@ export const RandomUsers = styled.div`
 export const UserItem = styled.div`
   display: flex;
   align-items: center;
-  margin: 12px 10px;
+  margin: 10px 10px;
   border-radius: 10px;
 
   & div {
     margin-left: 8px;
 
     color: white;
+  }
+
+  &:hover {
+    background-color: #363638;
+    cursor: pointer;
+    transition: 1s;
   }
 `;

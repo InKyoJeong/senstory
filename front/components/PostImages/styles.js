@@ -16,7 +16,7 @@ export const ImgWrapper = styled.div`
   display: flex;
   cursor: pointer;
   width: 100%;
-  max-height: 300px;
+  max-height: 500px;
 `;
 
 export const SigleImg = styled.img`

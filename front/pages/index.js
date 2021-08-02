@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_ALL_POST_REQUEST } from "../actions/post";
 import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
@@ -17,7 +17,7 @@ const Home = () => {
   const { me } = useSelector((state) => state.user);
   const { mainPosts, hasMorePosts, loadAllPostLoading, repostError } =
     useSelector((state) => state.post);
-  const [ref, inView] = useInView();
+  // const [ref, inView] = useInView();
 
   useEffect(() => {
     if (repostError) {
@@ -25,41 +25,43 @@ const Home = () => {
     }
   }, [repostError]);
 
-  useEffect(() => {
-    if (inView && hasMorePosts && !loadAllPostLoading) {
-      const lastId = mainPosts[mainPosts.length - 1]?.id;
-      dispatch({
-        type: LOAD_ALL_POST_REQUEST,
-        lastId,
-      });
-    }
-  }, [inView, hasMorePosts, loadAllPostLoading, mainPosts]);
-
   // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_ALL_POST_REQUEST,
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   function onScroll() {
-  //     if (
-  //       window.scrollY + document.documentElement.clientHeight >
-  //       document.documentElement.scrollHeight - 300
-  //     ) {
-  //       if (hasMorePosts && !loadAllPostLoading) {
-  //         dispatch({
-  //           type: LOAD_ALL_POST_REQUEST,
-  //         });
-  //       }
-  //     }
+  //   if (inView && hasMorePosts && !loadAllPostLoading) {
+  //     const lastId = mainPosts[mainPosts.length - 1]?.id;
+  //     dispatch({
+  //       type: LOAD_ALL_POST_REQUEST,
+  //       lastId,
+  //     });
   //   }
-  //   window.addEventListener("scroll", onScroll);
+  // }, [inView, hasMorePosts, loadAllPostLoading, mainPosts]);
 
-  //   return () => {
-  //     window.removeEventListener("scroll", onScroll);
-  //   };
-  // }, [hasMorePosts, loadAllPostLoading]);
+  useEffect(() => {
+    dispatch({
+      type: LOAD_ALL_POST_REQUEST,
+    });
+  }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      if (
+        window.scrollY + document.documentElement.clientHeight >
+        document.documentElement.scrollHeight - 300
+      ) {
+        if (hasMorePosts && !loadAllPostLoading) {
+          const lastId = mainPosts[mainPosts.length - 1]?.id;
+          dispatch({
+            type: LOAD_ALL_POST_REQUEST,
+            lastId,
+          });
+        }
+      }
+    }
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [hasMorePosts, loadAllPostLoading, mainPosts]);
 
   return (
     <Layout>
@@ -70,7 +72,7 @@ const Home = () => {
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-      <div ref={hasMorePosts && !loadAllPostLoading ? ref : undefined} />
+      {/* <div ref={hasMorePosts && !loadAllPostLoading ? ref : undefined} /> */}
     </Layout>
   );
 };

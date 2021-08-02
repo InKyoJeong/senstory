@@ -49,9 +49,13 @@ export const AvatarWrapper = styled.div`
   & div {
     font-size: 12px;
     font-weight: bolder;
-    color: ${(props) => props.theme.MAIN};
+    color: #428bcf;
     margin-top: 4px;
     cursor: pointer;
+
+    &:hover {
+      color: ${(props) => props.theme.MAIN};
+    }
   }
 `;
 
