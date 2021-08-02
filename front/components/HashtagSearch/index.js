@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import Router from "next/router";
-import { TagSearchInput } from "./styles";
+import { SearchWrapper, TagSearchInput } from "./styles";
 import useInput from "../../hooks/useInput";
+import { TagsFilled } from "@ant-design/icons";
 
 const HashtagSearch = () => {
   const [tagSearch, onChangeTagSearch] = useInput("");
@@ -11,8 +12,11 @@ const HashtagSearch = () => {
   }, [tagSearch]);
 
   return (
-    <div style={{ padding: 20 }}>
-      <label style={{ color: "white" }}>해시태그 검색</label>
+    <SearchWrapper>
+      <div>
+        <TagsFilled />
+        <label>해시태그 검색</label>
+      </div>
       <TagSearchInput
         size="small"
         bordered={false}
@@ -20,7 +24,7 @@ const HashtagSearch = () => {
         onChange={onChangeTagSearch}
         onSearch={onSearch}
       />
-    </div>
+    </SearchWrapper>
   );
 };
 

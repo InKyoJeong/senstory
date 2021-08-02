@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import wrapper from "../../store/configureStore";
 import { LOAD_HASHTAG_POSTS_REQUEST } from "../../actions/post";
-import { LOAD_ME_REQUEST } from "../../actions/user";
+import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../../actions/user";
 import PostCard from "../../components/PostCard";
 import Layout from "../../components/Layout";
 

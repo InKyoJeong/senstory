@@ -12,6 +12,7 @@ import Conditional from "../../hocs/Conditional";
 import { Global, TagSearchInput } from "./styles";
 import useInput from "../../hooks/useInput";
 import RandomUserForm from "../RandomUserForm";
+import HashtagSearch from "../HashtagSearch";
 
 const Layout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
@@ -132,17 +133,7 @@ const Layout = ({ children }) => {
             <LoginForm />
           </Conditional>
 
-          <div style={{ padding: 20 }}>
-            <label style={{ color: "white" }}>해시태그 검색</label>
-            <TagSearchInput
-              size="small"
-              bordered={false}
-              value={tagSearch}
-              onChange={onChangeTagSearch}
-              onSearch={onSearch}
-            />
-          </div>
-          {/* <HashtagSearch /> */}
+          <HashtagSearch />
         </Col>
       </Row>
     </div>
