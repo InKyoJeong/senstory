@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const RandomUserWrapper = styled.div`
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
-  border-color: ${(props) => props.theme.MIDDLE_GRAY};
-  border-radius: 10px;
   overflow: hidden;
-  padding: 8px;
 
   @media screen and (min-width: 992px) {
     margin: 20px 5% 20px 5%;
@@ -13,16 +9,14 @@ export const RandomUserWrapper = styled.div`
 `;
 
 export const RandomTitle = styled.div`
-  /* border-radius: 5px; */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #428bcf;
+  background-color: #57898f;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px 0px;
-  /* margin-bottom: 10px; */
 
   & > span {
     margin-right: 3px;
@@ -34,7 +28,8 @@ export const RandomUsers = styled.div`
   grid-template-columns: 1fr 1fr;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  padding: 5px;
 `;
 
 export const UserItem = styled.div`

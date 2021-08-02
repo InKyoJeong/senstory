@@ -11,7 +11,7 @@ export const HideWrapper = styled.div`
 export const CardWrapper = styled(Card)`
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
   border-color: ${(props) => props.theme.MIDDLE_GRAY};
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
   margin-top: 20px;
 

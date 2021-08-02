@@ -7,6 +7,7 @@ import {
   LOAD_FOLLOWINGS_REQUEST,
   LOAD_ME_REQUEST,
   LOAD_USER_REQUEST,
+  RANDOM_USER_REQUEST,
 } from "../actions/user";
 import useSWR from "swr";
 
@@ -121,6 +122,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
       store.dispatch({
         type: LOAD_ME_REQUEST,
+      });
+      store.dispatch({
+        type: RANDOM_USER_REQUEST,
       });
       store.dispatch(END);
       console.log("profile 페이지 getServerSideProps 끝");
