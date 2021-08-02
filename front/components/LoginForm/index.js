@@ -4,7 +4,16 @@ import useInput from "../../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../actions/user";
 
-import { FormWrapper, ButtonWrapper, LoginButton, LoginInput } from "./styles";
+import {
+  FormWrapper,
+  ButtonWrapper,
+  LoginButton,
+  LoginInput,
+  LogInTitle,
+  TextLog,
+  TextIn,
+  InputWrapper,
+} from "./styles";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,45 +28,46 @@ const LoginForm = () => {
   }, [logInError]);
 
   const onSubmitForm = useCallback(() => {
-    // console.log(email, password);
     dispatch(loginRequestAction({ email, password }));
   }, [email, password]);
 
   return (
     <FormWrapper onFinish={onSubmitForm}>
-      <div>
-        <label htmlFor="user-email">이메일</label>
-        <br />
-        <LoginInput
-          name="user-email"
-          type="email"
-          value={email}
-          onChange={onChangeEmail}
-          required
-          autoComplete="off"
-        />
-      </div>
-      <div style={{ marginTop: 10 }}>
-        <label htmlFor="user-password">비밀번호</label>
-        <br />
-        <LoginInput
-          name="user-password"
-          type="password"
-          value={password}
-          onChange={onChangePassword}
-          required
-        />
-      </div>
+      <LogInTitle>
+        <TextLog>Log</TextLog>
+        <TextIn>In</TextIn>
+      </LogInTitle>
+
+      <InputWrapper>
+        <div>
+          <label htmlFor="user-email">이메일</label>
+          <br />
+          <LoginInput
+            name="user-email"
+            type="email"
+            value={email}
+            onChange={onChangeEmail}
+            required
+            autoComplete="off"
+          />
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <label htmlFor="user-password">비밀번호</label>
+          <br />
+          <LoginInput
+            name="user-password"
+            type="password"
+            value={password}
+            onChange={onChangePassword}
+            required
+          />
+        </div>
+      </InputWrapper>
 
       <ButtonWrapper>
         <LoginButton type="primary" htmlType="submit" loading={logInLoading}>
           로그인
         </LoginButton>
-        {/* <Link href="/signup">
-          <a>
-            <Button>회원가입</Button>
-          </a>
-        </Link> */}
       </ButtonWrapper>
     </FormWrapper>
   );

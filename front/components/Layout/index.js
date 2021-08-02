@@ -94,27 +94,21 @@ const Layout = ({ children }) => {
           </Menu.Item>
         )}
 
-        {/* {!me && (
+        {!(me && me.id) && (
           <Menu.Item key="login">
             <Link href="/login">
               <a>로그인</a>
             </Link>
           </Menu.Item>
-        )} */}
+        )}
 
-        {!me && (
+        {!(me && me.id) && (
           <Menu.Item key="signup" style={HeaderRightMargin}>
             <Link href="/signup">
               <a>회원가입</a>
             </Link>
           </Menu.Item>
         )}
-
-        {/* <Menu.Item key="login" style={{ display: "none" }}>
-          <Link href="/">
-            <a>로그인</a>
-          </Link>
-        </Menu.Item> */}
       </Menu>
 
       <Row gutter={10}>
@@ -130,13 +124,12 @@ const Layout = ({ children }) => {
           <Conditional condition={me && me.id}>
             <ProfileForm />
             <RandomUserForm />
+            <HashtagSearch />
           </Conditional>
 
-          <Conditional condition={!(me && me.id)}>
+          {/* <Conditional condition={!(me && me.id)}>
             <LoginForm />
-          </Conditional>
-
-          <HashtagSearch />
+          </Conditional> */}
         </Col>
       </Row>
     </div>
