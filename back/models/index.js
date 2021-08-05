@@ -3,6 +3,7 @@ const comment = require("./comment");
 const hashtag = require("./hashtag");
 const image = require("./image");
 const post = require("./post");
+const diary = require("./diary");
 const user = require("./user");
 
 const env = process.env.NODE_ENV || "development";
@@ -20,6 +21,7 @@ db.Comment = comment;
 db.Hashtag = hashtag;
 db.Image = image;
 db.Post = post;
+db.Diary = diary;
 db.User = user;
 
 Object.keys(db).forEach((modelName) => {

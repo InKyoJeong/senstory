@@ -4,14 +4,14 @@ export const RandomUserWrapper = styled.div`
   overflow: hidden;
 
   @media screen and (min-width: 992px) {
-    margin: 20px 5% 20px 5%;
+    margin: 30px 5% 30px 5%;
   }
 `;
 
 export const RandomTitle = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #57898f;
+  background-color: #6f8385;
   color: white;
   display: flex;
   justify-content: center;

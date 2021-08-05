@@ -9,17 +9,6 @@ export const ErrorMessage = styled.div`
   color: #d43578;
 `;
 
-export const ButtonWrapper = styled.div`
-  margin-top: 20px;
-
-  & Button {
-    border-radius: 10px;
-    width: 100%;
-    background-color: ${(props) => props.isValid || props.theme.INVALID};
-    border-color: ${(props) => props.isValid || props.theme.INVALID};
-  }
-`;
-
 export const InputWrapper = styled.div`
   margin-top: 30px;
 
@@ -34,4 +23,16 @@ export const SignUpInput = styled(Input)`
   color: white;
   border-color: ${(props) => props.theme.LIGHT_GRAY};
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
+`;
+
+export const ButtonWrapper = styled.div`
+  margin-top: 20px;
+
+  & Button {
+    border-radius: 10px;
+    width: 100%;
+    height: 40px;
+    background-color: ${(props) => props.isValid || props.theme.INVALID};
+    border-color: ${(props) => props.isValid || props.theme.INVALID};
+  }
 `;
