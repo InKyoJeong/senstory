@@ -152,9 +152,9 @@ const reducer = (state = initialState, action) => {
         draft.addPostError = null;
         break;
       case ADD_POST_SUCCESS:
+        draft.mainPosts.unshift(action.data);
         draft.addPostLoading = false;
         draft.addPostFinish = true;
-        draft.mainPosts.unshift(action.data);
         draft.imagePaths = [];
         break;
       case ADD_POST_FAILURE:
@@ -257,8 +257,8 @@ const reducer = (state = initialState, action) => {
         break;
       }
       case ADD_COMMENT_FAILURE:
-        draft.uploadImagesLoading = false;
-        draft.uploadImagesError = action.error;
+        draft.addCommentLoading = false;
+        draft.addCommentError = action.error;
         break;
       case UPLOAD_IMAGES_REQUEST:
         draft.uploadImagesLoading = true;
@@ -272,8 +272,8 @@ const reducer = (state = initialState, action) => {
         break;
       }
       case UPLOAD_IMAGES_FAILURE:
-        draft.addCommentLoading = false;
-        draft.addCommentError = action.error;
+        draft.uploadImagesLoading = false;
+        draft.uploadImagesError = action.error;
         break;
       default:
         break;

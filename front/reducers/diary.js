@@ -6,6 +6,9 @@ import {
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
+  UPLOAD_PHOTOS_FAILURE,
+  UPLOAD_PHOTOS_REQUEST,
+  UPLOAD_PHOTOS_SUCCESS,
 } from "../actions/diary";
 
 export const initialState = {
@@ -18,6 +21,9 @@ export const initialState = {
   addDiaryLoading: false,
   addDiaryFinish: false,
   addDiaryError: null,
+  uploadPhotosLoading: false,
+  uploadPhotosFinish: false,
+  uploadPhotosError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,8 +35,8 @@ const reducer = (state = initialState, action) => {
         draft.loadUserDiarysError = null;
       case LOAD_USER_DIARYS_SUCCESS:
         draft.mainDiarys = draft.mainDiarys.concat(action.data);
-        draft.loadUserDiarysLoading = false;
         draft.loadUserDiarysFinish = true;
+        draft.loadUserDiarysLoading = false;
       case LOAD_USER_DIARYS_FAILURE:
         draft.loadUserDiarysLoading = false;
         draft.loadUserDiarysError = action.error;
@@ -42,10 +48,25 @@ const reducer = (state = initialState, action) => {
         draft.mainDiarys.unshift(action.data);
         draft.addDiaryFinish = true;
         draft.addDiaryLoading = false;
-      // draft.photoPaths = [];
+        draft.photoPaths = [];
       case ADD_DIARY_FAILURE:
         draft.addDiaryLoading = false;
         draft.addDiaryError = action.error;
+      case UPLOAD_PHOTOS_REQUEST:
+        draft.uploadPhotosLoading = true;
+        draft.uploadPhotosFinish = false;
+        draft.uploadPhotosError = null;
+        break;
+      case UPLOAD_PHOTOS_SUCCESS: {
+        draft.photoPaths = draft.photoPaths.concat(action.data);
+        draft.uploadPhotosLoading = false;
+        draft.uploadPhotosFinish = true;
+        break;
+      }
+      case UPLOAD_PHOTOS_FAILURE:
+        draft.uploadPhotostLoading = false;
+        draft.uploadPhotosError = action.error;
+        break;
       default:
         break;
     }

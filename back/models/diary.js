@@ -13,6 +13,10 @@ module.exports = class Diary extends Model {
           type: DataTypes.TEXT,
           allowNull: false,
         },
+        feel: {
+          type: DataTypes.STRING(20),
+          allowNull: false,
+        },
         maxtemp: {
           type: DataTypes.TINYINT,
           allowNull: true,
@@ -33,7 +37,7 @@ module.exports = class Diary extends Model {
   }
   static associate(db) {
     db.Diary.belongsTo(db.User);
-    // db.Diary.hasMany(db.Image);
+    db.Diary.hasMany(db.Photo);
     db.Diary.belongsToMany(db.Feel, { through: "DiaryFeel" });
   }
 };

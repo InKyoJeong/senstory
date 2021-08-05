@@ -1,10 +1,15 @@
 import { all, fork, takeLatest, put, call, throttle } from "redux-saga/effects";
 import axios from "axios";
 import {
+  ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
+  ADD_DIARY_SUCCESS,
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
+  UPLOAD_PHOTOS_FAILURE,
+  UPLOAD_PHOTOS_REQUEST,
+  UPLOAD_PHOTOS_SUCCESS,
 } from "../actions/diary";
 
 function loadUserDiarysAPI(data, lastId) {
@@ -27,6 +32,49 @@ function* loadUserDiarys(action) {
   }
 }
 
+function addDiaryAPI(data) {
+  return axios.post("/diarys", data);
+}
+
+function* addDiary(action) {
+  try {
+    console.log(action.data);
+    const result = yield call(addDiaryAPI, action.data);
+    console.log("addDiary saga result", result);
+    yield put({
+      type: ADD_DIARY_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: ADD_DIARY_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function uploadPhotosAPI(data) {
+  return axios.post("/diarys/photos", data);
+}
+
+function* uploadPhotos(action) {
+  try {
+    const result = yield call(uploadPhotosAPI, action.data);
+    console.log(result);
+    yield put({
+      type: UPLOAD_PHOTOS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPLOAD_PHOTOS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLoadUserDiarys() {
   yield throttle(5000, LOAD_USER_DIARYS_REQUEST, loadUserDiarys);
 }
@@ -35,6 +83,14 @@ function* watchAddDiary() {
   yield takeLatest(ADD_DIARY_REQUEST, addDiary);
 }
 
+function* watchUploadPhotos() {
+  yield takeLatest(UPLOAD_PHOTOS_REQUEST, uploadPhotos);
+}
+
 export default function* diarySaga() {
-  yield all([fork(watchLoadUserDiarys)]);
+  yield all([
+    fork(watchLoadUserDiarys),
+    fork(watchAddDiary),
+    fork(watchUploadPhotos),
+  ]);
 }

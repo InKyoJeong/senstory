@@ -12,6 +12,7 @@ import wrapper from "../../store/configureStore";
 import { LOAD_ME_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
 import Loader from "../../components/Loader";
+import DiaryWriteForm from "../../components/DiaryWriteForm";
 
 const Diary = () => {
   const router = useRouter();
@@ -22,14 +23,18 @@ const Diary = () => {
   // console.log("id", typeof id);
   const parseId = parseInt(id, 10);
 
+  if (!me) {
+    return <div>잘못된 접근입니다. (로그인하지 않음)</div>;
+  }
+
   useEffect(() => {
-    if (parseId !== me.id) {
+    if (me?.id && parseId !== me.id) {
       console.log("내 일기장이 아니라서 볼수없음. 홈으로 이동함 (잘못된 접근)");
       Router.push("/");
     }
   }, [parseId, me.id]);
 
-  if (parseId !== me.id) {
+  if (me?.id && parseId !== me.id) {
     return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
   }
 
@@ -38,7 +43,7 @@ const Diary = () => {
       <Head>
         <title> Diary | SceneryBook</title>
       </Head>
-      <div>Diary 페이지</div>
+      <DiaryWriteForm />
     </Layout>
   );
 };
