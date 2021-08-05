@@ -84,7 +84,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>프로필 | SceneryBook</title>
+        <title>프로필 | SenStory</title>
       </Head>
       <Layout>
         <ProfileForm hide />

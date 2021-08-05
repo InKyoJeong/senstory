@@ -33,7 +33,7 @@ const Signup = () => {
   return (
     <Layout>
       <Head>
-        <title>회원가입 | SceneryBook</title>
+        <title>회원가입 | SenStory</title>
       </Head>
 
       <SignUpForm />

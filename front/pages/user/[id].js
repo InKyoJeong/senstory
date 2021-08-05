@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Card } from "antd";
 import { END } from "redux-saga";
@@ -45,11 +45,33 @@ const User = () => {
     }
   }, [inView, hasMorePosts, loadUserAllPostLoading, mainPosts, id]);
 
+  const noUserStyle = useMemo(
+    () => ({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+      marginTop: "40vh",
+      fontSize: 15,
+    }),
+    []
+  );
+
+  if (!userInfo) {
+    return (
+      <Layout>
+        <div style={noUserStyle}>
+          <div>존재하지 않는 사용자입니다.</div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       {userInfo && (
         <Head>
-          <title>{userInfo.nickname}님의 게시글 | SceneryBook</title>
+          <title>{userInfo.nickname}님의 게시글 | SenStory</title>
           <meta
             name="description"
             content={`${userInfo.nickname}님의 게시글`}

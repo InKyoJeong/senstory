@@ -14,14 +14,14 @@ import theme from "../theme";
 //   }
 // `;
 
-const SceneryBook = ({ Component }) => {
+const Senstory = ({ Component }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
         {/* <Global /> */}
         <Head>
           <meta charSet="utf-8" />
-          <title>SceneryBook</title>
+          <title>SenStory</title>
           {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
         </Head>
         <Component />
@@ -30,8 +30,8 @@ const SceneryBook = ({ Component }) => {
   );
 };
 
-SceneryBook.propTypes = {
+Senstory.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default wrapper.withRedux(SceneryBook);
+export default wrapper.withRedux(Senstory);

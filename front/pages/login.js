@@ -38,7 +38,7 @@ const Login = () => {
     <>
       <Layout>
         <Head>
-          <title>로그인 | SceneryBook</title>
+          <title>로그인 | SenStory</title>
         </Head>
         <LoginForm />
       </Layout>

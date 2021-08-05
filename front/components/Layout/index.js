@@ -63,12 +63,10 @@ const Layout = ({ children }) => {
           key="home"
           icon={
             <>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Image src="/logo.png" alt="mainLogo" width="40" height="40" />
-              </div>
+              <Image src="/logo.png" alt="mainLogo" width="40" height="40" />
               <Link href="/">
                 <a>
-                  <i style={logoTitleLeft}>cenery</i>
+                  <i style={logoTitleLeft}>en</i>
                 </a>
               </Link>
             </>
@@ -77,7 +75,7 @@ const Layout = ({ children }) => {
         >
           <Link href="/">
             <a>
-              <i style={logoTitleRight}>Book</i>
+              <i style={logoTitleRight}>Story</i>
             </a>
           </Link>
         </Menu.Item>
@@ -128,10 +126,6 @@ const Layout = ({ children }) => {
             <RandomUserForm />
             <HashtagSearch />
           </Conditional>
-
-          {/* <Conditional condition={!(me && me.id)}>
-            <LoginForm />
-          </Conditional> */}
         </Col>
       </Row>
     </div>

@@ -41,7 +41,7 @@ const Diary = () => {
   return (
     <Layout>
       <Head>
-        <title> Diary | SceneryBook</title>
+        <title> Diary | SenStory</title>
       </Head>
       <DiaryWriteForm />
     </Layout>
