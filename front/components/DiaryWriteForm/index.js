@@ -29,7 +29,7 @@ const DiaryWriteForm = () => {
       type: ADD_DIARY_REQUEST,
       data: formData,
     });
-  }, [title, photoPaths]);
+  }, [title, content, feel, photoPaths]);
 
   const imageInput = useRef();
 
