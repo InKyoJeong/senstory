@@ -5,6 +5,7 @@ const postsRouter = require("./routes/posts");
 const userRouter = require("./routes/user");
 const usersRouter = require("./routes/users");
 const hashtagRouter = require("./routes/hashtag");
+const diarysRouter = require("./routes/diarys");
 const db = require("./models");
 const passport = require("passport");
 const passportConfig = require("./passport");
@@ -58,6 +59,7 @@ app.use("/post", postRouter);
 app.use("/users", usersRouter);
 app.use("/user", userRouter);
 app.use("/hashtag", hashtagRouter);
+app.use("/diarys", diarysRouter);
 
 app.listen(3065, () => {
   console.log("서버 실행중");

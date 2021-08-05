@@ -94,6 +94,14 @@ const Layout = ({ children }) => {
           </Menu.Item>
         )}
 
+        {/* {me && me.id && (
+          <Menu.Item key={`/diary/${me.id}`} style={HeaderRightMargin}>
+            <Link href={`/diary/${me.id}`}>
+              <a>diary</a>
+            </Link>
+          </Menu.Item>
+        )} */}
+
         {!(me && me.id) && (
           <Menu.Item key="login">
             <Link href="/login">

@@ -199,7 +199,7 @@ function* addPost(action) {
     const result = yield call(addPostAPI, action.data);
     // console.log("action.data: " + action.data);
     // console.log(result);
-    // console.log(result.data);
+    console.log("add_post", result.data);
     yield put({
       type: ADD_POST_SUCCESS,
       data: result.data,
