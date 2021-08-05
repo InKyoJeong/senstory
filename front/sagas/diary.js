@@ -1,6 +1,7 @@
-import { all, fork, takeLatest, put, call } from "redux-saga/effects";
+import { all, fork, takeLatest, put, call, throttle } from "redux-saga/effects";
 import axios from "axios";
 import {
+  ADD_DIARY_REQUEST,
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
@@ -28,6 +29,10 @@ function* loadUserDiarys(action) {
 
 function* watchLoadUserDiarys() {
   yield throttle(5000, LOAD_USER_DIARYS_REQUEST, loadUserDiarys);
+}
+
+function* watchAddDiary() {
+  yield takeLatest(ADD_DIARY_REQUEST, addDiary);
 }
 
 export default function* diarySaga() {

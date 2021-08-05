@@ -11,25 +11,34 @@ import Layout from "../../components/Layout";
 import wrapper from "../../store/configureStore";
 import { LOAD_ME_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
+import Loader from "../../components/Loader";
 
 const Diary = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { mainDiarys } = useSelector((state) => state.diary);
+  // const { mainDiarys } = useSelector((state) => state.diary);
   const { me } = useSelector((state) => state.user);
+  // console.log(typeof me.id);
+  // console.log("id", typeof id);
+  const parseId = parseInt(id, 10);
 
   useEffect(() => {
-    if (id !== me.id) {
+    if (parseId !== me.id) {
+      console.log("내 일기장이 아니라서 볼수없음. 홈으로 이동함 (잘못된 접근)");
       Router.push("/");
     }
-  }, [id, me.id]);
+  }, [parseId, me.id]);
+
+  if (parseId !== me.id) {
+    return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
+  }
 
   return (
     <Layout>
       <Head>
-        <title>diary | SceneryBook</title>
+        <title> Diary | SceneryBook</title>
       </Head>
-      <div>test</div>
+      <div>Diary 페이지</div>
     </Layout>
   );
 };
@@ -42,10 +51,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
-      store.dispatch({
-        type: LOAD_USER_DIARYS_REQUEST,
-        data: params.id,
-      });
+      // store.dispatch({
+      //   type: LOAD_USER_DIARYS_REQUEST,
+      //   data: params.id,
+      // });
       store.dispatch({
         type: LOAD_ME_REQUEST,
       });
