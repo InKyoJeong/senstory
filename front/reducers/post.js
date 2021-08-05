@@ -43,9 +43,9 @@ import {
 
 export const initialState = {
   mainPosts: [],
+  hasMorePosts: true,
   singlePost: null,
   imagePaths: [],
-  hasMorePosts: true,
   loadAllPostLoading: false,
   loadAllPostFinish: false,
   loadAllPostError: null,

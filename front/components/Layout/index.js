@@ -87,20 +87,20 @@ const Layout = ({ children }) => {
         </Menu.Item> */}
 
         {me && me.id && (
-          <Menu.Item key="profile" style={HeaderRightMargin}>
+          <Menu.Item key="profile">
             <Link href="/profile">
               <a>프로필</a>
             </Link>
           </Menu.Item>
         )}
 
-        {/* {me && me.id && (
+        {me && me.id && (
           <Menu.Item key={`/diary/${me.id}`} style={HeaderRightMargin}>
             <Link href={`/diary/${me.id}`}>
               <a>diary</a>
             </Link>
           </Menu.Item>
-        )} */}
+        )}
 
         {!(me && me.id) && (
           <Menu.Item key="login">
