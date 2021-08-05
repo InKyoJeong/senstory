@@ -82,40 +82,34 @@ const Layout = ({ children }) => {
           </Link>
         </Menu.Item>
 
-        {/* <Menu.Item key="search">
-          <Input.Search style={searchStyle} />
-        </Menu.Item> */}
-
         {me && me.id && (
-          <Menu.Item key="profile">
-            <Link href="/profile">
-              <a>프로필</a>
-            </Link>
-          </Menu.Item>
-        )}
-
-        {me && me.id && (
-          <Menu.Item key={`/diary/${me.id}`} style={HeaderRightMargin}>
-            <Link href={`/diary/${me.id}`}>
-              <a>diary</a>
-            </Link>
-          </Menu.Item>
+          <>
+            <Menu.Item key="profile">
+              <Link href="/profile">
+                <a>Profile</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key={`/diary/${me.id}`} style={HeaderRightMargin}>
+              <Link href={`/diary/${me.id}`}>
+                <a>Diary</a>
+              </Link>
+            </Menu.Item>
+          </>
         )}
 
         {!(me && me.id) && (
-          <Menu.Item key="login">
-            <Link href="/login">
-              <a>로그인</a>
-            </Link>
-          </Menu.Item>
-        )}
-
-        {!(me && me.id) && (
-          <Menu.Item key="signup" style={HeaderRightMargin}>
-            <Link href="/signup">
-              <a>회원가입</a>
-            </Link>
-          </Menu.Item>
+          <>
+            <Menu.Item key="login">
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="signup" style={HeaderRightMargin}>
+              <Link href="/signup">
+                <a>SignUp</a>
+              </Link>
+            </Menu.Item>
+          </>
         )}
       </Menu>
 

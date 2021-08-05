@@ -1,21 +1,39 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useInput from "../../hooks/useInput";
 import { Form, Button, Input } from "antd";
 import { ADD_DIARY_REQUEST, UPLOAD_PHOTOS_REQUEST } from "../../actions/diary";
 import { useDispatch, useSelector } from "react-redux";
-import { PictureFilled } from "@ant-design/icons";
+import {
+  FrownOutlined,
+  MehOutlined,
+  PictureFilled,
+  SmileOutlined,
+} from "@ant-design/icons";
+import { FeelButton, FeelButtonWrapper } from "./styles";
 
 const DiaryWriteForm = () => {
   const dispatch = useDispatch();
-  const { photoPaths, addDiaryLoading } = useSelector((state) => state.diary);
-
+  const { photoPaths, addDiaryLoading, addDiaryFinish } = useSelector(
+    (state) => state.diary
+  );
   const [title, onChangeTitle, setTitle] = useInput("");
-  const [feel, onChangeFeel, setFeel] = useInput("");
   const [content, onChangeContent, setContent] = useInput("");
+  const [feel, setFeel] = useState(null);
+
+  useEffect(() => {
+    if (addDiaryFinish) {
+      setTitle("");
+      setContent("");
+      setFeel(null);
+    }
+  }, [addDiaryFinish]);
 
   const onSubmit = useCallback(() => {
     if (!title || !title.trim()) {
       return alert("제목을 입력해주세요.");
+    }
+    if (!feel) {
+      return alert("기분을 선택해주세요.");
     }
     const formData = new FormData();
     photoPaths.forEach((v) => {
@@ -43,11 +61,14 @@ const DiaryWriteForm = () => {
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append("photo", f);
     });
-
     dispatch({
       type: UPLOAD_PHOTOS_REQUEST,
       data: imageFormData,
     });
+  }, []);
+
+  const onChangeFeel = useCallback((e) => {
+    setFeel(e.target.innerText);
   }, []);
 
   return (
@@ -57,7 +78,22 @@ const DiaryWriteForm = () => {
         onChange={onChangeTitle}
         placeholder="제목을 입력하세요."
       />
-      <input value={feel} onChange={onChangeFeel} placeholder="기분입력" />
+
+      <FeelButtonWrapper onClick={onChangeFeel} feel={feel}>
+        <FeelButton>
+          <SmileOutlined />
+          good
+        </FeelButton>
+        <FeelButton>
+          <MehOutlined />
+          soso
+        </FeelButton>
+        <FeelButton>
+          <FrownOutlined />
+          bad
+        </FeelButton>
+      </FeelButtonWrapper>
+
       <textarea
         value={content}
         onChange={onChangeContent}
