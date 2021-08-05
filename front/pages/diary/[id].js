@@ -13,6 +13,7 @@ import { LOAD_ME_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
 import Loader from "../../components/Loader";
 import DiaryWriteForm from "../../components/DiaryWriteForm";
+import DiaryLayout from "../../components/Layout/DiaryLayout";
 
 const Diary = () => {
   const router = useRouter();
@@ -39,12 +40,12 @@ const Diary = () => {
   }
 
   return (
-    <Layout>
+    <DiaryLayout>
       <Head>
         <title> Diary | SenStory</title>
       </Head>
       <DiaryWriteForm />
-    </Layout>
+    </DiaryLayout>
   );
 };
 
