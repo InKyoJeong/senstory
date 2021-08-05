@@ -34,6 +34,6 @@ module.exports = class Diary extends Model {
   static associate(db) {
     db.Diary.belongsTo(db.User);
     // db.Diary.hasMany(db.Image);
-    // db.Diary.belongsToMany(db.Feel, { through: "DiaryFeel" });
+    db.Diary.belongsToMany(db.Feel, { through: "DiaryFeel" });
   }
 };
