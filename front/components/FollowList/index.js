@@ -1,17 +1,22 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import { List, Card, Button, Avatar } from "antd";
+import { Button, Avatar, List } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from "../../actions/user";
 import { useDispatch } from "react-redux";
 
-import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
+import {
+  ListWrapper,
+  ListItem,
+  MoreButtonWrapper,
+  FollowListWrapper,
+  FollowInfoSection,
+  FollowDelSection,
+} from "./styles";
 import Link from "next/link";
 
 const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
-  console.log(data);
   const dispatch = useDispatch();
-
   const onCancel = useCallback(
     (id) => () => {
       if (header === "팔로잉") {
@@ -31,19 +36,10 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
     []
   );
 
-  // const gridStyle = useMemo(() => ({ xs: 2, md: 2 }), []);
-
   return (
     <ListWrapper
-      // style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
-      // grid={gridStyle}
       size="small"
-      header={
-        <div>
-          {header}
-          {/* {data.length} */}
-        </div>
-      }
+      header={<div>{header}</div>}
       loadMore={
         <MoreButtonWrapper>
           <Button onClick={onClickMore} loading={loading}>
@@ -54,25 +50,10 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
       bordered
       dataSource={data}
       renderItem={(item) => (
-        <ListItem>
-          {/* <FollowCard
-            style={{ display: "flex" }}
-            bordered={false}
-            actions={[<StopOutlined key="stop" onClick={onCancel(item.id)} />]}
-          >
-            <Card.Meta description={<div>{item.nickname}</div>} />
-          </FollowCard> */}
-          <div
-            style={{
-              display: "grid",
-              // alignItems: "center",
-              flex: 1,
-              gridTemplateColumns: "2fr 1fr",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ marginRight: 5 }}>
-                {/* <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> */}
+        <List.Item>
+          <FollowListWrapper>
+            <FollowInfoSection>
+              <div>
                 <Link href={`/user/${item.id}`}>
                   <a>
                     {item.avatar ? (
@@ -84,19 +65,13 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
                 </Link>
               </div>
               <div>{item.nickname}</div>
-            </div>
+            </FollowInfoSection>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <FollowDelSection>
               <StopOutlined key="stop" onClick={onCancel(item.id)} />
-            </div>
-          </div>
-        </ListItem>
+            </FollowDelSection>
+          </FollowListWrapper>
+        </List.Item>
       )}
     />
   );

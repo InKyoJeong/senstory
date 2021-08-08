@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Avatar, Comment, Badge } from "antd";
+import { Card, Avatar } from "antd";
 import Link from "next/link";
 
 import {
@@ -9,7 +9,6 @@ import {
   MessageOutlined,
   MessageFilled,
   RetweetOutlined,
-  ShareAltOutlined,
   ExportOutlined,
 } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -126,7 +125,6 @@ const PostCard = forwardRef(({ post }, ref) => {
         <RepostHeader>
           <RepostTitleWrapper>
             <div>
-              {/* todo: 프사 크기 <Avatar style={{ width: 25, height: 25 }}> */}
               <Link href={`/user/${post.User.id}`}>
                 <a>
                   {post.User.avatar ? (
@@ -182,7 +180,6 @@ const PostCard = forwardRef(({ post }, ref) => {
           />,
           <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
             <ExportOutlined key="share" onClick={onToggleModal} />
-            {/* <ShareAltOutlined key="share" onClick={onToggleModal} /> */}
           </CopyToClipboard>,
         ]}
       >
@@ -269,13 +266,9 @@ const PostCard = forwardRef(({ post }, ref) => {
         <>
           <CommentWriteForm post={post} />
           <CommentList
-            // header={`${post.Comments.length}개의 댓글`}
             itemLayout="horizontal"
             dataSource={post.Comments}
-            renderItem={(item) => (
-              // renderItem={(item: comment) => (
-              <CommentItem {...{ item }} />
-            )}
+            renderItem={(item) => <CommentItem {...{ item }} />}
           />
         </>
       </Conditional>

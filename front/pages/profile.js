@@ -14,8 +14,10 @@ import useSWR from "swr";
 import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
-import ProfileForm from "../components/ProfileForm";
+import MyProfileForm from "../components/MyProfileForm";
 import IntroEditForm from "../components/IntroEditForm";
+import Loader from "../components/Loader";
+
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
@@ -60,7 +62,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!(me && me.id)) {
-      Router.push("/");
+      Router.push("/login");
     }
   }, [me && me.id]);
 
@@ -73,7 +75,7 @@ const Profile = () => {
   }, []);
 
   if (!me) {
-    return "프로필 로딩중...";
+    return <Loader text="로그인 페이지로 이동중..." />;
   }
 
   if (followerError || followingError) {
@@ -87,7 +89,7 @@ const Profile = () => {
         <title>프로필 | SenStory</title>
       </Head>
       <Layout>
-        <ProfileForm hide />
+        <MyProfileForm hide />
         <NickEditForm />
         <IntroEditForm />
         {/* 자기소개 Form */}

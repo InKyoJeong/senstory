@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { List, Card } from "antd";
+import { List } from "antd";
 
 const BtnGradient = css`
   background: linear-gradient(0deg, #607882, gray);
@@ -34,18 +34,23 @@ export const ListWrapper = styled(List)`
   }
 `;
 
-export const ListItem = styled(List.Item)`
-  /* margin-top: 10px; */
+export const FollowListWrapper = styled.div`
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 `;
 
-export const FollowCard = styled(Card)`
-  /* background-color: #607882; */
-  background: linear-gradient(0deg, #607882, gray);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+export const FollowInfoSection = styled.div`
+  display: flex;
+  align-items: center;
 
-  & div {
-    color: white;
+  & div:first-child {
+    margin-right: 5px;
   }
+`;
+
+export const FollowDelSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

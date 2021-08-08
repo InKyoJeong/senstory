@@ -25,7 +25,7 @@ export const CardWrapper = styled(Card)`
   }
 `;
 
-export const UserInfoWrapper = styled.div`
+export const MyInfoWrapper = styled.div`
   display: grid;
   gap: 2px;
   grid-template-columns: 1fr 1fr 1fr;

@@ -41,7 +41,6 @@ const CommentWriteForm = ({ post }) => {
           <WriteInput
             value={commentText}
             onChange={onChangeCommentText}
-            // style={{ width: "100%", height: 50 }}
             placeholder="댓글을 입력하세요."
           />
           <WriteButton

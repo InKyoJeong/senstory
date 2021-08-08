@@ -9,12 +9,12 @@ import {
   HideWrapper,
   CardWrapper,
   LogoutButton,
-  UserInfoWrapper,
+  MyInfoWrapper,
   AvatarWrapper,
 } from "./styles";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 
-const ProfileForm = (props) => {
+const MyProfileForm = (props) => {
   const dispatch = useDispatch();
   const { me, logOutLoading } = useSelector((state) => state.user);
 
@@ -77,7 +77,7 @@ const ProfileForm = (props) => {
           로그아웃
         </LogoutButton>
 
-        <UserInfoWrapper>
+        <MyInfoWrapper>
           <div>
             <Link href={`/user/${me.id}`}>
               <a>
@@ -102,10 +102,10 @@ const ProfileForm = (props) => {
               </a>
             </Link>
           </div>
-        </UserInfoWrapper>
+        </MyInfoWrapper>
       </CardWrapper>
     </HideWrapper>
   );
 };
 
-export default ProfileForm;
+export default MyProfileForm;

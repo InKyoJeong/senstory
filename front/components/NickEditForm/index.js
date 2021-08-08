@@ -23,6 +23,11 @@ const NickEditForm = () => {
     }
   }, [changeNickFinish]);
 
+  if (nickname.length > 20) {
+    setNickname(nickname.slice(0, 20));
+    return alert("닉네임은 최대 20자 입니다.");
+  }
+
   const onSubmit = useCallback(() => {
     if (!nickname || !nickname.trim()) {
       return alert("닉네임을 입력해주세요.");
@@ -36,11 +41,6 @@ const NickEditForm = () => {
     });
   }, [nickname]);
 
-  if (nickname.length > 20) {
-    setNickname(nickname.slice(0, 20));
-    return alert("닉네임은 최대 20자 입니다.");
-  }
-
   return (
     <NickFormWrapper onFinish={onSubmit}>
       <label htmlFor="user-nickname">닉네임</label>
@@ -51,7 +51,6 @@ const NickEditForm = () => {
           value={nickname}
           onChange={onChangeNickname}
           type="text"
-          // bordered={false}
         />
         <NickEditButton
           type="primary"

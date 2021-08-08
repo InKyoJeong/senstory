@@ -52,14 +52,6 @@ const FollowButton = ({ user }) => {
 };
 
 FollowButton.propTypes = {
-  // post: PropTypes.shape({
-  //   id: PropTypes.number,
-  //   User: PropTypes.object,
-  //   content: PropTypes.string,
-  //   createdAt: PropTypes.string,
-  //   Comments: PropTypes.arrayOf(PropTypes.object),
-  //   Images: PropTypes.arrayOf(PropTypes.object),
-  // }).isRequired,
   user: PropTypes.shape({
     id: PropTypes.number,
     avatar: PropTypes.string,

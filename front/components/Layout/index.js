@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
 
-import ProfileForm from "../ProfileForm";
+import MyProfileForm from "../MyProfileForm";
 import Conditional from "../../hocs/Conditional";
 import { Global } from "./styles";
 import RandomUserForm from "../RandomUserForm";
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
 
         <Col xs={0} sm={0} md={0} lg={7} xxl={6}>
           <Conditional condition={me && me.id}>
-            <ProfileForm />
+            <MyProfileForm />
             <RandomUserForm />
             <HashtagSearch />
           </Conditional>
