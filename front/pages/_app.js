@@ -5,20 +5,13 @@ import "antd/dist/antd.css";
 
 import wrapper from "../store/configureStore";
 
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-
-// const Global = createGlobalStyle`
-//   body{
-//     background-color: #191A1A;
-//   }
-// `;
 
 const Senstory = ({ Component }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        {/* <Global /> */}
         <Head>
           <meta charSet="utf-8" />
           <title>SenStory</title>

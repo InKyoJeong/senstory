@@ -43,9 +43,7 @@ const MyProfileForm = (props) => {
 
   return (
     <HideWrapper hide={props.hide}>
-      <CardWrapper
-      // actions={[]}
-      >
+      <CardWrapper>
         <Card.Meta
           avatar={
             <AvatarWrapper>

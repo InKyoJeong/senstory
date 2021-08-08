@@ -30,7 +30,7 @@ export const MyInfoWrapper = styled.div`
   gap: 2px;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 30px;
-  background-color: #4a4343;
+  background-color: ${(props) => props.theme.DARK_GRAY};
   border: 1px solid #5e5d5d;
   padding: 15px 0px;
   border-radius: 8px;

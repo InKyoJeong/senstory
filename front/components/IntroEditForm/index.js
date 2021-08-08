@@ -22,7 +22,7 @@ const IntroEditForm = () => {
     }
   }, [changeIntroFinish]);
 
-  if (intro.length > 20) {
+  if (intro.length > 100) {
     setIntro(intro.slice(0, 100));
     return alert("100자 이내로 입력해주세요.");
   }

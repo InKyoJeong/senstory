@@ -8,10 +8,20 @@ import {
   MehOutlined,
   PictureFilled,
   SmileOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
-import { FeelButton, FeelButtonWrapper } from "./styles";
+import {
+  DiaryContentInput,
+  DiaryModalForm,
+  DiaryTitleInput,
+  DiaryWriteOverlay,
+  FeelButton,
+  FeelButtonWrapper,
+} from "./styles";
 
-const DiaryWriteForm = () => {
+const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
+  if (!modalOpen) return null;
+
   const dispatch = useDispatch();
   const { photoPaths, addDiaryLoading, addDiaryFinish } = useSelector(
     (state) => state.diary
@@ -31,6 +41,9 @@ const DiaryWriteForm = () => {
   const onSubmit = useCallback(() => {
     if (!title || !title.trim()) {
       return alert("제목을 입력해주세요.");
+    }
+    if (!content) {
+      return alert("내용을 입력해주세요.");
     }
     if (!feel) {
       return alert("기분을 선택해주세요.");
@@ -72,53 +85,126 @@ const DiaryWriteForm = () => {
   }, []);
 
   return (
-    <Form encType="multipart/form-data" onFinish={onSubmit}>
-      <input
-        value={title}
-        onChange={onChangeTitle}
-        placeholder="제목을 입력하세요."
-      />
+    <DiaryWriteOverlay>
+      <DiaryModalForm>
+        <Form
+          encType="multipart/form-data"
+          onFinish={onSubmit}
+          style={{ width: "100%" }}
+        >
+          <div style={{ padding: 10 }}>
+            <DiaryTitleInput
+              value={title}
+              onChange={onChangeTitle}
+              placeholder="제목을 입력하세요."
+            />
 
-      <FeelButtonWrapper onClick={onChangeFeel} feel={feel}>
-        <FeelButton>
-          <SmileOutlined />
-          good
-        </FeelButton>
-        <FeelButton>
-          <MehOutlined />
-          soso
-        </FeelButton>
-        <FeelButton>
-          <FrownOutlined />
-          bad
-        </FeelButton>
-      </FeelButtonWrapper>
+            <DiaryContentInput
+              value={content}
+              onChange={onChangeContent}
+              maxLength={500}
+              placeholder="내용을 입력하세요."
+              rows={4}
+            />
 
-      <textarea
-        value={content}
-        onChange={onChangeContent}
-        maxLength={1000}
-        placeholder="내용을 입력하세요."
-      />
+            <FeelButtonWrapper onClick={onChangeFeel} feel={feel}>
+              <FeelButton>
+                <StarOutlined />
+                Special
+              </FeelButton>
+              <FeelButton>
+                <SmileOutlined />
+                Good
+              </FeelButton>
+              <FeelButton>
+                <MehOutlined />
+                Soso
+              </FeelButton>
+              <FeelButton>
+                <FrownOutlined />
+                Bad
+              </FeelButton>
+            </FeelButtonWrapper>
 
-      <div>
-        <input
-          type="file"
-          name="image"
-          multiple
-          hidden
-          ref={imageInput}
-          onChange={onChangeImages}
-        />
-        <Button onClick={onClickImageUpload}>
-          <PictureFilled />
-        </Button>
-      </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: 10,
+              }}
+            >
+              {photoPaths.map((v, i) => (
+                <div key={v}>
+                  <img
+                    src={`http://localhost:3065/${v}`}
+                    alt={v}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      borderRadius: 10,
+                    }}
+                  />
+                  {/* <Button onClick={onRemoveImage(i)} /> */}
+                </div>
+              ))}
+            </div>
 
-      <Button type="primary" htmlType="submit" loading={addDiaryLoading}>
-        등록
-      </Button>
-    </Form>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: 10,
+              }}
+            >
+              <input
+                type="file"
+                name="image"
+                // multiple
+                hidden
+                ref={imageInput}
+                onChange={onChangeImages}
+              />
+              <Button onClick={onClickImageUpload}>
+                <PictureFilled />
+                {/* 사진 등록 */}
+              </Button>
+            </div>
+          </div>
+
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={addDiaryLoading}
+              style={{ width: "50%", borderBottomLeftRadius: 10, height: 40 }}
+            >
+              등록
+            </Button>
+            <Button
+              type="default"
+              onClick={onToggleModal}
+              style={{
+                width: "50%",
+                borderBottomRightRadius: 10,
+                height: 40,
+                backgroundColor: "#e0cccc",
+                border: "none",
+              }}
+            >
+              취소
+            </Button>
+          </div>
+        </Form>
+      </DiaryModalForm>
+    </DiaryWriteOverlay>
   );
 };
 
