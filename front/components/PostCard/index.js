@@ -29,19 +29,20 @@ import CommentWriteForm from "../CommentWriteForm";
 import PostTag from "../PostTag";
 import FollowButton from "../FollowButton";
 import PostDropdown from "./PostDropdown";
+import CommentItem from "../CommentItem";
+import Modal from "../Modal";
+import { fromNow } from "../../utils";
 import {
   PostCardWrapper,
   CommentList,
-  CommentAuthor,
   PostAuthor,
   RepostHeader,
   RepostTitleWrapper,
   RepostTitle,
   RepostInnerCard,
   CommonCard,
+  PostDate,
 } from "./styles";
-import { fromNow } from "../../utils";
-import Modal from "../Modal";
 
 const PostCard = forwardRef(({ post }, ref) => {
   const dispatch = useDispatch();
@@ -216,16 +217,7 @@ const PostCard = forwardRef(({ post }, ref) => {
                 }
               />
             </RepostInnerCard>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                color: "gray",
-                paddingTop: 10,
-              }}
-            >
-              {fromNow(post.createdAt)}
-            </div>
+            <PostDate>{fromNow(post.createdAt)}</PostDate>
           </>
         ) : (
           <Card.Meta
@@ -264,16 +256,7 @@ const PostCard = forwardRef(({ post }, ref) => {
                   onChangePost={onChangePost}
                   onCancelChange={onCancelChange}
                 />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    color: "gray",
-                    paddingTop: 10,
-                  }}
-                >
-                  {fromNow(post.createdAt)}
-                </div>
+                <PostDate>{fromNow(post.createdAt)}</PostDate>
               </>
             }
           />
@@ -288,25 +271,8 @@ const PostCard = forwardRef(({ post }, ref) => {
             itemLayout="horizontal"
             dataSource={post.Comments}
             renderItem={(item) => (
-              <li>
-                <Comment
-                  author={<CommentAuthor>{item.User.nickname}</CommentAuthor>}
-                  avatar={
-                    <Link href={`/user/${item.User.id}`}>
-                      <a>
-                        {item.User.avatar ? (
-                          <Avatar
-                            src={`http://localhost:3065/${item.User.avatar}`}
-                          />
-                        ) : (
-                          <Avatar>{item.User.nickname[0]}</Avatar>
-                        )}
-                      </a>
-                    </Link>
-                  }
-                  content={item.content}
-                />
-              </li>
+              // renderItem={(item: comment) => (
+              <CommentItem {...{ item }} />
             )}
           />
         </>
