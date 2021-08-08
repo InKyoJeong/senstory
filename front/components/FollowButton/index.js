@@ -2,30 +2,32 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../actions/user";
-import { FollowButtonContainer } from "./styles";
+import { FollowButtonContainer, FollowText } from "./styles";
+import { UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons";
 
-const FollowButton = ({ post }) => {
+const FollowButton = ({ user }) => {
+  console.log(user);
   const { me, followLoading, unfollowLoading } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
-  const isFollowing = me?.Followings.find((v) => v.id === post.User.id);
+  const isFollowing = me?.Followings.find((v) => v.id === user.id);
 
   const onClickButton = useCallback(() => {
     if (isFollowing) {
       dispatch({
         type: UNFOLLOW_REQUEST,
-        data: post.User.id,
+        data: user.id,
       });
     } else {
       dispatch({
         type: FOLLOW_REQUEST,
-        data: post.User.id,
+        data: user.id,
       });
     }
   }, [isFollowing]);
 
-  if (post.User.id === me.id) {
+  if (user.id === me.id) {
     return null;
   }
 
@@ -35,20 +37,39 @@ const FollowButton = ({ post }) => {
       loading={followLoading || unfollowLoading}
       onClick={onClickButton}
     >
-      {isFollowing ? "Unfollow" : "Follow"}
+      {isFollowing ? (
+        <>
+          <UserDeleteOutlined />
+          <FollowText>Unfollow</FollowText>
+        </>
+      ) : (
+        <>
+          <UserAddOutlined />
+          <FollowText>Follow</FollowText>
+        </>
+      )}
     </FollowButtonContainer>
   );
 };
 
 FollowButton.propTypes = {
-  post: PropTypes.shape({
+  // post: PropTypes.shape({
+  //   id: PropTypes.number,
+  //   User: PropTypes.object,
+  //   content: PropTypes.string,
+  //   createdAt: PropTypes.string,
+  //   Comments: PropTypes.arrayOf(PropTypes.object),
+  //   Images: PropTypes.arrayOf(PropTypes.object),
+  // }).isRequired,
+  user: PropTypes.shape({
     id: PropTypes.number,
-    User: PropTypes.object,
-    content: PropTypes.string,
+    avatar: PropTypes.string,
     createdAt: PropTypes.string,
-    Comments: PropTypes.arrayOf(PropTypes.object),
-    Images: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+    email: PropTypes.string,
+    intro: PropTypes.string,
+    nickname: PropTypes.string,
+    updatedAt: PropTypes.string,
+  }),
 };
 
 export default FollowButton;

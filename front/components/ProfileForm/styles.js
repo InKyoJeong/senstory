@@ -14,6 +14,7 @@ export const CardWrapper = styled(Card)`
   border-radius: 5px;
   overflow: hidden;
   margin-top: 20px;
+  border: 1px solid #545353;
 
   & div {
     color: #e3e3e6;
@@ -29,7 +30,8 @@ export const UserInfoWrapper = styled.div`
   gap: 2px;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 30px;
-  background-color: #2a2a2b;
+  background-color: #4a4343;
+  border: 1px solid #5e5d5d;
   padding: 15px 0px;
   border-radius: 8px;
 
@@ -38,6 +40,7 @@ export const UserInfoWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    color: white;
   }
 `;
 

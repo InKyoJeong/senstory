@@ -10,6 +10,7 @@ import {
   MessageFilled,
   RetweetOutlined,
   ShareAltOutlined,
+  ExportOutlined,
 } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -180,7 +181,8 @@ const PostCard = forwardRef(({ post }, ref) => {
             style={{ color: post.User.id === id && post.RepostId && "#1890FF" }}
           />,
           <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
-            <ShareAltOutlined key="share" onClick={onToggleModal} />
+            <ExportOutlined key="share" onClick={onToggleModal} />
+            {/* <ShareAltOutlined key="share" onClick={onToggleModal} /> */}
           </CopyToClipboard>,
         ]}
       >
@@ -244,7 +246,7 @@ const PostCard = forwardRef(({ post }, ref) => {
                   />
                 </Conditional>
                 <Conditional condition={id}>
-                  <FollowButton post={post} />
+                  <FollowButton user={post.User} />
                 </Conditional>
               </PostAuthor>
             }

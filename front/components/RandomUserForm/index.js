@@ -9,12 +9,14 @@ import {
   RandomTitle,
   UserItem,
   RandomUsers,
+  UserItemWrapper,
 } from "./styles";
+import FollowButton from "../FollowButton";
 
 const RandomUserForm = () => {
   const { randomUsers } = useSelector((state) => state.user);
 
-  // console.log("랜덤유저: ", randomUsers);
+  console.log("랜덤유저: ", randomUsers);
 
   return (
     <RandomUserWrapper>
@@ -25,18 +27,23 @@ const RandomUserForm = () => {
 
       <RandomUsers>
         {randomUsers.map((user) => (
-          <UserItem key={user.id}>
-            <Link href={`/user/${user.id}`}>
-              <a>
-                {user.avatar ? (
-                  <Avatar src={`http://localhost:3065/${user.avatar}`} />
-                ) : (
-                  <Avatar>{user.nickname[0]}</Avatar>
-                )}
-              </a>
-            </Link>
-            <div>{user.nickname}</div>
-          </UserItem>
+          <UserItemWrapper>
+            <UserItem key={user.id}>
+              <div>
+                <Link href={`/user/${user.id}`}>
+                  <a>
+                    {user.avatar ? (
+                      <Avatar src={`http://localhost:3065/${user.avatar}`} />
+                    ) : (
+                      <Avatar>{user.nickname[0]}</Avatar>
+                    )}
+                  </a>
+                </Link>
+              </div>
+              <div>{user.nickname}</div>
+            </UserItem>
+            <FollowButton user={user} />
+          </UserItemWrapper>
         ))}
       </RandomUsers>
     </RandomUserWrapper>

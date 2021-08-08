@@ -20,3 +20,8 @@ export const FollowButtonContainer = styled(Button)`
     ${Unfollow}
   }
 `;
+
+export const FollowText = styled.span`
+  font-size: 12px;
+  padding-left: 3px;
+`;

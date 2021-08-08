@@ -26,6 +26,7 @@ export const TagSearchTitle = styled.div`
 
 export const TagSearchForm = styled.div`
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  border: 1px solid #545353;
   padding: 15px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;

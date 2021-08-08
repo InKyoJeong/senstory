@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const RandomUserWrapper = styled.div`
-  overflow: hidden;
-
   @media screen and (min-width: 992px) {
     margin: 30px 5% 30px 5%;
   }
@@ -30,18 +28,29 @@ export const RandomUsers = styled.div`
   border-bottom-right-radius: 5px;
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
   padding: 5px;
+  border: 1px solid #545353;
+`;
+
+export const UserItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UserItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 10px 10px;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
   border-radius: 10px;
 
   & div {
-    margin-left: 8px;
-
     color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70px;
   }
 
   &:hover {
