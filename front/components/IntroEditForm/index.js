@@ -3,8 +3,8 @@ import { Input, Button } from "antd";
 import { CHANGE_INTRO_REQUEST } from "../../actions/user";
 import { useSelector, useDispatch } from "react-redux";
 
-import useInput from "../../hooks/useInput";
 import { IntroFormWrapper, IntroButton, IntroInputWrapper } from "./styles";
+import useInput from "../../hooks/useInput";
 import useToggle from "../../hooks/useToggle";
 import Modal from "../Modal";
 

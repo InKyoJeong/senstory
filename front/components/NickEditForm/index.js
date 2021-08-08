@@ -12,7 +12,9 @@ const NickEditForm = () => {
   const { me, changeNickLoading, changeNickFinish } = useSelector(
     (state) => state.user
   );
-  const [nickname, onChangeNickname] = useInput(me?.nickname || "");
+  const [nickname, onChangeNickname, setNickname] = useInput(
+    me?.nickname || ""
+  );
   const [modalOpen, onToggleModal] = useToggle(false);
 
   useEffect(() => {

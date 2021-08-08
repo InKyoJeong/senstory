@@ -12,7 +12,7 @@ import {
   UserInfoWrapper,
   AvatarWrapper,
 } from "./styles";
-import { UserOutlined } from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 
 const ProfileForm = (props) => {
   const dispatch = useDispatch();
@@ -73,6 +73,7 @@ const ProfileForm = (props) => {
           title={me.nickname}
         />
         <LogoutButton onClick={onLogOut} loading={logOutLoading}>
+          <LogoutOutlined />
           로그아웃
         </LogoutButton>
 

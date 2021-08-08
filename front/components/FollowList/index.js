@@ -6,6 +6,7 @@ import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from "../../actions/user";
 import { useDispatch } from "react-redux";
 
 import { ListWrapper, ListItem, MoreButtonWrapper, FollowCard } from "./styles";
+import Link from "next/link";
 
 const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
   console.log(data);
@@ -63,16 +64,35 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
           </FollowCard> */}
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
+              display: "grid",
+              // alignItems: "center",
+              flex: 1,
+              gridTemplateColumns: "2fr 1fr",
             }}
           >
-            <div style={{ marginRight: 5 }}>
-              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ marginRight: 5 }}>
+                {/* <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> */}
+                <Link href={`/user/${item.id}`}>
+                  <a>
+                    {item.avatar ? (
+                      <Avatar src={`http://localhost:3065/${item.avatar}`} />
+                    ) : (
+                      <Avatar>{item.nickname[0]}</Avatar>
+                    )}
+                  </a>
+                </Link>
+              </div>
+              <div>{item.nickname}</div>
             </div>
-            <div>{item.nickname}</div>
 
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <StopOutlined key="stop" onClick={onCancel(item.id)} />
             </div>
           </div>
