@@ -53,7 +53,6 @@ export const CommentActive = styled.div`
 export const IconCount = styled.span`
   font-size: 12px;
   font-style: italic;
-  font-weight: 500;
 `;
 
 export const InActive = styled.div`

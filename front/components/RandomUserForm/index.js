@@ -16,7 +16,7 @@ import FollowButton from "../FollowButton";
 const RandomUserForm = () => {
   const { randomUsers } = useSelector((state) => state.user);
 
-  console.log("랜덤유저: ", randomUsers);
+  // console.log("랜덤유저: ", randomUsers);
 
   return (
     <RandomUserWrapper>

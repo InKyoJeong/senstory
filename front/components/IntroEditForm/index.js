@@ -1,15 +1,26 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Input, Button } from "antd";
 import { CHANGE_INTRO_REQUEST } from "../../actions/user";
 import { useSelector, useDispatch } from "react-redux";
 
 import useInput from "../../hooks/useInput";
 import { IntroFormWrapper, IntroButton, IntroInputWrapper } from "./styles";
+import useToggle from "../../hooks/useToggle";
+import Modal from "../Modal";
 
 const IntroEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeIntroLoading } = useSelector((state) => state.user);
+  const { me, changeIntroLoading, changeIntroFinish } = useSelector(
+    (state) => state.user
+  );
   const [intro, onChangeIntro] = useInput(me?.intro || "");
+  const [modalOpen, onToggleModal] = useToggle(false);
+
+  useEffect(() => {
+    if (changeIntroFinish) {
+      onToggleModal();
+    }
+  }, [changeIntroFinish]);
 
   const onSubmit = useCallback(() => {
     dispatch({
@@ -47,6 +58,12 @@ const IntroEditForm = () => {
           등록
         </Button>
       </IntroButton>
+
+      <Modal
+        title="내 소개 등록 완료"
+        modalOpen={modalOpen}
+        onToggleModal={onToggleModal}
+      />
     </IntroFormWrapper>
   );
 };

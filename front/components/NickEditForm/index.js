@@ -1,14 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useInput from "../../hooks/useInput";
 import { CHANGE_NICK_REQUEST } from "../../actions/user";
 
 import { NickFormWrapper, NickInput, NickEditButton } from "./styles";
+import useInput from "../../hooks/useInput";
+import useToggle from "../../hooks/useToggle";
+import Modal from "../Modal";
 
 const NickEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeNickLoading } = useSelector((state) => state.user);
+  const { me, changeNickLoading, changeNickFinish } = useSelector(
+    (state) => state.user
+  );
   const [nickname, onChangeNickname] = useInput(me?.nickname || "");
+  const [modalOpen, onToggleModal] = useToggle(false);
+
+  useEffect(() => {
+    if (changeNickFinish) {
+      onToggleModal();
+    }
+  }, [changeNickFinish]);
 
   const onSubmit = useCallback(() => {
     if (!nickname || !nickname.trim()) {
@@ -43,6 +54,12 @@ const NickEditForm = () => {
           변경
         </NickEditButton>
       </div>
+
+      <Modal
+        title="닉네임 변경 완료"
+        modalOpen={modalOpen}
+        onToggleModal={onToggleModal}
+      />
     </NickFormWrapper>
   );
 };
