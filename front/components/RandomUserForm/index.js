@@ -27,19 +27,17 @@ const RandomUserForm = () => {
 
       <RandomUsers>
         {randomUsers.map((user) => (
-          <UserItemWrapper>
-            <UserItem key={user.id}>
-              <div>
-                <Link href={`/user/${user.id}`}>
-                  <a>
-                    {user.avatar ? (
-                      <Avatar src={`http://localhost:3065/${user.avatar}`} />
-                    ) : (
-                      <Avatar>{user.nickname[0]}</Avatar>
-                    )}
-                  </a>
-                </Link>
-              </div>
+          <UserItemWrapper key={user.id}>
+            <UserItem>
+              <Link href={`/user/${user.id}`}>
+                <a>
+                  {user.avatar ? (
+                    <Avatar src={`http://localhost:3065/${user.avatar}`} />
+                  ) : (
+                    <Avatar>{user.nickname[0]}</Avatar>
+                  )}
+                </a>
+              </Link>
               <div>{user.nickname}</div>
             </UserItem>
             <FollowButton user={user} />

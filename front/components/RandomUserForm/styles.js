@@ -27,7 +27,7 @@ export const RandomUsers = styled.div`
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
-  padding: 5px;
+  padding: 10px 5px;
   border: 1px solid #545353;
 `;
 
@@ -42,7 +42,7 @@ export const UserItem = styled.div`
   flex-direction: column;
   text-align: center;
   padding-top: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   border-radius: 10px;
 
   & div {

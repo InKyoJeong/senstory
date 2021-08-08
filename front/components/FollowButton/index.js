@@ -6,7 +6,6 @@ import { FollowButtonContainer, FollowText } from "./styles";
 import { UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons";
 
 const FollowButton = ({ user }) => {
-  console.log(user);
   const { me, followLoading, unfollowLoading } = useSelector(
     (state) => state.user
   );
