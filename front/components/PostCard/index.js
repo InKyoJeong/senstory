@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Avatar, Comment } from "antd";
+import { Card, Avatar, Comment, Badge } from "antd";
 import Link from "next/link";
 
 import {
@@ -42,6 +42,10 @@ import {
   RepostInnerCard,
   CommonCard,
   PostDate,
+  LikeActive,
+  CommentActive,
+  InActive,
+  IconCount,
 } from "./styles";
 
 const PostCard = forwardRef(({ post }, ref) => {
@@ -149,30 +153,26 @@ const PostCard = forwardRef(({ post }, ref) => {
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
-            // <div>
-            <HeartFilled
-              style={{ color: "red" }}
-              key="like"
-              onClick={onUnlike}
-            />
+            <LikeActive onClick={onUnlike}>
+              <HeartFilled key="like" />
+              <IconCount> {post.Likers.length}</IconCount>
+            </LikeActive>
           ) : (
-            // <span> {post.Likers.length}</span>
-            // </div>
-            // <div>
-            <>
-              <HeartOutlined key="like" onClick={onLike} />
-              {/* <span> {post.Likers.length}</span> */}
-            </>
-            // </div>
+            <InActive onClick={onLike}>
+              <HeartOutlined key="like" />
+              <IconCount> {post.Likers.length}</IconCount>
+            </InActive>
           ),
           commentOpen ? (
-            <MessageFilled
-              style={{ color: "#1890ff" }}
-              key="comment"
-              onClick={onToggleComment}
-            />
+            <CommentActive onClick={onToggleComment}>
+              <MessageFilled key="comment" />
+              <IconCount> {post.Comments.length}</IconCount>
+            </CommentActive>
           ) : (
-            <MessageOutlined key="comment" onClick={onToggleComment} />
+            <InActive onClick={onToggleComment}>
+              <MessageOutlined key="comment" />
+              <IconCount> {post.Comments.length}</IconCount>
+            </InActive>
           ),
           <RetweetOutlined
             key="re"

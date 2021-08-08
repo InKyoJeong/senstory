@@ -42,6 +42,29 @@ export const CommonCard = styled(Card)`
     props.repost === "true" ? "0px" : "10px"};
 `;
 
+export const LikeActive = styled.div`
+  color: red;
+`;
+
+export const CommentActive = styled.div`
+  color: ${(props) => props.theme.MAIN};
+`;
+
+export const IconCount = styled.span`
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 500;
+`;
+
+export const InActive = styled.div`
+  color: white;
+
+  &:hover {
+    color: ${(props) => props.theme.MAIN};
+    transition: 0.3s;
+  }
+`;
+
 export const RepostInnerCard = styled(Card)`
   ${cardStyle}
   border-radius: 10px;

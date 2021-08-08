@@ -22,10 +22,10 @@ const CommentItem = ({ item }) => {
           </Link>
         }
         content={
-          <div>
+          <>
             {item.content}
             <CommentDate>{fromNow(item.createdAt)}</CommentDate>
-          </div>
+          </>
         }
       />
     </li>

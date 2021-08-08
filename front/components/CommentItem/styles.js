@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { List, Button, Card } from "antd";
+import styled from "styled-components";
 
 export const CommentAuthor = styled.div`
   padding: 3px 5px;
