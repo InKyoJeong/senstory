@@ -2,6 +2,9 @@ import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import axios from "axios";
 
 import {
+  CHANGE_AREA_FAILURE,
+  CHANGE_AREA_REQUEST,
+  CHANGE_AREA_SUCCESS,
   CHANGE_INTRO_FAILURE,
   CHANGE_INTRO_REQUEST,
   CHANGE_INTRO_SUCCESS,
@@ -183,6 +186,25 @@ function* changeIntro(action) {
   } catch (err) {
     yield put({
       type: CHANGE_INTRO_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function changeAreaAPI(data) {
+  return axios.patch("/user/area", { area: data });
+}
+
+function* changeArea(action) {
+  try {
+    const result = yield call(changeAreaAPI, action.data);
+    yield put({
+      type: CHANGE_AREA_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: CHANGE_AREA_FAILURE,
       error: err.response.data,
     });
   }
@@ -378,6 +400,10 @@ function* watchChangeIntro() {
   yield takeLatest(CHANGE_INTRO_REQUEST, changeIntro);
 }
 
+function* watchChangeArea() {
+  yield takeLatest(CHANGE_AREA_REQUEST, changeArea);
+}
+
 function* watchFollow() {
   yield takeLatest(FOLLOW_REQUEST, follow);
 }
@@ -421,6 +447,7 @@ export default function* userSaga() {
     fork(watchSignUp),
     fork(watchChangeNickname),
     fork(watchChangeIntro),
+    fork(watchChangeArea),
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchRemoveFollower),

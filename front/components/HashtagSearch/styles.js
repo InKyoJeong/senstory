@@ -17,7 +17,7 @@ export const TagSearchTitle = styled.div`
   align-items: center;
   color: white;
   font-weight: 500;
-  background-color: #5a748f;
+  background-color: ${(props) => props.theme.DARK_MAIN};
   padding: 5px 20px;
   justify-content: center;
   border-top-right-radius: 5px;

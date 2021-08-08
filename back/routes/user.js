@@ -293,6 +293,24 @@ router.patch("/intro", isLoggedIn, async (req, res, next) => {
   }
 });
 
+// PATCH /user/area
+router.patch("/area", isLoggedIn, async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        area: req.body.area,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ area: req.body.area });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 // PATCH /user/1/follow
 router.patch("/:userId/follow", isLoggedIn, async (req, res, next) => {
   try {

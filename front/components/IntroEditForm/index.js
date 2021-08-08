@@ -13,7 +13,7 @@ const IntroEditForm = () => {
   const { me, changeIntroLoading, changeIntroFinish } = useSelector(
     (state) => state.user
   );
-  const [intro, onChangeIntro] = useInput(me?.intro || "");
+  const [intro, onChangeIntro, setIntro] = useInput(me?.intro || "");
   const [modalOpen, onToggleModal] = useToggle(false);
 
   useEffect(() => {
@@ -21,6 +21,11 @@ const IntroEditForm = () => {
       onToggleModal();
     }
   }, [changeIntroFinish]);
+
+  if (intro.length > 20) {
+    setIntro(intro.slice(0, 100));
+    return alert("100자 이내로 입력해주세요.");
+  }
 
   const onSubmit = useCallback(() => {
     dispatch({
@@ -50,7 +55,7 @@ const IntroEditForm = () => {
           value={intro}
           onChange={onChangeIntro}
           maxLength={100}
-          placeholder="소개를 입력해주세요."
+          placeholder="소개를 입력해주세요. (최대 100자)"
         />
       </IntroInputWrapper>
       <IntroButton>

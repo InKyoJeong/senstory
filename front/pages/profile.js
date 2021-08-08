@@ -21,6 +21,7 @@ import Loader from "../components/Loader";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
+import AreaEditForm from "../components/AreaEditForm";
 
 const fetcher = (url) =>
   axios.get(url, { withCredentials: true }).then((result) => result.data);
@@ -91,8 +92,8 @@ const Profile = () => {
       <Layout>
         <MyProfileForm hide />
         <NickEditForm />
+        <AreaEditForm />
         <IntroEditForm />
-        {/* 자기소개 Form */}
         <FollowList
           header="팔로잉"
           data={followingData}

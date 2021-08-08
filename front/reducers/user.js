@@ -49,6 +49,9 @@ import {
   RANDOM_USER_SUCCESS,
   RANDOM_USER_FAILURE,
   RANDOM_USER_REQUEST,
+  CHANGE_AREA_SUCCESS,
+  CHANGE_AREA_REQUEST,
+  CHANGE_AREA_FAILURE,
 } from "../actions/user";
 
 export const initialState = {
@@ -73,6 +76,9 @@ export const initialState = {
   changeIntroLoading: false, // 소개
   changeIntroFinish: false,
   changeIntroError: null,
+  changeAreaLoading: false, // 활동지역
+  changeAreaFinish: false,
+  changeAreaError: null,
   followLoading: false, // 팔로우
   followFinish: false,
   followError: null,
@@ -247,6 +253,20 @@ const reducer = (state = initialState, action) => {
       case CHANGE_INTRO_FAILURE:
         draft.changeIntroLoading = false;
         draft.changeIntroError = action.error;
+        break;
+      case CHANGE_AREA_REQUEST:
+        draft.changeAreaLoading = true;
+        draft.changeAreaFinish = false;
+        draft.changeAreaError = null;
+        break;
+      case CHANGE_AREA_SUCCESS:
+        draft.me.area = action.data.area;
+        draft.changeAreaLoading = false;
+        draft.changeAreaFinish = true;
+        break;
+      case CHANGE_AREA_FAILURE:
+        draft.changeAreaLoading = false;
+        draft.changeAreaError = action.error;
         break;
       case FOLLOW_REQUEST:
         draft.followLoading = true;

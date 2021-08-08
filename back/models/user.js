@@ -18,6 +18,10 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(100),
           allowNull: true,
         },
+        area: {
+          type: DataTypes.STRING(10),
+          allowNull: true,
+        },
         password: {
           type: DataTypes.STRING(100),
           allowNull: false,

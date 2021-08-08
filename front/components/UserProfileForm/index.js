@@ -7,45 +7,49 @@ import {
   UserInfoWrapper,
   UserIntroWrapper,
   UserIntroTitle,
+  UserHeader,
 } from "./styles";
 
 const UserProfileForm = ({ userInfo }) => {
   return (
-    <UserProfileWrapper>
-      <Card.Meta
-        avatar={
-          userInfo.avatar ? (
-            <Avatar src={`http://localhost:3065/${userInfo.avatar}`} />
-          ) : (
-            <Avatar>{userInfo.nickname[0]}</Avatar>
-          )
-        }
-        title={<div style={{ color: "white" }}>{userInfo.nickname}</div>}
-      />
+    <>
+      <UserHeader>{userInfo.nickname}님의 프로필</UserHeader>
 
-      <UserIntroWrapper>
-        <UserIntroTitle>활동 지역</UserIntroTitle>
-        {/* <div>{userInfo.area}</div> */}
-        <div>서울</div>
-        <UserIntroTitle>소개</UserIntroTitle>
-        <div>{userInfo.intro}</div>
-      </UserIntroWrapper>
+      <UserProfileWrapper>
+        <Card.Meta
+          avatar={
+            userInfo.avatar ? (
+              <Avatar src={`http://localhost:3065/${userInfo.avatar}`} />
+            ) : (
+              <Avatar>{userInfo.nickname[0]}</Avatar>
+            )
+          }
+          title={<div style={{ color: "white" }}>{userInfo.nickname}</div>}
+        />
 
-      <UserInfoWrapper>
-        <div>
-          <div>게시물</div>
-          <div>{userInfo.Posts}</div>
-        </div>
-        <div>
-          <div>팔로워</div>
-          <div>{userInfo.Followers}</div>
-        </div>
-        <div>
-          <div>팔로잉</div>
-          <div>{userInfo.Followings}</div>
-        </div>
-      </UserInfoWrapper>
-    </UserProfileWrapper>
+        <UserIntroWrapper>
+          <UserIntroTitle>활동 지역</UserIntroTitle>
+          <div>{userInfo.area}</div>
+          <UserIntroTitle>소개</UserIntroTitle>
+          <div>{userInfo.intro}</div>
+        </UserIntroWrapper>
+
+        <UserInfoWrapper>
+          <div>
+            <div>게시물</div>
+            <div>{userInfo.Posts}</div>
+          </div>
+          <div>
+            <div>팔로워</div>
+            <div>{userInfo.Followers}</div>
+          </div>
+          <div>
+            <div>팔로잉</div>
+            <div>{userInfo.Followings}</div>
+          </div>
+        </UserInfoWrapper>
+      </UserProfileWrapper>
+    </>
   );
 };
 
