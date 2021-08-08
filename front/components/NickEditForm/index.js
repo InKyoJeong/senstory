@@ -36,6 +36,11 @@ const NickEditForm = () => {
     });
   }, [nickname]);
 
+  if (nickname.length > 20) {
+    setNickname(nickname.slice(0, 20));
+    return alert("닉네임은 최대 20자 입니다.");
+  }
+
   return (
     <NickFormWrapper onFinish={onSubmit}>
       <label htmlFor="user-nickname">닉네임</label>

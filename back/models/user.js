@@ -11,7 +11,7 @@ module.exports = class User extends Model {
           unique: true,
         },
         nickname: {
-          type: DataTypes.STRING(30),
+          type: DataTypes.STRING(20),
           allowNull: false,
         },
         intro: {
