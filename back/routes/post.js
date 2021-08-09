@@ -41,10 +41,13 @@ const upload = multer({
 router.post("/", isLoggedIn, upload.none(), postAddPost);
 router.post("/images", isLoggedIn, upload.array("image"), postImages);
 router.get("/:postId", getPost);
+
 router.post("/:postId/repost", isLoggedIn, postRepost);
 router.post("/:postId/comment", isLoggedIn, postAddComment);
+
 router.patch("/:postId/like", isLoggedIn, patchLikePost);
 router.delete("/:postId/like", isLoggedIn, deleteLikePost);
+
 router.patch("/:postId", isLoggedIn, patchEditPost);
 router.delete("/:postId", isLoggedIn, deletePost);
 

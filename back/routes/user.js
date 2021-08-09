@@ -55,12 +55,15 @@ router.get("/:userId/posts", getUserPosts);
 router.post("/login", isNotLoggedIn, postLogin);
 router.post("/", isNotLoggedIn, postSignup);
 router.post("/logout", isLoggedIn, postLogout);
+
 router.patch("/nickname", isLoggedIn, patchEditNickname);
 router.patch("/intro", isLoggedIn, patchEditIntro);
 router.patch("/area", isLoggedIn, patchEditArea);
+
 router.patch("/:userId/follow", isLoggedIn, patchAddFollower);
 router.delete("/:userId/follow", isLoggedIn, deleteFollower);
 router.delete("/follower/:userId", isLoggedIn, deleteFollowing);
+
 router.post("/images", isLoggedIn, upload.array("image"), postAvatarImages);
 router.patch("/avatar", isLoggedIn, patchEditAvatar);
 
