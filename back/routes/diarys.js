@@ -28,7 +28,7 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-// POST /diarys
+// POST /diarys (postAddDiary)
 router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const diary = await Diary.create({
@@ -68,7 +68,7 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
   }
 });
 
-// GET /diarys/12 (All)
+// GET /diarys/12 (getDiarys)
 router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const where = { UserId: req.params.userId };
@@ -94,7 +94,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
   }
 });
 
-// POST /diarys/photos
+// POST /diarys/photos  (postAddPhotos)
 router.post(
   "/photos",
   isLoggedIn,

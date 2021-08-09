@@ -4,7 +4,7 @@ const { Post, User, Image, Comment, Hashtag } = require("../models");
 
 const router = express.Router();
 
-// GET /hashtag/태그
+// GET /hashtag/태그 (getHashtagPosts)
 router.get("/:hashtag", async (req, res, next) => {
   try {
     const where = {};

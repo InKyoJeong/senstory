@@ -1,9 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const { Post, User, Image, Comment } = require("../models");
 const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
-const { Op } = require("sequelize");
 
 const multer = require("multer");
 const path = require("path");
