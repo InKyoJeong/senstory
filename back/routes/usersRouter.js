@@ -1,8 +1,8 @@
 const express = require("express");
 const { getRandomUsers } = require("../controller/usersController");
 
-const router = express.Router();
+const usersRouter = express.Router();
 
-router.get("/", getRandomUsers);
+usersRouter.get("/", getRandomUsers);
 
-module.exports = router;
+module.exports = usersRouter;

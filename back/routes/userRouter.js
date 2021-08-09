@@ -24,7 +24,7 @@ const {
   patchEditAvatar,
 } = require("../controller/userController");
 
-const router = express.Router();
+const userRouter = express.Router();
 
 try {
   fs.accessSync("uploads");
@@ -47,24 +47,25 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-router.get("/", getMe);
-router.get("/followers", isLoggedIn, getFollowers);
-router.get("/followings", isLoggedIn, getFollowings);
-router.get("/:userId", getUser);
-router.get("/:userId/posts", getUserPosts);
-router.post("/login", isNotLoggedIn, postLogin);
-router.post("/", isNotLoggedIn, postSignup);
-router.post("/logout", isLoggedIn, postLogout);
+userRouter.get("/", getMe);
+userRouter.get("/followers", isLoggedIn, getFollowers);
+userRouter.get("/followings", isLoggedIn, getFollowings);
 
-router.patch("/nickname", isLoggedIn, patchEditNickname);
-router.patch("/intro", isLoggedIn, patchEditIntro);
-router.patch("/area", isLoggedIn, patchEditArea);
+userRouter.get("/:userId", getUser);
+userRouter.get("/:userId/posts", getUserPosts);
+userRouter.post("/login", isNotLoggedIn, postLogin);
+userRouter.post("/", isNotLoggedIn, postSignup);
+userRouter.post("/logout", isLoggedIn, postLogout);
 
-router.patch("/:userId/follow", isLoggedIn, patchAddFollower);
-router.delete("/:userId/follow", isLoggedIn, deleteFollower);
-router.delete("/follower/:userId", isLoggedIn, deleteFollowing);
+userRouter.patch("/nickname", isLoggedIn, patchEditNickname);
+userRouter.patch("/intro", isLoggedIn, patchEditIntro);
+userRouter.patch("/area", isLoggedIn, patchEditArea);
 
-router.post("/images", isLoggedIn, upload.array("image"), postAvatarImages);
-router.patch("/avatar", isLoggedIn, patchEditAvatar);
+userRouter.patch("/:userId/follow", isLoggedIn, patchAddFollower);
+userRouter.delete("/:userId/follow", isLoggedIn, deleteFollower);
+userRouter.delete("/follower/:userId", isLoggedIn, deleteFollowing);
 
-module.exports = router;
+userRouter.post("/images", isLoggedIn, upload.array("image"), postAvatarImages);
+userRouter.patch("/avatar", isLoggedIn, patchEditAvatar);
+
+module.exports = userRouter;

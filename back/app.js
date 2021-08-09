@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const postRouter = require("./routes/post");
-const postsRouter = require("./routes/posts");
-const userRouter = require("./routes/user");
-const usersRouter = require("./routes/users");
-const hashtagRouter = require("./routes/hashtag");
-const diarysRouter = require("./routes/diarys");
+const postRouter = require("./routes/postRouter");
+const postsRouter = require("./routes/postsRouter");
+const userRouter = require("./routes/userRouter");
+const usersRouter = require("./routes/usersRouter");
+const hashtagRouter = require("./routes/hashtagRouter");
+const diaryRouter = require("./routes/diaryRouter");
+
 const db = require("./models");
 const passport = require("passport");
 const passportConfig = require("./passport");
@@ -59,7 +60,7 @@ app.use("/post", postRouter);
 app.use("/users", usersRouter);
 app.use("/user", userRouter);
 app.use("/hashtag", hashtagRouter);
-app.use("/diarys", diarysRouter);
+app.use("/diary", diaryRouter);
 
 app.listen(3065, () => {
   console.log("서버 실행중");

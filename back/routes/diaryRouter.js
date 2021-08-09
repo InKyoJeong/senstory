@@ -9,7 +9,7 @@ const {
   postAddPhotos,
 } = require("../controller/diaryController");
 
-const router = express.Router();
+const diaryRouter = express.Router();
 
 try {
   fs.accessSync("uploads");
@@ -32,8 +32,8 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-router.post("/", isLoggedIn, upload.none(), postAddDiary);
-router.get("/:userId", isLoggedIn, getDiarys);
-router.post("/photos", isLoggedIn, upload.array("photo"), postAddPhotos);
+diaryRouter.post("/", isLoggedIn, upload.none(), postAddDiary);
+diaryRouter.get("/:userId", isLoggedIn, getDiarys);
+diaryRouter.post("/photos", isLoggedIn, upload.array("photo"), postAddPhotos);
 
-module.exports = router;
+module.exports = diaryRouter;

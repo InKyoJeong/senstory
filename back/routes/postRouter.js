@@ -15,7 +15,7 @@ const {
   deletePost,
 } = require("../controller/postController");
 
-const router = express.Router();
+const postRouter = express.Router();
 
 try {
   fs.accessSync("uploads");
@@ -38,17 +38,17 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-router.post("/", isLoggedIn, upload.none(), postAddPost);
-router.post("/images", isLoggedIn, upload.array("image"), postImages);
-router.get("/:postId", getPost);
+postRouter.post("/", isLoggedIn, upload.none(), postAddPost);
+postRouter.post("/images", isLoggedIn, upload.array("image"), postImages);
+postRouter.get("/:postId", getPost);
 
-router.post("/:postId/repost", isLoggedIn, postRepost);
-router.post("/:postId/comment", isLoggedIn, postAddComment);
+postRouter.post("/:postId/repost", isLoggedIn, postRepost);
+postRouter.post("/:postId/comment", isLoggedIn, postAddComment);
 
-router.patch("/:postId/like", isLoggedIn, patchLikePost);
-router.delete("/:postId/like", isLoggedIn, deleteLikePost);
+postRouter.patch("/:postId/like", isLoggedIn, patchLikePost);
+postRouter.delete("/:postId/like", isLoggedIn, deleteLikePost);
 
-router.patch("/:postId", isLoggedIn, patchEditPost);
-router.delete("/:postId", isLoggedIn, deletePost);
+postRouter.patch("/:postId", isLoggedIn, patchEditPost);
+postRouter.delete("/:postId", isLoggedIn, deletePost);
 
-module.exports = router;
+module.exports = postRouter;
