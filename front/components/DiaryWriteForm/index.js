@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import useInput from "../../hooks/useInput";
 import { Form, Button, Input } from "antd";
-import { ADD_DIARY_REQUEST, UPLOAD_PHOTOS_REQUEST } from "../../actions/diary";
+import {
+  ADD_DIARY_REQUEST,
+  REMOVE_DIARY_PHOTO,
+  UPLOAD_PHOTOS_REQUEST,
+} from "../../actions/diary";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FrownOutlined,
@@ -84,6 +88,16 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
     setFeel(e.target.innerText);
   }, []);
 
+  const onReset = useCallback(() => {
+    setTitle("");
+    setContent("");
+    setFeel(null);
+
+    dispatch({
+      type: REMOVE_DIARY_PHOTO,
+    });
+  }, []);
+
   return (
     <DiaryWriteOverlay>
       <DiaryModalForm>
@@ -131,7 +145,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: 10,
+                // margin: 10,
               }}
             >
               {photoPaths.map((v, i) => (
@@ -155,21 +169,44 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: 10,
+                // margin: 10,
               }}
             >
               <input
                 type="file"
                 name="image"
-                // multiple
                 hidden
                 ref={imageInput}
                 onChange={onChangeImages}
               />
-              <Button onClick={onClickImageUpload}>
-                <PictureFilled />
-                {/* 사진 등록 */}
-              </Button>
+
+              <div
+                onClick={onClickImageUpload}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {photoPaths.length === 0 && (
+                  <div
+                    style={{
+                      border: "2px dashed #2d2d2e",
+                      width: 100,
+                      height: 100,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 10,
+                    }}
+                  >
+                    <div style={{ color: "#2d2d2e" }}>+</div>
+                    <div style={{ color: "#2d2d2e" }}>사진 추가</div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -190,7 +227,10 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
             </Button>
             <Button
               type="default"
-              onClick={onToggleModal}
+              onClick={() => {
+                onToggleModal();
+                onReset();
+              }}
               style={{
                 width: "50%",
                 borderBottomRightRadius: 10,

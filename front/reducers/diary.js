@@ -6,6 +6,7 @@ import {
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
+  REMOVE_DIARY_PHOTO,
   UPLOAD_PHOTOS_FAILURE,
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
@@ -66,6 +67,9 @@ const reducer = (state = initialState, action) => {
       case UPLOAD_PHOTOS_FAILURE:
         draft.uploadPhotostLoading = false;
         draft.uploadPhotosError = action.error;
+        break;
+      case REMOVE_DIARY_PHOTO:
+        draft.photoPaths = draft.filter((v, i) => i === 0);
         break;
       default:
         break;
