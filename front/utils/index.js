@@ -6,3 +6,4 @@ dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 export const fromNow = (createdAt) => dayjs(createdAt).locale("ko").fromNow();
+export const today = (createdAt) => dayjs(createdAt).format("YYYY.MM.DD");

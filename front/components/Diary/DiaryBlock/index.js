@@ -1,15 +1,23 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { DiaryBlockWrapper } from "./styles";
+import { today } from "../../../utils";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
-  // console.log(diary);
   return (
-    <DiaryBlockWrapper>
-      <div>{diary.title}</div>
-      <div>{diary.createdAt}</div>
-      <div>{diary.UserId}</div>
-      <div>{diary.feel}</div>
+    <DiaryBlockWrapper feel={diary.feel}>
+      <div style={{ fontWeight: 600, opacity: 0.8 }}>{diary.feel}</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          opacity: 0.7,
+          fontStyle: "italic",
+          fontSize: 12,
+        }}
+      >
+        {today(diary.createdAt)}
+      </div>
       <div ref={ref} />
     </DiaryBlockWrapper>
   );
