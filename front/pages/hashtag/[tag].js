@@ -34,9 +34,13 @@ const Hashtag = () => {
   return (
     <Layout>
       {mainPosts.map((c) => (
-        <PostCard key={c.id} post={c} />
+        <PostCard
+          key={c.id}
+          post={c}
+          ref={hasMorePosts && !loadHashtagPostsLoading ? ref : undefined}
+        />
       ))}
-      <div ref={hasMorePosts && !loadHashtagPostsLoading ? ref : undefined} />
+      {/* <div ref={hasMorePosts && !loadHashtagPostsLoading ? ref : undefined} /> */}
     </Layout>
   );
 };

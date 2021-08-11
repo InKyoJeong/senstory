@@ -39,6 +39,7 @@ const reducer = (state = initialState, action) => {
         draft.mainDiarys = draft.mainDiarys.concat(action.data);
         draft.loadUserDiarysFinish = true;
         draft.loadUserDiarysLoading = false;
+        draft.hasMoreDiarys = action.data.length === 10;
         break;
       case LOAD_USER_DIARYS_FAILURE:
         draft.loadUserDiarysLoading = false;

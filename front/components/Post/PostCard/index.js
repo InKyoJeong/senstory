@@ -1,8 +1,8 @@
 import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { Card, Avatar } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
-
+import { Card, Avatar } from "antd";
 import {
   HeartOutlined,
   HeartFilled,
@@ -13,7 +13,6 @@ import {
 } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import { useSelector, useDispatch } from "react-redux";
 import {
   LIKE_POST_REQUEST,
   REMOVE_POST_REQUEST,
