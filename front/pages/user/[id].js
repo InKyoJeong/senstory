@@ -7,13 +7,14 @@ import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 
 import axios from "axios";
-import PostCard from "../../components/PostCard";
-import Layout from "../../components/Layout";
 import wrapper from "../../store/configureStore";
 import { LOAD_USER_ALL_POST_REQUEST } from "../../actions/post";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../actions/user";
-import UserProfileForm from "../../components/UserProfileForm";
 import Conditional from "../../hocs/Conditional";
+
+import Layout from "../../components/Common/Layout";
+import PostCard from "../../components/Post/PostCard";
+import UserProfileForm from "../../components/Profile/UserProfileForm";
 
 const User = () => {
   const dispatch = useDispatch();

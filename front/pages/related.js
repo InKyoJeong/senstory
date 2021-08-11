@@ -5,8 +5,8 @@ import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 import Router from "next/router";
 
-import Layout from "../components/Layout";
-import PostCard from "../components/PostCard";
+import Layout from "../components/Common/Layout";
+import PostCard from "../components/Post/PostCard";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";

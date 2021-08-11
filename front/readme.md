@@ -12,3 +12,8 @@ $ npm run dev
 - lg screen ≥ 992px
 - xl screen ≥ 1200px
 - xxl screen ≥ 1600px
+
+## todo
+
+- 컴포넌트 폴더나누기
+  - Common/Home/Post/Diary/Profile/User

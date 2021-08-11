@@ -4,10 +4,11 @@ import { LOAD_ALL_POST_REQUEST } from "../actions/post";
 import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
-import Layout from "../components/Layout";
-import PostCard from "../components/PostCard";
-import PostWriteForm from "../components/PostWriteForm";
 import Conditional from "../hocs/Conditional";
+import Layout from "../components/Common/Layout";
+import PostCard from "../components/Post/PostCard";
+import PostWriteForm from "../components/Post/PostWriteForm";
+
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";

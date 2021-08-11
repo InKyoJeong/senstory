@@ -7,8 +7,9 @@ import axios from "axios";
 import wrapper from "../../store/configureStore";
 import { LOAD_HASHTAG_POSTS_REQUEST } from "../../actions/post";
 import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../../actions/user";
-import PostCard from "../../components/PostCard";
-import Layout from "../../components/Layout";
+
+import PostCard from "../../components/Post/PostCard";
+import Layout from "../../components/Common/Layout";
 
 const Hashtag = () => {
   const dispatch = useDispatch();

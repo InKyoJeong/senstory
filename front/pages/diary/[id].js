@@ -7,19 +7,17 @@ import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 
 import axios from "axios";
-import Layout from "../../components/Layout";
 import wrapper from "../../store/configureStore";
 import { LOAD_ME_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
-import Loader from "../../components/Loader";
-import DiaryWriteForm from "../../components/DiaryWriteForm";
-
-import {
-  BgColorsOutlined,
-  EditFilled,
-  HighlightOutlined,
-} from "@ant-design/icons";
 import useToggle from "../../hooks/useToggle";
+
+import Layout from "../../components/Common/Layout";
+import Loader from "../../components/Common/Loader";
+import MainBanner from "../../components/Common/MainBanner";
+import DiaryWriteForm from "../../components/Diary/DiaryWriteForm";
+
+import { EditFilled } from "@ant-design/icons";
 
 const Diary = () => {
   const router = useRouter();
@@ -50,30 +48,16 @@ const Diary = () => {
     return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
   }
 
-  const titleStyle = useMemo(
-    () => ({
-      padding: "12px 0px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "#1890FF",
-      marginBottom: 20,
-      borderBottomRightRadius: 10,
-      borderBottomLeftRadius: 10,
-      border: "1px solid black",
-    }),
-    []
-  );
-
   return (
     <Layout>
       <Head>
         <title> Diary | SenStory</title>
       </Head>
-      <div style={titleStyle} onClick={onToggleModal}>
+
+      <MainBanner onClick={onToggleModal}>
         <EditFilled />
         <div style={{ marginLeft: 5 }}>오늘의 감정 기록하기</div>
-      </div>
+      </MainBanner>
 
       <DiaryWriteForm modalOpen={modalOpen} onToggleModal={onToggleModal} />
     </Layout>
@@ -101,15 +85,3 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 export default Diary;
-
-{
-  /* padding: 8px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme.MAIN};
-  border: 1px solid ${(props) => props.theme.DARK_GRAY};
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-weight: bolder; */
-}

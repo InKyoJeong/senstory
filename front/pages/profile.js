@@ -11,13 +11,13 @@ import {
 } from "../actions/user";
 import useSWR from "swr";
 
-import Layout from "../components/Layout";
-import NickEditForm from "../components/NickEditForm";
-import FollowList from "../components/FollowList";
-import MyProfileForm from "../components/MyProfileForm";
-import IntroEditForm from "../components/IntroEditForm";
-import Loader from "../components/Loader";
-import AreaEditForm from "../components/AreaEditForm";
+import Layout from "../components/Common/Layout";
+import Loader from "../components/Common/Loader";
+import MyProfileForm from "../components/Common/MyProfileForm";
+import NickEditForm from "../components/Profile/NickEditForm";
+import FollowList from "../components/Profile/FollowList";
+import AreaEditForm from "../components/Profile/AreaEditForm";
+import IntroEditForm from "../components/Profile/IntroEditForm";
 
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";

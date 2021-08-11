@@ -7,9 +7,9 @@ import wrapper from "../store/configureStore";
 import axios from "axios";
 import { END } from "redux-saga";
 
-import LoginForm from "../components/LoginForm";
-import Layout from "../components/Layout";
-import Loader from "../components/Loader";
+import LoginForm from "../components/User/LoginForm";
+import Layout from "../components/Common/Layout";
+import Loader from "../components/Common/Loader";
 
 const Login = () => {
   const { me, logInFinish, logInLoading } = useSelector((state) => state.user);
