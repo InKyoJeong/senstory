@@ -31,11 +31,11 @@ const Diary = () => {
   const [modalOpen, onToggleModal] = useToggle(false);
   const [ref, inView] = useInView();
 
-  useEffect(() => {
-    if (addDiaryFinish) {
-      onToggleModal();
-    }
-  }, [addDiaryFinish]);
+  // useEffect(() => {
+  //   if (addDiaryFinish) {
+  //     onToggleModal();
+  //   }
+  // }, [addDiaryFinish]);
 
   useEffect(() => {
     // 내 다이어리가 아닐때
@@ -76,13 +76,15 @@ const Diary = () => {
 
       <DiaryWriteForm modalOpen={modalOpen} onToggleModal={onToggleModal} />
 
-      {mainDiarys.map((diary) => (
-        <DiaryBlock
-          key={diary.id}
-          diary={diary}
-          ref={hasMoreDiarys && !loadUserDiarysLoading ? ref : undefined}
-        />
-      ))}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        {mainDiarys.map((diary) => (
+          <DiaryBlock
+            key={diary.id}
+            diary={diary}
+            ref={hasMoreDiarys && !loadUserDiarysLoading ? ref : undefined}
+          />
+        ))}
+      </div>
     </Layout>
   );
 };

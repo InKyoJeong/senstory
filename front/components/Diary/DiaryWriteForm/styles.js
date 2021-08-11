@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Input } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 const footerButton = css`
   width: 50%;
@@ -16,7 +17,6 @@ const photoStyle = css`
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  margin-top: 10px;
 `;
 
 const widePhotoStyle = css`
@@ -151,7 +151,12 @@ export const FeelButton = styled.div`
 
 export const PhotoDisplay = styled.div`
   ${alignCenter}
+  margin-top: 20px;
+  margin-bottom: 10px;
 
+  & div {
+    position: relative;
+  }
   & img {
     ${photoStyle}
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
@@ -159,6 +164,20 @@ export const PhotoDisplay = styled.div`
     @media screen and (min-width: 768px) {
       ${widePhotoStyle}
     }
+  }
+`;
+
+export const PhotoDeleteBtn = styled(CloseCircleOutlined)`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: black;
+  color: #d66565;
+
+  &:hover {
+    color: #e03d3d;
   }
 `;
 

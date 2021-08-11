@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "antd";
 import {
+  CiCircleFilled,
   FrownOutlined,
   MehOutlined,
   SmileOutlined,
@@ -24,6 +25,7 @@ import {
   FeelButton,
   FeelButtonWrapper,
   PhotoBorder,
+  PhotoDeleteBtn,
   PhotoDisplay,
   PhotoEnrollWrapper,
 } from "./styles";
@@ -45,6 +47,9 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
       setContent("");
       setFeel(null);
     }
+    return () => {
+      onToggleModal();
+    };
   }, [addDiaryFinish]);
 
   const onSubmit = useCallback(() => {
@@ -64,7 +69,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("feel", feel);
-    console.log("formData", formData);
+    // console.log("formData", formData);
     return dispatch({
       type: ADD_DIARY_REQUEST,
       data: formData,
@@ -93,14 +98,12 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
     setFeel(e.target.innerText);
   }, []);
 
-  const onResetContents = useCallback(() => {
-    setTitle("");
-    setContent("");
-    setFeel(null);
+  // console.log(feel);
 
-    return dispatch({
+  const onResetContents = useCallback((i) => {
+    dispatch({
       type: REMOVE_DIARY_PHOTO,
-      data: 0,
+      data: i,
     });
   }, []);
 
@@ -146,6 +149,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
               {photoPaths.map((v, i) => (
                 <div key={v}>
                   <img src={`http://localhost:3065/${v}`} alt={v} />
+                  <PhotoDeleteBtn onClick={() => onResetContents(i)} />
                 </div>
               ))}
             </PhotoDisplay>
@@ -157,9 +161,9 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
               ref={imageInput}
               onChange={onChangeImages}
             />
-            <PhotoEnrollWrapper onClick={onClickImageUpload}>
+            <PhotoEnrollWrapper>
               <Conditional condition={photoPaths.length === 0}>
-                <PhotoBorder>
+                <PhotoBorder onClick={onClickImageUpload}>
                   <div>+</div>
                   <div>사진 추가</div>
                 </PhotoBorder>
@@ -171,13 +175,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
             <Button type="primary" htmlType="submit" loading={addDiaryLoading}>
               등록
             </Button>
-            <Button
-              type="default"
-              onClick={() => {
-                onToggleModal();
-                onResetContents();
-              }}
-            >
+            <Button type="default" onClick={onToggleModal}>
               취소
             </Button>
           </DiaryWriteFooter>

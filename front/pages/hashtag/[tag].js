@@ -61,6 +61,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch({
         type: LOAD_ME_REQUEST,
       });
+      store.dispatch({
+        type: RANDOM_USER_REQUEST,
+      });
       store.dispatch(END);
       await store.sagaTask.toPromise();
     }

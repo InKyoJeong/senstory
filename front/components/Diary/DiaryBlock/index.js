@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import { DiaryBlockWrapper } from "./styles";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
+  // console.log(diary);
   return (
     <DiaryBlockWrapper>
       <div>{diary.title}</div>
+      <div>{diary.createdAt}</div>
+      <div>{diary.UserId}</div>
+      <div>{diary.feel}</div>
       <div ref={ref} />
     </DiaryBlockWrapper>
   );
