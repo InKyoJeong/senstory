@@ -13,7 +13,7 @@ import { LOAD_ME_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
 import Loader from "../../components/Loader";
 import DiaryWriteForm from "../../components/DiaryWriteForm";
-import DiaryLayout from "../../components/Layout/DiaryLayout";
+
 import {
   BgColorsOutlined,
   EditFilled,
@@ -66,7 +66,7 @@ const Diary = () => {
   );
 
   return (
-    <DiaryLayout>
+    <Layout>
       <Head>
         <title> Diary | SenStory</title>
       </Head>
@@ -76,7 +76,7 @@ const Diary = () => {
       </div>
 
       <DiaryWriteForm modalOpen={modalOpen} onToggleModal={onToggleModal} />
-    </DiaryLayout>
+    </Layout>
   );
 };
 

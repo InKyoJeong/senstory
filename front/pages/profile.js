@@ -11,7 +11,7 @@ import {
 } from "../actions/user";
 import useSWR from "swr";
 
-import ProfileLayout from "../components/Layout/ProfileLayout";
+import Layout from "../components/Layout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
 import MyProfileForm from "../components/MyProfileForm";
@@ -28,7 +28,7 @@ const fetcher = (url) =>
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
@@ -89,7 +89,7 @@ const Profile = () => {
       <Head>
         <title>프로필 | SenStory</title>
       </Head>
-      <ProfileLayout>
+      <Layout profile>
         <MyProfileForm hide />
         <NickEditForm />
         <AreaEditForm />
@@ -108,7 +108,7 @@ const Profile = () => {
           loading={!followerData && followerError}
           mutate={mutateFollower}
         />
-      </ProfileLayout>
+      </Layout>
     </>
   );
 };

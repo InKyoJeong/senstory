@@ -11,7 +11,12 @@ import HashtagSearch from "../HashtagSearch";
 import MyProfileForm from "../MyProfileForm";
 import RelatedCheck from "../RelatedCheck";
 
-const Layout = ({ children }) => {
+const Layout = ({
+  children,
+  main = false,
+  profile = false,
+  related = false,
+}) => {
   const { me } = useSelector((state) => state.user);
 
   return (
@@ -29,11 +34,22 @@ const Layout = ({ children }) => {
         </Col>
 
         <Col xs={0} sm={0} md={0} lg={7} xxl={6}>
-          <Conditional condition={me && me.id}>
+          <Conditional condition={me && me.id && profile}>
+            <MyProfileForm />
+            <RandomUserForm />
+          </Conditional>
+
+          <Conditional condition={me && me.id && main}>
             <RelatedCheck />
             <MyProfileForm />
             <RandomUserForm />
             <HashtagSearch />
+          </Conditional>
+
+          <Conditional condition={me && me.id && related}>
+            <RelatedCheck check />
+            <MyProfileForm />
+            <RandomUserForm />
           </Conditional>
         </Col>
       </Row>
@@ -43,6 +59,9 @@ const Layout = ({ children }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  main: PropTypes.bool,
+  profile: PropTypes.bool,
+  related: PropTypes.bool,
 };
 
 export default Layout;

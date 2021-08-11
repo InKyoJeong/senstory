@@ -64,7 +64,7 @@ const Home = () => {
   // }, [hasMorePosts, loadAllPostLoading, mainPosts]);
 
   return (
-    <Layout>
+    <Layout main>
       <Conditional condition={me}>
         <PostWriteForm />
       </Conditional>

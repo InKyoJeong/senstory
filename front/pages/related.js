@@ -45,7 +45,7 @@ const Related = () => {
   }
 
   return (
-    <Layout>
+    <Layout related>
       {mainPosts.map((post) => (
         <PostCard
           key={post.id}
