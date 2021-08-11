@@ -28,6 +28,9 @@ const CommentWriteForm = ({ post }) => {
       setCommentText("");
       return alert("로그인이 필요합니다.");
     }
+    if (!commentText || !commentText.trim()) {
+      return alert("내용을 입력해주세요.");
+    }
     dispatch({
       type: ADD_COMMENT_REQUEST,
       data: { content: commentText, postId: post.id, userId: id },
