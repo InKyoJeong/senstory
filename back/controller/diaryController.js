@@ -1,4 +1,5 @@
 const { User, Diary, Photo, Feel } = require("../models");
+const { Op } = require("sequelize");
 
 module.exports.postAddDiary = async (req, res, next) => {
   try {
