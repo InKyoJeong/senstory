@@ -13,7 +13,7 @@ import {
 } from "../actions/diary";
 
 function loadUserDiarysAPI(data, lastId) {
-  return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
+  return axios.get(`/diary/${data}?lastId=${lastId || 0}`);
 }
 
 function* loadUserDiarys(action) {
@@ -33,7 +33,7 @@ function* loadUserDiarys(action) {
 }
 
 function addDiaryAPI(data) {
-  return axios.post("/diarys", data);
+  return axios.post("/diary", data);
 }
 
 function* addDiary(action) {
@@ -55,7 +55,7 @@ function* addDiary(action) {
 }
 
 function uploadPhotosAPI(data) {
-  return axios.post("/diarys/photos", data);
+  return axios.post("/diary/photos", data);
 }
 
 function* uploadPhotos(action) {
