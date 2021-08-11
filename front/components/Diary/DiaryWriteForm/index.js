@@ -38,6 +38,7 @@ const DiaryWriteForm = ({ closeModal }) => {
   const [title, onChangeTitle, setTitle] = useInput("");
   const [content, onChangeContent, setContent] = useInput("");
   const [feel, setFeel] = useState(null);
+  const imageInput = useRef();
 
   useEffect(() => {
     if (addDiaryFinish) {
@@ -73,8 +74,6 @@ const DiaryWriteForm = ({ closeModal }) => {
       data: formData,
     });
   }, [title, content, feel, photoPaths]);
-
-  const imageInput = useRef();
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();

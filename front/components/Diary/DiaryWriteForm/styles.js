@@ -189,6 +189,7 @@ export const PhotoEnrollWrapper = styled.div`
 export const PhotoBorder = styled.div`
   ${photoStyle}
   ${alignCenter}
+  margin-bottom: 10px;
   flex-direction: column;
   border: 2px dashed ${(props) => props.theme.DARK_GRAY};
   cursor: pointer;

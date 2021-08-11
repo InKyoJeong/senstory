@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHANGE_AREA_REQUEST } from "../../../actions/user";
+
+import Conditional from "../../../hocs/Conditional";
 import useToggle from "../../../hooks/useToggle";
 import useInput from "../../../hooks/useInput";
 import Modal from "../../Common/Modal";
@@ -57,11 +59,9 @@ const AreaEditForm = () => {
         </AreaEditButton>
       </div>
 
-      <Modal
-        title="활동지역 변경 완료"
-        modalOpen={modalOpen}
-        onToggleModal={onToggleModal}
-      />
+      <Conditional condition={modalOpen}>
+        <Modal title="활동지역 변경 완료" onToggleModal={onToggleModal} />
+      </Conditional>
     </AreaFormWrapper>
   );
 };

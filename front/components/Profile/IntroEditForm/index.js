@@ -4,6 +4,7 @@ import { CHANGE_INTRO_REQUEST } from "../../../actions/user";
 import { useSelector, useDispatch } from "react-redux";
 
 import { IntroFormWrapper, IntroButton, IntroInputWrapper } from "./styles";
+import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
 import Modal from "../../Common/Modal";
@@ -64,11 +65,9 @@ const IntroEditForm = () => {
         </Button>
       </IntroButton>
 
-      <Modal
-        title="내 소개 등록 완료"
-        modalOpen={modalOpen}
-        onToggleModal={onToggleModal}
-      />
+      <Conditional condition={modalOpen}>
+        <Modal title="내 소개 등록 완료" onToggleModal={onToggleModal} />
+      </Conditional>
     </IntroFormWrapper>
   );
 };

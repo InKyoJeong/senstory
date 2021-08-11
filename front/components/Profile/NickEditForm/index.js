@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHANGE_NICK_REQUEST } from "../../../actions/user";
 
+import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
 import Modal from "../../Common/Modal";
@@ -61,11 +62,9 @@ const NickEditForm = () => {
         </NickEditButton>
       </div>
 
-      <Modal
-        title="닉네임 변경 완료"
-        modalOpen={modalOpen}
-        onToggleModal={onToggleModal}
-      />
+      <Conditional condition={modalOpen}>
+        <Modal title="닉네임 변경 완료" onToggleModal={onToggleModal} />
+      </Conditional>
     </NickFormWrapper>
   );
 };

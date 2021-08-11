@@ -272,11 +272,12 @@ const PostCard = forwardRef(({ post }, ref) => {
         </>
       </Conditional>
 
-      <Modal
-        title="게시글 링크가 복사되었습니다!"
-        modalOpen={modalOpen}
-        onToggleModal={onToggleModal}
-      />
+      <Conditional condition={modalOpen}>
+        <Modal
+          title="게시글 링크가 복사되었습니다!"
+          onToggleModal={onToggleModal}
+        />
+      </Conditional>
 
       <div ref={ref} />
     </PostCardWrapper>

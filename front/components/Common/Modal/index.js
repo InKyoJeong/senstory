@@ -5,14 +5,11 @@ import PropTypes from "prop-types";
 import { ModalForm, ModalOverlay } from "./styles";
 
 // interface ModalProps {
-//   modalOpen: boolean;
 //   onToggleModal: () => void;
 //   title: string;
 // }
 
-const Modal = ({ modalOpen, onToggleModal, title }) => {
-  if (!modalOpen) return null;
-
+const Modal = ({ onToggleModal, title }) => {
   return (
     <ModalOverlay>
       <ModalForm>
@@ -26,7 +23,6 @@ const Modal = ({ modalOpen, onToggleModal, title }) => {
 };
 
 Modal.propTypes = {
-  modalOpen: PropTypes.bool,
   onToggleModal: PropTypes.func,
   title: PropTypes.string,
 };
