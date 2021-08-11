@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "antd";
 import {
-  CiCircleFilled,
   FrownOutlined,
   MehOutlined,
   SmileOutlined,
@@ -30,9 +30,7 @@ import {
   PhotoEnrollWrapper,
 } from "./styles";
 
-const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
-  if (!modalOpen) return null;
-
+const DiaryWriteForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const { photoPaths, addDiaryLoading, addDiaryFinish } = useSelector(
     (state) => state.diary
@@ -48,7 +46,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
       setFeel(null);
     }
     return () => {
-      onToggleModal();
+      closeModal();
     };
   }, [addDiaryFinish]);
 
@@ -175,7 +173,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
             <Button type="primary" htmlType="submit" loading={addDiaryLoading}>
               등록
             </Button>
-            <Button type="default" onClick={onToggleModal}>
+            <Button type="default" onClick={closeModal}>
               취소
             </Button>
           </DiaryWriteFooter>
@@ -183,6 +181,10 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
       </DiaryModalForm>
     </DiaryWriteOverlay>
   );
+};
+
+DiaryWriteForm.propTypes = {
+  closeModal: PropTypes.func,
 };
 
 export default DiaryWriteForm;
