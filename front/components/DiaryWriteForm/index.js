@@ -93,8 +93,9 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
     setContent("");
     setFeel(null);
 
-    dispatch({
+    return dispatch({
       type: REMOVE_DIARY_PHOTO,
+      data: 0,
     });
   }, []);
 

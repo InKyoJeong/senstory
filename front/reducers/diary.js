@@ -34,25 +34,31 @@ const reducer = (state = initialState, action) => {
         draft.loadUserDiarysLoading = true;
         draft.loadUserDiarysFinish = false;
         draft.loadUserDiarysError = null;
+        break;
       case LOAD_USER_DIARYS_SUCCESS:
         draft.mainDiarys = draft.mainDiarys.concat(action.data);
         draft.loadUserDiarysFinish = true;
         draft.loadUserDiarysLoading = false;
+        break;
       case LOAD_USER_DIARYS_FAILURE:
         draft.loadUserDiarysLoading = false;
         draft.loadUserDiarysError = action.error;
+        break;
       case ADD_DIARY_REQUEST:
         draft.addDiaryLoading = true;
         draft.addDiaryFinish = false;
         draft.addDiaryError = null;
+        break;
       case ADD_DIARY_SUCCESS:
         draft.mainDiarys.unshift(action.data);
         draft.addDiaryFinish = true;
         draft.addDiaryLoading = false;
         draft.photoPaths = [];
+        break;
       case ADD_DIARY_FAILURE:
         draft.addDiaryLoading = false;
         draft.addDiaryError = action.error;
+        break;
       case UPLOAD_PHOTOS_REQUEST:
         draft.uploadPhotosLoading = true;
         draft.uploadPhotosFinish = false;
@@ -64,12 +70,13 @@ const reducer = (state = initialState, action) => {
         draft.uploadPhotosFinish = true;
         break;
       }
-      case UPLOAD_PHOTOS_FAILURE:
+      case UPLOAD_PHOTOS_FAILURE: {
         draft.uploadPhotostLoading = false;
         draft.uploadPhotosError = action.error;
         break;
+      }
       case REMOVE_DIARY_PHOTO:
-        draft.photoPaths = draft.filter((v, i) => i === 0);
+        draft.photoPaths = draft.photoPaths.filter((v, i) => i !== action.data);
         break;
       default:
         break;
