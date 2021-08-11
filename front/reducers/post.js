@@ -16,6 +16,9 @@ import {
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_SUCCESS,
+  LOAD_RELATED_POSTS_FAILURE,
+  LOAD_RELATED_POSTS_REQUEST,
+  LOAD_RELATED_POSTS_SUCCESS,
   LOAD_SINGLE_POST_FAILURE,
   LOAD_SINGLE_POST_REQUEST,
   LOAD_SINGLE_POST_SUCCESS,
@@ -58,6 +61,9 @@ export const initialState = {
   loadHashtagPostsLoading: false,
   loadHashtagPostsFinish: false,
   loadHashtagPostsError: null,
+  loadRelatedPostsLoading: false,
+  loadRelatedPostsFinish: false,
+  loadRelatedPostsError: null,
   addPostLoading: false,
   addPostFinish: false,
   addPostError: null,
@@ -116,6 +122,21 @@ const reducer = (state = initialState, action) => {
       case LOAD_USER_ALL_POST_FAILURE:
         draft.loadUserAllPostLoading = false;
         draft.loadUserAllPostError = action.error;
+        break;
+      case LOAD_RELATED_POSTS_REQUEST:
+        draft.loadRelatedPostsLoading = true;
+        draft.loadRelatedPostsFinish = false;
+        draft.loadRelatedPostsError = null;
+        break;
+      case LOAD_RELATED_POSTS_SUCCESS:
+        draft.loadRelatedPostsLoading = false;
+        draft.loadRelatedPostsFinish = true;
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.hasMorePosts = action.data.length === 10;
+        break;
+      case LOAD_RELATED_POSTS_FAILURE:
+        draft.loadRelatedPostsLoading = false;
+        draft.loadRelatedPostsError = action.error;
         break;
       case LOAD_HASHTAG_POSTS_REQUEST:
         draft.loadHashtagPostsLoading = true;

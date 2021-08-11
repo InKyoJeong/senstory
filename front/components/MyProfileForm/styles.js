@@ -4,6 +4,7 @@ import { Card, Button } from "antd";
 // Hide >= 992px
 export const HideWrapper = styled.div`
   @media screen and (min-width: 992px) {
+    margin-top: 20px;
     display: ${(props) => props.hide && "none"};
   }
 `;
@@ -21,7 +22,7 @@ export const CardWrapper = styled(Card)`
   }
 
   @media screen and (min-width: 992px) {
-    margin: 20px 5% 20px 5%;
+    margin: 0px 5% 20px 5%;
   }
 `;
 

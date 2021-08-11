@@ -10,10 +10,7 @@ import axios from "axios";
 import PostCard from "../../components/PostCard";
 import Layout from "../../components/Layout";
 import wrapper from "../../store/configureStore";
-import {
-  // LOAD_ALL_POST_REQUEST,
-  LOAD_USER_ALL_POST_REQUEST,
-} from "../../actions/post";
+import { LOAD_USER_ALL_POST_REQUEST } from "../../actions/post";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../actions/user";
 import UserProfileForm from "../../components/UserProfileForm";
 import Conditional from "../../hocs/Conditional";
@@ -88,10 +85,14 @@ const User = () => {
       </Conditional>
 
       {mainPosts.map((c) => (
-        <PostCard key={c.id} post={c} />
+        <PostCard
+          key={c.id}
+          post={c}
+          ref={hasMorePosts && !loadUserAllPostLoading ? ref : undefined}
+        />
       ))}
 
-      <div ref={hasMorePosts && !loadUserAllPostLoading ? ref : undefined} />
+      {/* <div ref={hasMorePosts && !loadUserAllPostLoading ? ref : undefined} /> */}
     </Layout>
   );
 };

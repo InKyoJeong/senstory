@@ -11,17 +11,17 @@ import {
 } from "../actions/user";
 import useSWR from "swr";
 
-import Layout from "../components/Layout";
+import ProfileLayout from "../components/Layout/ProfileLayout";
 import NickEditForm from "../components/NickEditForm";
 import FollowList from "../components/FollowList";
 import MyProfileForm from "../components/MyProfileForm";
 import IntroEditForm from "../components/IntroEditForm";
 import Loader from "../components/Loader";
+import AreaEditForm from "../components/AreaEditForm";
 
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-import AreaEditForm from "../components/AreaEditForm";
 
 const fetcher = (url) =>
   axios.get(url, { withCredentials: true }).then((result) => result.data);
@@ -89,7 +89,7 @@ const Profile = () => {
       <Head>
         <title>프로필 | SenStory</title>
       </Head>
-      <Layout>
+      <ProfileLayout>
         <MyProfileForm hide />
         <NickEditForm />
         <AreaEditForm />
@@ -108,7 +108,7 @@ const Profile = () => {
           loading={!followerData && followerError}
           mutate={mutateFollower}
         />
-      </Layout>
+      </ProfileLayout>
     </>
   );
 };

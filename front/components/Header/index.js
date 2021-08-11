@@ -77,6 +77,7 @@ const Header = () => {
               <a>Profile</a>
             </Link>
           </Menu.Item>
+
           <Menu.Item key={`/diary/${me.id}`} style={HeaderRightMargin}>
             <Link href={`/diary/${me.id}`}>
               <a>Diary</a>

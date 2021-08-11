@@ -17,6 +17,9 @@ import {
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_SUCCESS,
+  LOAD_RELATED_POSTS_FAILURE,
+  LOAD_RELATED_POSTS_REQUEST,
+  LOAD_RELATED_POSTS_SUCCESS,
   LOAD_SINGLE_POST_FAILURE,
   LOAD_SINGLE_POST_REQUEST,
   LOAD_SINGLE_POST_SUCCESS,
@@ -123,6 +126,26 @@ function* loadPosts(action) {
     console.error(err);
     yield put({
       type: LOAD_ALL_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadRelatedPostsAPI(lastId) {
+  return axios.get(`/posts/related?lastId=${lastId || 0}`);
+}
+
+function* loadRelatedPosts(action) {
+  try {
+    const result = yield call(loadRelatedPostsAPI, action.lastId);
+    yield put({
+      type: LOAD_RELATED_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_RELATED_POSTS_FAILURE,
       error: err.response.data,
     });
   }
@@ -314,6 +337,10 @@ function* watchLoadUserPosts() {
   yield throttle(5000, LOAD_USER_ALL_POST_REQUEST, loadUserPosts);
 }
 
+function* watchLoadRelatedPosts() {
+  yield throttle(5000, LOAD_RELATED_POSTS_REQUEST, loadRelatedPosts);
+}
+
 function* watchLoadHashtagPosts() {
   yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
 }
@@ -358,6 +385,7 @@ export default function* postSaga() {
     fork(watchLoadPost),
     fork(watchLoadUserPosts),
     fork(watchLoadHashtagPosts),
+    fork(watchLoadRelatedPosts),
     fork(watchAddPost),
     fork(watchUpdatePost),
     fork(watchRepost),

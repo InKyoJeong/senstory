@@ -60,6 +60,7 @@ const Diary = () => {
       marginBottom: 20,
       borderBottomRightRadius: 10,
       borderBottomLeftRadius: 10,
+      border: "1px solid black",
     }),
     []
   );

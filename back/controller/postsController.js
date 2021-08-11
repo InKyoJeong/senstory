@@ -63,7 +63,7 @@ module.exports.getFollowingPosts = async (req, res, next) => {
       include: [
         {
           model: User,
-          as: Followers,
+          as: "Followers",
           where: { id: req.user.id },
         },
       ],

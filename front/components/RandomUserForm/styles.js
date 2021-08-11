@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RandomUserWrapper = styled.div`
   @media screen and (min-width: 992px) {
-    margin: 30px 5% 30px 5%;
+    margin: 20px 5% 20px 5%;
   }
 `;
 
