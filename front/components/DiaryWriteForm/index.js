@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import useInput from "../../hooks/useInput";
-import { Form, Button, Input } from "antd";
+import { Form, Button } from "antd";
 import {
   ADD_DIARY_REQUEST,
   REMOVE_DIARY_PHOTO,
   UPLOAD_PHOTOS_REQUEST,
 } from "../../actions/diary";
 import { useDispatch, useSelector } from "react-redux";
+import useInput from "../../hooks/useInput";
 import {
   FrownOutlined,
   MehOutlined,
-  PictureFilled,
   SmileOutlined,
   StarOutlined,
 } from "@ant-design/icons";
@@ -18,10 +17,16 @@ import {
   DiaryContentInput,
   DiaryModalForm,
   DiaryTitleInput,
+  DiaryWriteFooter,
+  DiaryWriteInner,
   DiaryWriteOverlay,
   FeelButton,
   FeelButtonWrapper,
+  PhotoBorder,
+  PhotoDisplay,
+  PhotoEnrollWrapper,
 } from "./styles";
+import Conditional from "../../hocs/Conditional";
 
 const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
   if (!modalOpen) return null;
@@ -88,7 +93,7 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
     setFeel(e.target.innerText);
   }, []);
 
-  const onReset = useCallback(() => {
+  const onResetContents = useCallback(() => {
     setTitle("");
     setContent("");
     setFeel(null);
@@ -102,12 +107,8 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
   return (
     <DiaryWriteOverlay>
       <DiaryModalForm>
-        <Form
-          encType="multipart/form-data"
-          onFinish={onSubmit}
-          style={{ width: "100%" }}
-        >
-          <div style={{ padding: 10 }}>
+        <Form encType="multipart/form-data" onFinish={onSubmit}>
+          <DiaryWriteInner>
             <DiaryTitleInput
               value={title}
               onChange={onChangeTitle}
@@ -141,108 +142,45 @@ const DiaryWriteForm = ({ modalOpen, onToggleModal }) => {
               </FeelButton>
             </FeelButtonWrapper>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                // margin: 10,
-              }}
-            >
+            <PhotoDisplay>
               {photoPaths.map((v, i) => (
                 <div key={v}>
-                  <img
-                    src={`http://localhost:3065/${v}`}
-                    alt={v}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      borderRadius: 10,
-                    }}
-                  />
-                  {/* <Button onClick={onRemoveImage(i)} /> */}
+                  <img src={`http://localhost:3065/${v}`} alt={v} />
                 </div>
               ))}
-            </div>
+            </PhotoDisplay>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                // margin: 10,
-              }}
-            >
-              <input
-                type="file"
-                name="image"
-                hidden
-                ref={imageInput}
-                onChange={onChangeImages}
-              />
+            <input
+              type="file"
+              name="image"
+              hidden
+              ref={imageInput}
+              onChange={onChangeImages}
+            />
+            <PhotoEnrollWrapper onClick={onClickImageUpload}>
+              <Conditional condition={photoPaths.length === 0}>
+                <PhotoBorder>
+                  <div>+</div>
+                  <div>사진 추가</div>
+                </PhotoBorder>
+              </Conditional>
+            </PhotoEnrollWrapper>
+          </DiaryWriteInner>
 
-              <div
-                onClick={onClickImageUpload}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {photoPaths.length === 0 && (
-                  <div
-                    style={{
-                      border: "2px dashed #2d2d2e",
-                      width: 100,
-                      height: 100,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 10,
-                    }}
-                  >
-                    <div style={{ color: "#2d2d2e" }}>+</div>
-                    <div style={{ color: "#2d2d2e" }}>사진 추가</div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={addDiaryLoading}
-              style={{ width: "50%", borderBottomLeftRadius: 10, height: 40 }}
-            >
+          <DiaryWriteFooter>
+            <Button type="primary" htmlType="submit" loading={addDiaryLoading}>
               등록
             </Button>
             <Button
               type="default"
               onClick={() => {
                 onToggleModal();
-                onReset();
-              }}
-              style={{
-                width: "50%",
-                borderBottomRightRadius: 10,
-                height: 40,
-                backgroundColor: "#e0cccc",
-                border: "none",
+                onResetContents();
               }}
             >
               취소
             </Button>
-          </div>
+          </DiaryWriteFooter>
         </Form>
       </DiaryModalForm>
     </DiaryWriteOverlay>
