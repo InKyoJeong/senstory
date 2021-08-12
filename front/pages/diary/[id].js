@@ -18,6 +18,7 @@ import Loader from "../../components/common/Loader";
 import MainBanner from "../../components/common/MainBanner";
 import DiaryWriteForm from "../../components/diary/DiaryWriteForm";
 import DiaryBlock from "../../components/diary/DiaryBlock";
+import DiaryBlockContainer from "../../components/diary/DiaryBlockContainer";
 
 const Diary = () => {
   const router = useRouter();
@@ -79,19 +80,7 @@ const Diary = () => {
         <DiaryWriteForm closeModal={closeModal} />
       </Conditional>
 
-      <div
-        style={{
-          // display: "grid",
-          // gridTemplateColumns: "1fr 1fr",
-          // gap: 7,
-          // width: "100%",
-          // flex: 1,
-          // display: "flex",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
+      <DiaryBlockContainer>
         {mainDiarys.map((diary) => (
           <DiaryBlock
             key={diary.id}
@@ -99,7 +88,7 @@ const Diary = () => {
             ref={hasMoreDiarys && !loadUserDiarysLoading ? ref : undefined}
           />
         ))}
-      </div>
+      </DiaryBlockContainer>
     </Layout>
   );
 };
