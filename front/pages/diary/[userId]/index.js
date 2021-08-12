@@ -35,10 +35,10 @@ const Diary = () => {
 
   useEffect(() => {
     // 내 다이어리가 아닐때
-    if (me?.userId && parseId !== me?.userId) {
+    if (!me?.id || parseId !== me?.id) {
       Router.push("/");
     }
-  }, [parseId, me.userId]);
+  }, [parseId, me?.id]);
 
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadUserDiarysLoading) {
@@ -51,10 +51,7 @@ const Diary = () => {
     }
   }, [inView, hasMoreDiarys, loadUserDiarysLoading, mainDiarys, userId]);
 
-  if (!me) {
-    return <Loader text="잘못된 접근입니다." />;
-  }
-  if (parseId !== me?.id) {
+  if (!me?.id || parseId !== me?.id) {
     return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
   }
 

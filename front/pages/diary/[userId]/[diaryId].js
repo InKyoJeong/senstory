@@ -1,23 +1,36 @@
-import React from "react";
-import { useRouter } from "next/router";
-import Layout from "../../../components/common/Layout";
-import { Button } from "antd";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import Router from "next/router";
+import { Button } from "antd";
 
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
 import { LOAD_ME_REQUEST } from "../../../actions/user";
 import { LOAD_SINGLE_DIARY_REQUEST } from "../../../actions/diary";
+import Layout from "../../../components/common/Layout";
+import Loader from "../../../components/common/Loader";
 
 const DiaryDetail = () => {
   const router = useRouter();
   const { diaryId, userId } = router.query;
   console.log("diaryId:", diaryId);
   console.log("유저아이디 : ", userId);
-  // const parseId = parseInt(diaryId, 10);
+  const parseUserId = parseInt(userId, 10);
   const { singleDiary } = useSelector((state) => state.diary);
+  const { me } = useSelector((state) => state.user);
   console.log(singleDiary);
+
+  useEffect(() => {
+    if (!me?.id || parseUserId !== me?.id) {
+      Router.replace("/");
+    }
+  }, [parseUserId, me?.id]);
+
+  if (!me?.id || parseUserId !== me?.id) {
+    return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
+  }
 
   return (
     <Layout>
