@@ -29,10 +29,10 @@ const Diary = () => {
     (state) => state.diary
   );
   const { me, userInfo } = useSelector((state) => state.user);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, inView] = useInView();
-  console.log(mainDiarys);
+  // console.log(mainDiarys);
+
   useEffect(() => {
     // 내 다이어리가 아닐때
     if (me?.id && parseId !== me?.id) {
