@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const DiaryBlockWrapper = styled.div`
+  padding: 10px;
   border-radius: 5px;
-  padding: 10px 6px;
   color: ${(props) => props.theme.DARK_GRAY};
-  box-shadow: 2px 2px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2),
+    1px 1px 3px rgba(0, 0, 0, 0.9) inset;
+  overflow: hidden;
+  width: 48%;
+  margin: 1% auto;
 
   /* background-color: ${(props) => props.feel === "Special" && "#e8bdf0"}; */
   background: -webkit-linear-gradient(
@@ -59,4 +63,39 @@ export const DiaryBlockWrapper = styled.div`
     transition: 0.3s;
     cursor: pointer;
   }
+
+  & svg {
+    font-size: 18px;
+  }
+
+  & div {
+    position: relative;
+
+    & div {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.4);
+      transform: rotate(45deg);
+      height: 100px;
+      width: 45px;
+      top: -42px;
+      left: -24px;
+    }
+  }
+
+  /* height: 100px;
+  width: 12px;
+  top: -28px;
+  left: 22px; */
+`;
+
+export const BlockFeelText = styled.div`
+  color: ${(props) => props.theme.DARK_GRAY};
+`;
+
+export const BlockDateText = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0.7;
+  font-style: italic;
+  font-size: 12px;
 `;

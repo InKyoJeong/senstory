@@ -6,14 +6,15 @@ export const Banner = styled.div`
   align-items: center;
   justify-content: center;
   padding: 12px 0px;
-  background-color: ${(props) => props.theme.MAIN};
+  background-color: #49a2f5;
   margin-bottom: 20px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border: 1px solid black;
+  font-weight: bold;
 
   &:hover {
-    background-color: #49a2f5;
+    background-color: ${(props) => props.theme.MAIN};
     transition: 0.3s;
   }
 `;

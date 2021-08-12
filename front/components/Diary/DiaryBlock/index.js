@@ -1,25 +1,29 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { today } from "../../../utils";
-import { DiaryBlockWrapper } from "./styles";
+import { BlockFeelText, BlockDateText, DiaryBlockWrapper } from "./styles";
+import {
+  FrownOutlined,
+  MehOutlined,
+  SmileOutlined,
+  StarFilled,
+  StarOutlined,
+} from "@ant-design/icons";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
   return (
     <DiaryBlockWrapper feel={diary.feel}>
-      <div style={{ fontWeight: 600, opacity: 0.8 }}>{diary.feel}</div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          opacity: 0.7,
-          fontStyle: "italic",
-          fontSize: 12,
-        }}
-      >
-        {today(diary.createdAt)}
+      <div>
+        <div></div>
       </div>
-      {/* <div>{diary.UserId}</div>
-      <div>{diary.id}</div> */}
+      <BlockFeelText>
+        {diary.feel === "Special" && <StarOutlined />}
+        {diary.feel === "Good" && <SmileOutlined />}
+        {diary.feel === "Soso" && <MehOutlined />}
+        {diary.feel === "Bad" && <FrownOutlined />}
+      </BlockFeelText>
+      <BlockDateText>{today(diary.createdAt)}</BlockDateText>
+
       <div ref={ref} />
     </DiaryBlockWrapper>
   );

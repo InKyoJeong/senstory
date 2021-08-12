@@ -81,9 +81,15 @@ const Diary = () => {
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 7,
+          // display: "grid",
+          // gridTemplateColumns: "1fr 1fr",
+          // gap: 7,
+          // width: "100%",
+          // flex: 1,
+          // display: "flex",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
         }}
       >
         {mainDiarys.map((diary) => (
