@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useInput from "../../../hooks/useInput";
 import { loginRequestAction } from "../../../actions/user";
 
+import useInput from "../../../hooks/useInput";
+import MiniTitle from "../../common/MiniTitle";
 import {
   FormWrapper,
   ButtonWrapper,
@@ -10,7 +11,6 @@ import {
   LoginInput,
   InputWrapper,
 } from "./styles";
-import MiniTitle from "../../Common/MiniTitle";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

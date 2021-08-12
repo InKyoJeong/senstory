@@ -1,8 +1,8 @@
 import React, { useCallback, useRef } from "react";
-import { Card, Avatar, Form } from "antd";
-import Link from "next/link";
-
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
+import { Card, Avatar, Form } from "antd";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import {
   logoutRequestAction,
   UPLOAD_AVATAR_REQUEST,
@@ -15,7 +15,6 @@ import {
   MyInfoWrapper,
   AvatarWrapper,
 } from "./styles";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 
 const MyProfileForm = (props) => {
   const dispatch = useDispatch();

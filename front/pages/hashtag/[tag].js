@@ -8,8 +8,8 @@ import wrapper from "../../store/configureStore";
 import { LOAD_HASHTAG_POSTS_REQUEST } from "../../actions/post";
 import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../../actions/user";
 
-import PostCard from "../../components/Post/PostCard";
-import Layout from "../../components/Common/Layout";
+import PostCard from "../../components/post/PostCard";
+import Layout from "../../components/common/Layout";
 
 const Hashtag = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,6 @@ const Hashtag = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("post/id 페이지 getServerSideProps 시작");
       const cookie = req ? req.headers.cookie : "";
       axios.defaults.headers.Cookie = "";
       if (req && cookie) {

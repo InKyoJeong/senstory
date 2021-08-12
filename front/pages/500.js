@@ -1,5 +1,5 @@
 import React from "react";
-import CustomError from "../components/Common/CustomError";
+import CustomError from "../components/common/CustomError";
 
 const Custom500 = () => {
   return (

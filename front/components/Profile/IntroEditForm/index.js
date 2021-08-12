@@ -3,11 +3,11 @@ import { Input, Button } from "antd";
 import { CHANGE_INTRO_REQUEST } from "../../../actions/user";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IntroFormWrapper, IntroButton, IntroInputWrapper } from "./styles";
 import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
-import Modal from "../../Common/Modal";
+import Modal from "../../common/Modal";
+import { IntroFormWrapper, IntroButton, IntroInputWrapper } from "./styles";
 
 const IntroEditForm = () => {
   const dispatch = useDispatch();

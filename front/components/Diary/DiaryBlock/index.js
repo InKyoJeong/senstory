@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import { DiaryBlockWrapper } from "./styles";
 import { today } from "../../../utils";
+import { DiaryBlockWrapper } from "./styles";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
   return (
@@ -18,6 +18,7 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
       >
         {today(diary.createdAt)}
       </div>
+      <div>{diary.UserId}</div>
       <div ref={ref} />
     </DiaryBlockWrapper>
   );

@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../../actions/user";
-import { FollowButtonContainer, FollowText } from "./styles";
 import { UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { FollowButtonContainer, FollowText } from "./styles";
 
 const FollowButton = ({ user }) => {
   const { me, followLoading, unfollowLoading } = useSelector(

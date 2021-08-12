@@ -9,8 +9,8 @@ import { LOAD_SINGLE_POST_REQUEST } from "../../actions/post";
 import wrapper from "../../store/configureStore";
 import { END } from "redux-saga";
 
-import Layout from "../../components/Common/Layout";
-import PostCard from "../../components/Post/PostCard";
+import Layout from "../../components/common/Layout";
+import PostCard from "../../components/post/PostCard";
 
 const Post = () => {
   const router = useRouter();

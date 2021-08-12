@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { LOAD_RELATED_POSTS_REQUEST } from "../actions/post";
-import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 import Router from "next/router";
+import { LOAD_RELATED_POSTS_REQUEST } from "../actions/post";
+import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 
-import Layout from "../components/Common/Layout";
-import PostCard from "../components/Post/PostCard";
+import Layout from "../components/common/Layout";
+import PostCard from "../components/post/PostCard";
+
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";

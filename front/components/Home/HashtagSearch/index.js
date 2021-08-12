@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Router from "next/router";
-import useInput from "../../../hooks/useInput";
 import { TagsFilled } from "@ant-design/icons";
+import useInput from "../../../hooks/useInput";
 import {
   SearchWrapper,
   TagSearchInput,

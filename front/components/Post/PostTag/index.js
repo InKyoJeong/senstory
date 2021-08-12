@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Button } from "antd";
 
+import Conditional from "../../../hocs/Conditional";
 import {
   EditBtnWrapper,
   PostContent,
   PostEditInput,
   TagWrapper,
 } from "./styles";
-import Conditional from "../../../hocs/Conditional";
-import { useSelector } from "react-redux";
 
 const PostTag = ({
   postData,

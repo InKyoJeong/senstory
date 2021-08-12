@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "antd";
 import Router from "next/router";
 
-import useInput from "../../../hooks/useInput";
-import Conditional from "../../../hocs/Conditional";
 import { SIGN_UP_REQUEST } from "../../../actions/user";
 
+import useInput from "../../../hooks/useInput";
+import Conditional from "../../../hocs/Conditional";
+import MiniTitle from "../../common/MiniTitle";
 import {
   ErrorMessage,
   ButtonWrapper,
@@ -14,7 +15,6 @@ import {
   InputWrapper,
   SignUpFormWrapper,
 } from "./styles";
-import MiniTitle from "../../Common/MiniTitle";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();

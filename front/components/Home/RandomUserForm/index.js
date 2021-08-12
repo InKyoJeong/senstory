@@ -1,9 +1,10 @@
-import { Avatar } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
 import Link from "next/link";
+import { Avatar } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
 
-import { useSelector } from "react-redux";
+import FollowButton from "../../common/FollowButton";
 import {
   RandomUserWrapper,
   RandomTitle,
@@ -11,7 +12,6 @@ import {
   RandomUsers,
   UserItemWrapper,
 } from "./styles";
-import FollowButton from "../../Common/FollowButton";
 
 const RandomUserForm = () => {
   const { randomUsers } = useSelector((state) => state.user);

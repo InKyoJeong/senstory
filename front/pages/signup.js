@@ -7,9 +7,9 @@ import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
 
-import Layout from "../components/Common/Layout";
-import Loader from "../components/Common/Loader";
-import SignUpForm from "../components/User/SignUpForm";
+import Layout from "../components/common/Layout";
+import Loader from "../components/common/Loader";
+import SignUpForm from "../components/user/SignUpForm";
 
 const Signup = () => {
   const { signUpLoading, signUpFinish } = useSelector((state) => state.user);

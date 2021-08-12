@@ -2,8 +2,8 @@ import React from "react";
 import { Avatar, Comment } from "antd";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import { CommentAuthor, CommentDate } from "./styles";
 import { fromNow } from "../../../utils";
+import { CommentAuthor, CommentDate } from "./styles";
 
 const CommentItem = ({ item }) => {
   return (

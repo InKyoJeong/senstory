@@ -5,7 +5,7 @@ import { CHANGE_NICK_REQUEST } from "../../../actions/user";
 import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
-import Modal from "../../Common/Modal";
+import Modal from "../../common/Modal";
 import { NickFormWrapper, NickInput, NickEditButton } from "./styles";
 
 const NickEditForm = () => {

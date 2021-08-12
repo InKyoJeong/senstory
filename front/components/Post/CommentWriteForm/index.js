@@ -2,11 +2,11 @@ import React, { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form } from "antd";
 import { EditFilled } from "@ant-design/icons";
-import useInput from "../../../hooks/useInput";
 import { useSelector, useDispatch } from "react-redux";
-
-import { WriteWrapper, WriteButton, WriteInput } from "./styles";
 import { ADD_COMMENT_REQUEST } from "../../../actions/post";
+
+import useInput from "../../../hooks/useInput";
+import { WriteWrapper, WriteButton, WriteInput } from "./styles";
 
 const CommentWriteForm = ({ post }) => {
   const dispatch = useDispatch();

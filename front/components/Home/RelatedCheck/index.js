@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { RelatedForm } from "./styles";
+import PropTypes from "prop-types";
 import { BorderOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import Conditional from "../../../hocs/Conditional";
-import PropTypes from "prop-types";
+import { RelatedForm } from "./styles";
 
 const RelatedCheck = ({ check }) => {
   return (

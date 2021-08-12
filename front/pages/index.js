@@ -5,9 +5,9 @@ import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from "../actions/user";
 import { useInView } from "react-intersection-observer";
 
 import Conditional from "../hocs/Conditional";
-import Layout from "../components/Common/Layout";
-import PostCard from "../components/Post/PostCard";
-import PostWriteForm from "../components/Post/PostWriteForm";
+import Layout from "../components/common/Layout";
+import PostCard from "../components/post/PostCard";
+import PostWriteForm from "../components/post/PostWriteForm";
 
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";

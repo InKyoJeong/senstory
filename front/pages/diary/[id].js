@@ -11,30 +11,29 @@ import axios from "axios";
 import wrapper from "../../store/configureStore";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../actions/user";
 import { LOAD_USER_DIARYS_REQUEST } from "../../actions/diary";
-import useToggle from "../../hooks/useToggle";
 
-import Layout from "../../components/Common/Layout";
-import Loader from "../../components/Common/Loader";
-import MainBanner from "../../components/Common/MainBanner";
-import DiaryWriteForm from "../../components/Diary/DiaryWriteForm";
-import DiaryBlock from "../../components/Diary/DiaryBlock";
 import Conditional from "../../hocs/Conditional";
+import Layout from "../../components/common/Layout";
+import Loader from "../../components/common/Loader";
+import MainBanner from "../../components/common/MainBanner";
+import DiaryWriteForm from "../../components/diary/DiaryWriteForm";
+import DiaryBlock from "../../components/diary/DiaryBlock";
 
 const Diary = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = router.query;
   const parseId = parseInt(id, 10);
-  const { mainDiarys, hasMoreDiarys, addDiaryFinish, loadUserDiarysLoading } =
-    useSelector((state) => state.diary);
+  const { mainDiarys, hasMoreDiarys, loadUserDiarysLoading } = useSelector(
+    (state) => state.diary
+  );
   const { me, userInfo } = useSelector((state) => state.user);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, inView] = useInView();
-
+  console.log(mainDiarys);
   useEffect(() => {
     // 내 다이어리가 아닐때
-    // if (userInfo?.id && parseId !== userInfo.id)
     if (me?.id && parseId !== me?.id) {
       Router.push("/");
     }

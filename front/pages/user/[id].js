@@ -12,9 +12,9 @@ import { LOAD_USER_ALL_POST_REQUEST } from "../../actions/post";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../actions/user";
 import Conditional from "../../hocs/Conditional";
 
-import Layout from "../../components/Common/Layout";
-import PostCard from "../../components/Post/PostCard";
-import UserProfileForm from "../../components/Profile/UserProfileForm";
+import Layout from "../../components/common/Layout";
+import PostCard from "../../components/post/PostCard";
+import UserProfileForm from "../../components/profile/UserProfileForm";
 
 const User = () => {
   const dispatch = useDispatch();

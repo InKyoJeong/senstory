@@ -5,7 +5,7 @@ import { CHANGE_AREA_REQUEST } from "../../../actions/user";
 import Conditional from "../../../hocs/Conditional";
 import useToggle from "../../../hooks/useToggle";
 import useInput from "../../../hooks/useInput";
-import Modal from "../../Common/Modal";
+import Modal from "../../common/Modal";
 import { AreaEditButton, AreaFormWrapper, AreaInput } from "./styles";
 
 const AreaEditForm = () => {

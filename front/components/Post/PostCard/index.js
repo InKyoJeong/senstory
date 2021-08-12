@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useState } from "react";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import Link from "next/link";
 import { Card, Avatar } from "antd";
 import {
@@ -12,7 +12,6 @@ import {
   ExportOutlined,
 } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
 import {
   LIKE_POST_REQUEST,
   REMOVE_POST_REQUEST,
@@ -24,8 +23,8 @@ import {
 import { fromNow } from "../../../utils";
 import useToggle from "../../../hooks/useToggle";
 import Conditional from "../../../hocs/Conditional";
-import Modal from "../../Common/Modal";
-import FollowButton from "../../Common/FollowButton";
+import Modal from "../../common/Modal";
+import FollowButton from "../../common/FollowButton";
 import PostImages from "../PostImages";
 import CommentWriteForm from "../CommentWriteForm";
 import PostTag from "../PostTag";
