@@ -39,6 +39,25 @@ module.exports.postAddDiary = async (req, res, next) => {
   }
 };
 
+module.exports.getDiary = async (req, res, next) => {
+  try {
+    const diary = await Diary.findOne({
+      where: { id: req.params.diaryId },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "nickname", "avatar"],
+        },
+        { model: Photo },
+      ],
+    });
+    res.status(200).json(diary);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
 module.exports.postAddPhotos = async (req, res, next) => {
   console.log(req.files);
   res.json(req.files.map((v) => v.filename));

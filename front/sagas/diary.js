@@ -4,6 +4,9 @@ import {
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
+  LOAD_SINGLE_DIARY_FAILURE,
+  LOAD_SINGLE_DIARY_REQUEST,
+  LOAD_SINGLE_DIARY_SUCCESS,
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
@@ -30,6 +33,26 @@ function* loadUserDiarys(action) {
     console.error(err);
     yield put({
       type: LOAD_USER_DIARYS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadDiaryAPI(data) {
+  return axios.get(`/diary/${data}`);
+}
+
+function* loadDiary(action) {
+  try {
+    const result = yield call(loadDiaryAPI, action.data);
+    yield put({
+      type: LOAD_SINGLE_DIARY_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_SINGLE_DIARY_FAILURE,
       error: err.response.data,
     });
   }
@@ -106,6 +129,10 @@ function* watchLoadUserDiarys() {
   yield throttle(5000, LOAD_USER_DIARYS_REQUEST, loadUserDiarys);
 }
 
+function* watchLoadDiary() {
+  yield takeLatest(LOAD_SINGLE_DIARY_REQUEST, loadDiary);
+}
+
 function* watchAddDiary() {
   yield takeLatest(ADD_DIARY_REQUEST, addDiary);
 }
@@ -121,6 +148,7 @@ function* watchUploadPhotos() {
 export default function* diarySaga() {
   yield all([
     fork(watchLoadUserDiarys),
+    fork(watchLoadDiary),
     fork(watchAddDiary),
     fork(watchRemoveDiary),
     fork(watchUploadPhotos),

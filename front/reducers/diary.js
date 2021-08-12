@@ -3,6 +3,9 @@ import {
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
+  LOAD_SINGLE_DIARY_FAILURE,
+  LOAD_SINGLE_DIARY_REQUEST,
+  LOAD_SINGLE_DIARY_SUCCESS,
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
@@ -18,10 +21,14 @@ import {
 export const initialState = {
   mainDiarys: [],
   photoPaths: [],
+  singleDiary: null,
   hasMoreDiarys: true,
   loadUserDiarysLoading: false,
   loadUserDiarysFinish: false,
   loadUserDiarysError: null,
+  loadSingleDiaryLoading: false,
+  loadSingleDiaryFinish: false,
+  loadSingleDiaryError: null,
   addDiaryLoading: false,
   addDiaryFinish: false,
   addDiaryError: null,
@@ -50,6 +57,20 @@ const reducer = (state = initialState, action) => {
       case LOAD_USER_DIARYS_FAILURE:
         draft.loadUserDiarysLoading = false;
         draft.loadUserDiarysError = action.error;
+        break;
+      case LOAD_SINGLE_DIARY_REQUEST:
+        draft.loadSingleDiaryLoading = true;
+        draft.loadSingleDiaryFinish = false;
+        draft.loadSingleDiaryError = null;
+        break;
+      case LOAD_SINGLE_DIARY_SUCCESS:
+        draft.loadSingleDiaryFinish = true;
+        draft.loadSingleDiaryLoading = false;
+        draft.singleDiary = action.data;
+        break;
+      case LOAD_SINGLE_DIARY_FAILURE:
+        draft.loadSingleDiaryLoading = false;
+        draft.loadSingleDiaryError = action.error;
         break;
       case ADD_DIARY_REQUEST:
         draft.addDiaryLoading = true;

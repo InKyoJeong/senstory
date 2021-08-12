@@ -7,6 +7,7 @@ const {
   postAddDiary,
   postAddPhotos,
   deleteDiary,
+  getDiary,
 } = require("../controller/diaryController");
 
 const diaryRouter = express.Router();
@@ -33,6 +34,7 @@ const upload = multer({
 });
 
 diaryRouter.post("/", isLoggedIn, upload.none(), postAddDiary);
+diaryRouter.get("/:diaryId", isLoggedIn, getDiary);
 diaryRouter.delete("/:diaryId", isLoggedIn, deleteDiary);
 diaryRouter.post("/photos", isLoggedIn, upload.array("photo"), postAddPhotos);
 
