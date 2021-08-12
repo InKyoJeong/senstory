@@ -16,7 +16,7 @@ import {
 } from "../actions/diary";
 
 function loadUserDiarysAPI(data, lastId) {
-  return axios.get(`/diary/${data}?lastId=${lastId || 0}`);
+  return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
 }
 
 function* loadUserDiarys(action) {

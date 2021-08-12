@@ -5,7 +5,6 @@ const fs = require("fs");
 const { isLoggedIn } = require("./middlewares");
 const {
   postAddDiary,
-  getDiarys,
   postAddPhotos,
   deleteDiary,
 } = require("../controller/diaryController");
@@ -34,7 +33,6 @@ const upload = multer({
 });
 
 diaryRouter.post("/", isLoggedIn, upload.none(), postAddDiary);
-diaryRouter.get("/:userId", isLoggedIn, getDiarys);
 diaryRouter.delete("/:diaryId", isLoggedIn, deleteDiary);
 diaryRouter.post("/photos", isLoggedIn, upload.array("photo"), postAddPhotos);
 

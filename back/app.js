@@ -5,6 +5,7 @@ const postsRouter = require("./routes/postsRouter");
 const userRouter = require("./routes/userRouter");
 const usersRouter = require("./routes/usersRouter");
 const hashtagRouter = require("./routes/hashtagRouter");
+const diarysRouter = require("./routes/diarysRouter");
 const diaryRouter = require("./routes/diaryRouter");
 
 const db = require("./models");
@@ -60,6 +61,7 @@ app.use("/post", postRouter);
 app.use("/users", usersRouter);
 app.use("/user", userRouter);
 app.use("/hashtag", hashtagRouter);
+app.use("/diarys", diarysRouter);
 app.use("/diary", diaryRouter);
 
 app.listen(3065, () => {
