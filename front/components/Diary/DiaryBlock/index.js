@@ -18,7 +18,8 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
       >
         {today(diary.createdAt)}
       </div>
-      <div>{diary.UserId}</div>
+      {/* <div>{diary.UserId}</div>
+      <div>{diary.id}</div> */}
       <div ref={ref} />
     </DiaryBlockWrapper>
   );

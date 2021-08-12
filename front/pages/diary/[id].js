@@ -79,7 +79,13 @@ const Diary = () => {
         <DiaryWriteForm closeModal={closeModal} />
       </Conditional>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7 }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 7,
+        }}
+      >
         {mainDiarys.map((diary) => (
           <DiaryBlock
             key={diary.id}

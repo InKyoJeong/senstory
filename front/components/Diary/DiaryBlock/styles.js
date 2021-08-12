@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DiaryBlockWrapper = styled.div`
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px 6px;
   color: ${(props) => props.theme.DARK_GRAY};
   box-shadow: 2px 2px 1px rgba(255, 255, 255, 0.2);
 

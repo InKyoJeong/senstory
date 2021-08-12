@@ -17,3 +17,5 @@ $ npm run dev
 
 - 컴포넌트 폴더나누기
   - Common/Home/Post/Diary/Profile/User
+
+#### 메인포스트는 10개씩, 다이어리는 30개씩

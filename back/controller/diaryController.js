@@ -48,7 +48,7 @@ module.exports.getDiarys = async (req, res, next) => {
     }
     const diarys = await Diary.findAll({
       where,
-      limit: 10,
+      limit: 30,
       order: [["createdAt", "DESC"]],
       include: [
         {
