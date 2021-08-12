@@ -64,7 +64,8 @@ export const DiaryBlockWrapper = styled.div`
     transition: 0.3s;
     cursor: pointer;
   }
-
+ 
+  }
   & svg {
     font-size: 18px;
   }
@@ -95,6 +96,18 @@ export const BlockFeelText = styled.div`
 
   & div {
     z-index: 50;
+  }
+`;
+
+export const BlockTitleText = styled.div`
+  margin-left: auto;
+  color: ${(props) => props.theme.MIDDLE_GRAY};
+
+  & div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80px;
   }
 `;
 

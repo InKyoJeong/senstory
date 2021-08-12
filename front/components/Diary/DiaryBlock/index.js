@@ -15,6 +15,7 @@ import DiaryDropdown from "./DiaryDropdown";
 import {
   BlockFeelText,
   BlockDateText,
+  BlockTitleText,
   DiaryBlockWrapper,
   WhiteLabel,
 } from "./styles";
@@ -58,6 +59,9 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
             removeDiaryLoading={removeDiaryLoading}
           />
         </span> */}
+        <BlockTitleText>
+          <div>{diary.title}</div>
+        </BlockTitleText>
       </BlockFeelText>
       <BlockDateText>{today(diary.createdAt)}</BlockDateText>
 

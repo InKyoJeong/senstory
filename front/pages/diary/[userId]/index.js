@@ -31,10 +31,9 @@ const Diary = () => {
   const { me, userInfo } = useSelector((state) => state.user);
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, inView] = useInView();
-  // console.log(mainDiarys);
 
   useEffect(() => {
-    // 내 다이어리가 아닐때
+    // 로그인하지 않았거나 내 다이어리가 아닐때
     if (!me?.id || parseId !== me?.id) {
       Router.push("/");
     }

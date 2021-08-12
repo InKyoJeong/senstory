@@ -15,11 +15,11 @@ import Loader from "../../../components/common/Loader";
 const DiaryDetail = () => {
   const router = useRouter();
   const { diaryId, userId } = router.query;
-  console.log("diaryId:", diaryId);
-  console.log("유저아이디 : ", userId);
   const parseUserId = parseInt(userId, 10);
   const { singleDiary } = useSelector((state) => state.diary);
   const { me } = useSelector((state) => state.user);
+
+  // test
   console.log(singleDiary);
 
   useEffect(() => {
