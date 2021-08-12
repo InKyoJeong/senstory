@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_DIARY_REQUEST } from "../../../actions/diary";
@@ -10,6 +10,9 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import DiaryDropdown from "./DiaryDropdown";
+// import Conditional from "../../../hocs/Conditional";
+// import DiaryDetail from "../DiaryDetail";
+
 import {
   BlockFeelText,
   BlockDateText,
@@ -20,6 +23,7 @@ import {
 const DiaryBlock = forwardRef(({ diary }, ref) => {
   const dispatch = useDispatch();
   const { removeDiaryLoading } = useSelector((state) => state.diary);
+  // const [modalVisible, setModalVisible] = useState(false);
 
   const onRemoveDiary = useCallback(() => {
     return dispatch({
@@ -28,8 +32,20 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
     });
   }, []);
 
+  // const openDetail = useCallback(() => {
+  //   setModalVisible(true);
+  // }, []);
+
+  // const closeDetail = useCallback(() => {
+  //   setModalVisible(false);
+  // }, []);
+
+  const test = useCallback((id) => {
+    console.log(id);
+  }, []);
+
   return (
-    <DiaryBlockWrapper feel={diary.feel}>
+    <DiaryBlockWrapper feel={diary.feel} onClick={() => test(diary.id)}>
       <WhiteLabel>
         <div></div>
       </WhiteLabel>

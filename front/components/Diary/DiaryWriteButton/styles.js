@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Banner = styled.div`
+export const DiaryBanner = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
