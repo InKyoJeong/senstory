@@ -6,7 +6,10 @@ import {
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
+  REMOVE_DIARY_FAILURE,
   REMOVE_DIARY_PHOTO,
+  REMOVE_DIARY_REQUEST,
+  REMOVE_DIARY_SUCCESS,
   UPLOAD_PHOTOS_FAILURE,
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
@@ -22,6 +25,9 @@ export const initialState = {
   addDiaryLoading: false,
   addDiaryFinish: false,
   addDiaryError: null,
+  removeDiaryLoading: false,
+  removeDiaryFinish: false,
+  removeDiaryError: null,
   uploadPhotosLoading: false,
   uploadPhotosFinish: false,
   uploadPhotosError: null,
@@ -59,6 +65,22 @@ const reducer = (state = initialState, action) => {
       case ADD_DIARY_FAILURE:
         draft.addDiaryLoading = false;
         draft.addDiaryError = action.error;
+        break;
+      case REMOVE_DIARY_REQUEST:
+        draft.removeDiaryLoading = true;
+        draft.removeDiaryFinish = false;
+        draft.removeDiaryError = null;
+        break;
+      case REMOVE_DIARY_SUCCESS:
+        draft.removeDiaryFinish = true;
+        draft.removeDiaryLoading = false;
+        draft.mainDiarys = draft.mainDiarys.filter(
+          (v) => v.id !== action.data.DiaryId
+        );
+        break;
+      case REMOVE_DIARY_FAILURE:
+        draft.removeDiaryLoading = false;
+        draft.removeDiaryError = action.error;
         break;
       case UPLOAD_PHOTOS_REQUEST:
         draft.uploadPhotosLoading = true;

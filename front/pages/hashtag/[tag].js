@@ -40,7 +40,6 @@ const Hashtag = () => {
           ref={hasMorePosts && !loadHashtagPostsLoading ? ref : undefined}
         />
       ))}
-      {/* <div ref={hasMorePosts && !loadHashtagPostsLoading ? ref : undefined} /> */}
     </Layout>
   );
 };

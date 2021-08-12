@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Button } from "antd";
 
 export const DiaryBlockWrapper = styled.div`
   padding: 10px;
   border-radius: 5px;
   color: ${(props) => props.theme.DARK_GRAY};
-  box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2),
-    1px 1px 3px rgba(0, 0, 0, 0.9) inset;
+  box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2);
+
   overflow: hidden;
   width: 48%;
   margin: 1% auto;
@@ -67,29 +68,34 @@ export const DiaryBlockWrapper = styled.div`
   & svg {
     font-size: 18px;
   }
+`;
+
+export const WhiteLabel = styled.div`
+  position: relative;
 
   & div {
-    position: relative;
-
-    & div {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.4);
-      transform: rotate(45deg);
-      height: 100px;
-      width: 45px;
-      top: -42px;
-      left: -24px;
-    }
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(45deg);
+    height: 100px;
+    width: 45px;
+    top: -42px;
+    left: -24px;
+    /* height: 100px;
+    width: 12px;
+    top: -28px;
+    left: 22px; */
   }
-
-  /* height: 100px;
-  width: 12px;
-  top: -28px;
-  left: 22px; */
 `;
 
 export const BlockFeelText = styled.div`
   color: ${(props) => props.theme.DARK_GRAY};
+  display: flex;
+  justify-content: space-between;
+
+  & div {
+    z-index: 50;
+  }
 `;
 
 export const BlockDateText = styled.div`
@@ -98,4 +104,18 @@ export const BlockDateText = styled.div`
   opacity: 0.7;
   font-style: italic;
   font-size: 12px;
+`;
+
+// ----- DiaryDropdown -----
+export const DiaryDropdownButton = styled(Button)`
+  background-color: #e6acac;
+  color: black;
+  border-width: 2px;
+
+  &:hover,
+  &:focus {
+    background-color: #e89b9b;
+    border-color: #d6c7c7;
+    color: red;
+  }
 `;

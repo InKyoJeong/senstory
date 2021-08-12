@@ -1,26 +1,52 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_DIARY_REQUEST } from "../../../actions/diary";
 import { today } from "../../../utils";
-import { BlockFeelText, BlockDateText, DiaryBlockWrapper } from "./styles";
 import {
   FrownOutlined,
   MehOutlined,
   SmileOutlined,
-  StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
+import DiaryDropdown from "./DiaryDropdown";
+import {
+  BlockFeelText,
+  BlockDateText,
+  DiaryBlockWrapper,
+  WhiteLabel,
+} from "./styles";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
+  const dispatch = useDispatch();
+  const { removeDiaryLoading } = useSelector((state) => state.diary);
+
+  const onRemoveDiary = useCallback(() => {
+    return dispatch({
+      type: REMOVE_DIARY_REQUEST,
+      data: diary.id,
+    });
+  }, []);
+
   return (
     <DiaryBlockWrapper feel={diary.feel}>
-      <div>
+      <WhiteLabel>
         <div></div>
-      </div>
+      </WhiteLabel>
+
       <BlockFeelText>
-        {diary.feel === "Special" && <StarOutlined />}
-        {diary.feel === "Good" && <SmileOutlined />}
-        {diary.feel === "Soso" && <MehOutlined />}
-        {diary.feel === "Bad" && <FrownOutlined />}
+        <div>
+          {diary.feel === "Special" && <StarOutlined />}
+          {diary.feel === "Good" && <SmileOutlined />}
+          {diary.feel === "Soso" && <MehOutlined />}
+          {diary.feel === "Bad" && <FrownOutlined />}
+        </div>
+        <span>
+          <DiaryDropdown
+            onRemoveDiary={onRemoveDiary}
+            removeDiaryLoading={removeDiaryLoading}
+          />
+        </span>
       </BlockFeelText>
       <BlockDateText>{today(diary.createdAt)}</BlockDateText>
 

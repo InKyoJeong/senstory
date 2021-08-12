@@ -36,34 +36,6 @@ const Home = () => {
     }
   }, [inView, hasMorePosts, loadAllPostLoading, mainPosts]);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_ALL_POST_REQUEST,
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   function onScroll() {
-  //     if (
-  //       window.scrollY + document.documentElement.clientHeight >
-  //       document.documentElement.scrollHeight - 300
-  //     ) {
-  //       if (hasMorePosts && !loadAllPostLoading) {
-  //         const lastId = mainPosts[mainPosts.length - 1]?.id;
-  //         dispatch({
-  //           type: LOAD_ALL_POST_REQUEST,
-  //           lastId,
-  //         });
-  //       }
-  //     }
-  //   }
-  //   window.addEventListener("scroll", onScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", onScroll);
-  //   };
-  // }, [hasMorePosts, loadAllPostLoading, mainPosts]);
-
   return (
     <Layout main>
       <Conditional condition={me}>

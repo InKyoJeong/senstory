@@ -7,6 +7,9 @@ import {
   LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
+  REMOVE_DIARY_FAILURE,
+  REMOVE_DIARY_REQUEST,
+  REMOVE_DIARY_SUCCESS,
   UPLOAD_PHOTOS_FAILURE,
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
@@ -54,6 +57,30 @@ function* addDiary(action) {
   }
 }
 
+function removeDiaryAPI(data) {
+  return axios.delete(`/diary/${data}`);
+}
+
+function* removeDiary(action) {
+  try {
+    const result = yield call(removeDiaryAPI, action.data);
+    yield put({
+      type: REMOVE_DIARY_SUCCESS,
+      data: result.data,
+    });
+    // yield put({
+    //   type: REMOVE_DIARY_OF_ME,
+    //   data: action.data,
+    // });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: REMOVE_DIARY_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function uploadPhotosAPI(data) {
   return axios.post("/diary/photos", data);
 }
@@ -83,6 +110,10 @@ function* watchAddDiary() {
   yield takeLatest(ADD_DIARY_REQUEST, addDiary);
 }
 
+function* watchRemoveDiary() {
+  yield takeLatest(REMOVE_DIARY_REQUEST, removeDiary);
+}
+
 function* watchUploadPhotos() {
   yield takeLatest(UPLOAD_PHOTOS_REQUEST, uploadPhotos);
 }
@@ -91,6 +122,7 @@ export default function* diarySaga() {
   yield all([
     fork(watchLoadUserDiarys),
     fork(watchAddDiary),
+    fork(watchRemoveDiary),
     fork(watchUploadPhotos),
   ]);
 }

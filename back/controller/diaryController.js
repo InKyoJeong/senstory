@@ -69,3 +69,15 @@ module.exports.postAddPhotos = async (req, res, next) => {
   console.log(req.files);
   res.json(req.files.map((v) => v.filename));
 };
+
+module.exports.deleteDiary = async (req, res, next) => {
+  try {
+    await Diary.destroy({
+      where: { id: req.params.diaryId, UserId: req.user.id },
+    });
+    res.status(200).json({ DiaryId: parseInt(req.params.diaryId, 10) });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
