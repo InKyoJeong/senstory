@@ -6,10 +6,8 @@ module.exports.postAddDiary = async (req, res, next) => {
       title: req.body.title,
       content: req.body.content,
       feel: req.body.feel,
-      maxtemp: req.body.maxtemp,
-      mintemp: req.body.mintemp,
-      // maxtemp: parseInt(req.body.maxtemp,10),
-      // mintemp: parseInt(req.body.mintemp,10),
+      maxtemp: parseInt(req.body.maxtemp, 10),
+      mintemp: parseInt(req.body.mintemp, 10),
       UserId: req.user.id,
     });
     const feel = req.body.feel;
