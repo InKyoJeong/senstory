@@ -10,7 +10,7 @@ import {
   SmileOutlined,
   StarOutlined,
 } from "@ant-design/icons";
-import DiaryDropdown from "./DiaryDropdown";
+// import DiaryDropdown from "../DiaryDropdown";
 
 import {
   BlockFeelText,
