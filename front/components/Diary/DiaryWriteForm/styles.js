@@ -89,6 +89,28 @@ export const DiaryContentInput = styled(Input.TextArea)`
   border-radius: 10px;
 `;
 
+export const TempWriteWrapper = styled.div`
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: ${(props) => props.theme.DARK_GRAY};
+  color: #c2c2c2;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & div {
+    margin-right: 10px;
+  }
+`;
+
+export const TempMin = styled.span`
+  color: rgb(151, 205, 252);
+`;
+export const TempMax = styled.span`
+  color: rgb(247, 161, 231);
+`;
+
 export const FeelButtonWrapper = styled.div`
   margin-top: 10px;
   display: grid;
@@ -152,7 +174,7 @@ export const FeelButton = styled.div`
 export const PhotoDisplay = styled.div`
   ${alignCenter}
   margin-top: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 
   & div {
     position: relative;

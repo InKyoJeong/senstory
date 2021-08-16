@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Form, Button } from "antd";
 import {
+  FireFilled,
+  FireOutlined,
   FrownOutlined,
+  LoadingOutlined,
   MehOutlined,
   SmileOutlined,
   StarOutlined,
@@ -28,7 +31,12 @@ import {
   PhotoDeleteBtn,
   PhotoDisplay,
   PhotoEnrollWrapper,
+  TempMin,
+  TempMax,
+  TempWriteWrapper,
 } from "./styles";
+
+const WEATHER_API_KEY = "754396fc47cf98139cb846496c61d15d";
 
 const DiaryWriteForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -38,7 +46,36 @@ const DiaryWriteForm = ({ closeModal }) => {
   const [title, onChangeTitle, setTitle] = useInput("");
   const [content, onChangeContent, setContent] = useInput("");
   const [feel, setFeel] = useState(null);
+  const [maxtemp, setMaxtemp] = useState(null);
+  const [mintemp, setMintemp] = useState(null);
+
   const imageInput = useRef();
+
+  const onGeoSuccess = useCallback(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const maxtemp = data.main.temp_max;
+          const mintemp = data.main.temp_min;
+          setMaxtemp(Math.round(maxtemp));
+          setMintemp(Math.round(mintemp));
+        });
+    },
+    [maxtemp, mintemp]
+  );
+
+  const onGeoError = useCallback(() => {
+    alert("위치를 찾을 수 없습니다.");
+  }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+  }, []);
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -82,12 +119,14 @@ const DiaryWriteForm = ({ closeModal }) => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("feel", feel);
+    formData.append("maxtemp", maxtemp);
+    formData.append("mintemp", mintemp);
     // console.log("formData", formData);
     return dispatch({
       type: ADD_DIARY_REQUEST,
       data: formData,
     });
-  }, [title, content, feel, photoPaths]);
+  }, [title, content, feel, photoPaths, maxtemp, mintemp]);
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
@@ -108,8 +147,6 @@ const DiaryWriteForm = ({ closeModal }) => {
   const onChangeFeel = useCallback((e) => {
     setFeel(e.target.innerText);
   }, []);
-
-  // console.log(feel);
 
   const onResetContents = useCallback((i) => {
     dispatch({
@@ -136,6 +173,20 @@ const DiaryWriteForm = ({ closeModal }) => {
               placeholder="내용을 입력하세요."
               rows={4}
             />
+
+            <TempWriteWrapper>
+              <div>오늘 날씨</div>
+              <Conditional condition={maxtemp === null && mintemp === null}>
+                <span>
+                  <LoadingOutlined />
+                </span>
+              </Conditional>
+              <Conditional condition={maxtemp && mintemp}>
+                <span>
+                  <TempMin>{mintemp}°</TempMin> / <TempMax>{maxtemp}°</TempMax>
+                </span>
+              </Conditional>
+            </TempWriteWrapper>
 
             <FeelButtonWrapper onClick={onChangeFeel} feel={feel}>
               <FeelButton>
