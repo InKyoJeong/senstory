@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "antd";
 
 export const DiaryBlockWrapper = styled.div`
   padding: 10px;
@@ -64,8 +63,7 @@ export const DiaryBlockWrapper = styled.div`
     transition: 0.3s;
     cursor: pointer;
   }
- 
-  }
+
   & svg {
     font-size: 18px;
   }

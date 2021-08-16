@@ -24,27 +24,29 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import DiaryDropdown from "../../../components/diary/DiaryDropdown";
+import Conditional from "../../../hocs/Conditional";
 
 const DiaryDetail = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { diaryId, userId } = router.query;
   const parseUserId = parseInt(userId, 10);
-  const { singleDiary, removeDiaryFinish } = useSelector(
+  const { singleDiary, removeDiaryLoading, removeDiaryFinish } = useSelector(
     (state) => state.diary
   );
+
   const { me } = useSelector((state) => state.user);
 
   // test
   console.log(singleDiary);
 
   useEffect(() => {
-    if (!me?.id || parseUserId !== me?.id) {
+    if (!me?.id || parseUserId !== me?.id || !singleDiary?.id) {
       Router.replace("/");
     }
   }, [parseUserId, me?.id]);
 
-  if (!me?.id || parseUserId !== me?.id) {
+  if (!me?.id || parseUserId !== me?.id || !singleDiary?.id) {
     return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
   }
 
@@ -61,8 +63,14 @@ const DiaryDetail = () => {
     });
   }, []);
 
+  if (removeDiaryLoading || removeDiaryFinish) {
+    return <Loader text="삭제중..." />;
+  }
+
   return (
     <Layout>
+      {/* <DiaryDetail diary={singleDiary}/> */}
+
       <div
         style={{
           width: "100%",
@@ -109,21 +117,26 @@ const DiaryDetail = () => {
         >
           <DiaryDropdown
             onRemoveDiary={onRemoveDiary}
-            // removeDiaryLoading={removeDiaryLoading}
+            removeDiaryLoading={removeDiaryLoading}
           />
         </div>
       </div>
-
-      {/* <DiaryDetail diary={singleDiary}/> */}
 
       <div
         style={{
           background: "linear-gradient(135deg, #ffe78f, #f2bf05)",
           borderRadius: 20,
           padding: "10px 20px 20px 20px",
+          marginBottom: 20,
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: 10,
+          }}
+        >
           <div>
             {singleDiary.feel === "Special" && <StarOutlined />}
             {singleDiary.feel === "Good" && <SmileOutlined />}
@@ -131,7 +144,9 @@ const DiaryDetail = () => {
             {singleDiary.feel === "Bad" && <FrownOutlined />}
           </div>
           <div>
-            {singleDiary.mintemp}° / {singleDiary.maxtemp}°
+            <Conditional condition={singleDiary.mintemp && singleDiary.maxtemp}>
+              {singleDiary.mintemp}° / {singleDiary.maxtemp}°
+            </Conditional>
           </div>
         </div>
 
@@ -145,10 +160,10 @@ const DiaryDetail = () => {
         >
           <div
             style={{
-              color: "white",
+              color: "black",
+              textShadow: "1px 1px 1px rgba(255,255,255, 0.5)",
               marginBottom: 40,
               fontWeight: "bolder",
-              textShadow: "1px 1px 3px rgba(0,0,0, 0.3)",
             }}
           >
             {singleDiary.title}
@@ -168,12 +183,12 @@ const DiaryDetail = () => {
               </div>
               <div
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: "#f0f0f0",
                   padding: "15px 15px 30px 15px",
                   width: "75%",
                   height: "75%",
                   boxShadow:
-                    "0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04)",
+                    "0 10px 10px -4px rgba(0,0,0,0.2),0 5px 5px -5px rgba(0,0,0,0.04)",
                 }}
               >
                 <img
@@ -187,9 +202,10 @@ const DiaryDetail = () => {
 
           <div
             style={{
-              color: "white",
+              color: "black",
+              textShadow: "1px 1px 1px rgba(255,255,255, 0.5)",
+              whiteSpace: "pre-wrap",
               marginTop: 30,
-              textShadow: "1px 1px 2px rgba(0,0,0, 0.2)",
             }}
           >
             {singleDiary.content}

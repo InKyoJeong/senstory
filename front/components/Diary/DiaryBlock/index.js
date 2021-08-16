@@ -10,7 +10,6 @@ import {
   SmileOutlined,
   StarOutlined,
 } from "@ant-design/icons";
-// import DiaryDropdown from "../DiaryDropdown";
 
 import {
   BlockFeelText,
@@ -24,16 +23,6 @@ import Router, { useRouter } from "next/router";
 const DiaryBlock = forwardRef(({ diary }, ref) => {
   const router = useRouter();
   const { userId } = router.query;
-
-  const dispatch = useDispatch();
-  const { removeDiaryLoading } = useSelector((state) => state.diary);
-
-  const onRemoveDiary = useCallback(() => {
-    return dispatch({
-      type: REMOVE_DIARY_REQUEST,
-      data: diary.id,
-    });
-  }, []);
 
   const test = useCallback((id) => {
     console.log(id);
@@ -53,12 +42,6 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
           {diary.feel === "Soso" && <MehOutlined />}
           {diary.feel === "Bad" && <FrownOutlined />}
         </div>
-        {/* <span>
-          <DiaryDropdown
-            onRemoveDiary={onRemoveDiary}
-            removeDiaryLoading={removeDiaryLoading}
-          />
-        </span> */}
         <BlockTitleText>
           <div>{diary.title}</div>
         </BlockTitleText>
@@ -79,8 +62,8 @@ DiaryBlock.propTypes = {
     createdAt: PropTypes.string,
     feel: PropTypes.string,
     Photos: PropTypes.arrayOf(PropTypes.object),
-    // maxtemp: PropTypes.number,
-    // mintemp: PropTypes.number,
+    maxtemp: PropTypes.number,
+    mintemp: PropTypes.number,
   }).isRequired,
 };
 export default DiaryBlock;
