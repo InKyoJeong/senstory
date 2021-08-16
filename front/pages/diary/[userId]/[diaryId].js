@@ -9,6 +9,7 @@ import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
 import { LOAD_ME_REQUEST } from "../../../actions/user";
 import {
+  BACK_TO_DIARY,
   LOAD_SINGLE_DIARY_REQUEST,
   REMOVE_DIARY_REQUEST,
 } from "../../../actions/diary";
@@ -31,13 +32,12 @@ const DiaryDetail = () => {
   const dispatch = useDispatch();
   const { diaryId, userId } = router.query;
   const parseUserId = parseInt(userId, 10);
-  const { singleDiary, removeDiaryLoading, removeDiaryFinish } = useSelector(
-    (state) => state.diary
-  );
-
+  const { singleDiary, removeDiaryLoading, removeDiaryFinish, backTodiary } =
+    useSelector((state) => state.diary);
   const { me } = useSelector((state) => state.user);
 
   // test
+  console.log("backTodiary", backTodiary);
   console.log(singleDiary);
 
   useEffect(() => {
@@ -63,6 +63,16 @@ const DiaryDetail = () => {
     });
   }, []);
 
+  const onBack = useCallback(() => {
+    dispatch({
+      type: BACK_TO_DIARY,
+    });
+  }, []);
+
+  if (backTodiary) {
+    router.back();
+  }
+
   if (removeDiaryLoading || removeDiaryFinish) {
     return <Loader text="삭제중..." />;
   }
@@ -83,10 +93,7 @@ const DiaryDetail = () => {
         }}
       >
         <div>
-          <div
-            onClick={() => router.back()}
-            style={{ fontSize: 30, paddingLeft: 10 }}
-          >
+          <div onClick={onBack} style={{ fontSize: 30, paddingLeft: 10 }}>
             <ArrowLeftOutlined
               style={{
                 color: "white",

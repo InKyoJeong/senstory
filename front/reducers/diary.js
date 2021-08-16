@@ -3,6 +3,8 @@ import {
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
+  BACK_TO_DIARY,
+  BACK_TO_DIARY_FINISH,
   LOAD_SINGLE_DIARY_FAILURE,
   LOAD_SINGLE_DIARY_REQUEST,
   LOAD_SINGLE_DIARY_SUCCESS,
@@ -38,6 +40,7 @@ export const initialState = {
   uploadPhotosLoading: false,
   uploadPhotosFinish: false,
   uploadPhotosError: null,
+  backTodiary: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -121,6 +124,12 @@ const reducer = (state = initialState, action) => {
       }
       case REMOVE_DIARY_PHOTO:
         draft.photoPaths = draft.photoPaths.filter((v, i) => i !== action.data);
+        break;
+      case BACK_TO_DIARY:
+        draft.backTodiary = true;
+        break;
+      case BACK_TO_DIARY_FINISH:
+        draft.backTodiary = false;
         break;
       default:
         break;

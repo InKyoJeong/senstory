@@ -10,7 +10,10 @@ import { EditFilled } from "@ant-design/icons";
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../../actions/user";
-import { LOAD_USER_DIARYS_REQUEST } from "../../../actions/diary";
+import {
+  BACK_TO_DIARY_FINISH,
+  LOAD_USER_DIARYS_REQUEST,
+} from "../../../actions/diary";
 
 import Conditional from "../../../hocs/Conditional";
 import Layout from "../../../components/common/Layout";
@@ -38,6 +41,12 @@ const Diary = () => {
       Router.push("/");
     }
   }, [parseId, me?.id]);
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: BACK_TO_DIARY_FINISH,
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadUserDiarysLoading) {
