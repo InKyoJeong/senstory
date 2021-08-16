@@ -9,10 +9,10 @@ import { DiaryDropdownButton } from "./styles";
 //  removeDiaryLoading: boolean;
 // }
 
-const DiaryDropdown = ({ onRemoveDiary, removeDiaryLoading }) => {
+const DiaryDropdown = ({ onRemoveDiary }) => {
   const menu = (
     <>
-      <DiaryDropdownButton onClick={onRemoveDiary} loading={removeDiaryLoading}>
+      <DiaryDropdownButton onClick={onRemoveDiary}>
         <DeleteOutlined />
       </DiaryDropdownButton>
     </>

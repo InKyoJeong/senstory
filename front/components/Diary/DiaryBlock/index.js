@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_DIARY_REQUEST } from "../../../actions/diary";
-import { today } from "../../../utils";
+import { todayDot } from "../../../utils";
 import Link from "next/link";
 import {
   FrownOutlined,
@@ -46,7 +46,7 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
           <div>{diary.title}</div>
         </BlockTitleText>
       </BlockFeelText>
-      <BlockDateText>{today(diary.createdAt)}</BlockDateText>
+      <BlockDateText>{todayDot(diary.createdAt)}</BlockDateText>
 
       <div ref={ref} />
     </DiaryBlockWrapper>
