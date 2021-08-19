@@ -7,7 +7,6 @@ export const DiaryBanner = styled.div`
   justify-content: center;
   padding: 12px 0px;
   background-color: #49a2f5;
-  margin-bottom: 20px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border: 1px solid black;

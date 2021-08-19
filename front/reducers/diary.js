@@ -5,6 +5,9 @@ import {
   ADD_DIARY_SUCCESS,
   BACK_TO_DIARY,
   BACK_TO_DIARY_FINISH,
+  LOAD_FEEL_DIARYS_FAILURE,
+  LOAD_FEEL_DIARYS_REQUEST,
+  LOAD_FEEL_DIARYS_SUCCESS,
   LOAD_SINGLE_DIARY_FAILURE,
   LOAD_SINGLE_DIARY_REQUEST,
   LOAD_SINGLE_DIARY_SUCCESS,
@@ -31,6 +34,9 @@ export const initialState = {
   loadSingleDiaryLoading: false,
   loadSingleDiaryFinish: false,
   loadSingleDiaryError: null,
+  loadFeelDiarysLoading: false,
+  loadFeelDiarysFinish: false,
+  loadFeelDiarysError: null,
   addDiaryLoading: false,
   addDiaryFinish: false,
   addDiaryError: null,
@@ -74,6 +80,21 @@ const reducer = (state = initialState, action) => {
       case LOAD_SINGLE_DIARY_FAILURE:
         draft.loadSingleDiaryLoading = false;
         draft.loadSingleDiaryError = action.error;
+        break;
+      case LOAD_FEEL_DIARYS_REQUEST:
+        draft.loadFeelDiarysLoading = true;
+        draft.loadFeelDiarysFinish = false;
+        draft.loadFeelDiarysError = null;
+        break;
+      case LOAD_FEEL_DIARYS_SUCCESS:
+        draft.loadFeelDiarysFinish = true;
+        draft.loadFeelDiarysLoading = false;
+        draft.mainDiarys = draft.mainDiarys.concat(action.data);
+        draft.hasMoreDiarys = action.data.length === 30;
+        break;
+      case LOAD_FEEL_DIARYS_FAILURE:
+        draft.loadFeelDiarysLoading = false;
+        draft.loadFeelDiarysError = action.error;
         break;
       case ADD_DIARY_REQUEST:
         draft.addDiaryLoading = true;

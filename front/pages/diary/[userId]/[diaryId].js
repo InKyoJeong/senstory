@@ -52,6 +52,7 @@ const DiaryDetailPage = () => {
 
   if (backTodiary) {
     router.back();
+    // return <Loader text="로딩중..." />;
   }
 
   if (removeDiaryLoading || removeDiaryFinish) {

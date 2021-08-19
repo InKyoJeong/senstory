@@ -26,6 +26,7 @@ import {
   DiaryImgClip,
   DiaryImgFrame,
   DiaryContentText,
+  DiaryTempWrapper,
 } from "./styles";
 
 const DiaryDetail = ({ diary, onBack }) => {
@@ -50,7 +51,7 @@ const DiaryDetail = ({ diary, onBack }) => {
         </DiaryHeaderMenu>
       </DiaryHeaderWrapper>
 
-      <DiaryContentsWrapper>
+      <DiaryContentsWrapper feel={diary.feel}>
         <DiaryContentsTop>
           <div>
             {diary.feel === "Special" && <StarOutlined />}
@@ -60,7 +61,11 @@ const DiaryDetail = ({ diary, onBack }) => {
           </div>
           <div>
             <Conditional condition={diary.mintemp && diary.maxtemp}>
-              {diary.mintemp}° / {diary.maxtemp}°
+              <DiaryTempWrapper>
+                <span>{diary.mintemp}°</span>
+                <span>/</span>
+                <span>{diary.maxtemp}°</span>
+              </DiaryTempWrapper>
             </Conditional>
           </div>
         </DiaryContentsTop>

@@ -4,6 +4,9 @@ import {
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
+  LOAD_FEEL_DIARYS_FAILURE,
+  LOAD_FEEL_DIARYS_REQUEST,
+  LOAD_FEEL_DIARYS_SUCCESS,
   LOAD_SINGLE_DIARY_FAILURE,
   LOAD_SINGLE_DIARY_REQUEST,
   LOAD_SINGLE_DIARY_SUCCESS,
@@ -53,6 +56,31 @@ function* loadDiary(action) {
     console.error(err);
     yield put({
       type: LOAD_SINGLE_DIARY_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadFeelDiarysAPI(data1, data2, lastId) {
+  return axios.get(`/feel/${data1}/${data2}?lastId=${lastId || 0}`);
+}
+
+function* loadFeelDiarys(action) {
+  try {
+    const result = yield call(
+      loadFeelDiarysAPI,
+      action.data1,
+      action.data2,
+      action.lastId
+    );
+    yield put({
+      type: LOAD_FEEL_DIARYS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_FEEL_DIARYS_FAILURE,
       error: err.response.data,
     });
   }
@@ -129,6 +157,10 @@ function* watchLoadUserDiarys() {
   yield throttle(5000, LOAD_USER_DIARYS_REQUEST, loadUserDiarys);
 }
 
+function* watchLoadFeelDiarys() {
+  yield throttle(5000, LOAD_FEEL_DIARYS_REQUEST, loadFeelDiarys);
+}
+
 function* watchLoadDiary() {
   yield takeLatest(LOAD_SINGLE_DIARY_REQUEST, loadDiary);
 }
@@ -148,6 +180,7 @@ function* watchUploadPhotos() {
 export default function* diarySaga() {
   yield all([
     fork(watchLoadUserDiarys),
+    fork(watchLoadFeelDiarys),
     fork(watchLoadDiary),
     fork(watchAddDiary),
     fork(watchRemoveDiary),

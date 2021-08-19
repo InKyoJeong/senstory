@@ -44,19 +44,79 @@ export const DiaryHeaderMenu = styled.div`
   font-weight: bolder;
 `;
 
-// ----- Diary  -----
+// ----- Diary Contents-----
 
 export const DiaryContentsWrapper = styled.div`
-  background: linear-gradient(135deg, #ffe78f, #f2bf05);
   border-radius: 20px;
   padding: 10px 20px 20px 20px;
   margin-bottom: 20px;
+
+  background: -webkit-linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Special" && "#76bae8"},
+    ${(props) => props.feel === "Special" && "#e8bdf0"}
+  );
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Special" && "#76bae8"},
+    ${(props) => props.feel === "Special" && "#e8bdf0"}
+  );
+
+  background: -webkit-linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Good" && "#adde9b"},
+    ${(props) => props.feel === "Good" && "#8ACF71"}
+  );
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Good" && "#adde9b"},
+    ${(props) => props.feel === "Good" && "#8ACF71"}
+  );
+
+  background: -webkit-linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Soso" && "#ffe78f"},
+    ${(props) => props.feel === "Soso" && "#f2bf05"}
+  );
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Soso" && "#ffe78f"},
+    ${(props) => props.feel === "Soso" && "#f2bf05"}
+  );
+
+  background: -webkit-linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Bad" && "#ffa1a7"},
+    ${(props) => props.feel === "Bad" && "#ff757f"}
+  );
+  background: linear-gradient(
+    135deg,
+    ${(props) => props.feel === "Bad" && "#ffa1a7"},
+    ${(props) => props.feel === "Bad" && "#ff757f"}
+  );
 `;
 
 export const DiaryContentsTop = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+`;
+
+export const DiaryTempWrapper = styled.div`
+  background-color: ${(props) => props.theme.BLACK};
+  padding: 3px 6px;
+  border-radius: 100px;
+
+  & span:first-child {
+    color: rgb(151, 205, 252);
+  }
+  & span:nth-child(2) {
+    color: gray;
+    margin: 5px;
+  }
+  & span:last-child {
+    color: rgb(247, 161, 231);
+  }
 `;
 
 export const DiaryContents = styled.div`
@@ -69,6 +129,13 @@ export const DiaryTitleText = styled.div`
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
   margin-bottom: 40px;
   font-weight: bolder;
+`;
+
+export const DiaryContentText = styled.div`
+  color: black;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  white-space: pre-wrap;
+  margin-top: 30px;
 `;
 
 // ----- Diary Image -----
@@ -95,11 +162,4 @@ export const DiaryImgFrame = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
-
-export const DiaryContentText = styled.div`
-  color: black;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
-  white-space: pre-wrap;
-  margin-top: 30px;
 `;

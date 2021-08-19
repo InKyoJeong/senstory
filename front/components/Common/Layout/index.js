@@ -10,12 +10,14 @@ import MyProfileForm from "../../common/MyProfileForm";
 import RandomUserForm from "../../home/RandomUserForm";
 import HashtagSearch from "../../home/HashtagSearch";
 import RelatedCheck from "../../home/RelatedCheck";
+import FeelSelect from "../../diary/FeelSelect";
 
 const Layout = ({
   children,
   main = false,
   profile = false,
   related = false,
+  diary = false,
 }) => {
   const { me } = useSelector((state) => state.user);
 
@@ -51,6 +53,10 @@ const Layout = ({
             <MyProfileForm />
             <RandomUserForm />
           </Conditional>
+
+          <Conditional condition={me && me.id && diary}>
+            <FeelSelect />
+          </Conditional>
         </Col>
       </Row>
     </div>
@@ -62,6 +68,7 @@ Layout.propTypes = {
   main: PropTypes.bool,
   profile: PropTypes.bool,
   related: PropTypes.bool,
+  diary: PropTypes.bool,
 };
 
 export default Layout;
