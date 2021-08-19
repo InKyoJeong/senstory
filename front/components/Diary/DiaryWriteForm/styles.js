@@ -38,7 +38,7 @@ export const DiaryModalForm = styled.div`
   ${alignCenter}
   flex-direction: column;
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 50%;
   width: 90%;
   transform: translate(-50%, -50%);

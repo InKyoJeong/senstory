@@ -59,6 +59,7 @@ const DiaryWriteForm = ({ closeModal }) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           const maxtemp = data.main.temp_max;
           const mintemp = data.main.temp_min;
           setMaxtemp(Math.round(maxtemp));
@@ -178,7 +179,7 @@ const DiaryWriteForm = ({ closeModal }) => {
             />
 
             <TempWriteWrapper>
-              <div>오늘 날씨</div>
+              <div>현재 날씨</div>
               <Conditional condition={maxtemp === null && mintemp === null}>
                 <span>
                   <LoadingOutlined />
