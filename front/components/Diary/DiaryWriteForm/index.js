@@ -46,6 +46,7 @@ const DiaryWriteForm = ({ closeModal }) => {
   const [feel, setFeel] = useState(null);
   const [maxtemp, setMaxtemp] = useState(null);
   const [mintemp, setMintemp] = useState(null);
+  const [geoError, setGeoError] = useState(false);
 
   const imageInput = useRef();
 
@@ -55,6 +56,7 @@ const DiaryWriteForm = ({ closeModal }) => {
       const lon = position.coords.longitude;
 
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
+
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -68,6 +70,7 @@ const DiaryWriteForm = ({ closeModal }) => {
   );
 
   const onGeoError = useCallback(() => {
+    setGeoError(true);
     alert("위치를 찾을 수 없습니다.");
   }, []);
 
@@ -101,6 +104,9 @@ const DiaryWriteForm = ({ closeModal }) => {
   }, [addDiaryFinish]);
 
   const onSubmit = useCallback(() => {
+    if (maxtemp === null && mintemp === null && !geoError) {
+      return alert("날씨 로딩이 끝난 후에 등록해주세요.");
+    }
     if (!title || !title.trim()) {
       return alert("제목을 입력해주세요.");
     }
