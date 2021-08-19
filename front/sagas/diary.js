@@ -20,7 +20,7 @@ import {
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
 } from "../actions/diary";
-import { ADD_DIARY_TO_ME } from "../actions/user";
+import { ADD_DIARY_TO_ME, REMOVE_DIARY_OF_ME } from "../actions/user";
 
 function loadUserDiarysAPI(data, lastId) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
@@ -124,10 +124,10 @@ function* removeDiary(action) {
       type: REMOVE_DIARY_SUCCESS,
       data: result.data,
     });
-    // yield put({
-    //   type: REMOVE_DIARY_OF_ME,
-    //   data: action.data,
-    // });
+    yield put({
+      type: REMOVE_DIARY_OF_ME,
+      data: action.data.id,
+    });
   } catch (err) {
     console.error(err);
     yield put({
