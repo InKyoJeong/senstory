@@ -18,19 +18,17 @@ import {
   DiaryBlockWrapper,
   WhiteLabel,
 } from "./styles";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 
 const DiaryBlock = forwardRef(({ diary }, ref) => {
-  const router = useRouter();
-  const { userId } = router.query;
+  const { me } = useSelector((state) => state.user);
 
-  const test = useCallback((id) => {
-    console.log(id);
-    Router.push(`/diary/${userId}/${id}`);
+  const onDetail = useCallback((id) => {
+    Router.push(`/diary/${me.id}/${id}`);
   }, []);
 
   return (
-    <DiaryBlockWrapper feel={diary.feel} onClick={() => test(diary.id)}>
+    <DiaryBlockWrapper feel={diary.feel} onClick={() => onDetail(diary.id)}>
       <WhiteLabel>
         <div></div>
       </WhiteLabel>

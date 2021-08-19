@@ -1,41 +1,31 @@
 import React, { useCallback, useState } from "react";
 import Router from "next/router";
 import { useSelector } from "react-redux";
+import { Button } from "antd";
 
 const FeelSelect = () => {
-  const [feelSelect, setFeelSelect] = useState(null);
   const { me } = useSelector((state) => state.user);
 
-  const onSelect = useCallback(
-    (e) => {
-      setFeelSelect(e.target.innerText);
-      Router.push(`/feel/${me.id}/${feelSelect}`);
-    },
-    [feelSelect]
-  );
+  const onSelect = useCallback((e) => {
+    // console.log(e.target);
+    Router.push(`/feel/${me.id}/${e.target.innerText}`);
+  }, []);
 
   return (
-    <div onClick={onSelect} style={{ width: 200, height: 500, color: "white" }}>
-      <div>Special</div>
-      <div>Good</div>
-      <div>Soso</div>
-      <div>Bad</div>
+    <div
+      onClick={onSelect}
+      style={{
+        width: 200,
+        height: 500,
+        color: "white",
+        backgroundColor: "gray",
+      }}
+    >
+      <Button>Special</Button>
+      <Button>Good</Button>
+      <Button>Soso</Button>
+      <Button>Bad</Button>
     </div>
-    // <SearchWrapper>
-    //   <TagSearchTitle>
-    //     <TagsFilled />
-    //     <label>해시태그 검색</label>
-    //   </TagSearchTitle>
-    //   <TagSearchForm>
-    //     <TagSearchInput
-    //       size="small"
-    //       bordered={false}
-    //       value={tagSearch}
-    //       onChange={onChangeTagSearch}
-    //       onSearch={onSearch}
-    //     />
-    //   </TagSearchForm>
-    // </SearchWrapper>
   );
 };
 
