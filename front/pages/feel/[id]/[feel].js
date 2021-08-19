@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { useRouter } from "next/router";
+import Router from "next/router";
+
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
@@ -11,18 +13,25 @@ import { LOAD_ME_REQUEST } from "../../../actions/user";
 import Layout from "../../../components/common/Layout";
 import DiaryBlock from "../../../components/diary/DiaryBlock";
 import DiaryBlockContainer from "../../../components/diary/DiaryBlockContainer";
+import Loader from "../../../components/common/Loader";
 
 const Feel = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id, feel } = router.query;
   const userId = parseInt(id, 10);
-  console.log(userId);
   const { mainDiarys, hasMoreDiarys, loadFeelDiarysLoading } = useSelector(
     (state) => state.diary
   );
+  const { me } = useSelector((state) => state.user);
 
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (!me?.id || userId !== me?.id) {
+      Router.push("/");
+    }
+  }, [userId, me?.id]);
 
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadFeelDiarysLoading) {
@@ -35,6 +44,10 @@ const Feel = () => {
       });
     }
   }, [inView, hasMoreDiarys, loadFeelDiarysLoading, mainDiarys, feel]);
+
+  if (!me?.id || userId !== me?.id) {
+    return <Loader text="잘못된 접근입니다. 홈으로 이동합니다." />;
+  }
 
   return (
     <Layout diary>

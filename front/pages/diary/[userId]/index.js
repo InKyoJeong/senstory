@@ -31,11 +31,10 @@ const Diary = () => {
   const { mainDiarys, hasMoreDiarys, loadUserDiarysLoading } = useSelector(
     (state) => state.diary
   );
-  const { me, userInfo } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, inView] = useInView();
 
-  console.log(me);
   useEffect(() => {
     // 로그인하지 않았거나 내 다이어리가 아닐때
     if (!me?.id || parseId !== me?.id) {
