@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { LOAD_ME_REQUEST } from "../actions/user";
 import Head from "next/head";
@@ -10,25 +10,30 @@ import axios from "axios";
 import Layout from "../components/common/Layout";
 import Loader from "../components/common/Loader";
 import SignUpForm from "../components/user/SignUpForm";
+import SignUpFinish from "../components/user/SignUpFinish";
 
 const Signup = () => {
   const { signUpLoading, signUpFinish } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (signUpFinish) {
-      Router.replace("/login");
-    }
-  }, [signUpFinish]);
+  if (signUpFinish) {
+    return <SignUpFinish />;
+  }
+
+  // useEffect(() => {
+  //   if (signUpFinish) {
+  //     Router.replace("/login");
+  //   }
+  // }, [signUpFinish]);
 
   if (signUpLoading) {
     return <Loader text="회원가입 중..." />;
   }
 
-  if (signUpFinish) {
-    return (
-      <Loader text="회원가입이 완료되었습니다. 로그인 페이지로 이동 중..." />
-    );
-  }
+  // if (signUpFinish) {
+  //   return (
+  //     <Loader text="회원가입이 완료되었습니다. 로그인 페이지로 이동 중..." />
+  //   );
+  // }
 
   return (
     <Layout>

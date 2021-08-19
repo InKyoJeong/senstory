@@ -28,11 +28,11 @@ const SignUpForm = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
-  useEffect(() => {
-    if (signUpFinish) {
-      Router.replace("/");
-    }
-  }, [signUpFinish]);
+  // useEffect(() => {
+  //   if (signUpFinish) {
+  //     Router.replace("/");
+  //   }
+  // }, [signUpFinish]);
 
   useEffect(() => {
     if (signUpError) {

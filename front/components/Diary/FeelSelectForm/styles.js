@@ -25,6 +25,13 @@ export const SelectBtnWrapper = styled.div`
     margin: 3px;
     border: none;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+
+    &:hover,
+    &:active,
+    &:focus {
+      opacity: 0.7;
+      color: black;
+    }
   }
 
   & Button:first-child {
