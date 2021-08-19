@@ -22,7 +22,7 @@ import DiaryWriteButton from "../../../components/diary/DiaryWriteButton";
 import DiaryWriteForm from "../../../components/diary/DiaryWriteForm";
 import DiaryBlock from "../../../components/diary/DiaryBlock";
 import DiaryBlockContainer from "../../../components/diary/DiaryBlockContainer";
-import FeelSelect from "../../../components/diary/FeelSelect";
+import FeelSelectForm from "../../../components/diary/FeelSelectForm";
 
 const Diary = () => {
   const router = useRouter();
@@ -82,7 +82,7 @@ const Diary = () => {
         <div style={{ marginLeft: 5 }}>오늘의 감정 기록하기</div>
       </DiaryWriteButton>
 
-      <FeelSelect hide />
+      <FeelSelectForm hide />
 
       <Conditional condition={modalVisible}>
         <DiaryWriteForm closeModal={closeModal} />

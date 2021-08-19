@@ -126,7 +126,7 @@ function* removeDiary(action) {
     });
     yield put({
       type: REMOVE_DIARY_OF_ME,
-      data: action.data.id,
+      data: action.data,
     });
   } catch (err) {
     console.error(err);

@@ -13,7 +13,7 @@ import {
 import HideWrapper from "../../common/HideWrapper";
 import FeelChartBar from "../FeelChartBar";
 
-const FeelSelect = ({ hide }) => {
+const FeelSelectForm = ({ hide }) => {
   const { me } = useSelector((state) => state.user);
 
   const onSelect = useCallback((e) => {
@@ -51,8 +51,8 @@ const FeelSelect = ({ hide }) => {
   );
 };
 
-FeelSelect.propTypes = {
+FeelSelectForm.propTypes = {
   hide: PropTypes.bool,
 };
 
-export default FeelSelect;
+export default FeelSelectForm;

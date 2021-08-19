@@ -357,9 +357,7 @@ const reducer = (state = initialState, action) => {
         });
         break;
       case REMOVE_DIARY_OF_ME:
-        draft.me.Diaries = draft.me.Diaries.filter(
-          (v) => v.id !== action.data.id
-        );
+        draft.me.Diaries = draft.me.Diaries.filter((v) => v.id !== action.data);
         break;
       default:
         break;

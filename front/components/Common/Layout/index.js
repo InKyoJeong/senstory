@@ -10,7 +10,7 @@ import MyProfileForm from "../../common/MyProfileForm";
 import RandomUserForm from "../../home/RandomUserForm";
 import HashtagSearch from "../../home/HashtagSearch";
 import RelatedCheck from "../../home/RelatedCheck";
-import FeelSelect from "../../diary/FeelSelect";
+import FeelSelectForm from "../../diary/FeelSelectForm";
 
 const Layout = ({
   children,
@@ -55,7 +55,7 @@ const Layout = ({
           </Conditional>
 
           <Conditional condition={me && me.id && diary}>
-            <FeelSelect />
+            <FeelSelectForm />
           </Conditional>
         </Col>
       </Row>
