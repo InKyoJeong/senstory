@@ -34,6 +34,6 @@ export const ChartWrapper = styled.div`
     margin: 3px;
     display: flex;
     align-items: center;
-    background-color: white;
+    /* background-color: white; */
   }
 `;

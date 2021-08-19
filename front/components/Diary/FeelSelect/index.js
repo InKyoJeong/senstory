@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { ChartWrapper, FeelSelectWrapper, SelectBtnWrapper } from "./styles";
 import HideWrapper from "../../common/HideWrapper";
+import FeelBar from "../FeelBar";
 
 const FeelSelect = ({ hide }) => {
   const { me } = useSelector((state) => state.user);
@@ -13,7 +14,15 @@ const FeelSelect = ({ hide }) => {
   const onSelect = useCallback((e) => {
     Router.push(`/feel/${me.id}/${e.target.innerText}`);
   }, []);
-  console.log(me);
+
+  const totalLength = me.Diaries.length;
+  const specialLength = me.Diaries.filter(
+    (diary) => diary.feel === "Special"
+  ).length;
+  const sosoLength = me.Diaries.filter((diary) => diary.feel === "Soso").length;
+  const goodLength = me.Diaries.filter((diary) => diary.feel === "Good").length;
+  const badLength = me.Diaries.filter((diary) => diary.feel === "Bad").length;
+
   return (
     <HideWrapper hide={hide}>
       <FeelSelectWrapper>
@@ -24,12 +33,12 @@ const FeelSelect = ({ hide }) => {
           <Button>Bad</Button>
         </SelectBtnWrapper>
 
+        {/* <div>{me.Diaries.length}</div> */}
         <ChartWrapper>
-          {/* <div>{me.Diarys.length}</div> */}
-
-          <div>22222</div>
-          <div>3333</div>
-          <div>44444</div>
+          <FeelBar feelLength={specialLength} totalLength={totalLength} />
+          <FeelBar feelLength={sosoLength} totalLength={totalLength} />
+          <FeelBar feelLength={goodLength} totalLength={totalLength} />
+          <FeelBar feelLength={badLength} totalLength={totalLength} />
         </ChartWrapper>
       </FeelSelectWrapper>
     </HideWrapper>
