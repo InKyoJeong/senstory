@@ -10,6 +10,11 @@ export const PostContent = styled.p`
   margin-right: 3px;
 `;
 
+export const PostEditWrapper = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
 export const PostEditInput = styled(Input.TextArea)`
   background-color: ${(props) => props.theme.LIGHT_GRAY};
   border-color: ${(props) => props.theme.LIGHT_GRAY};

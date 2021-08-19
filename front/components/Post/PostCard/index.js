@@ -27,7 +27,7 @@ import Modal from "../../common/Modal";
 import FollowButton from "../../common/FollowButton";
 import PostImages from "../PostImages";
 import CommentWriteForm from "../CommentWriteForm";
-import PostTag from "../PostTag";
+import PostContents from "../PostContents";
 import PostDropdown from "./PostDropdown";
 import CommentItem from "../CommentItem";
 import {
@@ -206,7 +206,7 @@ const PostCard = forwardRef(({ post }, ref) => {
                 }
                 title={<PostAuthor>{post.Repost.User.nickname}</PostAuthor>}
                 description={
-                  <PostTag
+                  <PostContents
                     postData={post.Repost.content}
                     onChangePost={onChangePost}
                     onCancelChange={onCancelChange}
@@ -247,7 +247,7 @@ const PostCard = forwardRef(({ post }, ref) => {
             }
             description={
               <>
-                <PostTag
+                <PostContents
                   postData={post.content}
                   editMode={editMode}
                   onChangePost={onChangePost}

@@ -8,11 +8,12 @@ import Conditional from "../../../hocs/Conditional";
 import {
   EditBtnWrapper,
   PostContent,
+  PostEditWrapper,
   PostEditInput,
   TagWrapper,
 } from "./styles";
 
-const PostTag = ({
+const PostContents = ({
   postData,
   editMode = false,
   onChangePost,
@@ -36,7 +37,7 @@ const PostTag = ({
   return (
     <TagWrapper>
       <Conditional condition={editMode}>
-        <div style={{ display: "flex" }}>
+        <PostEditWrapper>
           <PostEditInput value={textEdit} onChange={onChangeText} />
           <EditBtnWrapper>
             <Button
@@ -48,7 +49,7 @@ const PostTag = ({
             <div />
             <Button onClick={onCancelChange}>취소</Button>
           </EditBtnWrapper>
-        </div>
+        </PostEditWrapper>
       </Conditional>
 
       <Conditional condition={!editMode}>
@@ -67,10 +68,10 @@ const PostTag = ({
   );
 };
 
-PostTag.propTypes = {
+PostContents.propTypes = {
   postData: PropTypes.string.isRequired,
   editMode: PropTypes.bool,
   onCancelChange: PropTypes.func.isRequired,
 };
 
-export default PostTag;
+export default PostContents;
