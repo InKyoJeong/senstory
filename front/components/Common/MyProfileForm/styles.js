@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { Card, Button } from "antd";
 
-// Hide >= 992px
-export const HideWrapper = styled.div`
-  @media screen and (min-width: 992px) {
-    margin-top: 20px;
-    display: ${(props) => props.hide && "none"};
-  }
-`;
-
 export const CardWrapper = styled(Card)`
   background-color: ${(props) => props.theme.MIDDLE_GRAY};
   border-color: ${(props) => props.theme.MIDDLE_GRAY};

@@ -14,6 +14,7 @@ import Layout from "../../../components/common/Layout";
 import DiaryBlock from "../../../components/diary/DiaryBlock";
 import DiaryBlockContainer from "../../../components/diary/DiaryBlockContainer";
 import Loader from "../../../components/common/Loader";
+import FeelSelect from "../../../components/diary/FeelSelect";
 
 const Feel = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,8 @@ const Feel = () => {
 
   return (
     <Layout diary>
+      <FeelSelect hide />
+
       <DiaryBlockContainer>
         {mainDiarys.map((diary) => (
           <DiaryBlock

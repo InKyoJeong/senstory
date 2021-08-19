@@ -1,5 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import Link from "next/link";
 import { Card, Avatar, Form } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
@@ -9,14 +11,14 @@ import {
 } from "../../../actions/user";
 
 import {
-  HideWrapper,
   CardWrapper,
   LogoutButton,
   MyInfoWrapper,
   AvatarWrapper,
 } from "./styles";
+import HideWrapper from "../HideWrapper";
 
-const MyProfileForm = (props) => {
+const MyProfileForm = ({ hide }) => {
   const dispatch = useDispatch();
   const { me, logOutLoading } = useSelector((state) => state.user);
 
@@ -44,7 +46,7 @@ const MyProfileForm = (props) => {
   }, []);
 
   return (
-    <HideWrapper hide={props.hide}>
+    <HideWrapper hide={hide}>
       <CardWrapper>
         <Card.Meta
           avatar={
@@ -106,6 +108,10 @@ const MyProfileForm = (props) => {
       </CardWrapper>
     </HideWrapper>
   );
+};
+
+MyProfileForm.propTypes = {
+  hide: PropTypes.bool,
 };
 
 export default MyProfileForm;

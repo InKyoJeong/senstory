@@ -1,32 +1,41 @@
 import React, { useCallback, useState } from "react";
+import PropTypes from "prop-types";
+
 import Router from "next/router";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
+import { FeelSelectWrapper } from "./styles";
+import HideWrapper from "../../common/HideWrapper";
 
-const FeelSelect = () => {
+const FeelSelect = ({ hide }) => {
   const { me } = useSelector((state) => state.user);
 
   const onSelect = useCallback((e) => {
-    // console.log(e.target);
     Router.push(`/feel/${me.id}/${e.target.innerText}`);
   }, []);
 
   return (
-    <div
-      onClick={onSelect}
-      style={{
-        width: 200,
-        height: 500,
-        color: "white",
-        backgroundColor: "gray",
-      }}
-    >
-      <Button>Special</Button>
-      <Button>Good</Button>
-      <Button>Soso</Button>
-      <Button>Bad</Button>
-    </div>
+    <HideWrapper hide={hide}>
+      <FeelSelectWrapper
+        onClick={onSelect}
+        style={{
+          color: "white",
+          backgroundColor: "gray",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Button>Special</Button>
+        <Button>Good</Button>
+        <Button>Soso</Button>
+        <Button>Bad</Button>
+      </FeelSelectWrapper>
+    </HideWrapper>
   );
+};
+
+FeelSelect.propTypes = {
+  hide: PropTypes.bool,
 };
 
 export default FeelSelect;
