@@ -25,6 +25,9 @@ const FeelSelect = ({ hide }) => {
 
   return (
     <HideWrapper hide={hide}>
+      <div style={{ color: "white", backgroundColor: "gray" }}>
+        {me.Diaries.length}
+      </div>
       <FeelSelectWrapper>
         <SelectBtnWrapper onClick={onSelect}>
           <Button>Special</Button>
@@ -33,7 +36,6 @@ const FeelSelect = ({ hide }) => {
           <Button>Bad</Button>
         </SelectBtnWrapper>
 
-        {/* <div>{me.Diaries.length}</div> */}
         <ChartWrapper>
           <FeelBar feelLength={specialLength} totalLength={totalLength} />
           <FeelBar feelLength={sosoLength} totalLength={totalLength} />

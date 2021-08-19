@@ -6,6 +6,9 @@ export const GuageWrapper = styled.div`
 
   & div {
     width: ${(props) => props.percent};
-    background-color: red;
+    padding: 10px 0px;
+    background-color: ${(props) => props.theme.MAIN};
+    background: linear-gradient(to right, #1890ff, #336a9c);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
   }
 `;

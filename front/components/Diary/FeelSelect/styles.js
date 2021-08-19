@@ -7,7 +7,9 @@ export const FeelSelectWrapper = styled.div`
   margin-top: 20px;
   border-radius: 10px;
   padding: 10px;
-  background-color: gray;
+  background-color: ${(props) => props.theme.DARK_GRAY};
+  border: 2px solid gray;
+  color: white;
 
   @media screen and (min-width: 992px) {
     margin: 20px 5% 20px 5%;
@@ -21,6 +23,21 @@ export const SelectBtnWrapper = styled.div`
   & Button {
     height: 25%;
     margin: 3px;
+    border: none;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  & Button:first-child {
+    background: linear-gradient(to right, #76bae8, #e8bdf0);
+  }
+  & Button:nth-child(2) {
+    background: linear-gradient(to right, #adde9b, #8acf71);
+  }
+  & Button:nth-child(3) {
+    background: linear-gradient(to right, #ffe689, #f7d75e);
+  }
+  & Button:nth-child(4) {
+    background: linear-gradient(to right, #ff8d95, #ff757f);
   }
 `;
 
@@ -34,6 +51,5 @@ export const ChartWrapper = styled.div`
     margin: 3px;
     display: flex;
     align-items: center;
-    /* background-color: white; */
   }
 `;

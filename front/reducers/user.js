@@ -351,10 +351,13 @@ const reducer = (state = initialState, action) => {
         draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
         break;
       case ADD_DIARY_TO_ME:
-        draft.me.Diarys.unshift({ id: action.data.id, feel: action.data.feel });
+        draft.me.Diaries.unshift({
+          id: action.data.id,
+          feel: action.data.feel,
+        });
         break;
       case REMOVE_DIARY_OF_ME:
-        draft.me.Diarys = draft.me.Diarys.filter(
+        draft.me.Diaries = draft.me.Diaries.filter(
           (v) => v.id !== action.data.id
         );
         break;
