@@ -7,8 +7,9 @@ export const DiaryContainerWrapper = styled.div`
   margin-top: 20px;
 `;
 
-// style={{
-//     // display: "grid",
-//     // gridTemplateColumns: "1fr 1fr",
-//     // gap: 7,
-//   }}
+export const DiaryEmpty = styled.div`
+  color: gray;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+`;

@@ -13,7 +13,8 @@ export const GuageWrapper = styled.div`
     border-radius: 2px;
   }
 
-  /* & span {
-    width: 50%;
-  } */
+  & span {
+    padding-left: 5px;
+    font-size: 0.7rem;
+  }
 `;

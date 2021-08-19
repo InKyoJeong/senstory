@@ -25,6 +25,7 @@ export const SelectBtnWrapper = styled.div`
     margin: 3px;
     border: none;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    font-size: 0.75rem;
 
     &:hover,
     &:active,
@@ -66,4 +67,5 @@ export const TotalDiary = styled.div`
   opacity: 0.7;
   display: flex;
   justify-content: flex-end;
+  font-size: 0.8rem;
 `;
