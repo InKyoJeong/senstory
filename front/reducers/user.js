@@ -52,6 +52,7 @@ import {
   CHANGE_AREA_SUCCESS,
   CHANGE_AREA_REQUEST,
   CHANGE_AREA_FAILURE,
+  ADD_DIARY_TO_ME,
 } from "../actions/user";
 
 export const initialState = {
@@ -347,6 +348,9 @@ const reducer = (state = initialState, action) => {
         break;
       case REMOVE_POST_OF_ME:
         draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
+        break;
+      case ADD_DIARY_TO_ME:
+        draft.me.Diarys.unshift({ id: action.data.id, feel: action.data.feel });
         break;
       default:
         break;

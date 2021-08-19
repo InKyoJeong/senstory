@@ -42,6 +42,8 @@ export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
+export const ADD_DIARY_TO_ME = "ADD_DIARY_TO_ME";
+
 export const LOAD_ME_REQUEST = "LOAD_ME_REQUEST";
 export const LOAD_ME_SUCCESS = "LOAD_ME_SUCCESS";
 export const LOAD_ME_FAILURE = "LOAD_ME_FAILURE";

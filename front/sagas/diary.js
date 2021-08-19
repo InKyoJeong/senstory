@@ -20,6 +20,7 @@ import {
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
 } from "../actions/diary";
+import { ADD_DIARY_TO_ME } from "../actions/user";
 
 function loadUserDiarysAPI(data, lastId) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
@@ -92,11 +93,15 @@ function addDiaryAPI(data) {
 
 function* addDiary(action) {
   try {
-    console.log(action.data);
+    // console.log(action.data);
     const result = yield call(addDiaryAPI, action.data);
-    console.log("addDiary saga result", result);
+    // console.log("addDiary saga result", result);
     yield put({
       type: ADD_DIARY_SUCCESS,
+      data: result.data,
+    });
+    yield put({
+      type: ADD_DIARY_TO_ME,
       data: result.data,
     });
   } catch (err) {

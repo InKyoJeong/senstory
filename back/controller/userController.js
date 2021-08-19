@@ -1,6 +1,6 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { Post, User, Image, Comment } = require("../models");
+const { Post, User, Image, Comment, Diary } = require("../models");
 const { Op } = require("sequelize");
 
 module.exports.getMe = async (req, res, next) => {
@@ -16,6 +16,10 @@ module.exports.getMe = async (req, res, next) => {
           {
             model: Post,
             attributes: ["id"],
+          },
+          {
+            model: Diary,
+            attributes: ["id", "feel"],
           },
           { model: User, as: "Followings", attributes: ["id"] },
           { model: User, as: "Followers", attributes: ["id"] },
