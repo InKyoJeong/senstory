@@ -10,5 +10,10 @@ export const GuageWrapper = styled.div`
     background-color: ${(props) => props.theme.MAIN};
     background: linear-gradient(to right, #1890ff, #336a9c);
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    border-radius: 2px;
   }
+
+  /* & span {
+    width: 50%;
+  } */
 `;

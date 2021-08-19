@@ -21,12 +21,15 @@ import Router from "next/router";
 const DiaryBlock = forwardRef(({ diary }, ref) => {
   const { me } = useSelector((state) => state.user);
 
-  const onDetail = useCallback((id) => {
+  const handleClickDiary = useCallback((id) => {
     Router.push(`/diary/${me.id}/${id}`);
   }, []);
 
   return (
-    <DiaryBlockWrapper feel={diary.feel} onClick={() => onDetail(diary.id)}>
+    <DiaryBlockWrapper
+      feel={diary.feel}
+      onClick={() => handleClickDiary(diary.id)}
+    >
       <WhiteLabel>
         <div></div>
       </WhiteLabel>

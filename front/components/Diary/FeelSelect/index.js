@@ -4,9 +4,14 @@ import PropTypes from "prop-types";
 import Router from "next/router";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
-import { ChartWrapper, FeelSelectWrapper, SelectBtnWrapper } from "./styles";
+import {
+  ChartWrapper,
+  FeelSelectWrapper,
+  SelectBtnWrapper,
+  TotalDiary,
+} from "./styles";
 import HideWrapper from "../../common/HideWrapper";
-import FeelBar from "../FeelBar";
+import FeelChartBar from "../FeelChartBar";
 
 const FeelSelect = ({ hide }) => {
   const { me } = useSelector((state) => state.user);
@@ -25,9 +30,6 @@ const FeelSelect = ({ hide }) => {
 
   return (
     <HideWrapper hide={hide}>
-      <div style={{ color: "white", backgroundColor: "gray" }}>
-        {me.Diaries.length}
-      </div>
       <FeelSelectWrapper>
         <SelectBtnWrapper onClick={onSelect}>
           <Button>Special</Button>
@@ -37,11 +39,13 @@ const FeelSelect = ({ hide }) => {
         </SelectBtnWrapper>
 
         <ChartWrapper>
-          <FeelBar feelLength={specialLength} totalLength={totalLength} />
-          <FeelBar feelLength={sosoLength} totalLength={totalLength} />
-          <FeelBar feelLength={goodLength} totalLength={totalLength} />
-          <FeelBar feelLength={badLength} totalLength={totalLength} />
+          <FeelChartBar feelLength={specialLength} totalLength={totalLength} />
+          <FeelChartBar feelLength={goodLength} totalLength={totalLength} />
+          <FeelChartBar feelLength={sosoLength} totalLength={totalLength} />
+          <FeelChartBar feelLength={badLength} totalLength={totalLength} />
         </ChartWrapper>
+        <div></div>
+        <TotalDiary>총 {me.Diaries.length}개</TotalDiary>
       </FeelSelectWrapper>
     </HideWrapper>
   );

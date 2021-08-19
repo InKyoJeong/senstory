@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FeelSelectWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 10px;
+  gap: 5px;
   margin-top: 20px;
   border-radius: 10px;
   padding: 10px;
@@ -52,4 +52,11 @@ export const ChartWrapper = styled.div`
     display: flex;
     align-items: center;
   }
+`;
+
+export const TotalDiary = styled.div`
+  color: "white";
+  opacity: 0.7;
+  display: flex;
+  justify-content: flex-end;
 `;
