@@ -8,7 +8,11 @@ import {
   UserIntroWrapper,
   UserIntroTitle,
   UserHeader,
+  UserHalfTitle,
+  UserIntroTop,
+  UserInfoNick,
 } from "./styles";
+import Conditional from "../../../hocs/Conditional";
 
 const UserProfileForm = ({ userInfo }) => {
   return (
@@ -24,14 +28,35 @@ const UserProfileForm = ({ userInfo }) => {
               <Avatar>{userInfo.nickname[0]}</Avatar>
             )
           }
-          title={<div style={{ color: "white" }}>{userInfo.nickname}</div>}
+          title={<UserInfoNick>{userInfo.nickname}</UserInfoNick>}
         />
 
         <UserIntroWrapper>
-          <UserIntroTitle>활동 지역</UserIntroTitle>
-          <div>{userInfo.area}</div>
-          <UserIntroTitle>소개</UserIntroTitle>
-          <div>{userInfo.intro}</div>
+          <UserIntroTop>
+            <div>
+              <UserHalfTitle>활동 지역</UserHalfTitle>
+              <div>{userInfo.area}</div>
+              <Conditional condition={userInfo.area === ""}>
+                <span>등록중</span>
+              </Conditional>
+            </div>
+
+            <div>
+              <UserHalfTitle>MBTI</UserHalfTitle>
+              <div>{userInfo.mbti}</div>
+              <Conditional condition={userInfo.mbti === ""}>
+                <span>등록중</span>
+              </Conditional>
+            </div>
+          </UserIntroTop>
+
+          <div>
+            <UserIntroTitle>소개</UserIntroTitle>
+            <div>{userInfo.intro}</div>
+            <Conditional condition={userInfo.intro === ""}>
+              <span>등록중</span>
+            </Conditional>
+          </div>
         </UserIntroWrapper>
 
         <UserInfoWrapper>

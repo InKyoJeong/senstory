@@ -28,9 +28,9 @@ const AreaEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    if (!area.trim()) {
-      return alert("활동 지역을 입력해주세요.");
-    }
+    // if (!area.trim()) {
+    //   return alert("활동 지역을 입력해주세요.");
+    // }
 
     dispatch({
       type: CHANGE_AREA_REQUEST,

@@ -1,5 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Card } from "antd";
+
+const userTitle = css`
+  background-color: ${({ theme }) => theme.color.DARK_MAIN};
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  margin: 10px 0px 5px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+`;
 
 export const UserHeader = styled.div`
   padding: 8px 0px;
@@ -11,6 +20,10 @@ export const UserHeader = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-weight: bolder;
+`;
+
+export const UserInfoNick = styled.div`
+  color: white;
 `;
 
 export const UserProfileWrapper = styled(Card)`
@@ -40,16 +53,35 @@ export const UserInfoWrapper = styled.div`
   }
 `;
 
+export const UserIntroTop = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-direction: column;
+  justify-content: center;
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 export const UserIntroWrapper = styled.div`
   color: white;
   margin-top: 20px;
+
+  & span {
+    color: gray;
+  }
 `;
 
 export const UserIntroTitle = styled.div`
   width: 50%;
-  background-color: ${({ theme }) => theme.color.DARK_MAIN};
-  display: flex;
-  justify-content: center;
-  border-radius: 5px;
-  margin: 10px 0px 5px 0px;
+  ${userTitle}
+`;
+
+export const UserHalfTitle = styled.div`
+  width: 100%;
+  ${userTitle}
 `;

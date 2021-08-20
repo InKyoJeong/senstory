@@ -1,13 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHANGE_MBTI_REQUEST } from "../../../actions/user";
+import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
+import useToggle from "../../../hooks/useToggle";
+import Modal from "../../common/Modal";
 import { MbtiEditButton, MbtiFormWrapper } from "./styles";
 
 const MbtiEditForm = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
+  const { me, changeMbtiFinish, changeMbtiLoading } = useSelector(
+    (state) => state.user
+  );
   const [mbti, onChangeMbti] = useInput(me?.mbti || "");
+  const [modalOpen, onToggleModal] = useToggle(false);
+
+  useEffect(() => {
+    if (changeMbtiFinish) {
+      onToggleModal();
+    }
+  }, [changeMbtiFinish]);
 
   const onSubmit = useCallback(() => {
     dispatch({
@@ -46,10 +58,18 @@ const MbtiEditForm = () => {
           <option value="ENFP">ENFP</option>
         </select>
 
-        <MbtiEditButton htmlType="submit" type="primary">
+        <MbtiEditButton
+          htmlType="submit"
+          type="primary"
+          loading={changeMbtiLoading}
+        >
           변경
         </MbtiEditButton>
       </div>
+
+      <Conditional condition={modalOpen}>
+        <Modal title="MBTI 변경 완료" onToggleModal={onToggleModal} />
+      </Conditional>
     </MbtiFormWrapper>
   );
 };
