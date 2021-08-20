@@ -4,7 +4,7 @@ export const CommentAuthor = styled.div`
   padding: 3px 5px;
   border-radius: 5px;
   color: white;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
 
   &:hover {
     color: white;
@@ -14,5 +14,5 @@ export const CommentAuthor = styled.div`
 export const CommentDate = styled.div`
   display: flex;
   justify-content: flex-end;
-  color: ${(props) => props.theme.LIGHT_GRAY};
+  color: ${({ theme }) => theme.color.LIGHT_GRAY};
 `;

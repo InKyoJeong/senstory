@@ -25,7 +25,7 @@ export const SigleImg = styled.img`
 `;
 
 export const LeftImg = styled.div`
-  border-right: 1px solid ${(props) => props.theme.DARK_GRAY};
+  border-right: 1px solid ${({ theme }) => theme.color.DARK_GRAY};
   ${hoverOpacity}
   width:50%;
 
@@ -35,7 +35,7 @@ export const LeftImg = styled.div`
 `;
 
 export const RightImg = styled.div`
-  border-left: 1px solid ${(props) => props.theme.DARK_GRAY};
+  border-left: 1px solid ${({ theme }) => theme.color.DARK_GRAY};
   ${hoverOpacity}
   width:50%;
 

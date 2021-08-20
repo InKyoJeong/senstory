@@ -14,11 +14,11 @@ export const PageTitleWrapper = styled.div`
 
 export const TextFront = styled.i`
   ${subTitle}
-  color: ${(props) => props.theme.MAIN};
+  color: ${({ theme }) => theme.color.MAIN};
   margin: 0px 3px;
 `;
 
 export const TextBack = styled.i`
   ${subTitle}
-  color: ${(props) => props.theme.LIGHT_GRAY};
+  color: ${({ theme }) => theme.color.LIGHT_GRAY};
 `;

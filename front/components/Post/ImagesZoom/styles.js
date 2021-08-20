@@ -20,7 +20,7 @@ export const CloseBtn = styled(CloseOutlined)`
   cursor: pointer;
   z-index: 999;
   background-color: #e89b9b;
-  color: ${(props) => props.theme.MIDDLE_GRAY};
+  color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-radius: 100px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 `;
@@ -55,7 +55,7 @@ export const Indicator = styled.div`
     height: 30px;
     line-height: 30px;
     border-radius: 15px;
-    background-color: ${(props) => props.theme.MIDDLE_GRAY};
+    background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
     /* background: #313131; */
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 

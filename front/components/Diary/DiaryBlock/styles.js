@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DiaryBlockWrapper = styled.div`
   padding: 10px;
   border-radius: 5px;
-  color: ${(props) => props.theme.DARK_GRAY};
+  color: ${({ theme }) => theme.color.DARK_GRAY};
   box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2);
 
   overflow: hidden;
@@ -88,7 +88,7 @@ export const WhiteLabel = styled.div`
 `;
 
 export const BlockFeelText = styled.div`
-  color: ${(props) => props.theme.DARK_GRAY};
+  color: ${({ theme }) => theme.color.DARK_GRAY};
   display: flex;
   justify-content: space-between;
 
@@ -99,7 +99,7 @@ export const BlockFeelText = styled.div`
 
 export const BlockTitleText = styled.div`
   margin-left: auto;
-  color: ${(props) => props.theme.MIDDLE_GRAY};
+  color: ${({ theme }) => theme.color.MIDDLE_GRAY};
 
   & div {
     overflow: hidden;

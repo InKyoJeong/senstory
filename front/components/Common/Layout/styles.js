@@ -3,7 +3,7 @@ import { Input } from "antd";
 
 export const Global = createGlobalStyle`
   body{
-     background-color: ${(props) => props.theme.BLACK};
+     background-color: ${({ theme }) => theme.color.BLACK};
    }
    
   .ant-row{

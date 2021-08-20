@@ -6,8 +6,8 @@ export const UserHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.MAIN};
-  border: 1px solid ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.MAIN};
+  border: 1px solid ${({ theme }) => theme.color.DARK_GRAY};
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-weight: bolder;
@@ -15,7 +15,7 @@ export const UserHeader = styled.div`
 
 export const UserProfileWrapper = styled(Card)`
   margin: 20px 0;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   color: white;
   border-radius: 5px;
   border: 1px solid black;
@@ -26,7 +26,7 @@ export const UserInfoWrapper = styled.div`
   gap: 2px;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 20px;
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border: 1px solid #5e5d5d;
   padding: 15px 0px;
   border-radius: 8px;
@@ -47,7 +47,7 @@ export const UserIntroWrapper = styled.div`
 
 export const UserIntroTitle = styled.div`
   width: 50%;
-  background-color: ${(props) => props.theme.DARK_MAIN};
+  background-color: ${({ theme }) => theme.color.DARK_MAIN};
   display: flex;
   justify-content: center;
   border-radius: 5px;

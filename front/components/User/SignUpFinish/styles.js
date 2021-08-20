@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FinishWrapper = styled.div`
   height: 100vh;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@ export const FinishWrapper = styled.div`
   }
 
   & Button {
-    background-color: ${(props) => props.theme.MAIN};
+    background-color: ${({ theme }) => theme.color.MAIN};
     border-radius: 10px;
     border: none;
   }

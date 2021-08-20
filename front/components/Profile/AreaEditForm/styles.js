@@ -16,7 +16,7 @@ export const AreaFormWrapper = styled(Form)`
 `;
 
 export const AreaInput = styled(Input)`
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-color: gray;
   color: white;
   border-radius: 10px;

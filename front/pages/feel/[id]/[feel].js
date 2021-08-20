@@ -15,7 +15,6 @@ import DiaryBlock from "../../../components/diary/DiaryBlock";
 import DiaryBlockContainer from "../../../components/diary/DiaryBlockContainer";
 import Loader from "../../../components/common/Loader";
 import FeelSelectForm from "../../../components/diary/FeelSelectForm";
-import Conditional from "../../../hocs/Conditional";
 
 const Feel = () => {
   const dispatch = useDispatch();

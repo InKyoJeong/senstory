@@ -28,7 +28,7 @@ export const ModalForm = styled.div`
   & div {
     margin-bottom: 15px;
     font-weight: bolder;
-    color: ${(props) => props.theme.BLACK};
+    color: ${({ theme }) => theme.color.BLACK};
   }
 
   & Button {

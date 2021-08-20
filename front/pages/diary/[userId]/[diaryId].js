@@ -25,8 +25,8 @@ const DiaryDetailPage = () => {
   const { me } = useSelector((state) => state.user);
 
   // test
-  console.log("backTodiary", backTodiary);
-  console.log(singleDiary);
+  // console.log("backTodiary", backTodiary);
+  // console.log(singleDiary);
 
   useEffect(() => {
     if (!me?.id || parseUserId !== me?.id || !singleDiary?.id) {

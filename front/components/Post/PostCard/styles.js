@@ -47,7 +47,7 @@ export const LikeActive = styled.div`
 `;
 
 export const CommentActive = styled.div`
-  color: ${(props) => props.theme.MAIN};
+  color: ${({ theme }) => theme.color.MAIN};
 `;
 
 export const IconCount = styled.span`
@@ -59,7 +59,7 @@ export const InActive = styled.div`
   color: white;
 
   &:hover {
-    color: ${(props) => props.theme.MAIN};
+    color: ${({ theme }) => theme.color.MAIN};
     transition: 0.3s;
   }
 `;
@@ -80,7 +80,7 @@ export const PostAuthor = styled.div`
 export const PostDate = styled.div`
   display: flex;
   justify-content: flex-end;
-  color: ${(props) => props.theme.LIGHT_GRAY};
+  color: ${({ theme }) => theme.color.LIGHT_GRAY};
   padding-top: 10px;
 `;
 
@@ -89,7 +89,7 @@ export const CommentList = styled(List)`
   margin-top: 10px;
   margin-bottom: 30px;
   color: white;
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-radius: 10px;
 
   & li:not(:last-child) {

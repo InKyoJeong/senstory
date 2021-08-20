@@ -7,7 +7,7 @@ export const FeelSelectWrapper = styled.div`
   margin-top: 20px;
   border-radius: 10px;
   padding: 10px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   border: 2px solid gray;
   color: white;
 
@@ -67,5 +67,5 @@ export const TotalDiary = styled.div`
   opacity: 0.7;
   display: flex;
   justify-content: flex-end;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 `;

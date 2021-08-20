@@ -12,7 +12,7 @@ export const DiaryHeaderWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 20px;
@@ -103,7 +103,7 @@ export const DiaryContentsTop = styled.div`
 `;
 
 export const DiaryTempWrapper = styled.div`
-  background-color: ${(props) => props.theme.BLACK};
+  background-color: ${({ theme }) => theme.color.BLACK};
   padding: 3px 6px;
   border-radius: 100px;
 

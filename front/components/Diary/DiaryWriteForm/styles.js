@@ -42,7 +42,7 @@ export const DiaryModalForm = styled.div`
   left: 50%;
   width: 90%;
   transform: translate(-50%, -50%);
-  background-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   border-radius: 10px;
   animation: fadeIn 0.4s;
 
@@ -75,7 +75,7 @@ export const DiaryWriteInner = styled.div`
 export const DiaryTitleInput = styled(Input)`
   width: 100%;
   height: 40px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   border-radius: 10px;
   border-color: #4e4e4f;
   color: white;
@@ -83,7 +83,7 @@ export const DiaryTitleInput = styled(Input)`
 
 export const DiaryContentInput = styled(Input.TextArea)`
   margin-top: 10px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   border-color: #4e4e4f;
   color: white;
   border-radius: 10px;
@@ -92,7 +92,7 @@ export const DiaryContentInput = styled(Input.TextArea)`
 export const TempWriteWrapper = styled.div`
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   color: #c2c2c2;
   border-radius: 10px;
   display: flex;
@@ -213,7 +213,7 @@ export const PhotoBorder = styled.div`
   ${alignCenter}
   margin-bottom: 10px;
   flex-direction: column;
-  border: 2px dashed ${(props) => props.theme.DARK_GRAY};
+  border: 2px dashed ${({ theme }) => theme.color.DARK_GRAY};
   cursor: pointer;
 
   @media screen and (min-width: 768px) {
@@ -221,7 +221,7 @@ export const PhotoBorder = styled.div`
   }
 
   & div {
-    color: ${(props) => props.theme.DARK_GRAY};
+    color: ${({ theme }) => theme.color.DARK_GRAY};
   }
 `;
 

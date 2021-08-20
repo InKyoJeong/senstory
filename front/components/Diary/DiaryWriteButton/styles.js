@@ -13,7 +13,7 @@ export const DiaryBanner = styled.div`
   font-weight: bold;
 
   &:hover {
-    background-color: ${(props) => props.theme.MAIN};
+    background-color: ${({ theme }) => theme.color.MAIN};
     transition: 0.3s;
   }
 `;

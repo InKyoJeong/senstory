@@ -26,7 +26,7 @@ export const RandomUsers = styled.div`
   grid-template-columns: 1fr 1fr;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   padding: 10px 5px;
   border: 1px solid #545353;
 `;

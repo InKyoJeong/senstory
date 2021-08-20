@@ -13,8 +13,8 @@ export const LoginInput = styled(Input)`
   border-radius: 10px;
   margin-top: 5px;
   color: white;
-  border-color: ${(props) => props.theme.LIGHT_GRAY};
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  border-color: ${({ theme }) => theme.color.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
 `;
 
 export const InputWrapper = styled.div`

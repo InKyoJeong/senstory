@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Card, Button } from "antd";
 
 export const CardWrapper = styled(Card)`
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
-  border-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
+  border-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-radius: 5px;
   overflow: hidden;
   margin-top: 20px;
@@ -23,7 +23,7 @@ export const MyInfoWrapper = styled.div`
   gap: 2px;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 30px;
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   border: 1px solid #5e5d5d;
   padding: 15px 0px;
   border-radius: 8px;
@@ -50,7 +50,7 @@ export const AvatarWrapper = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${(props) => props.theme.MAIN};
+      color: ${({ theme }) => theme.color.MAIN};
     }
   }
 `;

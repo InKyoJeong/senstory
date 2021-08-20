@@ -17,7 +17,7 @@ export const TagSearchTitle = styled.div`
   align-items: center;
   color: white;
   font-weight: 500;
-  background-color: ${(props) => props.theme.DARK_MAIN};
+  background-color: ${({ theme }) => theme.color.DARK_MAIN};
   padding: 5px 20px;
   justify-content: center;
   border-top-right-radius: 5px;
@@ -25,7 +25,7 @@ export const TagSearchTitle = styled.div`
 `;
 
 export const TagSearchForm = styled.div`
-  background-color: ${(props) => props.theme.MIDDLE_GRAY};
+  background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border: 1px solid #545353;
   padding: 15px;
   border-bottom-right-radius: 5px;
@@ -34,7 +34,7 @@ export const TagSearchForm = styled.div`
 
 export const TagSearchInput = styled(Input.Search)`
   vertical-align: middle;
-  background-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   color: white;
   border-radius: 5px;
   padding: 5px 0px;

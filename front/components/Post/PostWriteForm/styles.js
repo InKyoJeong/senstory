@@ -3,7 +3,7 @@ import { Form, Button, Input } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 export const FormWrapper = styled(Form)`
-  background-color: ${(props) => props.theme.DARK_GRAY};
+  background-color: ${({ theme }) => theme.color.DARK_GRAY};
   margin-top: 20px;
   margin-bottom: 40px;
   padding: 10px;
@@ -12,8 +12,8 @@ export const FormWrapper = styled(Form)`
 
 export const PostWriteInput = styled(Input.TextArea)`
   margin-bottom: 8px;
-  background-color: ${(props) => props.theme.LIGHT_GRAY};
-  border-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
+  border-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   color: white;
   border-radius: 10px;
 `;

@@ -16,8 +16,8 @@ export const PostEditWrapper = styled.div`
 `;
 
 export const PostEditInput = styled(Input.TextArea)`
-  background-color: ${(props) => props.theme.LIGHT_GRAY};
-  border-color: ${(props) => props.theme.LIGHT_GRAY};
+  background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
+  border-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   color: white;
   border-radius: 10px;
 `;
