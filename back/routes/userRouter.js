@@ -22,6 +22,7 @@ const {
   deleteFollowing,
   postAvatarImages,
   patchEditAvatar,
+  patchEditMbti,
 } = require("../controller/userController");
 
 const userRouter = express.Router();
@@ -58,6 +59,7 @@ userRouter.post("/", isNotLoggedIn, postSignup);
 userRouter.post("/logout", isLoggedIn, postLogout);
 
 userRouter.patch("/nickname", isLoggedIn, patchEditNickname);
+userRouter.patch("/mbti", isLoggedIn, patchEditMbti);
 userRouter.patch("/intro", isLoggedIn, patchEditIntro);
 userRouter.patch("/area", isLoggedIn, patchEditArea);
 

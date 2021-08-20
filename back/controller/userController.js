@@ -258,6 +258,23 @@ module.exports.patchEditIntro = async (req, res, next) => {
   }
 };
 
+module.exports.patchEditMbti = async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        mbti: req.body.mbti,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ mbti: req.body.mbti });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
 module.exports.patchEditArea = async (req, res, next) => {
   try {
     await User.update(

@@ -14,6 +14,10 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(20),
           allowNull: false,
         },
+        mbti: {
+          type: DataTypes.STRING(10),
+          allowNull: true,
+        },
         intro: {
           type: DataTypes.STRING(100),
           allowNull: true,
