@@ -24,10 +24,6 @@ const DiaryDetailPage = () => {
     useSelector((state) => state.diary);
   const { me } = useSelector((state) => state.user);
 
-  // test
-  // console.log("backTodiary", backTodiary);
-  // console.log(singleDiary);
-
   useEffect(() => {
     if (!me?.id || parseUserId !== me?.id || !singleDiary?.id) {
       Router.replace("/");

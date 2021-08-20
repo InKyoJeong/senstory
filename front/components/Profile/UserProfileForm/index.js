@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { Avatar, Card } from "antd";
 import {
   UserProfileWrapper,
@@ -88,6 +87,8 @@ UserProfileForm.propTypes = {
     createdAt: PropTypes.string,
     email: PropTypes.string,
     intro: PropTypes.string,
+    area: PropTypes.string,
+    mbti: PropTypes.string,
     nickname: PropTypes.string,
     updatedAt: PropTypes.string,
   }),

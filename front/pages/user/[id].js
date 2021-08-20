@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, Card } from "antd";
 import { END } from "redux-saga";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -101,8 +100,6 @@ const User = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("user/id 페이지 getServerSideProps 시작");
-
       const cookie = req ? req.headers.cookie : "";
       axios.defaults.headers.Cookie = "";
       if (req && cookie) {
@@ -120,9 +117,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
         data: params.id,
       });
       store.dispatch(END);
-
-      console.log("user/id 페이지 getServerSideProps 끝");
-
       await store.sagaTask.toPromise();
     }
 );

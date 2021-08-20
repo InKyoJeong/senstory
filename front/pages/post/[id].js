@@ -51,7 +51,6 @@ const Post = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("post/id 페이지 getServerSideProps 시작");
       const cookie = req ? req.headers.cookie : "";
       axios.defaults.headers.Cookie = "";
       if (req && cookie) {
@@ -65,7 +64,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
         data: params.id,
       });
       store.dispatch(END);
-      console.log("post/id 페이지 getServerSideProps 끝");
       await store.sagaTask.toPromise();
     }
 );

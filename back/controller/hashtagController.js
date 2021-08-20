@@ -12,7 +12,7 @@ module.exports.getHashtagPosts = async (req, res, next) => {
       limit: 10,
       order: [
         ["createdAt", "DESC"],
-        [Comment, "createdAt", "DESC"], // 댓글 정렬
+        [Comment, "createdAt", "DESC"],
       ],
       include: [
         {

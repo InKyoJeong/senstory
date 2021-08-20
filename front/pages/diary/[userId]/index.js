@@ -10,10 +10,7 @@ import { EditFilled } from "@ant-design/icons";
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../../actions/user";
-import {
-  BACK_TO_DIARY_FINISH,
-  LOAD_USER_DIARYS_REQUEST,
-} from "../../../actions/diary";
+import { LOAD_USER_DIARYS_REQUEST } from "../../../actions/diary";
 
 import Conditional from "../../../hocs/Conditional";
 import Layout from "../../../components/common/Layout";
@@ -37,17 +34,10 @@ const Diary = () => {
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    // 로그인하지 않았거나 내 다이어리가 아닐때
     if (!me?.id || parseId !== me?.id) {
       Router.push("/");
     }
   }, [parseId, me?.id]);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: BACK_TO_DIARY_FINISH,
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadUserDiarysLoading) {

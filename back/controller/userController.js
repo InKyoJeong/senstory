@@ -4,7 +4,6 @@ const { Post, User, Image, Comment, Diary } = require("../models");
 const { Op } = require("sequelize");
 
 module.exports.getMe = async (req, res, next) => {
-  console.log(req.headers);
   try {
     if (req.user) {
       const userWithoutPassword = await User.findOne({

@@ -10,13 +10,12 @@ module.exports.postAddDiary = async (req, res, next) => {
       mintemp: parseInt(req.body.mintemp, 10),
       UserId: req.user.id,
     });
+
     const feel = req.body.feel;
-    console.log("feel:", feel);
     if (feel) {
       const result = await Promise.resolve(
         Feel.findOrCreate({ where: { name: feel } })
       );
-      console.log("feel프로미스 결과", result); //test
       await diary.addFeels(result[0]);
     }
 
@@ -32,7 +31,6 @@ module.exports.postAddDiary = async (req, res, next) => {
       }
     }
     res.status(201).json(diary);
-    console.log("diary route json", diary);
   } catch (error) {
     console.error(error);
     next(error);

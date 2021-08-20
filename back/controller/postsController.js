@@ -12,7 +12,7 @@ module.exports.getPosts = async (req, res, next) => {
       limit: 10,
       order: [
         ["createdAt", "DESC"],
-        [Comment, "createdAt", "DESC"], // 댓글 정렬
+        [Comment, "createdAt", "DESC"],
       ],
       include: [
         {
@@ -32,7 +32,7 @@ module.exports.getPosts = async (req, res, next) => {
           ],
         },
         {
-          model: User, // 좋아요
+          model: User,
           as: "Likers",
           attributes: ["id"],
         },
@@ -99,7 +99,7 @@ module.exports.getFollowingPosts = async (req, res, next) => {
           ],
         },
         {
-          model: User, // 좋아요
+          model: User,
           as: "Likers",
           attributes: ["id"],
         },

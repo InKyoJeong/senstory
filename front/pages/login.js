@@ -13,7 +13,7 @@ import Loader from "../components/common/Loader";
 
 const Login = () => {
   const { me, logInFinish, logInLoading } = useSelector((state) => state.user);
-  //   console.log(me);
+
   useEffect(() => {
     if (me && me.id) {
       Router.replace("/");
@@ -49,8 +49,6 @@ const Login = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req }) => {
-      console.log("login 페이지 getServerSideProps 시작");
-      console.log(req.headers);
       const cookie = req ? req.headers.cookie : "";
       axios.defaults.headers.Cookie = "";
       if (req && cookie) {
@@ -61,7 +59,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       });
 
       store.dispatch(END);
-      console.log("login 페이지 getServerSideProps 끝");
       await store.sagaTask.toPromise();
     }
 );

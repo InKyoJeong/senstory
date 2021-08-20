@@ -36,17 +36,17 @@ module.exports.postAddPost = async (req, res, next) => {
           model: Comment,
           include: [
             {
-              model: User, // 댓글 작성자
+              model: User,
               attributes: ["id", "nickname", "avatar"],
             },
           ],
         },
         {
-          model: User, // 글 작성자
+          model: User,
           attributes: ["id", "nickname", "avatar"],
         },
         {
-          model: User, // 좋아요
+          model: User,
           as: "Likers",
           attributes: ["id"],
         },

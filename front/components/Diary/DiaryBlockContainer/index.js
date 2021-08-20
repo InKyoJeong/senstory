@@ -4,7 +4,6 @@ import Conditional from "../../../hocs/Conditional";
 import { DiaryContainerWrapper, DiaryEmpty } from "./styles";
 
 const DiaryBlockContainer = ({ children, selectFeel }) => {
-  // console.log(children);
   return (
     <>
       <Conditional condition={children.length === 0}>

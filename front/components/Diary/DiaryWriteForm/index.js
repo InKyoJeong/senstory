@@ -125,7 +125,7 @@ const DiaryWriteForm = ({ closeModal }) => {
     formData.append("feel", feel);
     formData.append("maxtemp", maxtemp);
     formData.append("mintemp", mintemp);
-    // console.log("formData", formData);
+
     return dispatch({
       type: ADD_DIARY_REQUEST,
       data: formData,

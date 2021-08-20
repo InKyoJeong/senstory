@@ -15,7 +15,7 @@ module.exports.getDiarys = async (req, res, next) => {
         {
           model: User,
           attributes: ["id", "nickname", "avatar"],
-        }, // todo: 사용자 include 여부선택
+        },
         { model: Photo },
       ],
     });

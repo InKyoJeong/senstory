@@ -29,7 +29,6 @@ const fetcher = (url) =>
 
 const Profile = () => {
   const { me } = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
@@ -50,7 +49,6 @@ const Profile = () => {
   } = useSWR(
     `http://localhost:3065/user/followings?limit=${followingLimit}`,
     fetcher
-    // { refreshInterval: 1000 }
   );
 
   // useEffect(() => {
@@ -118,8 +116,6 @@ const Profile = () => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req }) => {
-      console.log("profile 페이지 getServerSideProps 시작");
-      console.log(req.headers);
       const cookie = req ? req.headers.cookie : "";
       axios.defaults.headers.Cookie = "";
       if (req && cookie) {
@@ -132,7 +128,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
         type: RANDOM_USER_REQUEST,
       });
       store.dispatch(END);
-      console.log("profile 페이지 getServerSideProps 끝");
       await store.sagaTask.toPromise();
     }
 );
