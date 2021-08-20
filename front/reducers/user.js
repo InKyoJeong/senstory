@@ -54,6 +54,9 @@ import {
   CHANGE_AREA_FAILURE,
   ADD_DIARY_TO_ME,
   REMOVE_DIARY_OF_ME,
+  CHANGE_MBTI_REQUEST,
+  CHANGE_MBTI_SUCCESS,
+  CHANGE_MBTI_FAILURE,
 } from "../actions/user";
 
 export const initialState = {
@@ -75,6 +78,9 @@ export const initialState = {
   changeNickLoading: false, // 닉네임
   changeNickFinish: false,
   changeNickError: null,
+  changeMbtiLoading: false, // MBTI
+  changeMbtiFinish: false,
+  changeMbtiError: null,
   changeIntroLoading: false, // 소개
   changeIntroFinish: false,
   changeIntroError: null,
@@ -241,6 +247,20 @@ const reducer = (state = initialState, action) => {
       case CHANGE_NICK_FAILURE:
         draft.changeNickLoading = false;
         draft.changeNickError = action.error;
+        break;
+      case CHANGE_MBTI_REQUEST:
+        draft.changeMbtiLoading = true;
+        draft.changeMbtiFinish = false;
+        draft.changeMbtiError = null;
+        break;
+      case CHANGE_MBTI_SUCCESS:
+        draft.me.mbti = action.data.mbti;
+        draft.changeMbtiLoading = false;
+        draft.changeMbtiFinish = true;
+        break;
+      case CHANGE_MBTI_FAILURE:
+        draft.changeMbtiLoading = false;
+        draft.changeMbtiError = action.error;
         break;
       case CHANGE_INTRO_REQUEST:
         draft.changeIntroLoading = true;

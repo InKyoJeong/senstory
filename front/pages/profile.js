@@ -15,6 +15,7 @@ import Layout from "../components/common/Layout";
 import Loader from "../components/common/Loader";
 import MyProfileForm from "../components/common/MyProfileForm";
 import NickEditForm from "../components/profile/NickEditForm";
+import MbtiEditForm from "../components/profile/MbtiEditForm";
 import FollowList from "../components/profile/FollowList";
 import AreaEditForm from "../components/profile/AreaEditForm";
 import IntroEditForm from "../components/profile/IntroEditForm";
@@ -92,6 +93,7 @@ const Profile = () => {
       <Layout profile>
         <MyProfileForm hide />
         <NickEditForm />
+        <MbtiEditForm />
         <AreaEditForm />
         <IntroEditForm />
         <FollowList

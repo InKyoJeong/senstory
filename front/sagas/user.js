@@ -8,6 +8,9 @@ import {
   CHANGE_INTRO_FAILURE,
   CHANGE_INTRO_REQUEST,
   CHANGE_INTRO_SUCCESS,
+  CHANGE_MBTI_FAILURE,
+  CHANGE_MBTI_REQUEST,
+  CHANGE_MBTI_SUCCESS,
   CHANGE_NICK_FAILURE,
   CHANGE_NICK_REQUEST,
   CHANGE_NICK_SUCCESS,
@@ -167,6 +170,25 @@ function* changeNickname(action) {
   } catch (err) {
     yield put({
       type: CHANGE_NICK_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function changeMbtiAPI(data) {
+  return axios.patch("/user/mbti", { mbti: data });
+}
+
+function* changeMbti(action) {
+  try {
+    const result = yield call(changeMbtiAPI, action.data);
+    yield put({
+      type: CHANGE_MBTI_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: CHANGE_MBTI_FAILURE,
       error: err.response.data,
     });
   }
@@ -396,6 +418,10 @@ function* watchChangeNickname() {
   yield takeLatest(CHANGE_NICK_REQUEST, changeNickname);
 }
 
+function* watchChangeMbti() {
+  yield takeLatest(CHANGE_MBTI_REQUEST, changeMbti);
+}
+
 function* watchChangeIntro() {
   yield takeLatest(CHANGE_INTRO_REQUEST, changeIntro);
 }
@@ -446,6 +472,7 @@ export default function* userSaga() {
     fork(watchLogOut),
     fork(watchSignUp),
     fork(watchChangeNickname),
+    fork(watchChangeMbti),
     fork(watchChangeIntro),
     fork(watchChangeArea),
     fork(watchFollow),
