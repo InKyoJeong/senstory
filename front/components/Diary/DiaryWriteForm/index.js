@@ -40,6 +40,7 @@ const DiaryWriteForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } =
     useSelector((state) => state.diary);
+
   const [title, onChangeTitle, setTitle] = useInput("");
   const [content, onChangeContent, setContent] = useInput("");
   const [feel, setFeel] = useState(null);

@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { isLoggedIn } = require("./middlewares");
+const { isLoggedIn, errorHandler } = require("./middlewares");
 const {
   postAddPost,
   postImages,
@@ -38,7 +38,7 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-postRouter.post("/", isLoggedIn, upload.none(), postAddPost);
+postRouter.post("/", isLoggedIn, upload.none(), postAddPost, errorHandler);
 postRouter.post("/images", isLoggedIn, upload.array("image"), postImages);
 postRouter.get("/:postId", getPost);
 

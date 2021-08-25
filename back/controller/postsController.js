@@ -49,7 +49,7 @@ module.exports.getPosts = async (req, res, next) => {
         },
       ],
     });
-    res.status(200).json(posts);
+    // res.status(200).json(posts);
   } catch (error) {
     console.error(error);
     next(error);

@@ -4,6 +4,7 @@ import {
   ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
+  ADD_POST_ERROR_FINISH,
   ADD_POST_FAILURE,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
@@ -181,6 +182,9 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
         draft.addPostError = action.error;
+        break;
+      case ADD_POST_ERROR_FINISH:
+        draft.addPostError = null;
         break;
       case UPDATE_POST_REQUEST:
         draft.updatePostLoading = true;

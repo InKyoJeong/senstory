@@ -5,6 +5,7 @@ import {
   ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
+  ADD_POST_ERROR_FINISH,
   ADD_POST_FAILURE,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
@@ -219,9 +220,6 @@ function addPostAPI(data) {
 function* addPost(action) {
   try {
     const result = yield call(addPostAPI, action.data);
-    // console.log("action.data: " + action.data);
-    // console.log(result);
-    // console.log("add_post", result.data);
     yield put({
       type: ADD_POST_SUCCESS,
       data: result.data,
@@ -235,6 +233,10 @@ function* addPost(action) {
     yield put({
       type: ADD_POST_FAILURE,
       error: err.response.data,
+    });
+  } finally {
+    yield put({
+      type: ADD_POST_ERROR_FINISH,
     });
   }
 }

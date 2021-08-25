@@ -94,9 +94,7 @@ function addDiaryAPI(data) {
 
 function* addDiary(action) {
   try {
-    // console.log(action.data);
     const result = yield call(addDiaryAPI, action.data);
-    // console.log("addDiary saga result", result);
     yield put({
       type: ADD_DIARY_SUCCESS,
       data: result.data,

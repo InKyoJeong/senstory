@@ -19,9 +19,8 @@ import {
 
 const PostWriteForm = () => {
   const dispatch = useDispatch();
-  const { imagePaths, addPostFinish, addPostLoading } = useSelector(
-    (state) => state.post
-  );
+  const { imagePaths, addPostFinish, addPostLoading, addPostError } =
+    useSelector((state) => state.post);
   const [text, onChangeText, setText] = useInput("");
 
   useEffect(() => {
@@ -29,6 +28,12 @@ const PostWriteForm = () => {
       setText("");
     }
   }, [addPostFinish]);
+
+  useEffect(() => {
+    if (addPostError) {
+      alert(addPostError);
+    }
+  }, [addPostError]);
 
   const onSubmit = useCallback(() => {
     if (!text || !text.trim()) {
