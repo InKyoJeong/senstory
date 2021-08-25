@@ -51,20 +51,22 @@ const DiaryWriteForm = ({ closeModal }) => {
   const imageInput = useRef();
 
   const onGeoSuccess = useCallback(
-    (position) => {
+    async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
 
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const maxtemp = data.main.temp_max;
-          const mintemp = data.main.temp_min;
-          setMaxtemp(Math.round(maxtemp));
-          setMintemp(Math.round(mintemp));
-        });
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw Error("요청이 실패했습니다. 다시 시도해주세요.");
+        }
+        const data = await response.json();
+        setMaxtemp(Math.round(data.main.temp_max));
+        setMintemp(Math.round(data.main.temp_min));
+      } catch (error) {
+        alert(error.message);
+      }
     },
     [maxtemp, mintemp]
   );

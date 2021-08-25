@@ -39,7 +39,7 @@ const MbtiEditForm = () => {
           id="mbti-select"
           onChange={onChangeMbti}
         >
-          <option value="">--MBTI 선택--</option>
+          <option value="">---- MBTI 선택 ----</option>
           <option value="ISTJ">ISTJ</option>
           <option value="ISTP">ISTP</option>
           <option value="ISFJ">ISFJ</option>
