@@ -68,6 +68,8 @@ const DiaryWriteForm = ({ closeModal }) => {
           throw Error("요청이 실패했습니다. 다시 시도해주세요.");
         }
         const data = await response.json();
+        // console.log("data", data);
+
         setMaxtemp(Math.round(data.main.temp_max));
         setMintemp(Math.round(data.main.temp_min));
       } catch (error) {
@@ -145,7 +147,7 @@ const DiaryWriteForm = ({ closeModal }) => {
   }, [imageInput.current]);
 
   const onChangeImages = useCallback((e) => {
-    console.log("photos", e.target.files);
+    // console.log("photos", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append("photo", f);

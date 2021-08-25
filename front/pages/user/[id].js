@@ -91,8 +91,6 @@ const User = () => {
           ref={hasMorePosts && !loadUserAllPostLoading ? ref : undefined}
         />
       ))}
-
-      {/* <div ref={hasMorePosts && !loadUserAllPostLoading ? ref : undefined} /> */}
     </Layout>
   );
 };

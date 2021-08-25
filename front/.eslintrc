@@ -12,7 +12,7 @@
     "node": true,
     "es6": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  "extends": ["airbnb", "plugin:prettier/recommended"],
   "plugins": ["import", "react-hooks", "jsx-a11y", "prettier"],
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",

@@ -56,8 +56,8 @@ module.exports.getDiary = async (req, res, next) => {
   }
 };
 
-module.exports.postAddPhotos = async (req, res, next) => {
-  console.log(req.files);
+module.exports.postAddPhotos = (req, res, next) => {
+  // console.log(req.files);
   res.json(req.files.map((v) => v.filename));
 };
 

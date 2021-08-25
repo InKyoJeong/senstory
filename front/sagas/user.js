@@ -336,7 +336,6 @@ function uploadAvatarAPI(data) {
 function* uploadAvatar(action) {
   try {
     const result = yield call(uploadAvatarAPI, action.data);
-    console.log("result.data", result.data); // data:["파일명"]
     yield put({
       type: UPLOAD_AVATAR_SUCCESS,
       data: result.data,

@@ -4,7 +4,13 @@
 $ npm run dev
 ```
 
-### antd
+## Build
+
+```
+$ npm run build
+```
+
+<!-- ### antd
 
 - xs screen < 576px
 - sm screen ≥ 576px
@@ -18,4 +24,4 @@ $ npm run dev
 - 컴포넌트 폴더나누기
   - Common/Home/Post/Diary/Profile/User
 
-#### 메인포스트는 10개씩, 다이어리는 30개씩
+#### 메인포스트는 10개씩, 다이어리는 30개씩 -->

@@ -5,7 +5,7 @@ const fs = require("fs");
 try {
   fs.accessSync("uploads");
 } catch (error) {
-  console.log("uploads 폴더 없으므로 생성됨");
+  // console.log("uploads 폴더 없으므로 생성됨");
   fs.mkdirSync("uploads");
 }
 

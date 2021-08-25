@@ -1,4 +1,4 @@
-const { User, Diary, Photo, Feel } = require("../models");
+const { User, Diary, Photo } = require("../models");
 const { Op } = require("sequelize");
 
 module.exports.getDiarys = async (req, res, next) => {
