@@ -2,12 +2,11 @@ import styled, { css } from "styled-components";
 import { Card } from "antd";
 
 const userTitle = css`
-  background-color: ${({ theme }) => theme.color.DARK_MAIN};
   display: flex;
   justify-content: center;
   border-radius: 5px;
   margin: 10px 0px 5px 0px;
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  border: 2px solid ${({ theme }) => theme.color.DARK_MAIN};
 `;
 
 export const UserHeader = styled.div`
@@ -56,6 +55,7 @@ export const UserInfoWrapper = styled.div`
 export const UserIntroTop = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 20px;
   flex-direction: column;
   justify-content: center;
 
@@ -77,7 +77,7 @@ export const UserIntroWrapper = styled.div`
 `;
 
 export const UserIntroTitle = styled.div`
-  width: 50%;
+  width: calc(50% - 10px); // gap
   ${userTitle}
 `;
 
