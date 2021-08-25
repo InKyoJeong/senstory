@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { isLoggedIn } = require("./middlewares");
+const { isLoggedIn, errorHandler } = require("./middlewares");
 const {
   postAddDiary,
   postAddPhotos,
@@ -33,7 +33,7 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB 제한
 });
 
-diaryRouter.post("/", isLoggedIn, upload.none(), postAddDiary);
+diaryRouter.post("/", isLoggedIn, upload.none(), postAddDiary, errorHandler);
 diaryRouter.get("/:diaryId", isLoggedIn, getDiary);
 diaryRouter.delete("/:diaryId", isLoggedIn, deleteDiary);
 diaryRouter.post("/photos", isLoggedIn, upload.array("photo"), postAddPhotos);

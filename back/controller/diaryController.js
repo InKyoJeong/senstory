@@ -3,7 +3,7 @@ const { User, Diary, Photo, Feel } = require("../models");
 module.exports.postAddDiary = async (req, res, next) => {
   try {
     const diary = await Diary.create({
-      title: req.body.title,
+      title: req.body.ttle,
       content: req.body.content,
       feel: req.body.feel,
       maxtemp: parseInt(req.body.maxtemp, 10),

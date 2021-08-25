@@ -6,6 +6,7 @@ export const DiaryDropdownButton = styled(Button)`
   background-color: #e6acac;
   color: black;
   border-width: 2px;
+  border-radius: 10px;
 
   &:hover,
   &:focus {

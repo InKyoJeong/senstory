@@ -38,15 +38,20 @@ const WEATHER_API_KEY = "754396fc47cf98139cb846496c61d15d";
 
 const DiaryWriteForm = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const { photoPaths, addDiaryLoading, addDiaryFinish } = useSelector(
-    (state) => state.diary
-  );
+  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } =
+    useSelector((state) => state.diary);
   const [title, onChangeTitle, setTitle] = useInput("");
   const [content, onChangeContent, setContent] = useInput("");
   const [feel, setFeel] = useState(null);
   const [maxtemp, setMaxtemp] = useState(null);
   const [mintemp, setMintemp] = useState(null);
   const [geoError, setGeoError] = useState(false);
+
+  useEffect(() => {
+    if (addDiaryError) {
+      alert(addDiaryError);
+    }
+  }, [addDiaryError]);
 
   const imageInput = useRef();
 

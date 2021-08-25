@@ -1,6 +1,7 @@
 import { all, fork, takeLatest, put, call, throttle } from "redux-saga/effects";
 import axios from "axios";
 import {
+  ADD_DIARY_ERROR_FINISH,
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
@@ -105,10 +106,13 @@ function* addDiary(action) {
       data: result.data,
     });
   } catch (err) {
-    console.error(err);
     yield put({
       type: ADD_DIARY_FAILURE,
       error: err.response.data,
+    });
+  } finally {
+    yield put({
+      type: ADD_DIARY_ERROR_FINISH,
     });
   }
 }

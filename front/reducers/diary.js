@@ -1,5 +1,6 @@
 import { produce } from "immer";
 import {
+  ADD_DIARY_ERROR_FINISH,
   ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
   ADD_DIARY_SUCCESS,
@@ -110,6 +111,9 @@ const reducer = (state = initialState, action) => {
       case ADD_DIARY_FAILURE:
         draft.addDiaryLoading = false;
         draft.addDiaryError = action.error;
+        break;
+      case ADD_DIARY_ERROR_FINISH:
+        draft.addDiaryError = null;
         break;
       case REMOVE_DIARY_REQUEST:
         draft.removeDiaryLoading = true;
