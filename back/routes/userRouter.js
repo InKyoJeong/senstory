@@ -1,5 +1,5 @@
 const express = require("express");
-const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
+const { isLoggedIn, isNotLoggedIn, errorHandler } = require("./middlewares");
 
 const multer = require("multer");
 const path = require("path");
@@ -53,19 +53,24 @@ userRouter.get("/followers", isLoggedIn, getFollowers);
 userRouter.get("/followings", isLoggedIn, getFollowings);
 
 userRouter.get("/:userId", getUser);
-userRouter.get("/:userId/posts", getUserPosts);
-userRouter.post("/login", isNotLoggedIn, postLogin);
-userRouter.post("/", isNotLoggedIn, postSignup);
-userRouter.post("/logout", isLoggedIn, postLogout);
+userRouter.get("/:userId/posts", getUserPosts, errorHandler);
+userRouter.post("/login", isNotLoggedIn, postLogin, errorHandler);
+userRouter.post("/", isNotLoggedIn, postSignup, errorHandler);
+userRouter.post("/logout", isLoggedIn, postLogout, errorHandler);
 
-userRouter.patch("/nickname", isLoggedIn, patchEditNickname);
-userRouter.patch("/mbti", isLoggedIn, patchEditMbti);
-userRouter.patch("/intro", isLoggedIn, patchEditIntro);
-userRouter.patch("/area", isLoggedIn, patchEditArea);
+userRouter.patch("/nickname", isLoggedIn, patchEditNickname, errorHandler);
+userRouter.patch("/mbti", isLoggedIn, patchEditMbti, errorHandler);
+userRouter.patch("/intro", isLoggedIn, patchEditIntro, errorHandler);
+userRouter.patch("/area", isLoggedIn, patchEditArea, errorHandler);
 
-userRouter.patch("/:userId/follow", isLoggedIn, patchAddFollower);
-userRouter.delete("/:userId/follow", isLoggedIn, deleteFollower);
-userRouter.delete("/follower/:userId", isLoggedIn, deleteFollowing);
+userRouter.patch("/:userId/follow", isLoggedIn, patchAddFollower, errorHandler);
+userRouter.delete("/:userId/follow", isLoggedIn, deleteFollower, errorHandler);
+userRouter.delete(
+  "/follower/:userId",
+  isLoggedIn,
+  deleteFollowing,
+  errorHandler
+);
 
 userRouter.post("/images", isLoggedIn, upload.array("image"), postAvatarImages);
 userRouter.patch("/avatar", isLoggedIn, patchEditAvatar);

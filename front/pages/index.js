@@ -16,8 +16,13 @@ import axios from "axios";
 const Home = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
-  const { mainPosts, hasMorePosts, loadAllPostLoading, repostError } =
-    useSelector((state) => state.post);
+  const {
+    mainPosts,
+    hasMorePosts,
+    loadAllPostLoading,
+    repostError,
+    loadAllPostError,
+  } = useSelector((state) => state.post);
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -25,6 +30,12 @@ const Home = () => {
       alert(repostError);
     }
   }, [repostError]);
+
+  useEffect(() => {
+    if (loadAllPostError) {
+      alert(loadAllPostError);
+    }
+  }, [loadAllPostError]);
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadAllPostLoading) {

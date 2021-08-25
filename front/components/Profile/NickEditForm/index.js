@@ -10,9 +10,8 @@ import { NickFormWrapper, NickInput, NickEditButton } from "./styles";
 
 const NickEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeNickLoading, changeNickFinish } = useSelector(
-    (state) => state.user
-  );
+  const { me, changeNickLoading, changeNickFinish, changeNickError } =
+    useSelector((state) => state.user);
   const [nickname, onChangeNickname, setNickname] = useInput(
     me?.nickname || ""
   );
@@ -23,6 +22,12 @@ const NickEditForm = () => {
       onToggleModal();
     }
   }, [changeNickFinish]);
+
+  useEffect(() => {
+    if (changeNickError) {
+      alert(changeNickError);
+    }
+  }, [changeNickError]);
 
   if (nickname.length > 20) {
     setNickname(nickname.slice(0, 20));

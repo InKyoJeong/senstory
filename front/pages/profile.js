@@ -14,6 +14,7 @@ import useSWR from "swr";
 import Layout from "../components/common/Layout";
 import Loader from "../components/common/Loader";
 import MyProfileForm from "../components/common/MyProfileForm";
+import CustomError from "../components/common/CustomError";
 import NickEditForm from "../components/profile/NickEditForm";
 import MbtiEditForm from "../components/profile/MbtiEditForm";
 import FollowList from "../components/profile/FollowList";
@@ -80,7 +81,12 @@ const Profile = () => {
 
   if (followerError || followingError) {
     console.error(followerError || followingError);
-    return <div>다시 시도하세요.</div>;
+    return (
+      <CustomError
+        errorTitle="에러 발생!"
+        errorContent="잠시 후 다시 시도해주세요."
+      />
+    );
   }
 
   return (

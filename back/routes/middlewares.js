@@ -15,7 +15,6 @@ exports.isNotLoggedIn = (req, res, next) => {
 };
 
 exports.errorHandler = (error, req, res, next) => {
-  console.log(error);
   res
     .status(500)
     .send("서버 에러가 발생하였습니다. 잠시 후에 다시 시도해주세요.");
