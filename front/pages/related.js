@@ -11,6 +11,7 @@ import PostCard from "../components/post/PostCard";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
+import Loader from "../components/common/Loader";
 
 const Related = () => {
   const dispatch = useDispatch();
