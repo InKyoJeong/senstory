@@ -7,21 +7,29 @@ import { RelatedForm } from "./styles";
 
 const RelatedCheck = ({ check }) => {
   return (
-    <RelatedForm>
+    <>
       <Conditional condition={check}>
-        <CheckSquareOutlined />
         <Link href="/">
-          <a>친구의 소식만 보기</a>
+          <a>
+            <RelatedForm>
+              <CheckSquareOutlined />
+              친구의 소식만 보기
+            </RelatedForm>
+          </a>
         </Link>
       </Conditional>
 
       <Conditional condition={!check}>
-        <BorderOutlined />
         <Link href="/related">
-          <a>친구의 소식만 보기</a>
+          <a>
+            <RelatedForm>
+              <BorderOutlined />
+              친구의 소식만 보기
+            </RelatedForm>
+          </a>
         </Link>
       </Conditional>
-    </RelatedForm>
+    </>
   );
 };
 

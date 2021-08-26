@@ -20,7 +20,7 @@ const HashtagSearch = () => {
     <SearchWrapper>
       <TagSearchTitle>
         <TagsFilled />
-        <label>해시태그 검색</label>
+        <label>해시태그 찾기</label>
       </TagSearchTitle>
       <TagSearchForm>
         <TagSearchInput

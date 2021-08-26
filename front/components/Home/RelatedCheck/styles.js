@@ -3,13 +3,12 @@ import styled from "styled-components";
 export const RelatedForm = styled.div`
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
+  cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
-  /* margin-top: 20px; */
   border: 1px solid #545353;
   padding: 5px 10px;
   color: white;
-  cursor: pointer;
   transition: 0.3s;
 
   & span {
