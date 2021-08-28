@@ -1,17 +1,10 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import Image from "next/image";
-import {
-  ArrowLeftOutlined,
-  FrownOutlined,
-  MehOutlined,
-  SmileOutlined,
-  StarOutlined,
-} from "@ant-design/icons";
-import { todayOnlyNum } from "../../../utils";
-import { REMOVE_DIARY_REQUEST } from "../../../actions/diary";
-import Conditional from "../../../hocs/Conditional";
-import DiaryDropdown from "../DiaryDropdown";
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import Image from 'next/image';
+import { ArrowLeftOutlined, FrownOutlined, MehOutlined, SmileOutlined, StarOutlined } from '@ant-design/icons';
+import { todayOnlyNum } from '../../../utils';
+import Conditional from '../../../hocs/Conditional';
+import DiaryDropdown from '../DiaryDropdown';
 
 import {
   DiaryHeaderWrapper,
@@ -27,16 +20,18 @@ import {
   DiaryImgFrame,
   DiaryContentText,
   DiaryTempWrapper,
-} from "./styles";
+} from './styles';
+import { removeDiaryRequest, REMOVE_DIARY_REQUEST } from '../../../reducers/diary/removeDiary';
 
 const DiaryDetail = ({ diary, onBack }) => {
   const dispatch = useDispatch();
 
   const onRemoveDiary = useCallback(() => {
-    dispatch({
-      type: REMOVE_DIARY_REQUEST,
-      data: diary.id,
-    });
+    // dispatch({
+    //   type: REMOVE_DIARY_REQUEST,
+    //   data: diary.id,
+    // });
+    dispatch(removeDiaryRequest(diary.id));
   }, []);
 
   return (
@@ -54,10 +49,10 @@ const DiaryDetail = ({ diary, onBack }) => {
       <DiaryContentsWrapper feel={diary.feel}>
         <DiaryContentsTop>
           <div>
-            {diary.feel === "Special" && <StarOutlined />}
-            {diary.feel === "Good" && <SmileOutlined />}
-            {diary.feel === "Soso" && <MehOutlined />}
-            {diary.feel === "Bad" && <FrownOutlined />}
+            {diary.feel === 'Special' && <StarOutlined />}
+            {diary.feel === 'Good' && <SmileOutlined />}
+            {diary.feel === 'Soso' && <MehOutlined />}
+            {diary.feel === 'Bad' && <FrownOutlined />}
           </div>
           <div>
             <Conditional condition={diary.mintemp && diary.maxtemp}>

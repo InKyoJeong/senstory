@@ -1,26 +1,14 @@
 import { produce } from 'immer';
-import {
-  ADD_DIARY_ERROR_FINISH,
-  ADD_DIARY_FAILURE,
-  ADD_DIARY_REQUEST,
-  ADD_DIARY_SUCCESS,
-  BACK_TO_DIARY,
-  BACK_TO_DIARY_FINISH,
-  LOAD_FEEL_DIARYS_FAILURE,
-  LOAD_FEEL_DIARYS_REQUEST,
-  LOAD_FEEL_DIARYS_SUCCESS,
-  REMOVE_DIARY_FAILURE,
-  REMOVE_DIARY_PHOTO,
-  REMOVE_DIARY_REQUEST,
-  REMOVE_DIARY_SUCCESS,
-  UPLOAD_PHOTOS_FAILURE,
-  UPLOAD_PHOTOS_REQUEST,
-  UPLOAD_PHOTOS_SUCCESS,
-} from '../../actions/diary';
-
 import { UserInitialState } from '../../interfaces/diary';
+
+import { ADD_DIARY_ERROR_FINISH, ADD_DIARY_FAILURE, ADD_DIARY_REQUEST, ADD_DIARY_SUCCESS } from './addDiary';
+import { BACK_TO_DIARY, BACK_TO_DIARY_FINISH } from './backToDiary';
+import { LOAD_FEEL_DIARYS_FAILURE, LOAD_FEEL_DIARYS_REQUEST, LOAD_FEEL_DIARYS_SUCCESS } from './loadFeelDiarys';
 import { LOAD_SINGLE_DIARY_FAILURE, LOAD_SINGLE_DIARY_REQUEST, LOAD_SINGLE_DIARY_SUCCESS } from './loadSingleDiary';
 import { LOAD_USER_DIARYS_FAILURE, LOAD_USER_DIARYS_REQUEST, LOAD_USER_DIARYS_SUCCESS } from './loadUserDiarys';
+import { REMOVE_DIARY_FAILURE, REMOVE_DIARY_REQUEST, REMOVE_DIARY_SUCCESS } from './removeDiary';
+import { REMOVE_DIARY_PHOTO } from './removeDiaryPhoto';
+import { UPLOAD_PHOTO_FAILURE, UPLOAD_PHOTO_REQUEST, UPLOAD_PHOTO_SUCCESS } from './uploadPhoto';
 
 export const initialState: UserInitialState = {
   mainDiarys: [],
@@ -127,18 +115,18 @@ const reducer = (state: UserInitialState = initialState, action) => {
         draft.removeDiaryLoading = false;
         draft.removeDiaryError = action.error;
         break;
-      case UPLOAD_PHOTOS_REQUEST:
+      case UPLOAD_PHOTO_REQUEST:
         draft.uploadPhotosLoading = true;
         draft.uploadPhotosFinish = false;
         draft.uploadPhotosError = null;
         break;
-      case UPLOAD_PHOTOS_SUCCESS: {
+      case UPLOAD_PHOTO_SUCCESS: {
         draft.photoPaths = action.data;
         draft.uploadPhotosLoading = false;
         draft.uploadPhotosFinish = true;
         break;
       }
-      case UPLOAD_PHOTOS_FAILURE: {
+      case UPLOAD_PHOTO_FAILURE: {
         draft.uploadPhotosLoading = false;
         draft.uploadPhotosError = action.error;
         break;

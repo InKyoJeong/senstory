@@ -1,21 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import { Form, Button } from "antd";
-import {
-  FrownOutlined,
-  LoadingOutlined,
-  MehOutlined,
-  SmileOutlined,
-  StarOutlined,
-} from "@ant-design/icons";
-import {
-  ADD_DIARY_REQUEST,
-  REMOVE_DIARY_PHOTO,
-  UPLOAD_PHOTOS_REQUEST,
-} from "../../../actions/diary";
-import useInput from "../../../hooks/useInput";
-import Conditional from "../../../hocs/Conditional";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Form, Button } from 'antd';
+import { FrownOutlined, LoadingOutlined, MehOutlined, SmileOutlined, StarOutlined } from '@ant-design/icons';
+import useInput from '../../../hooks/useInput';
+import Conditional from '../../../hocs/Conditional';
 import {
   DiaryContentInput,
   DiaryModalForm,
@@ -32,17 +21,19 @@ import {
   TempMin,
   TempMax,
   TempWriteWrapper,
-} from "./styles";
+} from './styles';
+import { addDiaryRequest, ADD_DIARY_REQUEST } from '../../../reducers/diary/addDiary';
+import { uploadPhotoRequest, UPLOAD_PHOTO_REQUEST } from '../../../reducers/diary/uploadPhoto';
+import { removeDiaryPhotoRequest } from '../../../reducers/diary/removeDiaryPhoto';
 
-const WEATHER_API_KEY = "754396fc47cf98139cb846496c61d15d";
+const WEATHER_API_KEY = '754396fc47cf98139cb846496c61d15d';
 
 const DiaryWriteForm = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } =
-    useSelector((state) => state.diary);
+  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } = useSelector((state) => state.diary);
 
-  const [title, onChangeTitle, setTitle] = useInput("");
-  const [content, onChangeContent, setContent] = useInput("");
+  const [title, onChangeTitle, setTitle] = useInput('');
+  const [content, onChangeContent, setContent] = useInput('');
   const [feel, setFeel] = useState(null);
   const [maxtemp, setMaxtemp] = useState(null);
   const [mintemp, setMintemp] = useState(null);
@@ -65,7 +56,7 @@ const DiaryWriteForm = ({ closeModal }) => {
       try {
         const response = await fetch(url);
         if (!response.ok) {
-          throw Error("요청이 실패했습니다. 다시 시도해주세요.");
+          throw Error('요청이 실패했습니다. 다시 시도해주세요.');
         }
         const data = await response.json();
         setMaxtemp(Math.round(data.main.temp_max));
@@ -74,12 +65,12 @@ const DiaryWriteForm = ({ closeModal }) => {
         alert(error.message);
       }
     },
-    [maxtemp, mintemp]
+    [maxtemp, mintemp],
   );
 
   const onGeoError = useCallback(() => {
     setGeoError(true);
-    alert("위치를 찾을 수 없습니다.");
+    alert('위치를 찾을 수 없습니다.');
   }, []);
 
   useEffect(() => {
@@ -95,15 +86,15 @@ const DiaryWriteForm = ({ closeModal }) => {
 
     return () => {
       const scrollY = document.body.style.top;
-      document.body.style.cssText = "";
-      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
   }, []);
 
   useEffect(() => {
     if (addDiaryFinish) {
-      setTitle("");
-      setContent("");
+      setTitle('');
+      setContent('');
       setFeel(null);
     }
     return () => {
@@ -113,31 +104,32 @@ const DiaryWriteForm = ({ closeModal }) => {
 
   const onSubmit = useCallback(() => {
     if (maxtemp === null && mintemp === null && !geoError) {
-      return alert("날씨 로딩이 끝난 후에 등록해주세요.");
+      return alert('날씨 로딩이 끝난 후에 등록해주세요.');
     }
     if (!title || !title.trim()) {
-      return alert("제목을 입력해주세요.");
+      return alert('제목을 입력해주세요.');
     }
     if (!content) {
-      return alert("내용을 입력해주세요.");
+      return alert('내용을 입력해주세요.');
     }
     if (!feel) {
-      return alert("기분을 선택해주세요.");
+      return alert('기분을 선택해주세요.');
     }
     const formData = new FormData();
     photoPaths.forEach((v) => {
-      formData.append("photo", v);
+      formData.append('photo', v);
     });
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("feel", feel);
-    formData.append("maxtemp", maxtemp);
-    formData.append("mintemp", mintemp);
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('feel', feel);
+    formData.append('maxtemp', maxtemp);
+    formData.append('mintemp', mintemp);
 
-    return dispatch({
-      type: ADD_DIARY_REQUEST,
-      data: formData,
-    });
+    // return dispatch({
+    //   type: ADD_DIARY_REQUEST,
+    //   data: formData,
+    // });
+    return dispatch(addDiaryRequest(formData));
   }, [title, content, feel, photoPaths, maxtemp, mintemp]);
 
   const onClickImageUpload = useCallback(() => {
@@ -148,12 +140,14 @@ const DiaryWriteForm = ({ closeModal }) => {
     // console.log("photos", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
-      imageFormData.append("photo", f);
+      imageFormData.append('photo', f);
     });
-    dispatch({
-      type: UPLOAD_PHOTOS_REQUEST,
-      data: imageFormData,
-    });
+    // dispatch({
+    //   type: UPLOAD_PHOTO_REQUEST,
+    //   data: imageFormData,
+    // });
+
+    dispatch(uploadPhotoRequest(imageFormData));
   }, []);
 
   const onChangeFeel = useCallback((e) => {
@@ -161,10 +155,11 @@ const DiaryWriteForm = ({ closeModal }) => {
   }, []);
 
   const onResetContents = useCallback((i) => {
-    dispatch({
-      type: REMOVE_DIARY_PHOTO,
-      data: i,
-    });
+    // dispatch({
+    //   type: REMOVE_DIARY_PHOTO,
+    //   data: i,
+    // });
+    dispatch(removeDiaryPhotoRequest(i));
   }, []);
 
   return (
@@ -172,11 +167,7 @@ const DiaryWriteForm = ({ closeModal }) => {
       <DiaryModalForm>
         <Form encType="multipart/form-data" onFinish={onSubmit}>
           <DiaryWriteInner>
-            <DiaryTitleInput
-              value={title}
-              onChange={onChangeTitle}
-              placeholder="제목을 입력하세요."
-            />
+            <DiaryTitleInput value={title} onChange={onChangeTitle} placeholder="제목을 입력하세요." />
 
             <DiaryContentInput
               value={content}
@@ -228,13 +219,7 @@ const DiaryWriteForm = ({ closeModal }) => {
               ))}
             </PhotoDisplay>
 
-            <input
-              type="file"
-              name="image"
-              hidden
-              ref={imageInput}
-              onChange={onChangeImages}
-            />
+            <input type="file" name="image" hidden ref={imageInput} onChange={onChangeImages} />
             <PhotoEnrollWrapper>
               <Conditional condition={photoPaths.length === 0}>
                 <PhotoBorder onClick={onClickImageUpload}>

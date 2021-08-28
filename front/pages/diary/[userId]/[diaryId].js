@@ -7,12 +7,12 @@ import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import { END } from 'redux-saga';
 import { LOAD_ME_REQUEST } from '../../../actions/user';
-import { BACK_TO_DIARY } from '../../../actions/diary';
 
 import Layout from '../../../components/common/Layout';
 import Loader from '../../../components/common/Loader';
 import DiaryDetail from '../../../components/diary/DiaryDetail';
 import { loadSingleDiaryRequest, LOAD_SINGLE_DIARY_REQUEST } from '../../../reducers/diary/loadSingleDiary';
+import { backToDiaryRequest, BACK_TO_DIARY } from '../../../reducers/diary/backToDiary';
 
 const DiaryDetailPage = () => {
   const router = useRouter();
@@ -39,9 +39,10 @@ const DiaryDetailPage = () => {
   }, [removeDiaryFinish]);
 
   const onBack = useCallback(() => {
-    dispatch({
-      type: BACK_TO_DIARY,
-    });
+    // dispatch({
+    //   type: BACK_TO_DIARY,
+    // });
+    dispatch(backToDiaryRequest());
   }, []);
 
   if (backTodiary) {
