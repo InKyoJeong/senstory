@@ -1,4 +1,4 @@
-import { produce } from "immer";
+import { produce } from 'immer';
 import {
   ADD_DIARY_ERROR_FINISH,
   ADD_DIARY_FAILURE,
@@ -9,12 +9,6 @@ import {
   LOAD_FEEL_DIARYS_FAILURE,
   LOAD_FEEL_DIARYS_REQUEST,
   LOAD_FEEL_DIARYS_SUCCESS,
-  LOAD_SINGLE_DIARY_FAILURE,
-  LOAD_SINGLE_DIARY_REQUEST,
-  LOAD_SINGLE_DIARY_SUCCESS,
-  LOAD_USER_DIARYS_FAILURE,
-  LOAD_USER_DIARYS_REQUEST,
-  LOAD_USER_DIARYS_SUCCESS,
   REMOVE_DIARY_FAILURE,
   REMOVE_DIARY_PHOTO,
   REMOVE_DIARY_REQUEST,
@@ -22,9 +16,13 @@ import {
   UPLOAD_PHOTOS_FAILURE,
   UPLOAD_PHOTOS_REQUEST,
   UPLOAD_PHOTOS_SUCCESS,
-} from "../actions/diary";
+} from '../../actions/diary';
 
-export const initialState = {
+import { UserInitialState } from '../../interfaces/diary';
+import { LOAD_SINGLE_DIARY_FAILURE, LOAD_SINGLE_DIARY_REQUEST, LOAD_SINGLE_DIARY_SUCCESS } from './loadSingleDiary';
+import { LOAD_USER_DIARYS_FAILURE, LOAD_USER_DIARYS_REQUEST, LOAD_USER_DIARYS_SUCCESS } from './loadUserDiarys';
+
+export const initialState: UserInitialState = {
   mainDiarys: [],
   photoPaths: [],
   singleDiary: null,
@@ -50,8 +48,8 @@ export const initialState = {
   backTodiary: false,
 };
 
-const reducer = (state = initialState, action) => {
-  return produce(state, (draft) => {
+const reducer = (state: UserInitialState = initialState, action) => {
+  return produce(state, (draft: UserInitialState) => {
     switch (action.type) {
       case LOAD_USER_DIARYS_REQUEST:
         draft.loadUserDiarysLoading = true;
@@ -123,9 +121,7 @@ const reducer = (state = initialState, action) => {
       case REMOVE_DIARY_SUCCESS:
         draft.removeDiaryFinish = true;
         draft.removeDiaryLoading = false;
-        draft.mainDiarys = draft.mainDiarys.filter(
-          (v) => v.id !== action.data.DiaryId
-        );
+        draft.mainDiarys = draft.mainDiarys.filter((v) => v.id !== action.data.DiaryId);
         break;
       case REMOVE_DIARY_FAILURE:
         draft.removeDiaryLoading = false;
@@ -143,7 +139,7 @@ const reducer = (state = initialState, action) => {
         break;
       }
       case UPLOAD_PHOTOS_FAILURE: {
-        draft.uploadPhotostLoading = false;
+        draft.uploadPhotosLoading = false;
         draft.uploadPhotosError = action.error;
         break;
       }

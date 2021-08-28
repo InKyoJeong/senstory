@@ -10,7 +10,6 @@ import { EditFilled } from "@ant-design/icons";
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
 import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from "../../../actions/user";
-import { LOAD_USER_DIARYS_REQUEST } from "../../../actions/diary";
 
 import Conditional from "../../../hocs/Conditional";
 import Layout from "../../../components/common/Layout";
@@ -20,6 +19,10 @@ import DiaryWriteForm from "../../../components/diary/DiaryWriteForm";
 import DiaryBlock from "../../../components/diary/DiaryBlock";
 import DiaryBlockContainer from "../../../components/diary/DiaryBlockContainer";
 import FeelSelectForm from "../../../components/diary/FeelSelectForm";
+import {
+  loadUserDiarysRequest,
+  LOAD_USER_DIARYS_REQUEST,
+} from "../../../reducers/diary/loadUserDiarys";
 
 const Diary = () => {
   const router = useRouter();
@@ -42,11 +45,12 @@ const Diary = () => {
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadUserDiarysLoading) {
       const lastId = mainDiarys[mainDiarys.length - 1]?.id;
-      dispatch({
-        type: LOAD_USER_DIARYS_REQUEST,
-        lastId,
-        data: userId,
-      });
+      // dispatch({
+      //   type: LOAD_USER_DIARYS_REQUEST,
+      //   lastId,
+      //   data: userId,
+      // });
+      dispatch(loadUserDiarysRequest(userId, lastId));
     }
   }, [inView, hasMoreDiarys, loadUserDiarysLoading, mainDiarys, userId]);
 
@@ -99,10 +103,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
-      store.dispatch({
-        type: LOAD_USER_DIARYS_REQUEST,
-        data: params.userId,
-      });
+      // store.dispatch({
+      //   type: LOAD_USER_DIARYS_REQUEST,
+      //   data: params.userId,
+      // });
+      store.dispatch(loadUserDiarysRequest(params.userId));
       store.dispatch({
         type: LOAD_USER_REQUEST,
         data: params.userId,
