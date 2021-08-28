@@ -68,8 +68,6 @@ const DiaryWriteForm = ({ closeModal }) => {
           throw Error("요청이 실패했습니다. 다시 시도해주세요.");
         }
         const data = await response.json();
-        // console.log("data", data);
-
         setMaxtemp(Math.round(data.main.temp_max));
         setMintemp(Math.round(data.main.temp_min));
       } catch (error) {

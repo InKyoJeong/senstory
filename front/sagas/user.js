@@ -113,7 +113,6 @@ function* logIn(action) {
   } finally {
     yield put({
       type: LOG_IN_ERROR_FINISH,
-      // error: null,
     });
   }
 }

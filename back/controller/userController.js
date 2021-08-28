@@ -298,7 +298,7 @@ module.exports.patchAddFollower = async (req, res, next) => {
       return res.status(403).send("존재하지 않는 사용자입니다.");
     }
     await user.addFollowers(req.user.id);
-    res.status(200).json({ UserId: parseInt(req.params.userId, 10) }); // action.data
+    res.status(200).json({ UserId: parseInt(req.params.userId, 10) });
   } catch (error) {
     console.error(error);
     next(error);

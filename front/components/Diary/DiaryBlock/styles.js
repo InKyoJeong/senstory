@@ -80,10 +80,6 @@ export const WhiteLabel = styled.div`
     width: 45px;
     top: -42px;
     left: -24px;
-    /* height: 100px;
-    width: 12px;
-    top: -28px;
-    left: 22px; */
   }
 `;
 
@@ -100,6 +96,7 @@ export const BlockFeelText = styled.div`
 export const BlockTitleText = styled.div`
   margin-left: auto;
   color: ${({ theme }) => theme.color.MIDDLE_GRAY};
+  font-style: italic;
 
   & div {
     overflow: hidden;

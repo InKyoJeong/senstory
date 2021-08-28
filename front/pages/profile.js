@@ -92,8 +92,9 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>프로필 | SenStory</title>
+        <title>Profile | SenStory</title>
       </Head>
+
       <Layout profile>
         <MyProfileForm hide />
         <NickEditForm />

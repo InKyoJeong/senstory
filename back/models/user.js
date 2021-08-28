@@ -34,10 +34,6 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        // allowRecommend:{
-        //   type:DataTypes.BOOLEAN,
-        //   allowNull :true
-        // }
       },
       {
         modelName: "User",

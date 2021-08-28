@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Router from "next/router";
+import Head from "next/head";
 import axios from "axios";
 import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
@@ -57,6 +58,10 @@ const DiaryDetailPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title> Diary | SenStory</title>
+      </Head>
+
       <DiaryDetail diary={singleDiary} onBack={onBack} />
     </Layout>
   );

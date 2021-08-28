@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import { Button, Avatar, List } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import {
@@ -15,7 +16,6 @@ import {
   FollowInfoSection,
   FollowDelSection,
 } from "./styles";
-import Link from "next/link";
 
 const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
   const dispatch = useDispatch();

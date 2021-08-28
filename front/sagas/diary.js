@@ -146,7 +146,6 @@ function uploadPhotosAPI(data) {
 function* uploadPhotos(action) {
   try {
     const result = yield call(uploadPhotosAPI, action.data);
-    console.log(result);
     yield put({
       type: UPLOAD_PHOTOS_SUCCESS,
       data: result.data,

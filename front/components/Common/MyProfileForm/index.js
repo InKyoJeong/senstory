@@ -33,7 +33,7 @@ const MyProfileForm = ({ hide }) => {
   }, [avatarInput.current]);
 
   const onChangeAvatar = useCallback((e) => {
-    console.log("images", e.target.files);
+    // console.log("images", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append("image", f);
