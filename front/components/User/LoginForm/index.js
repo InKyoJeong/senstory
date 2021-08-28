@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginRequestAction } from "../../../actions/user";
+import { LOG_IN_REQUEST } from "../../../actions/user";
 
 import useInput from "../../../hooks/useInput";
 import MiniTitle from "../../common/MiniTitle";
@@ -25,7 +25,10 @@ const LoginForm = () => {
   }, [logInError]);
 
   const onSubmitForm = useCallback(() => {
-    dispatch(loginRequestAction({ email, password }));
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: { email, password },
+    });
   }, [email, password]);
 
   return (

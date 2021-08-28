@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { Card, Avatar, Form } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import {
-  logoutRequestAction,
-  UPLOAD_AVATAR_REQUEST,
-} from "../../../actions/user";
+import { LOG_OUT_REQUEST, UPLOAD_AVATAR_REQUEST } from "../../../actions/user";
 
 import {
   CardWrapper,
@@ -25,7 +22,7 @@ const MyProfileForm = ({ hide }) => {
   const avatarInput = useRef();
 
   const onLogOut = useCallback(() => {
-    dispatch(logoutRequestAction());
+    dispatch({ type: LOG_OUT_REQUEST });
   }, []);
 
   const onClickAvatarUpload = useCallback(() => {
