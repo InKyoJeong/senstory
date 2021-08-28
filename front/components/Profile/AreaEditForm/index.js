@@ -6,7 +6,8 @@ import Conditional from "../../../hocs/Conditional";
 import useToggle from "../../../hooks/useToggle";
 import useInput from "../../../hooks/useInput";
 import Modal from "../../common/Modal";
-import { AreaEditButton, AreaFormWrapper, AreaInput } from "./styles";
+import { AreaFormWrapper, AreaInput } from "./styles";
+import ChangeButton from "../ChangeButton";
 
 const AreaEditForm = () => {
   const dispatch = useDispatch();
@@ -28,10 +29,6 @@ const AreaEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    // if (!area.trim()) {
-    //   return alert("활동 지역을 입력해주세요.");
-    // }
-
     dispatch({
       type: CHANGE_AREA_REQUEST,
       data: area,
@@ -50,13 +47,7 @@ const AreaEditForm = () => {
           type="text"
           placeholder={"활동지역 (최대 10자)"}
         />
-        <AreaEditButton
-          type="primary"
-          htmlType="submit"
-          loading={changeAreaLoading}
-        >
-          변경
-        </AreaEditButton>
+        <ChangeButton loading={changeAreaLoading} />
       </div>
 
       <Conditional condition={modalOpen}>

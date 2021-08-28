@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHANGE_MBTI_REQUEST } from "../../../actions/user";
+
 import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
 import Modal from "../../common/Modal";
-import { MbtiEditButton, MbtiFormWrapper } from "./styles";
+import ChangeButton from "../ChangeButton";
+import { MbtiFormWrapper } from "./styles";
 
 const MbtiEditForm = () => {
   const dispatch = useDispatch();
@@ -58,13 +60,7 @@ const MbtiEditForm = () => {
           <option value="ENFP">ENFP</option>
         </select>
 
-        <MbtiEditButton
-          htmlType="submit"
-          type="primary"
-          loading={changeMbtiLoading}
-        >
-          변경
-        </MbtiEditButton>
+        <ChangeButton loading={changeMbtiLoading} />
       </div>
 
       <Conditional condition={modalOpen}>

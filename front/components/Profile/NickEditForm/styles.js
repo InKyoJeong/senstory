@@ -22,8 +22,3 @@ export const NickInput = styled(Input)`
   border-radius: 10px;
   overflow: hidden;
 `;
-
-export const NickEditButton = styled(Button)`
-  border-radius: 10px;
-  margin-left: 5px;
-`;

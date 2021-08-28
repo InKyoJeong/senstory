@@ -6,7 +6,8 @@ import Conditional from "../../../hocs/Conditional";
 import useInput from "../../../hooks/useInput";
 import useToggle from "../../../hooks/useToggle";
 import Modal from "../../common/Modal";
-import { NickFormWrapper, NickInput, NickEditButton } from "./styles";
+import ChangeButton from "../ChangeButton";
+import { NickFormWrapper, NickInput } from "./styles";
 
 const NickEditForm = () => {
   const dispatch = useDispatch();
@@ -58,13 +59,7 @@ const NickEditForm = () => {
           onChange={onChangeNickname}
           type="text"
         />
-        <NickEditButton
-          type="primary"
-          htmlType="submit"
-          loading={changeNickLoading}
-        >
-          변경
-        </NickEditButton>
+        <ChangeButton loading={changeNickLoading} />
       </div>
 
       <Conditional condition={modalOpen}>

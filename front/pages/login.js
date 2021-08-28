@@ -48,6 +48,7 @@ const Login = () => {
         <Head>
           <title>로그인 | SenStory</title>
         </Head>
+
         <LoginForm />
       </Layout>
     </>

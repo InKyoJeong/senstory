@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Input, Button } from "antd";
+import { Form, Input } from "antd";
 
 export const AreaFormWrapper = styled(Form)`
   margin-bottom: 20px;
@@ -21,9 +21,4 @@ export const AreaInput = styled(Input)`
   color: white;
   border-radius: 10px;
   overflow: hidden;
-`;
-
-export const AreaEditButton = styled(Button)`
-  border-radius: 10px;
-  margin-left: 5px;
 `;

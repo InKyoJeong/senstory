@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Button } from "antd";
+import { Form } from "antd";
 
 export const MbtiFormWrapper = styled(Form)`
   margin-bottom: 20px;
@@ -23,9 +23,4 @@ export const MbtiFormWrapper = styled(Form)`
       outline: none;
     }
   }
-`;
-
-export const MbtiEditButton = styled(Button)`
-  border-radius: 10px;
-  margin-left: 5px;
 `;
