@@ -9,7 +9,9 @@ export interface RemoveDiaryRequest {
 
 export interface RemoveDiarySuccess {
   type: typeof REMOVE_DIARY_SUCCESS;
-  data: number;
+  data: {
+    DiaryId: number;
+  };
 }
 
 export interface RemoveDiaryFailure {
@@ -22,7 +24,7 @@ export const removeDiaryRequest = (data: number): RemoveDiaryRequest => ({
   data,
 });
 
-export const removeDiarySuccess = (data: number): RemoveDiarySuccess => ({
+export const removeDiarySuccess = (data: { DiaryId: number }): RemoveDiarySuccess => ({
   type: REMOVE_DIARY_SUCCESS,
   data,
 });
