@@ -47,8 +47,22 @@ const Related = () => {
     return <Loader text="로그인 페이지로 이동중..." />;
   }
 
+  const emptyStyle = useMemo(
+    () => ({
+      color: 'white',
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '50%',
+    }),
+    [],
+  );
+
   return (
     <Layout related>
+      <Conditional condition={mainPosts.length === 0}>
+        <div style={emptyStyle}>표시할 게시물이 없습니다.</div>
+      </Conditional>
+
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} ref={hasMorePosts && !loadRelatedPostsLoading ? ref : undefined} />
       ))}
