@@ -1,4 +1,4 @@
-import produce from "immer";
+import produce from 'immer';
 
 import {
   ADD_POST_TO_ME,
@@ -57,7 +57,7 @@ import {
   CHANGE_MBTI_REQUEST,
   CHANGE_MBTI_SUCCESS,
   CHANGE_MBTI_FAILURE,
-} from "../actions/user";
+} from '../../actions/user';
 
 export const initialState = {
   loadMeLoading: false, // 내 정보 가져오기
@@ -312,9 +312,7 @@ const reducer = (state = initialState, action) => {
       case UNFOLLOW_SUCCESS:
         draft.unfollowLoading = false;
         draft.unfollowFinish = true;
-        draft.me.Followings = draft.me.Followings.filter(
-          (v) => v.id !== action.data.UserId
-        );
+        draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data.UserId);
         break;
       case UNFOLLOW_FAILURE:
         draft.unfollowLoading = false;
@@ -355,9 +353,7 @@ const reducer = (state = initialState, action) => {
         break;
       case REMOVE_FOLLOWER_SUCCESS:
         draft.removeFollowerLoading = false;
-        draft.me.Followers = draft.me.Followers.filter(
-          (v) => v.id !== action.data.UserId
-        );
+        draft.me.Followers = draft.me.Followers.filter((v) => v.id !== action.data.UserId);
         draft.removeFollowerFinish = true;
         break;
       case REMOVE_FOLLOWER_FAILURE:

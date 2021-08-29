@@ -3,147 +3,113 @@ import axios from 'axios';
 import { ADD_DIARY_TO_ME, REMOVE_DIARY_OF_ME } from '../actions/user';
 import {
   loadUserDiarysFailure,
+  LoadUserDiarysRequest,
   loadUserDiarysSuccess,
-  LOAD_USER_DIARYS_FAILURE,
   LOAD_USER_DIARYS_REQUEST,
-  LOAD_USER_DIARYS_SUCCESS,
 } from '../reducers/diary/loadUserDiarys';
 import {
   loadSingleDiaryFailure,
-  loadSingleDiaryRequest,
+  LoadSingleDiaryRequest,
   loadSingleDiarySuccess,
   LOAD_SINGLE_DIARY_REQUEST,
 } from '../reducers/diary/loadSingleDiary';
 import {
   loadFeelDiarysFailure,
+  LoadFeelDiarysRequest,
   loadFeelDiarysSuccess,
   LOAD_FEEL_DIARYS_REQUEST,
 } from '../reducers/diary/loadFeelDiarys';
 import {
   addDiaryErrorFinish,
   addDiaryFailure,
+  AddDiaryRequest,
   addDiarySuccess,
-  ADD_DIARY_ERROR_FINISH,
-  ADD_DIARY_FAILURE,
   ADD_DIARY_REQUEST,
-  ADD_DIARY_SUCCESS,
+  DiaryContent,
 } from '../reducers/diary/addDiary';
 import {
   removeDiaryFailure,
+  RemoveDiaryRequest,
   removeDiarySuccess,
-  REMOVE_DIARY_FAILURE,
   REMOVE_DIARY_REQUEST,
-  REMOVE_DIARY_SUCCESS,
 } from '../reducers/diary/removeDiary';
-import { uploadPhotoFailure, uploadPhotoSuccess, UPLOAD_PHOTO_REQUEST } from '../reducers/diary/uploadPhoto';
+import {
+  Photo,
+  uploadPhotoFailure,
+  UploadPhotoRequest,
+  uploadPhotoSuccess,
+  UPLOAD_PHOTO_REQUEST,
+} from '../reducers/diary/uploadPhoto';
+import { SagaIterator } from 'redux-saga';
 
-function loadUserDiarysAPI(data, lastId) {
+function loadUserDiarysAPI(data: number | string, lastId: number) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
 }
 
-function* loadUserDiarys(action) {
+function* loadUserDiarys(action: LoadUserDiarysRequest): SagaIterator {
   try {
     const result = yield call(loadUserDiarysAPI, action.data, action.lastId);
-    // yield put({
-    //   type: LOAD_USER_DIARYS_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadUserDiarysSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_USER_DIARYS_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadUserDiarysFailure(err));
   }
 }
 
-function loadDiaryAPI(data) {
+function loadDiaryAPI(data: number | string) {
   return axios.get(`/diary/${data}`);
 }
 
-function* loadDiary(action) {
+function* loadDiary(action: LoadSingleDiaryRequest): SagaIterator {
   try {
     const result = yield call(loadDiaryAPI, action.data);
-    // yield put({
-    //   type: LOAD_SINGLE_DIARY_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadSingleDiarySuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_SINGLE_DIARY_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadSingleDiaryFailure(err));
   }
 }
 
-function loadFeelDiarysAPI(id, feel, lastId) {
+function loadFeelDiarysAPI(id: number, feel: string, lastId: number) {
   return axios.get(`/feel/${id}/${feel}?lastId=${lastId || 0}`);
 }
 
-function* loadFeelDiarys(action) {
+function* loadFeelDiarys(action: LoadFeelDiarysRequest): SagaIterator {
   try {
     const result = yield call(loadFeelDiarysAPI, action.id, action.feel, action.lastId);
-    // yield put({
-    //   type: LOAD_FEEL_DIARYS_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadFeelDiarysSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_FEEL_DIARYS_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadFeelDiarysFailure(err));
   }
 }
 
-function addDiaryAPI(data) {
+function addDiaryAPI(data: DiaryContent) {
   return axios.post('/diary', data);
 }
 
-function* addDiary(action) {
+function* addDiary(action: AddDiaryRequest): SagaIterator {
   try {
     const result = yield call(addDiaryAPI, action.data);
-    // yield put({
-    //   type: ADD_DIARY_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(addDiarySuccess(result.data));
     yield put({
       type: ADD_DIARY_TO_ME,
       data: result.data,
     });
   } catch (err) {
-    // yield put({
-    //   type: ADD_DIARY_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(addDiaryFailure(err));
   } finally {
-    // yield put({
-    //   type: ADD_DIARY_ERROR_FINISH,
-    // });
     yield put(addDiaryErrorFinish());
   }
 }
 
-function removeDiaryAPI(data) {
+function removeDiaryAPI(data: number) {
   return axios.delete(`/diary/${data}`);
 }
 
-function* removeDiary(action) {
+function* removeDiary(action: RemoveDiaryRequest): SagaIterator {
   try {
     const result = yield call(removeDiaryAPI, action.data);
-    // yield put({
-    //   type: REMOVE_DIARY_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(removeDiarySuccess(result.data));
     yield put({
       type: REMOVE_DIARY_OF_ME,
@@ -151,32 +117,20 @@ function* removeDiary(action) {
     });
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: REMOVE_DIARY_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(removeDiaryFailure(err));
   }
 }
 
-function uploadPhotosAPI(data) {
+function uploadPhotosAPI(data: Photo) {
   return axios.post('/diary/photos', data);
 }
 
-function* uploadPhotos(action) {
+function* uploadPhotos(action: UploadPhotoRequest): SagaIterator {
   try {
     const result = yield call(uploadPhotosAPI, action.data);
-    // yield put({
-    //   type: UPLOAD_PHOTO_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(uploadPhotoSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: UPLOAD_PHOTO_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(uploadPhotoFailure(err));
   }
 }

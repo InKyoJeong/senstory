@@ -6,7 +6,7 @@ export const LOAD_SINGLE_DIARY_FAILURE = 'LOAD_SINGLE_DIARY_FAILURE' as const;
 
 export interface LoadSingleDiaryRequest {
   type: typeof LOAD_SINGLE_DIARY_REQUEST;
-  data: string;
+  data: string | number;
 }
 
 export interface LoadSingleDiarySuccess {
@@ -19,7 +19,7 @@ export interface LoadSingleDiaryFailure {
   error: string;
 }
 
-export const loadSingleDiaryRequest = (data: string): LoadSingleDiaryRequest => ({
+export const loadSingleDiaryRequest = (data: string | number): LoadSingleDiaryRequest => ({
   type: LOAD_SINGLE_DIARY_REQUEST,
   data,
 });
