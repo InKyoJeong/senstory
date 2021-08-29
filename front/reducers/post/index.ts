@@ -1,21 +1,40 @@
 import produce from 'immer';
-
 import { PostinitialState } from '../../interfaces/post';
-import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS } from './addComment';
-import { ADD_POST_ERROR_FINISH, ADD_POST_FAILURE, ADD_POST_REQUEST, ADD_POST_SUCCESS } from './addPost';
-import { LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS } from './likePost';
 
-import { LOAD_ALL_POST_FAILURE, LOAD_ALL_POST_REQUEST, LOAD_ALL_POST_SUCCESS } from './loadAllPost';
-import { LOAD_HASHTAG_POSTS_FAILURE, LOAD_HASHTAG_POSTS_REQUEST, LOAD_HASHTAG_POSTS_SUCCESS } from './loadHashtagPosts';
-import { LOAD_RELATED_POSTS_FAILURE, LOAD_RELATED_POSTS_REQUEST, LOAD_RELATED_POSTS_SUCCESS } from './loadRelatedPost';
-import { LOAD_SINGLE_POST_FAILURE, LOAD_SINGLE_POST_REQUEST, LOAD_SINGLE_POST_SUCCESS } from './loadSinglePost';
-import { LOAD_USER_ALL_POST_FAILURE, LOAD_USER_ALL_POST_REQUEST, LOAD_USER_ALL_POST_SUCCESS } from './loadUserAllPost';
-import { REMOVE_IMAGE } from './removeImage';
-import { REMOVE_POST_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS } from './removePost';
-import { REPOST_ERROR_FINISH, REPOST_FAILURE, REPOST_REQUEST, REPOST_SUCCESS } from './repost';
-import { UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS } from './unlikePost';
-import { UPDATE_POST_FAILURE, UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS } from './updatePost';
-import { UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS } from './uploadImages';
+import { AddComment, ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS } from './addComment';
+import { AddPost, ADD_POST_ERROR_FINISH, ADD_POST_FAILURE, ADD_POST_REQUEST, ADD_POST_SUCCESS } from './addPost';
+import { LikePost, LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS } from './likePost';
+import { LoadAllPost, LOAD_ALL_POST_FAILURE, LOAD_ALL_POST_REQUEST, LOAD_ALL_POST_SUCCESS } from './loadAllPost';
+import {
+  LoadHashtagPosts,
+  LOAD_HASHTAG_POSTS_FAILURE,
+  LOAD_HASHTAG_POSTS_REQUEST,
+  LOAD_HASHTAG_POSTS_SUCCESS,
+} from './loadHashtagPosts';
+import {
+  LoadRelatedPost,
+  LOAD_RELATED_POSTS_FAILURE,
+  LOAD_RELATED_POSTS_REQUEST,
+  LOAD_RELATED_POSTS_SUCCESS,
+} from './loadRelatedPost';
+import {
+  LoadSinglePost,
+  LOAD_SINGLE_POST_FAILURE,
+  LOAD_SINGLE_POST_REQUEST,
+  LOAD_SINGLE_POST_SUCCESS,
+} from './loadSinglePost';
+import {
+  LoadUserAllPost,
+  LOAD_USER_ALL_POST_FAILURE,
+  LOAD_USER_ALL_POST_REQUEST,
+  LOAD_USER_ALL_POST_SUCCESS,
+} from './loadUserAllPost';
+import { RemoveImage, REMOVE_IMAGE } from './removeImage';
+import { RemovePost, REMOVE_POST_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS } from './removePost';
+import { Repost, REPOST_ERROR_FINISH, REPOST_FAILURE, REPOST_REQUEST, REPOST_SUCCESS } from './repost';
+import { UnlikePost, UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS } from './unlikePost';
+import { UpdatePost, UPDATE_POST_FAILURE, UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS } from './updatePost';
+import { UploadImages, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS } from './uploadImages';
 
 export const initialState: PostinitialState = {
   mainPosts: [],
@@ -63,7 +82,23 @@ export const initialState: PostinitialState = {
   repostError: null,
 };
 
-const reducer = (state: PostinitialState = initialState, action) => {
+export type PostReducerAction =
+  | AddComment
+  | AddPost
+  | LikePost
+  | LoadAllPost
+  | LoadHashtagPosts
+  | LoadRelatedPost
+  | LoadSinglePost
+  | LoadUserAllPost
+  | RemoveImage
+  | RemovePost
+  | Repost
+  | UnlikePost
+  | UpdatePost
+  | UploadImages;
+
+const reducer = (state: PostinitialState = initialState, action: PostReducerAction) => {
   return produce(state, (draft: PostinitialState) => {
     switch (action.type) {
       case LOAD_ALL_POST_REQUEST:

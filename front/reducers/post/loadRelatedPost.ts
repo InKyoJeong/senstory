@@ -6,7 +6,7 @@ export const LOAD_RELATED_POSTS_FAILURE = 'LOAD_RELATED_POSTS_FAILURE' as const;
 
 export interface LoadRelatedPostRequest {
   type: typeof LOAD_RELATED_POSTS_REQUEST;
-  lastId: number;
+  lastId?: number;
 }
 
 export interface LoadRelatedPostSuccess {
@@ -19,7 +19,7 @@ export interface LoadRelatedPostFailure {
   error: string;
 }
 
-export const loadRelatedPostRequest = (lastId: number): LoadRelatedPostRequest => ({
+export const loadRelatedPostRequest = (lastId?: number): LoadRelatedPostRequest => ({
   type: LOAD_RELATED_POSTS_REQUEST,
   lastId,
 });

@@ -35,4 +35,4 @@ export const unlikePostFailure = (error: string): UnlikePostFailure => ({
   error,
 });
 
-export type LikePost = UnlikePostRequest | UnlikePostSuccess | UnlikePostFailure;
+export type UnlikePost = UnlikePostRequest | UnlikePostSuccess | UnlikePostFailure;

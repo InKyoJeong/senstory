@@ -51,7 +51,7 @@ export const initialState: DiaryInitialState = {
   backTodiary: false,
 };
 
-type ReducerAction =
+export type DiaryReducerAction =
   | AddDiary
   | BackToDiary
   | LoadFeelDiarys
@@ -61,7 +61,7 @@ type ReducerAction =
   | RemoveDiaryPhoto
   | UploadPhoto;
 
-const reducer = (state: DiaryInitialState = initialState, action: ReducerAction) => {
+const reducer = (state: DiaryInitialState = initialState, action: DiaryReducerAction) => {
   return produce(state, (draft: DiaryInitialState) => {
     switch (action.type) {
       case LOAD_USER_DIARYS_REQUEST:

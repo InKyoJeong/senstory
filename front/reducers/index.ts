@@ -1,10 +1,17 @@
 import { HYDRATE } from 'next-redux-wrapper';
-import { combineReducers } from 'redux';
+import { AnyAction, combineReducers } from 'redux';
 import user from './user';
 import post from './post';
 import diary from './diary';
+import { PostinitialState } from '../interfaces/post';
+import { DiaryInitialState } from '../interfaces/diary';
 
-const rootReducer = (state, action) => {
+export interface RootState {
+  post: PostinitialState;
+  diary: DiaryInitialState;
+}
+
+const rootReducer = (state: RootState, action: AnyAction) => {
   switch (action.type) {
     case HYDRATE:
       console.log('HYDRATE: ', action);
