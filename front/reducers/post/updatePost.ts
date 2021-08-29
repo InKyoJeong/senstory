@@ -11,18 +11,12 @@ export interface PostUpdateContent {
 
 export interface UpdatePostRequest {
   type: typeof UPDATE_POST_REQUEST;
-  data: {
-    PostId: number;
-    content: string;
-  };
+  data: PostUpdateContent;
 }
 
 export interface UpdatePostSuccess {
   type: typeof UPDATE_POST_SUCCESS;
-  data: {
-    PostId: number;
-    content: string;
-  };
+  data: PostUpdateContent;
 }
 
 export interface UpdatePostFailure {

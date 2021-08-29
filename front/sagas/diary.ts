@@ -42,7 +42,7 @@ import {
 } from '../reducers/diary/uploadPhoto';
 import { SagaIterator } from 'redux-saga';
 
-function loadUserDiarysAPI(data: number | string, lastId: number) {
+function loadUserDiarysAPI(data: number | string, lastId?: number) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
 }
 
@@ -70,7 +70,7 @@ function* loadDiary(action: LoadSingleDiaryRequest): SagaIterator {
   }
 }
 
-function loadFeelDiarysAPI(id: number, feel: string, lastId: number) {
+function loadFeelDiarysAPI(id: number, feel: string, lastId?: number) {
   return axios.get(`/feel/${id}/${feel}?lastId=${lastId || 0}`);
 }
 

@@ -8,7 +8,7 @@ export interface LoadFeelDiarysRequest {
   type: typeof LOAD_FEEL_DIARYS_REQUEST;
   id: number;
   feel: string;
-  lastId: number;
+  lastId?: number;
 }
 
 export interface LoadFeelDiarysSuccess {
@@ -21,7 +21,7 @@ export interface LoadFeelDiarysFailure {
   error: string;
 }
 
-export const loadFeelDiarysRequest = (id: number, feel: string, lastId: number) => ({
+export const loadFeelDiarysRequest = (id: number, feel: string, lastId?: number) => ({
   type: LOAD_FEEL_DIARYS_REQUEST,
   id,
   feel,

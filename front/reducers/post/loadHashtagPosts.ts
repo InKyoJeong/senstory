@@ -8,7 +8,7 @@ export const LOAD_HASHTAG_POSTS_FAILURE = 'LOAD_HASHTAG_POSTS_FAILURE' as const;
 export interface LoadHashtagPostsRequest {
   type: typeof LOAD_HASHTAG_POSTS_REQUEST;
   data: string;
-  lastId: number;
+  lastId?: number;
 }
 
 export interface LoadHashtagPostsSuccess {
@@ -21,7 +21,7 @@ export interface LoadHashtagPostsFailure {
   error: string;
 }
 
-export const loadHashtagPostsRequest = (data: string, lastId: number): LoadHashtagPostsRequest => ({
+export const loadHashtagPostsRequest = (data: string, lastId?: number): LoadHashtagPostsRequest => ({
   type: LOAD_HASHTAG_POSTS_REQUEST,
   data,
   lastId,

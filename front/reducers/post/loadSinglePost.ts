@@ -6,7 +6,6 @@ export const LOAD_SINGLE_POST_FAILURE = 'LOAD_SINGLE_POST_FAILURE' as const;
 
 export interface LoadSinglePostRequest {
   type: typeof LOAD_SINGLE_POST_REQUEST;
-
   data: number;
 }
 

@@ -1,291 +1,210 @@
 import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
 import axios from 'axios';
-
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../actions/user';
 import {
   loadAllPostFailure,
+  LoadAllPostRequest,
   loadAllPostSuccess,
-  LOAD_ALL_POST_FAILURE,
   LOAD_ALL_POST_REQUEST,
-  LOAD_ALL_POST_SUCCESS,
 } from '../reducers/post/loadAllPost';
 import {
+  LoadSinglePost,
   loadSinglePostFailure,
+  LoadSinglePostRequest,
   loadSinglePostSuccess,
-  LOAD_SINGLE_POST_FAILURE,
   LOAD_SINGLE_POST_REQUEST,
-  LOAD_SINGLE_POST_SUCCESS,
 } from '../reducers/post/loadSinglePost';
 import {
   loadUserAllPostFailure,
+  LoadUserAllPostRequest,
   loadUserAllPostSuccess,
-  LOAD_USER_ALL_POST_FAILURE,
   LOAD_USER_ALL_POST_REQUEST,
-  LOAD_USER_ALL_POST_SUCCESS,
 } from '../reducers/post/loadUserAllPost';
 import {
+  LoadRelatedPost,
   loadRelatedPostFailure,
+  LoadRelatedPostRequest,
   loadRelatedPostSuccess,
-  LOAD_RELATED_POSTS_FAILURE,
   LOAD_RELATED_POSTS_REQUEST,
-  LOAD_RELATED_POSTS_SUCCESS,
 } from '../reducers/post/loadRelatedPost';
 import {
   loadHashtagPostsFailure,
-  loadHashtagPostsRequest,
+  LoadHashtagPostsRequest,
   loadHashtagPostsSuccess,
-  LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
-  LOAD_HASHTAG_POSTS_SUCCESS,
 } from '../reducers/post/loadHashtagPosts';
 import {
   addPostErrorFinish,
   addPostFailure,
+  AddPostRequest,
   addPostSuccess,
-  ADD_POST_ERROR_FINISH,
-  ADD_POST_FAILURE,
   ADD_POST_REQUEST,
-  ADD_POST_SUCCESS,
+  PostContent,
 } from '../reducers/post/addPost';
 import {
   removePostFailure,
+  RemovePostRequest,
   removePostSuccess,
-  REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
-  REMOVE_POST_SUCCESS,
 } from '../reducers/post/removePost';
-import { updatePostFailure, updatePostSuccess, UPDATE_POST_REQUEST } from '../reducers/post/updatePost';
 import {
-  likePostFailure,
-  likePostSuccess,
-  LIKE_POST_FAILURE,
-  LIKE_POST_REQUEST,
-  LIKE_POST_SUCCESS,
-} from '../reducers/post/likePost';
+  PostUpdateContent,
+  updatePostFailure,
+  UpdatePostRequest,
+  updatePostSuccess,
+  UPDATE_POST_REQUEST,
+} from '../reducers/post/updatePost';
+import { likePostFailure, LikePostRequest, likePostSuccess, LIKE_POST_REQUEST } from '../reducers/post/likePost';
 import {
   unlikePostFailure,
+  UnlikePostRequest,
   unlikePostSuccess,
-  UNLIKE_POST_FAILURE,
   UNLIKE_POST_REQUEST,
-  UNLIKE_POST_SUCCESS,
 } from '../reducers/post/unlikePost';
 import {
   addCommentFailure,
+  AddCommentRequest,
   addCommentSuccess,
-  ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
-  ADD_COMMENT_SUCCESS,
+  CommentContent,
 } from '../reducers/post/addComment';
 import {
+  Image,
   uploadImagesFailure,
+  UploadImagesRequest,
   uploadImagesSuccess,
-  UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
-  UPLOAD_IMAGES_SUCCESS,
 } from '../reducers/post/uploadImages';
 import {
   repostErrorFinish,
   repostFailure,
+  RepostRequest,
   repostSuccess,
-  REPOST_ERROR_FINISH,
-  REPOST_FAILURE,
   REPOST_REQUEST,
-  REPOST_SUCCESS,
 } from '../reducers/post/repost';
+import { SagaIterator } from 'redux-saga';
 
-function likePostAPI(data) {
+function likePostAPI(data: number) {
   return axios.patch(`/post/${data}/like`);
 }
 
-function* likePost(action) {
+function* likePost(action: LikePostRequest): SagaIterator {
   try {
     const result = yield call(likePostAPI, action.data);
-    // yield put({
-    //   type: LIKE_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(likePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LIKE_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(likePostFailure(err.response.data));
   }
 }
 
-function unlikePostAPI(data) {
+function unlikePostAPI(data: number) {
   return axios.delete(`/post/${data}/like`);
 }
 
-function* unlikePost(action) {
+function* unlikePost(action: UnlikePostRequest): SagaIterator {
   try {
     const result = yield call(unlikePostAPI, action.data);
-    // yield put({
-    //   type: UNLIKE_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(unlikePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: UNLIKE_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(unlikePostFailure(err.response.data));
   }
 }
 
-function repostAPI(data) {
+function repostAPI(data: number) {
   return axios.post(`/post/${data}/repost`);
 }
 
-function* repost(action) {
+function* repost(action: RepostRequest): SagaIterator {
   try {
     const result = yield call(repostAPI, action.data);
-    // console.log(result);
-    // yield put({
-    //   type: REPOST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(repostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: REPOST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(repostFailure(err.response.data));
   } finally {
-    // yield put({
-    //   type: REPOST_ERROR_FINISH,
-    // });
     yield put(repostErrorFinish());
   }
 }
 
-function loadPostsAPI(lastId) {
+function loadPostsAPI(lastId?: number) {
   return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
-function* loadPosts(action) {
+function* loadPosts(action: LoadAllPostRequest): SagaIterator {
   try {
     const result = yield call(loadPostsAPI, action.lastId);
-    // yield put({
-    //   type: LOAD_ALL_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadAllPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_ALL_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadAllPostFailure(err.response.data));
   }
 }
 
-function loadRelatedPostsAPI(lastId) {
+function loadRelatedPostsAPI(lastId?: number) {
   return axios.get(`/posts/related?lastId=${lastId || 0}`);
 }
 
-function* loadRelatedPosts(action) {
+function* loadRelatedPosts(action: LoadRelatedPostRequest): SagaIterator {
   try {
     const result = yield call(loadRelatedPostsAPI, action.lastId);
-    // yield put({
-    //   type: LOAD_RELATED_POSTS_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadRelatedPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_RELATED_POSTS_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadRelatedPostFailure(err.response.data));
   }
 }
 
-function loadPostAPI(data) {
+function loadPostAPI(data: number) {
   return axios.get(`/post/${data}`);
 }
 
-function* loadPost(action) {
+function* loadPost(action: LoadSinglePostRequest): SagaIterator {
   try {
     const result = yield call(loadPostAPI, action.data);
-    // yield put({
-    //   type: LOAD_SINGLE_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadSinglePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_SINGLE_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadSinglePostFailure(err.response.data));
   }
 }
 
-function loadUserPostsAPI(data, lastId) {
+function loadUserPostsAPI(data: string | number, lastId?: number) {
   return axios.get(`/user/${data}/posts?lastId=${lastId || 0}`);
 }
 
-function* loadUserPosts(action) {
+function* loadUserPosts(action: LoadUserAllPostRequest): SagaIterator {
   try {
     const result = yield call(loadUserPostsAPI, action.data, action.lastId);
-    // yield put({
-    //   type: LOAD_USER_ALL_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadUserAllPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_USER_ALL_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadUserAllPostFailure(err.response.data));
   }
 }
 
-function loadHashtagPostsAPI(data, lastId) {
+function loadHashtagPostsAPI(data: string, lastId?: number) {
   return axios.get(`/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`);
 }
 
-function* loadHashtagPosts(action) {
+function* loadHashtagPosts(action: LoadHashtagPostsRequest): SagaIterator {
   try {
     const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
-    // yield put({
-    //   type: LOAD_HASHTAG_POSTS_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(loadHashtagPostsSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: LOAD_HASHTAG_POSTS_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(loadHashtagPostsFailure(err.response.data));
   }
 }
 
-function addPostAPI(data) {
+function addPostAPI(data: PostContent) {
   return axios.post('/post', data);
 }
 
-function* addPost(action) {
+function* addPost(action: AddPostRequest): SagaIterator {
   try {
     const result = yield call(addPostAPI, action.data);
-    // yield put({
-    //   type: ADD_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(addPostSuccess(result.data));
     yield put({
       type: ADD_POST_TO_ME,
@@ -293,30 +212,19 @@ function* addPost(action) {
     });
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: ADD_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(addPostFailure(err.response.data));
   } finally {
-    // yield put({
-    //   type: ADD_POST_ERROR_FINISH,
-    // });
     yield put(addPostErrorFinish());
   }
 }
 
-function removePostAPI(data) {
+function removePostAPI(data: number) {
   return axios.delete(`/post/${data}`);
 }
 
-function* removePost(action) {
+function* removePost(action: RemovePostRequest): SagaIterator {
   try {
     const result = yield call(removePostAPI, action.data);
-    // yield put({
-    //   type: REMOVE_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(removePostSuccess(result.data));
     yield put({
       type: REMOVE_POST_OF_ME,
@@ -324,77 +232,49 @@ function* removePost(action) {
     });
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: REMOVE_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(removePostFailure(err.response.data));
   }
 }
 
-function updatePostAPI(data) {
+function updatePostAPI(data: PostUpdateContent) {
   return axios.patch(`/post/${data.PostId}`, data);
 }
 
-function* updatePost(action) {
+function* updatePost(action: UpdatePostRequest): SagaIterator {
   try {
     const result = yield call(updatePostAPI, action.data);
-    // yield put({
-    //   type: UPDATE_POST_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(updatePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: UPDATE_POST_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(updatePostFailure(err.response.data));
   }
 }
 
-function addCommentAPI(data) {
+function addCommentAPI(data: CommentContent) {
   return axios.post(`/post/${data.postId}/comment`, data);
 }
 
-function* addComment(action) {
+function* addComment(action: AddCommentRequest): SagaIterator {
   try {
     const result = yield call(addCommentAPI, action.data);
-    // yield put({
-    //   type: ADD_COMMENT_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(addCommentSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: ADD_COMMENT_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(addCommentFailure(err.response.data));
   }
 }
 
-function uploadImagesAPI(data) {
+function uploadImagesAPI(data: Image) {
   return axios.post('/post/images', data);
 }
 
-function* uploadImages(action) {
+function* uploadImages(action: UploadImagesRequest): SagaIterator {
   try {
     const result = yield call(uploadImagesAPI, action.data);
     console.log(result);
-    // yield put({
-    //   type: UPLOAD_IMAGES_SUCCESS,
-    //   data: result.data,
-    // });
     yield put(uploadImagesSuccess(result.data));
   } catch (err) {
     console.error(err);
-    // yield put({
-    //   type: UPLOAD_IMAGES_FAILURE,
-    //   error: err.response.data,
-    // });
     yield put(uploadImagesFailure(err.response.data));
   }
 }

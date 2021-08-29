@@ -7,7 +7,7 @@ export const LOAD_USER_ALL_POST_FAILURE = 'LOAD_USER_ALL_POST_FAILURE' as const;
 export interface LoadUserAllPostRequest {
   type: typeof LOAD_USER_ALL_POST_REQUEST;
   data: string | number;
-  lastId: number;
+  lastId?: number;
 }
 
 export interface LoadUserAllPostSuccess {
@@ -20,7 +20,7 @@ export interface LoadUserAllPostFailure {
   error: string;
 }
 
-export const loadUserAllPostRequest = (data: string | number, lastId: number): LoadUserAllPostRequest => ({
+export const loadUserAllPostRequest = (data: string | number, lastId?: number): LoadUserAllPostRequest => ({
   type: LOAD_USER_ALL_POST_REQUEST,
   data,
   lastId,
