@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE, ADD_POST_REQUEST } from '../../../actions/post';
 import { EditFilled, PictureFilled } from '@ant-design/icons';
 import useInput from '../../../hooks/useInput';
 import {
@@ -12,6 +11,9 @@ import {
   PostWriteInput,
   WriteButtonWrapper,
 } from './styles';
+import { addPostRequest } from '../../../reducers/post/addPost';
+import { uploadImagesRequest } from '../../../reducers/post/uploadImages';
+import { removeImageRequest, REMOVE_IMAGE } from '../../../reducers/post/removeImage';
 
 const PostWriteForm = () => {
   const dispatch = useDispatch();
@@ -40,10 +42,11 @@ const PostWriteForm = () => {
     });
     formData.append('content', text);
     // console.log("formData", formData);
-    return dispatch({
-      type: ADD_POST_REQUEST,
-      data: formData,
-    });
+    // return dispatch({
+    //   type: ADD_POST_REQUEST,
+    //   data: formData,
+    // });
+    return dispatch(addPostRequest(formData));
   }, [text, imagePaths]);
 
   const imageInput = useRef();
@@ -59,18 +62,20 @@ const PostWriteForm = () => {
       imageFormData.append('image', f);
     });
 
-    dispatch({
-      type: UPLOAD_IMAGES_REQUEST,
-      data: imageFormData,
-    });
+    // dispatch({
+    //   type: UPLOAD_IMAGES_REQUEST,
+    //   data: imageFormData,
+    // });
+    dispatch(uploadImagesRequest(imageFormData));
   }, []);
 
   const onRemoveImage = useCallback(
     (index) => () => {
-      dispatch({
-        type: REMOVE_IMAGE,
-        data: index,
-      });
+      // dispatch({
+      //   type: REMOVE_IMAGE,
+      //   data: index,
+      // });
+      dispatch(removeImageRequest(index));
     },
     [],
   );

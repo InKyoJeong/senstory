@@ -7,7 +7,7 @@ export interface LikeInfo {
 
 export interface PostLiker {
   id: number;
-  Like: LikeInfo;
+  // Like: LikeInfo;
 }
 
 export interface PostImage {
@@ -55,7 +55,7 @@ export interface Post {
   createdAt: Date;
   updatedAt: Date;
   Likers: PostLiker[];
-  Repost: PostRepost;
+  Repost: null | PostRepost;
   Comments: Comment[];
 }
 

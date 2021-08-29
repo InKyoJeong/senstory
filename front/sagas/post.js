@@ -1,37 +1,6 @@
 import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
 import axios from 'axios';
 
-import {
-  ADD_COMMENT_FAILURE,
-  ADD_COMMENT_REQUEST,
-  ADD_COMMENT_SUCCESS,
-  ADD_POST_ERROR_FINISH,
-  ADD_POST_FAILURE,
-  ADD_POST_REQUEST,
-  ADD_POST_SUCCESS,
-  LIKE_POST_FAILURE,
-  LIKE_POST_REQUEST,
-  LIKE_POST_SUCCESS,
-  LOAD_HASHTAG_POSTS_FAILURE,
-  LOAD_HASHTAG_POSTS_REQUEST,
-  LOAD_HASHTAG_POSTS_SUCCESS,
-  REMOVE_POST_FAILURE,
-  REMOVE_POST_REQUEST,
-  REMOVE_POST_SUCCESS,
-  REPOST_ERROR_FINISH,
-  REPOST_FAILURE,
-  REPOST_REQUEST,
-  REPOST_SUCCESS,
-  UNLIKE_POST_FAILURE,
-  UNLIKE_POST_REQUEST,
-  UNLIKE_POST_SUCCESS,
-  UPDATE_POST_FAILURE,
-  UPDATE_POST_REQUEST,
-  UPDATE_POST_SUCCESS,
-  UPLOAD_IMAGES_FAILURE,
-  UPLOAD_IMAGES_REQUEST,
-  UPLOAD_IMAGES_SUCCESS,
-} from '../actions/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../actions/user';
 import {
   loadAllPostFailure,
@@ -61,6 +30,62 @@ import {
   LOAD_RELATED_POSTS_REQUEST,
   LOAD_RELATED_POSTS_SUCCESS,
 } from '../reducers/post/loadRelatedPost';
+import {
+  loadHashtagPostsFailure,
+  loadHashtagPostsRequest,
+  loadHashtagPostsSuccess,
+  LOAD_HASHTAG_POSTS_FAILURE,
+  LOAD_HASHTAG_POSTS_REQUEST,
+  LOAD_HASHTAG_POSTS_SUCCESS,
+} from '../reducers/post/loadHashtagPosts';
+import {
+  addPostErrorFinish,
+  addPostFailure,
+  addPostSuccess,
+  ADD_POST_ERROR_FINISH,
+  ADD_POST_FAILURE,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+} from '../reducers/post/addPost';
+import {
+  removePostFailure,
+  removePostSuccess,
+  REMOVE_POST_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+} from '../reducers/post/removePost';
+import { updatePostFailure, updatePostSuccess, UPDATE_POST_REQUEST } from '../reducers/post/updatePost';
+import {
+  likePostFailure,
+  likePostSuccess,
+  LIKE_POST_FAILURE,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
+} from '../reducers/post/likePost';
+import {
+  unlikePostFailure,
+  unlikePostSuccess,
+  UNLIKE_POST_FAILURE,
+  UNLIKE_POST_REQUEST,
+  UNLIKE_POST_SUCCESS,
+} from '../reducers/post/unlikePost';
+import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS } from '../reducers/post/addComment';
+import {
+  uploadImagesFailure,
+  uploadImagesSuccess,
+  UPLOAD_IMAGES_FAILURE,
+  UPLOAD_IMAGES_REQUEST,
+  UPLOAD_IMAGES_SUCCESS,
+} from '../reducers/post/uploadImages';
+import {
+  repostErrorFinish,
+  repostFailure,
+  repostSuccess,
+  REPOST_ERROR_FINISH,
+  REPOST_FAILURE,
+  REPOST_REQUEST,
+  REPOST_SUCCESS,
+} from '../reducers/post/repost';
 
 function likePostAPI(data) {
   return axios.patch(`/post/${data}/like`);
@@ -69,16 +94,18 @@ function likePostAPI(data) {
 function* likePost(action) {
   try {
     const result = yield call(likePostAPI, action.data);
-    yield put({
-      type: LIKE_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LIKE_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(likePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LIKE_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LIKE_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(likePostFailure(err));
   }
 }
 
@@ -89,16 +116,18 @@ function unlikePostAPI(data) {
 function* unlikePost(action) {
   try {
     const result = yield call(unlikePostAPI, action.data);
-    yield put({
-      type: UNLIKE_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: UNLIKE_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(unlikePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: UNLIKE_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: UNLIKE_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(unlikePostFailure(err));
   }
 }
 
@@ -110,20 +139,23 @@ function* repost(action) {
   try {
     const result = yield call(repostAPI, action.data);
     // console.log(result);
-    yield put({
-      type: REPOST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: REPOST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(repostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: REPOST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: REPOST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(repostFailure(err));
   } finally {
-    yield put({
-      type: REPOST_ERROR_FINISH,
-    });
+    // yield put({
+    //   type: REPOST_ERROR_FINISH,
+    // });
+    yield put(repostErrorFinish());
   }
 }
 
@@ -222,16 +254,18 @@ function loadHashtagPostsAPI(data, lastId) {
 function* loadHashtagPosts(action) {
   try {
     const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
-    yield put({
-      type: LOAD_HASHTAG_POSTS_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LOAD_HASHTAG_POSTS_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(loadHashtagPostsSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOAD_HASHTAG_POSTS_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LOAD_HASHTAG_POSTS_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(loadHashtagPostsFailure(err));
   }
 }
 
@@ -242,24 +276,27 @@ function addPostAPI(data) {
 function* addPost(action) {
   try {
     const result = yield call(addPostAPI, action.data);
-    yield put({
-      type: ADD_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: ADD_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(addPostSuccess(result.data));
     yield put({
       type: ADD_POST_TO_ME,
       data: result.data.id,
     });
   } catch (err) {
     console.error(err);
-    yield put({
-      type: ADD_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: ADD_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(addPostFailure(err));
   } finally {
-    yield put({
-      type: ADD_POST_ERROR_FINISH,
-    });
+    // yield put({
+    //   type: ADD_POST_ERROR_FINISH,
+    // });
+    yield put(addPostErrorFinish());
   }
 }
 
@@ -270,20 +307,22 @@ function removePostAPI(data) {
 function* removePost(action) {
   try {
     const result = yield call(removePostAPI, action.data);
-    yield put({
-      type: REMOVE_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: REMOVE_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(removePostSuccess(result.data));
     yield put({
       type: REMOVE_POST_OF_ME,
       data: action.data,
     });
   } catch (err) {
     console.error(err);
-    yield put({
-      type: REMOVE_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: REMOVE_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(removePostFailure(err));
   }
 }
 
@@ -294,16 +333,18 @@ function updatePostAPI(data) {
 function* updatePost(action) {
   try {
     const result = yield call(updatePostAPI, action.data);
-    yield put({
-      type: UPDATE_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: UPDATE_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(updatePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: UPDATE_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: UPDATE_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(updatePostFailure(err));
   }
 }
 
@@ -335,16 +376,18 @@ function* uploadImages(action) {
   try {
     const result = yield call(uploadImagesAPI, action.data);
     console.log(result);
-    yield put({
-      type: UPLOAD_IMAGES_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: UPLOAD_IMAGES_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(uploadImagesSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: UPLOAD_IMAGES_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: UPLOAD_IMAGES_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(uploadImagesFailure(err));
   }
 }
 

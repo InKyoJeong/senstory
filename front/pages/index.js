@@ -19,6 +19,8 @@ const Home = () => {
   const { mainPosts, hasMorePosts, loadAllPostLoading, repostError, loadAllPostError } = useSelector(
     (state) => state.post,
   );
+
+  console.log(mainPosts);
   const [ref, inView] = useInView();
 
   useEffect(() => {

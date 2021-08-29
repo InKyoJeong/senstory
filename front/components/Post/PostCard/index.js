@@ -1,8 +1,8 @@
-import React, { forwardRef, useCallback, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import Link from "next/link";
-import { Card, Avatar } from "antd";
+import React, { forwardRef, useCallback, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { Card, Avatar } from 'antd';
 import {
   HeartOutlined,
   HeartFilled,
@@ -10,26 +10,19 @@ import {
   MessageFilled,
   RetweetOutlined,
   ExportOutlined,
-} from "@ant-design/icons";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import {
-  LIKE_POST_REQUEST,
-  REMOVE_POST_REQUEST,
-  UNLIKE_POST_REQUEST,
-  REPOST_REQUEST,
-  UPDATE_POST_REQUEST,
-} from "../../../actions/post";
+} from '@ant-design/icons';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { fromNow } from "../../../utils";
-import useToggle from "../../../hooks/useToggle";
-import Conditional from "../../../hocs/Conditional";
-import Modal from "../../common/Modal";
-import FollowButton from "../../common/FollowButton";
-import PostImages from "../PostImages";
-import CommentWriteForm from "../CommentWriteForm";
-import PostContents from "../PostContents";
-import PostDropdown from "./PostDropdown";
-import CommentItem from "../CommentItem";
+import { fromNow } from '../../../utils';
+import useToggle from '../../../hooks/useToggle';
+import Conditional from '../../../hocs/Conditional';
+import Modal from '../../common/Modal';
+import FollowButton from '../../common/FollowButton';
+import PostImages from '../PostImages';
+import CommentWriteForm from '../CommentWriteForm';
+import PostContents from '../PostContents';
+import PostDropdown from './PostDropdown';
+import CommentItem from '../CommentItem';
 import {
   PostCardWrapper,
   CommentList,
@@ -44,7 +37,12 @@ import {
   CommentActive,
   InActive,
   IconCount,
-} from "./styles";
+} from './styles';
+import { removePostRequest } from '../../../reducers/post/removePost';
+import { updatePostRequest } from '../../../reducers/post/updatePost';
+import { likePostRequest, LIKE_POST_REQUEST } from '../../../reducers/post/likePost';
+import { unlikePostRequest } from '../../../reducers/post/unlikePost';
+import { repostRequest } from '../../../reducers/post/repost';
 
 const PostCard = forwardRef(({ post }, ref) => {
   const dispatch = useDispatch();
@@ -58,42 +56,46 @@ const PostCard = forwardRef(({ post }, ref) => {
 
   const onLike = useCallback(() => {
     if (!id) {
-      return alert("로그인이 필요합니다.");
+      return alert('로그인이 필요합니다.');
     }
-    return dispatch({
-      type: LIKE_POST_REQUEST,
-      data: post.id,
-    });
+    // return dispatch({
+    //   type: LIKE_POST_REQUEST,
+    //   data: post.id,
+    // });
+    return dispatch(likePostRequest(post.id));
   }, [id]);
 
   const onUnlike = useCallback(() => {
     if (!id) {
-      return alert("로그인이 필요합니다.");
+      return alert('로그인이 필요합니다.');
     }
-    return dispatch({
-      type: UNLIKE_POST_REQUEST,
-      data: post.id,
-    });
+    // return dispatch({
+    //   type: UNLIKE_POST_REQUEST,
+    //   data: post.id,
+    // });
+    return dispatch(unlikePostRequest(post.id));
   }, [id]);
 
   const onRemovePost = useCallback(() => {
     if (!id) {
-      return alert("로그인이 필요합니다.");
+      return alert('로그인이 필요합니다.');
     }
-    return dispatch({
-      type: REMOVE_POST_REQUEST,
-      data: post.id,
-    });
+    // return dispatch({
+    //   type: REMOVE_POST_REQUEST,
+    //   data: post.id,
+    // });
+    return dispatch(removePostRequest(post.id));
   }, [id]);
 
   const onRepost = useCallback(() => {
     if (!id) {
-      return alert("로그인이 필요합니다.");
+      return alert('로그인이 필요합니다.');
     }
-    return dispatch({
-      type: REPOST_REQUEST,
-      data: post.id,
-    });
+    // return dispatch({
+    //   type: REPOST_REQUEST,
+    //   data: post.id,
+    // });
+    return dispatch(repostRequest(post.id));
   }, [id]);
 
   const onClickUpdate = useCallback(() => {
@@ -106,15 +108,21 @@ const PostCard = forwardRef(({ post }, ref) => {
 
   const onChangePost = useCallback(
     (textEdit) => () => {
-      dispatch({
-        type: UPDATE_POST_REQUEST,
-        data: {
+      // dispatch({
+      //   type: UPDATE_POST_REQUEST,
+      // data: {
+      //   PostId: post.id,
+      //   content: textEdit,
+      // },
+      // });
+      dispatch(
+        updatePostRequest({
           PostId: post.id,
           content: textEdit,
-        },
-      });
+        }),
+      );
     },
-    [post]
+    [post],
   );
 
   return (
@@ -136,17 +144,14 @@ const PostCard = forwardRef(({ post }, ref) => {
             </div>
 
             <Conditional condition={id && post.User.id === id}>
-              <PostDropdown
-                onRemovePost={onRemovePost}
-                removePostLoading={removePostLoading}
-              />
+              <PostDropdown onRemovePost={onRemovePost} removePostLoading={removePostLoading} />
             </Conditional>
           </RepostTitleWrapper>
         </RepostHeader>
       )}
 
       <CommonCard
-        repost={post.RepostId && post.Repost && "true"}
+        repost={post.RepostId && post.Repost && 'true'}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
@@ -174,7 +179,7 @@ const PostCard = forwardRef(({ post }, ref) => {
           <RetweetOutlined
             key="re"
             onClick={onRepost}
-            style={{ color: post.User.id === id && post.RepostId && "#1890FF" }}
+            style={{ color: post.User.id === id && post.RepostId && '#1890FF' }}
           />,
           <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
             <ExportOutlined key="share" onClick={onToggleModal} />
@@ -183,21 +188,13 @@ const PostCard = forwardRef(({ post }, ref) => {
       >
         {post.RepostId && post.Repost ? (
           <>
-            <RepostInnerCard
-              cover={
-                post.Repost.Images[0] && (
-                  <PostImages images={post.Repost.Images} />
-                )
-              }
-            >
+            <RepostInnerCard cover={post.Repost.Images[0] && <PostImages images={post.Repost.Images} />}>
               <Card.Meta
                 avatar={
                   <Link href={`/user/${post.Repost.User.id}`}>
                     <a>
                       {post.Repost.User.avatar ? (
-                        <Avatar
-                          src={`http://localhost:3065/${post.Repost.User.avatar}`}
-                        />
+                        <Avatar src={`http://localhost:3065/${post.Repost.User.avatar}`} />
                       ) : (
                         <Avatar>{post.User.nickname[0]}</Avatar>
                       )}
@@ -272,10 +269,7 @@ const PostCard = forwardRef(({ post }, ref) => {
       </Conditional>
 
       <Conditional condition={modalOpen}>
-        <Modal
-          title="게시글 링크가 복사되었습니다!"
-          onToggleModal={onToggleModal}
-        />
+        <Modal title="게시글 링크가 복사되었습니다!" onToggleModal={onToggleModal} />
       </Conditional>
 
       <div ref={ref} />
