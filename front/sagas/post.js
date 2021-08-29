@@ -15,9 +15,6 @@ import {
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_SUCCESS,
-  LOAD_RELATED_POSTS_FAILURE,
-  LOAD_RELATED_POSTS_REQUEST,
-  LOAD_RELATED_POSTS_SUCCESS,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
@@ -57,6 +54,13 @@ import {
   LOAD_USER_ALL_POST_REQUEST,
   LOAD_USER_ALL_POST_SUCCESS,
 } from '../reducers/post/loadUserAllPost';
+import {
+  loadRelatedPostFailure,
+  loadRelatedPostSuccess,
+  LOAD_RELATED_POSTS_FAILURE,
+  LOAD_RELATED_POSTS_REQUEST,
+  LOAD_RELATED_POSTS_SUCCESS,
+} from '../reducers/post/loadRelatedPost';
 
 function likePostAPI(data) {
   return axios.patch(`/post/${data}/like`);
@@ -152,16 +156,18 @@ function loadRelatedPostsAPI(lastId) {
 function* loadRelatedPosts(action) {
   try {
     const result = yield call(loadRelatedPostsAPI, action.lastId);
-    yield put({
-      type: LOAD_RELATED_POSTS_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LOAD_RELATED_POSTS_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(loadRelatedPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOAD_RELATED_POSTS_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LOAD_RELATED_POSTS_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(loadRelatedPostFailure(err));
   }
 }
 
