@@ -1,5 +1,5 @@
-import { all, fork, takeLatest, put, throttle, call } from "redux-saga/effects";
-import axios from "axios";
+import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
+import axios from 'axios';
 
 import {
   ADD_COMMENT_FAILURE,
@@ -12,21 +12,12 @@ import {
   LIKE_POST_FAILURE,
   LIKE_POST_REQUEST,
   LIKE_POST_SUCCESS,
-  LOAD_ALL_POST_FAILURE,
-  LOAD_ALL_POST_REQUEST,
-  LOAD_ALL_POST_SUCCESS,
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_SUCCESS,
   LOAD_RELATED_POSTS_FAILURE,
   LOAD_RELATED_POSTS_REQUEST,
   LOAD_RELATED_POSTS_SUCCESS,
-  LOAD_SINGLE_POST_FAILURE,
-  LOAD_SINGLE_POST_REQUEST,
-  LOAD_SINGLE_POST_SUCCESS,
-  LOAD_USER_ALL_POST_FAILURE,
-  LOAD_USER_ALL_POST_REQUEST,
-  LOAD_USER_ALL_POST_SUCCESS,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
@@ -43,8 +34,29 @@ import {
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
-} from "../actions/post";
-import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../actions/user";
+} from '../actions/post';
+import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../actions/user';
+import {
+  loadAllPostFailure,
+  loadAllPostSuccess,
+  LOAD_ALL_POST_FAILURE,
+  LOAD_ALL_POST_REQUEST,
+  LOAD_ALL_POST_SUCCESS,
+} from '../reducers/post/loadAllPost';
+import {
+  loadSinglePostFailure,
+  loadSinglePostSuccess,
+  LOAD_SINGLE_POST_FAILURE,
+  LOAD_SINGLE_POST_REQUEST,
+  LOAD_SINGLE_POST_SUCCESS,
+} from '../reducers/post/loadSinglePost';
+import {
+  loadUserAllPostFailure,
+  loadUserAllPostSuccess,
+  LOAD_USER_ALL_POST_FAILURE,
+  LOAD_USER_ALL_POST_REQUEST,
+  LOAD_USER_ALL_POST_SUCCESS,
+} from '../reducers/post/loadUserAllPost';
 
 function likePostAPI(data) {
   return axios.patch(`/post/${data}/like`);
@@ -118,16 +130,18 @@ function loadPostsAPI(lastId) {
 function* loadPosts(action) {
   try {
     const result = yield call(loadPostsAPI, action.lastId);
-    yield put({
-      type: LOAD_ALL_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LOAD_ALL_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(loadAllPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOAD_ALL_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LOAD_ALL_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(loadAllPostFailure(err));
   }
 }
 
@@ -158,16 +172,18 @@ function loadPostAPI(data) {
 function* loadPost(action) {
   try {
     const result = yield call(loadPostAPI, action.data);
-    yield put({
-      type: LOAD_SINGLE_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LOAD_SINGLE_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(loadSinglePostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOAD_SINGLE_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LOAD_SINGLE_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(loadSinglePostFailure(err));
   }
 }
 
@@ -178,23 +194,23 @@ function loadUserPostsAPI(data, lastId) {
 function* loadUserPosts(action) {
   try {
     const result = yield call(loadUserPostsAPI, action.data, action.lastId);
-    yield put({
-      type: LOAD_USER_ALL_POST_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: LOAD_USER_ALL_POST_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(loadUserAllPostSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: LOAD_USER_ALL_POST_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: LOAD_USER_ALL_POST_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(loadUserAllPostFailure(err));
   }
 }
 
 function loadHashtagPostsAPI(data, lastId) {
-  return axios.get(
-    `/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`
-  );
+  return axios.get(`/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`);
 }
 
 function* loadHashtagPosts(action) {
@@ -214,7 +230,7 @@ function* loadHashtagPosts(action) {
 }
 
 function addPostAPI(data) {
-  return axios.post("/post", data);
+  return axios.post('/post', data);
 }
 
 function* addPost(action) {
@@ -306,7 +322,7 @@ function* addComment(action) {
 }
 
 function uploadImagesAPI(data) {
-  return axios.post("/post/images", data);
+  return axios.post('/post/images', data);
 }
 
 function* uploadImages(action) {

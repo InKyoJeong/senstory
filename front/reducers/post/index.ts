@@ -1,4 +1,4 @@
-import produce from "immer";
+import produce from 'immer';
 
 import {
   ADD_COMMENT_FAILURE,
@@ -11,21 +11,12 @@ import {
   LIKE_POST_FAILURE,
   LIKE_POST_REQUEST,
   LIKE_POST_SUCCESS,
-  LOAD_ALL_POST_FAILURE,
-  LOAD_ALL_POST_REQUEST,
-  LOAD_ALL_POST_SUCCESS,
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_HASHTAG_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_SUCCESS,
   LOAD_RELATED_POSTS_FAILURE,
   LOAD_RELATED_POSTS_REQUEST,
   LOAD_RELATED_POSTS_SUCCESS,
-  LOAD_SINGLE_POST_FAILURE,
-  LOAD_SINGLE_POST_REQUEST,
-  LOAD_SINGLE_POST_SUCCESS,
-  LOAD_USER_ALL_POST_FAILURE,
-  LOAD_USER_ALL_POST_REQUEST,
-  LOAD_USER_ALL_POST_SUCCESS,
   REMOVE_IMAGE,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
@@ -43,9 +34,15 @@ import {
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
-} from "../actions/post";
+} from '../../actions/post';
 
-export const initialState = {
+import { PostinitialState } from '../../interfaces/post';
+
+import { LOAD_ALL_POST_FAILURE, LOAD_ALL_POST_REQUEST, LOAD_ALL_POST_SUCCESS } from './loadAllPost';
+import { LOAD_SINGLE_POST_FAILURE, LOAD_SINGLE_POST_REQUEST, LOAD_SINGLE_POST_SUCCESS } from './loadSinglePost';
+import { LOAD_USER_ALL_POST_FAILURE, LOAD_USER_ALL_POST_REQUEST, LOAD_USER_ALL_POST_SUCCESS } from './loadUserAllPost';
+
+export const initialState: PostinitialState = {
   mainPosts: [],
   hasMorePosts: true,
   singlePost: null,
@@ -91,8 +88,8 @@ export const initialState = {
   repostError: null,
 };
 
-const reducer = (state = initialState, action) => {
-  return produce(state, (draft) => {
+const reducer = (state: PostinitialState = initialState, action) => {
+  return produce(state, (draft: PostinitialState) => {
     switch (action.type) {
       case LOAD_ALL_POST_REQUEST:
         draft.loadAllPostLoading = true;
@@ -194,8 +191,7 @@ const reducer = (state = initialState, action) => {
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostFinish = true;
-        draft.mainPosts.find((v) => v.id === action.data.PostId).content =
-          action.data.content;
+        draft.mainPosts.find((v) => v.id === action.data.PostId).content = action.data.content;
         break;
       case UPDATE_POST_FAILURE:
         draft.updatePostLoading = false;
@@ -226,9 +222,7 @@ const reducer = (state = initialState, action) => {
       case REMOVE_POST_SUCCESS:
         draft.removePostLoading = false;
         draft.removePostFinish = true;
-        draft.mainPosts = draft.mainPosts.filter(
-          (v) => v.id !== action.data.PostId
-        );
+        draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data.PostId);
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;
@@ -269,9 +263,7 @@ const reducer = (state = initialState, action) => {
           post.Likers = post.Likers.filter((v) => v.id !== action.data.UserId);
         }
         if (draft.singlePost?.Likers) {
-          const index = draft.singlePost.Likers.find(
-            (v) => v.id === action.data.UserId
-          );
+          const index = draft.singlePost.Likers.find((v) => v.id === action.data.UserId);
           draft.singlePost.Likers.splice(index, 1);
         }
         draft.unlikePostLoading = false;

@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { UserInitialState } from '../../interfaces/diary';
+import { DiaryInitialState } from '../../interfaces/diary';
 
 import { AddDiary, ADD_DIARY_ERROR_FINISH, ADD_DIARY_FAILURE, ADD_DIARY_REQUEST, ADD_DIARY_SUCCESS } from './addDiary';
 import { BackToDiary, BACK_TO_DIARY, BACK_TO_DIARY_FINISH } from './backToDiary';
@@ -25,7 +25,7 @@ import { RemoveDiary, REMOVE_DIARY_FAILURE, REMOVE_DIARY_REQUEST, REMOVE_DIARY_S
 import { RemoveDiaryPhoto, REMOVE_DIARY_PHOTO } from './removeDiaryPhoto';
 import { UploadPhoto, UPLOAD_PHOTO_FAILURE, UPLOAD_PHOTO_REQUEST, UPLOAD_PHOTO_SUCCESS } from './uploadPhoto';
 
-export const initialState: UserInitialState = {
+export const initialState: DiaryInitialState = {
   mainDiarys: [],
   photoPaths: [],
   singleDiary: null,
@@ -61,8 +61,8 @@ type ReducerAction =
   | RemoveDiaryPhoto
   | UploadPhoto;
 
-const reducer = (state: UserInitialState = initialState, action: ReducerAction) => {
-  return produce(state, (draft: UserInitialState) => {
+const reducer = (state: DiaryInitialState = initialState, action: ReducerAction) => {
+  return produce(state, (draft: DiaryInitialState) => {
     switch (action.type) {
       case LOAD_USER_DIARYS_REQUEST:
         draft.loadUserDiarysLoading = true;

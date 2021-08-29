@@ -6,7 +6,7 @@ export const LOAD_USER_DIARYS_FAILURE = 'LOAD_USER_DIARYS_FAILURE' as const;
 
 export interface LoadUserDiarysRequest {
   type: typeof LOAD_USER_DIARYS_REQUEST;
-  data: number;
+  data: number | string;
   lastId: number;
 }
 
@@ -20,7 +20,7 @@ export interface LoadUserDiarysFailure {
   error: string;
 }
 
-export const loadUserDiarysRequest = (data: number, lastId: number): LoadUserDiarysRequest => ({
+export const loadUserDiarysRequest = (data: number | string, lastId: number): LoadUserDiarysRequest => ({
   type: LOAD_USER_DIARYS_REQUEST,
   data,
   lastId,

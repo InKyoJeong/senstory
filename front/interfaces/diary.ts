@@ -26,7 +26,7 @@ export interface Diary {
   updatedAt: Date;
 }
 
-export interface UserInitialState {
+export interface DiaryInitialState {
   mainDiarys: Diary[];
   photoPaths: string[];
   singleDiary: Diary | null;
