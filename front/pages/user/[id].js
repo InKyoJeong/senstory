@@ -7,13 +7,14 @@ import { useInView } from 'react-intersection-observer';
 
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
-import { LOAD_ME_REQUEST, LOAD_USER_REQUEST } from '../../actions/user';
 import Conditional from '../../hocs/Conditional';
 
 import Layout from '../../components/common/Layout';
 import PostCard from '../../components/post/PostCard';
 import UserProfileForm from '../../components/profile/UserProfileForm';
 import { loadUserAllPostRequest, LOAD_USER_ALL_POST_REQUEST } from '../../reducers/post/loadUserAllPost';
+import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
+import { LOAD_USER_REQUEST } from '../../reducers/user/loadUser';
 
 const User = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import Router from 'next/router';
-import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from '../actions/user';
 
 import Layout from '../components/common/Layout';
 import PostCard from '../components/post/PostCard';
@@ -13,6 +12,8 @@ import axios from 'axios';
 import Loader from '../components/common/Loader';
 import { loadRelatedPostRequest } from '../reducers/post/loadRelatedPost';
 import Conditional from '../hocs/Conditional';
+import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const Related = () => {
   const dispatch = useDispatch();

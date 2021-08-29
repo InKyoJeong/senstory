@@ -6,13 +6,13 @@ import Head from 'next/head';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import { END } from 'redux-saga';
-import { LOAD_ME_REQUEST } from '../../../actions/user';
 
 import Layout from '../../../components/common/Layout';
 import Loader from '../../../components/common/Loader';
 import DiaryDetail from '../../../components/diary/DiaryDetail';
 import { loadSingleDiaryRequest, LOAD_SINGLE_DIARY_REQUEST } from '../../../reducers/diary/loadSingleDiary';
 import { backToDiaryRequest, BACK_TO_DIARY } from '../../../reducers/diary/backToDiary';
+import { LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 
 const DiaryDetailPage = () => {
   const router = useRouter();

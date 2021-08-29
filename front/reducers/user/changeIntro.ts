@@ -1,0 +1,3 @@
+export const CHANGE_INTRO_REQUEST = 'CHANGE_INTRO_REQUEST' as const;
+export const CHANGE_INTRO_SUCCESS = 'CHANGE_INTRO_SUCCESS' as const;
+export const CHANGE_INTRO_FAILURE = 'CHANGE_INTRO_FAILURE' as const;

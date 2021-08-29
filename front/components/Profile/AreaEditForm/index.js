@@ -1,20 +1,18 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CHANGE_AREA_REQUEST } from "../../../actions/user";
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Conditional from "../../../hocs/Conditional";
-import useToggle from "../../../hooks/useToggle";
-import useInput from "../../../hooks/useInput";
-import Modal from "../../common/Modal";
-import { AreaFormWrapper, AreaInput } from "./styles";
-import ChangeButton from "../ChangeButton";
+import Conditional from '../../../hocs/Conditional';
+import useToggle from '../../../hooks/useToggle';
+import useInput from '../../../hooks/useInput';
+import Modal from '../../common/Modal';
+import { AreaFormWrapper, AreaInput } from './styles';
+import ChangeButton from '../ChangeButton';
+import { CHANGE_AREA_REQUEST } from '../../../reducers/user/changeArea';
 
 const AreaEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeAreaLoading, changeAreaFinish } = useSelector(
-    (state) => state.user
-  );
-  const [area, onChangeArea, setArea] = useInput(me?.area || "");
+  const { me, changeAreaLoading, changeAreaFinish } = useSelector((state) => state.user);
+  const [area, onChangeArea, setArea] = useInput(me?.area || '');
   const [modalOpen, onToggleModal] = useToggle(false);
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const AreaEditForm = () => {
 
   if (area.length > 20) {
     setArea(area.slice(0, 10));
-    return alert("최대 10자로 입력해주세요.");
+    return alert('최대 10자로 입력해주세요.');
   }
 
   const onSubmit = useCallback(() => {
@@ -40,13 +38,7 @@ const AreaEditForm = () => {
       <label htmlFor="user-area">활동 지역</label>
       <br />
       <div>
-        <AreaInput
-          name="area"
-          value={area}
-          onChange={onChangeArea}
-          type="text"
-          placeholder={"활동지역 (최대 10자)"}
-        />
+        <AreaInput name="area" value={area} onChange={onChangeArea} type="text" placeholder={'활동지역 (최대 10자)'} />
         <ChangeButton loading={changeAreaLoading} />
       </div>
 

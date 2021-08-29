@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from '../actions/user';
 import { useInView } from 'react-intersection-observer';
 
 import Conditional from '../hocs/Conditional';
@@ -12,6 +11,8 @@ import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import { loadAllPostRequest, LOAD_ALL_POST_REQUEST } from '../reducers/post/loadAllPost';
+import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const Home = () => {
   const dispatch = useDispatch();

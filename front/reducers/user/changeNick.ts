@@ -1,0 +1,3 @@
+export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST' as const;
+export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS' as const;
+export const CHANGE_NICK_FAILURE = 'CHANGE_NICK_FAILURE' as const;

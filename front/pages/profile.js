@@ -2,13 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  LOAD_FOLLOWERS_REQUEST,
-  LOAD_FOLLOWINGS_REQUEST,
-  LOAD_ME_REQUEST,
-  LOAD_USER_REQUEST,
-  RANDOM_USER_REQUEST,
-} from '../actions/user';
 import useSWR from 'swr';
 
 import Layout from '../components/common/Layout';
@@ -24,6 +17,8 @@ import IntroEditForm from '../components/profile/IntroEditForm';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
+import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const fetcher = (url) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 

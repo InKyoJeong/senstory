@@ -1,63 +1,34 @@
-import { all, fork, takeLatest, put, call } from "redux-saga/effects";
-import axios from "axios";
+import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
+import axios from 'axios';
 
+import { LOG_IN_ERROR_FINISH, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS } from '../reducers/user/login';
+import { LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS } from '../reducers/user/logout';
+import { SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS } from '../reducers/user/signup';
+import { CHANGE_NICK_FAILURE, CHANGE_NICK_REQUEST, CHANGE_NICK_SUCCESS } from '../reducers/user/changeNick';
+import { CHANGE_INTRO_FAILURE, CHANGE_INTRO_REQUEST, CHANGE_INTRO_SUCCESS } from '../reducers/user/changeIntro';
+import { CHANGE_AREA_FAILURE, CHANGE_AREA_REQUEST, CHANGE_AREA_SUCCESS } from '../reducers/user/changeArea';
+import { UPLOAD_AVATAR_FAILURE, UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS } from '../reducers/user/uploadAvatar';
+import { CHANGE_MBTI_FAILURE, CHANGE_MBTI_REQUEST, CHANGE_MBTI_SUCCESS } from '../reducers/user/changeMbti';
+import { SAVE_AVATAR_FAILURE, SAVE_AVATAR_REQUEST, SAVE_AVATAR_SUCCESS } from '../reducers/user/saveAvatar';
+import { FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS } from '../reducers/user/follow';
+import { UNFOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS } from '../reducers/user/unfollow';
+import { LOAD_ME_FAILURE, LOAD_ME_REQUEST, LOAD_ME_SUCCESS } from '../reducers/user/loadMe';
 import {
-  CHANGE_AREA_FAILURE,
-  CHANGE_AREA_REQUEST,
-  CHANGE_AREA_SUCCESS,
-  CHANGE_INTRO_FAILURE,
-  CHANGE_INTRO_REQUEST,
-  CHANGE_INTRO_SUCCESS,
-  CHANGE_MBTI_FAILURE,
-  CHANGE_MBTI_REQUEST,
-  CHANGE_MBTI_SUCCESS,
-  CHANGE_NICK_FAILURE,
-  CHANGE_NICK_REQUEST,
-  CHANGE_NICK_SUCCESS,
-  FOLLOW_FAILURE,
-  FOLLOW_REQUEST,
-  FOLLOW_SUCCESS,
-  LOAD_FOLLOWERS_FAILURE,
-  LOAD_FOLLOWERS_REQUEST,
-  LOAD_FOLLOWERS_SUCCESS,
-  LOAD_FOLLOWINGS_FAILURE,
-  LOAD_FOLLOWINGS_REQUEST,
-  LOAD_FOLLOWINGS_SUCCESS,
-  LOAD_ME_FAILURE,
-  LOAD_ME_REQUEST,
-  LOAD_ME_SUCCESS,
-  LOAD_USER_FAILURE,
-  LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS,
-  LOG_IN_ERROR_FINISH,
-  LOG_IN_FAILURE,
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-  LOG_OUT_FAILURE,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  RANDOM_USER_FAILURE,
-  RANDOM_USER_REQUEST,
-  RANDOM_USER_SUCCESS,
   REMOVE_FOLLOWER_FAILURE,
   REMOVE_FOLLOWER_REQUEST,
   REMOVE_FOLLOWER_SUCCESS,
-  SAVE_AVATAR_FAILURE,
-  SAVE_AVATAR_REQUEST,
-  SAVE_AVATAR_SUCCESS,
-  SIGN_UP_FAILURE,
-  SIGN_UP_REQUEST,
-  SIGN_UP_SUCCESS,
-  UNFOLLOW_FAILURE,
-  UNFOLLOW_REQUEST,
-  UNFOLLOW_SUCCESS,
-  UPLOAD_AVATAR_FAILURE,
-  UPLOAD_AVATAR_REQUEST,
-  UPLOAD_AVATAR_SUCCESS,
-} from "../actions/user";
+} from '../reducers/user/removeFollower';
+import {
+  LOAD_FOLLOWINGS_FAILURE,
+  LOAD_FOLLOWINGS_REQUEST,
+  LOAD_FOLLOWINGS_SUCCESS,
+} from '../reducers/user/loadFollowings';
+import { LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS } from '../reducers/user/loadFollowers';
+import { RANDOM_USER_FAILURE, RANDOM_USER_REQUEST, RANDOM_USER_SUCCESS } from '../reducers/user/randomUser';
+import { LOAD_USER_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS } from '../reducers/user/loadUser';
 
 function loadMeAPI() {
-  return axios.get("/user");
+  return axios.get('/user');
 }
 
 function* loadMe() {
@@ -95,7 +66,7 @@ function* loadUser(action) {
 }
 
 function loginAPI(data) {
-  return axios.post("/user/login", data);
+  return axios.post('/user/login', data);
 }
 
 function* logIn(action) {
@@ -118,7 +89,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/user/logout");
+  return axios.post('/user/logout');
 }
 
 function* logOut() {
@@ -136,7 +107,7 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post("/user", data);
+  return axios.post('/user', data);
 }
 
 function* signUp(action) {
@@ -156,7 +127,7 @@ function* signUp(action) {
 }
 
 function changeNicknameAPI(data) {
-  return axios.patch("/user/nickname", { nickname: data });
+  return axios.patch('/user/nickname', { nickname: data });
 }
 
 function* changeNickname(action) {
@@ -175,7 +146,7 @@ function* changeNickname(action) {
 }
 
 function changeMbtiAPI(data) {
-  return axios.patch("/user/mbti", { mbti: data });
+  return axios.patch('/user/mbti', { mbti: data });
 }
 
 function* changeMbti(action) {
@@ -194,7 +165,7 @@ function* changeMbti(action) {
 }
 
 function changeIntroAPI(data) {
-  return axios.patch("/user/intro", { intro: data });
+  return axios.patch('/user/intro', { intro: data });
 }
 
 function* changeIntro(action) {
@@ -213,7 +184,7 @@ function* changeIntro(action) {
 }
 
 function changeAreaAPI(data) {
-  return axios.patch("/user/area", { area: data });
+  return axios.patch('/user/area', { area: data });
 }
 
 function* changeArea(action) {
@@ -270,7 +241,7 @@ function* unfollow(action) {
 }
 
 function loadFollowersAPI(data) {
-  return axios.get("/user/followers", data);
+  return axios.get('/user/followers', data);
 }
 
 function* loadFollowers(action) {
@@ -290,7 +261,7 @@ function* loadFollowers(action) {
 }
 
 function loadFollowingsAPI(data) {
-  return axios.get("/user/followings", data);
+  return axios.get('/user/followings', data);
 }
 
 function* loadFollowings(action) {
@@ -329,7 +300,7 @@ function* removeFollower(action) {
 }
 
 function uploadAvatarAPI(data) {
-  return axios.post("/user/images", data);
+  return axios.post('/user/images', data);
 }
 
 function* uploadAvatar(action) {
@@ -353,7 +324,7 @@ function* uploadAvatar(action) {
 }
 
 function saveAvatarAPI(data) {
-  return axios.patch("/user/avatar", { avatar: data }); // avatar: "파일명"
+  return axios.patch('/user/avatar', { avatar: data }); // avatar: "파일명"
 }
 
 function* saveAvatar(action) {

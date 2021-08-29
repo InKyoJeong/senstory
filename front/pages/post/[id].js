@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import axios from 'axios';
-import { LOAD_ME_REQUEST } from '../../actions/user';
 import wrapper from '../../store/configureStore';
 import { END } from 'redux-saga';
 
 import Layout from '../../components/common/Layout';
 import PostCard from '../../components/post/PostCard';
 import { loadSinglePostRequest } from '../../reducers/post/loadSinglePost';
+import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
 
 const Post = () => {
   const router = useRouter();

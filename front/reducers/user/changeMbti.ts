@@ -1,0 +1,3 @@
+export const CHANGE_MBTI_REQUEST = 'CHANGE_MBTI_REQUEST' as const;
+export const CHANGE_MBTI_SUCCESS = 'CHANGE_MBTI_SUCCESS' as const;
+export const CHANGE_MBTI_FAILURE = 'CHANGE_MBTI_FAILURE' as const;

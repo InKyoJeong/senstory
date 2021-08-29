@@ -1,22 +1,16 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LOG_IN_REQUEST } from "../../../actions/user";
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import useInput from "../../../hooks/useInput";
-import MiniTitle from "../../common/MiniTitle";
-import {
-  FormWrapper,
-  ButtonWrapper,
-  LoginButton,
-  LoginInput,
-  InputWrapper,
-} from "./styles";
+import useInput from '../../../hooks/useInput';
+import { LOG_IN_REQUEST } from '../../../reducers/user/login';
+import MiniTitle from '../../common/MiniTitle';
+import { FormWrapper, ButtonWrapper, LoginButton, LoginInput, InputWrapper } from './styles';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { logInLoading, logInError } = useSelector((state) => state.user);
-  const [email, onChangeEmail] = useInput("");
-  const [password, onChangePassword] = useInput("");
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChangePassword] = useInput('');
 
   useEffect(() => {
     if (logInError) {
@@ -53,13 +47,7 @@ const LoginForm = () => {
         <div>
           <label htmlFor="user-password">비밀번호</label>
           <br />
-          <LoginInput
-            name="user-password"
-            type="password"
-            value={password}
-            onChange={onChangePassword}
-            required
-          />
+          <LoginInput name="user-password" type="password" value={password} onChange={onChangePassword} required />
         </div>
       </InputWrapper>
 

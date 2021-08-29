@@ -8,7 +8,6 @@ import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 // import { LOAD_FEEL_DIARYS_REQUEST } from "../../../actions/diary";
-import { LOAD_ME_REQUEST } from '../../../actions/user';
 
 import Layout from '../../../components/common/Layout';
 import DiaryBlock from '../../../components/diary/DiaryBlock';
@@ -17,6 +16,7 @@ import Loader from '../../../components/common/Loader';
 import FeelSelectForm from '../../../components/diary/FeelSelectForm';
 
 import { loadFeelDiarysRequest } from '../../../reducers/diary/loadFeelDiarys';
+import { LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 
 const Feel = () => {
   const dispatch = useDispatch();

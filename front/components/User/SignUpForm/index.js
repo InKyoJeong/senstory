@@ -1,27 +1,20 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "antd";
+import React, { useCallback, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'antd';
 
-import { SIGN_UP_REQUEST } from "../../../actions/user";
-
-import useInput from "../../../hooks/useInput";
-import Conditional from "../../../hocs/Conditional";
-import MiniTitle from "../../common/MiniTitle";
-import {
-  ErrorMessage,
-  ButtonWrapper,
-  SignUpInput,
-  InputWrapper,
-  SignUpFormWrapper,
-} from "./styles";
+import useInput from '../../../hooks/useInput';
+import Conditional from '../../../hocs/Conditional';
+import MiniTitle from '../../common/MiniTitle';
+import { ErrorMessage, ButtonWrapper, SignUpInput, InputWrapper, SignUpFormWrapper } from './styles';
+import { SIGN_UP_REQUEST } from '../../../reducers/user/signup';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const { signUpLoading, signUpError } = useSelector((state) => state.user);
-  const [email, onChangeEmail] = useInput("");
-  const [password, onChangePassword] = useInput("");
-  const [nickname, onChangeNickname] = useInput("");
-  const [passwordCheck, setPasswordCheck] = useState("");
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChangePassword] = useInput('');
+  const [nickname, onChangeNickname] = useInput('');
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
@@ -33,11 +26,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     setIsValid(
-      email.length != 0 &&
-        password.length != 0 &&
-        passwordCheck.length != 0 &&
-        nickname.length != 0 &&
-        !passwordError
+      email.length != 0 && password.length != 0 && passwordCheck.length != 0 && nickname.length != 0 && !passwordError,
     );
   }, [email, password, passwordCheck, nickname]);
 
@@ -46,7 +35,7 @@ const SignUpForm = () => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
     },
-    [password]
+    [password],
   );
 
   const onSubmit = useCallback(() => {
@@ -79,24 +68,12 @@ const SignUpForm = () => {
       <InputWrapper>
         <label htmlFor="user-nick">닉네임</label>
         <br />
-        <SignUpInput
-          name="user-nick"
-          value={nickname}
-          onChange={onChangeNickname}
-          required
-          autoComplete="off"
-        />
+        <SignUpInput name="user-nick" value={nickname} onChange={onChangeNickname} required autoComplete="off" />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="user-password">비밀번호</label>
         <br />
-        <SignUpInput
-          name="user-password"
-          type="password"
-          value={password}
-          onChange={onChangePassword}
-          required
-        />
+        <SignUpInput name="user-password" type="password" value={password} onChange={onChangePassword} required />
       </InputWrapper>
       <InputWrapper>
         <label htmlFor="user-password-check">비밀번호 확인</label>

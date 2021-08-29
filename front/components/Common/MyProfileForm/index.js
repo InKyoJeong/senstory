@@ -1,19 +1,15 @@
-import React, { useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import React, { useCallback, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import Link from "next/link";
-import { Card, Avatar, Form } from "antd";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { LOG_OUT_REQUEST, UPLOAD_AVATAR_REQUEST } from "../../../actions/user";
+import Link from 'next/link';
+import { Card, Avatar, Form } from 'antd';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
-import {
-  CardWrapper,
-  LogoutButton,
-  MyInfoWrapper,
-  AvatarWrapper,
-} from "./styles";
-import HideWrapper from "../HideWrapper";
+import { CardWrapper, LogoutButton, MyInfoWrapper, AvatarWrapper } from './styles';
+import HideWrapper from '../HideWrapper';
+import { LOG_OUT_REQUEST } from '../../../reducers/user/logout';
+import { UPLOAD_AVATAR_REQUEST } from '../../../reducers/user/uploadAvatar';
 
 const MyProfileForm = ({ hide }) => {
   const dispatch = useDispatch();
@@ -33,7 +29,7 @@ const MyProfileForm = ({ hide }) => {
     // console.log("images", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
-      imageFormData.append("image", f);
+      imageFormData.append('image', f);
     });
 
     dispatch({
@@ -58,13 +54,7 @@ const MyProfileForm = ({ hide }) => {
                 </a>
               </Link>
               <Form encType="multipart/form-data">
-                <input
-                  type="file"
-                  name="image"
-                  hidden
-                  ref={avatarInput}
-                  onChange={onChangeAvatar}
-                />
+                <input type="file" name="image" hidden ref={avatarInput} onChange={onChangeAvatar} />
                 <div onClick={onClickAvatarUpload}>사진 변경</div>
               </Form>
             </AvatarWrapper>

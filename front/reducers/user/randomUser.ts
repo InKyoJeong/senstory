@@ -1,0 +1,3 @@
+export const RANDOM_USER_REQUEST = 'RANDOM_USER_REQUEST' as const;
+export const RANDOM_USER_SUCCESS = 'RANDOM_USER_SUCCESS' as const;
+export const RANDOM_USER_FAILURE = 'RANDOM_USER_FAILURE' as const;

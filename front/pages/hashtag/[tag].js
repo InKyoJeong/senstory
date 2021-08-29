@@ -5,11 +5,12 @@ import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
-import { LOAD_ME_REQUEST, RANDOM_USER_REQUEST } from '../../actions/user';
 
 import PostCard from '../../components/post/PostCard';
 import Layout from '../../components/common/Layout';
 import { loadHashtagPostsRequest, LOAD_HASHTAG_POSTS_REQUEST } from '../../reducers/post/loadHashtagPosts';
+import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
+import { RANDOM_USER_REQUEST } from '../../reducers/user/randomUser';
 
 const Hashtag = () => {
   const dispatch = useDispatch();

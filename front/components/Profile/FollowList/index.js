@@ -1,27 +1,20 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
-import Link from "next/link";
-import { Button, Avatar, List } from "antd";
-import { StopOutlined } from "@ant-design/icons";
-import {
-  UNFOLLOW_REQUEST,
-  REMOVE_FOLLOWER_REQUEST,
-} from "../../../actions/user";
-import { useDispatch } from "react-redux";
+import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { Button, Avatar, List } from 'antd';
+import { StopOutlined } from '@ant-design/icons';
 
-import {
-  ListWrapper,
-  MoreButtonWrapper,
-  FollowListWrapper,
-  FollowInfoSection,
-  FollowDelSection,
-} from "./styles";
+import { useDispatch } from 'react-redux';
+
+import { ListWrapper, MoreButtonWrapper, FollowListWrapper, FollowInfoSection, FollowDelSection } from './styles';
+import { UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
+import { REMOVE_FOLLOWER_REQUEST } from '../../../reducers/user/removeFollower';
 
 const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
   const dispatch = useDispatch();
   const onCancel = useCallback(
     (id) => () => {
-      if (header === "팔로잉") {
+      if (header === '팔로잉') {
         dispatch({
           type: UNFOLLOW_REQUEST,
           data: id,
@@ -35,7 +28,7 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
       });
       mutate((prev) => prev.filter((data) => data.id !== id));
     },
-    []
+    [],
   );
 
   return (

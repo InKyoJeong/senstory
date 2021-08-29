@@ -1,20 +1,18 @@
-import React, { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CHANGE_MBTI_REQUEST } from "../../../actions/user";
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Conditional from "../../../hocs/Conditional";
-import useInput from "../../../hooks/useInput";
-import useToggle from "../../../hooks/useToggle";
-import Modal from "../../common/Modal";
-import ChangeButton from "../ChangeButton";
-import { MbtiFormWrapper } from "./styles";
+import Conditional from '../../../hocs/Conditional';
+import useInput from '../../../hooks/useInput';
+import useToggle from '../../../hooks/useToggle';
+import { CHANGE_MBTI_REQUEST } from '../../../reducers/user/changeMbti';
+import Modal from '../../common/Modal';
+import ChangeButton from '../ChangeButton';
+import { MbtiFormWrapper } from './styles';
 
 const MbtiEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeMbtiFinish, changeMbtiLoading } = useSelector(
-    (state) => state.user
-  );
-  const [mbti, onChangeMbti] = useInput(me?.mbti || "");
+  const { me, changeMbtiFinish, changeMbtiLoading } = useSelector((state) => state.user);
+  const [mbti, onChangeMbti] = useInput(me?.mbti || '');
   const [modalOpen, onToggleModal] = useToggle(false);
 
   useEffect(() => {
@@ -35,12 +33,7 @@ const MbtiEditForm = () => {
       <label htmlFor="user-mbti">MBTI</label>
       <br />
       <div>
-        <select
-          value={mbti}
-          name="mbtis"
-          id="mbti-select"
-          onChange={onChangeMbti}
-        >
+        <select value={mbti} name="mbtis" id="mbti-select" onChange={onChangeMbti}>
           <option value="">---- MBTI 선택 ----</option>
           <option value="ISTJ">ISTJ</option>
           <option value="ISTP">ISTP</option>

@@ -1,6 +1,5 @@
 import { all, fork, takeLatest, put, call, throttle } from 'redux-saga/effects';
 import axios from 'axios';
-import { ADD_DIARY_TO_ME, REMOVE_DIARY_OF_ME } from '../actions/user';
 import {
   loadUserDiarysFailure,
   LoadUserDiarysRequest,
@@ -41,6 +40,8 @@ import {
   UPLOAD_PHOTO_REQUEST,
 } from '../reducers/diary/uploadPhoto';
 import { SagaIterator } from 'redux-saga';
+import { ADD_DIARY_TO_ME } from '../reducers/user/addDiaryToMe';
+import { REMOVE_DIARY_OF_ME } from '../reducers/user/removeDiaryOfMe';
 
 function loadUserDiarysAPI(data: number | string, lastId?: number) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);

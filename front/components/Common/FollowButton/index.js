@@ -1,14 +1,13 @@
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../../../actions/user";
-import { UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { FollowButtonContainer, FollowText } from "./styles";
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
+import { FollowButtonContainer, FollowText } from './styles';
+import { FOLLOW_REQUEST } from '../../../reducers/user/follow';
+import { UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
 
 const FollowButton = ({ user }) => {
-  const { me, followLoading, unfollowLoading } = useSelector(
-    (state) => state.user
-  );
+  const { me, followLoading, unfollowLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const isFollowing = me?.Followings.find((v) => v.id === user.id);
 
@@ -31,11 +30,7 @@ const FollowButton = ({ user }) => {
   }
 
   return (
-    <FollowButtonContainer
-      unfollow={isFollowing}
-      loading={followLoading || unfollowLoading}
-      onClick={onClickButton}
-    >
+    <FollowButtonContainer unfollow={isFollowing} loading={followLoading || unfollowLoading} onClick={onClickButton}>
       {isFollowing ? (
         <>
           <UserDeleteOutlined />

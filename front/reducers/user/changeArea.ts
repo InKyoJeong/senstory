@@ -1,0 +1,3 @@
+export const CHANGE_AREA_REQUEST = 'CHANGE_AREA_REQUEST' as const;
+export const CHANGE_AREA_SUCCESS = 'CHANGE_AREA_SUCCESS' as const;
+export const CHANGE_AREA_FAILURE = 'CHANGE_AREA_FAILURE' as const;

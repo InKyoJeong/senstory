@@ -1,6 +1,5 @@
 import { all, fork, takeLatest, put, throttle, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../actions/user';
 import {
   loadAllPostFailure,
   LoadAllPostRequest,
@@ -83,6 +82,8 @@ import {
   REPOST_REQUEST,
 } from '../reducers/post/repost';
 import { SagaIterator } from 'redux-saga';
+import { ADD_POST_TO_ME } from '../reducers/user/addPostToMe';
+import { REMOVE_POST_OF_ME } from '../reducers/user/removePostOfMe';
 
 function likePostAPI(data: number) {
   return axios.patch(`/post/${data}/like`);

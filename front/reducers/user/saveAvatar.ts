@@ -1,0 +1,3 @@
+export const SAVE_AVATAR_REQUEST = 'SAVE_AVATAR_REQUEST' as const;
+export const SAVE_AVATAR_SUCCESS = 'SAVE_AVATAR_SUCCESS' as const;
+export const SAVE_AVATAR_FAILURE = 'SAVE_AVATAR_FAILURE' as const;
