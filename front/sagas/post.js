@@ -105,7 +105,7 @@ function* likePost(action) {
     //   type: LIKE_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(likePostFailure(err));
+    yield put(likePostFailure(err.response.data));
   }
 }
 
@@ -127,7 +127,7 @@ function* unlikePost(action) {
     //   type: UNLIKE_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(unlikePostFailure(err));
+    yield put(unlikePostFailure(err.response.data));
   }
 }
 
@@ -150,7 +150,7 @@ function* repost(action) {
     //   type: REPOST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(repostFailure(err));
+    yield put(repostFailure(err.response.data));
   } finally {
     // yield put({
     //   type: REPOST_ERROR_FINISH,
@@ -177,7 +177,7 @@ function* loadPosts(action) {
     //   type: LOAD_ALL_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(loadAllPostFailure(err));
+    yield put(loadAllPostFailure(err.response.data));
   }
 }
 
@@ -199,7 +199,7 @@ function* loadRelatedPosts(action) {
     //   type: LOAD_RELATED_POSTS_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(loadRelatedPostFailure(err));
+    yield put(loadRelatedPostFailure(err.response.data));
   }
 }
 
@@ -221,7 +221,7 @@ function* loadPost(action) {
     //   type: LOAD_SINGLE_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(loadSinglePostFailure(err));
+    yield put(loadSinglePostFailure(err.response.data));
   }
 }
 
@@ -243,7 +243,7 @@ function* loadUserPosts(action) {
     //   type: LOAD_USER_ALL_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(loadUserAllPostFailure(err));
+    yield put(loadUserAllPostFailure(err.response.data));
   }
 }
 
@@ -265,7 +265,7 @@ function* loadHashtagPosts(action) {
     //   type: LOAD_HASHTAG_POSTS_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(loadHashtagPostsFailure(err));
+    yield put(loadHashtagPostsFailure(err.response.data));
   }
 }
 
@@ -291,7 +291,7 @@ function* addPost(action) {
     //   type: ADD_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(addPostFailure(err));
+    yield put(addPostFailure(err.response.data));
   } finally {
     // yield put({
     //   type: ADD_POST_ERROR_FINISH,
@@ -322,7 +322,7 @@ function* removePost(action) {
     //   type: REMOVE_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(removePostFailure(err));
+    yield put(removePostFailure(err.response.data));
   }
 }
 
@@ -344,7 +344,7 @@ function* updatePost(action) {
     //   type: UPDATE_POST_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(updatePostFailure(err));
+    yield put(updatePostFailure(err.response.data));
   }
 }
 
@@ -387,7 +387,7 @@ function* uploadImages(action) {
     //   type: UPLOAD_IMAGES_FAILURE,
     //   error: err.response.data,
     // });
-    yield put(uploadImagesFailure(err));
+    yield put(uploadImagesFailure(err.response.data));
   }
 }
 
