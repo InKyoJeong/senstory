@@ -69,7 +69,13 @@ import {
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
 } from '../reducers/post/unlikePost';
-import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS } from '../reducers/post/addComment';
+import {
+  addCommentFailure,
+  addCommentSuccess,
+  ADD_COMMENT_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+} from '../reducers/post/addComment';
 import {
   uploadImagesFailure,
   uploadImagesSuccess,
@@ -355,16 +361,18 @@ function addCommentAPI(data) {
 function* addComment(action) {
   try {
     const result = yield call(addCommentAPI, action.data);
-    yield put({
-      type: ADD_COMMENT_SUCCESS,
-      data: result.data,
-    });
+    // yield put({
+    //   type: ADD_COMMENT_SUCCESS,
+    //   data: result.data,
+    // });
+    yield put(addCommentSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put({
-      type: ADD_COMMENT_FAILURE,
-      error: err.response.data,
-    });
+    // yield put({
+    //   type: ADD_COMMENT_FAILURE,
+    //   error: err.response.data,
+    // });
+    yield put(addCommentFailure(err.response.data));
   }
 }
 
