@@ -12,7 +12,7 @@ import Loader from '../../../components/common/Loader';
 import DiaryDetail from '../../../components/diary/DiaryDetail';
 import { loadSingleDiaryRequest, LOAD_SINGLE_DIARY_REQUEST } from '../../../reducers/diary/loadSingleDiary';
 import { backToDiaryRequest, BACK_TO_DIARY } from '../../../reducers/diary/backToDiary';
-import { LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 
 const DiaryDetailPage = () => {
   const router = useRouter();
@@ -71,9 +71,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
   // store.dispatch({
   //   type: LOAD_SINGLE_DIARY_REQUEST,
   //   data: params.diaryId,

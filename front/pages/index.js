@@ -11,8 +11,8 @@ import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import { loadAllPostRequest, LOAD_ALL_POST_REQUEST } from '../reducers/post/loadAllPost';
-import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
-import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { randomUserRequest, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Home = () => {
     (state) => state.post,
   );
 
-  console.log(mainPosts);
+  // console.log(mainPosts);
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -67,16 +67,18 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
   // store.dispatch({
   //   type: LOAD_ALL_POST_REQUEST,
   // });
   store.dispatch(loadAllPostRequest());
-  store.dispatch({
-    type: RANDOM_USER_REQUEST,
-  });
+  // store.dispatch({
+  //   type: RANDOM_USER_REQUEST,
+  // });
+  store.dispatch(randomUserRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

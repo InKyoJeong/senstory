@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Conditional from '../../../hocs/Conditional';
 import useInput from '../../../hooks/useInput';
 import useToggle from '../../../hooks/useToggle';
-import { CHANGE_NICK_REQUEST } from '../../../reducers/user/changeNick';
+import { changeNickRequest, CHANGE_NICK_REQUEST } from '../../../reducers/user/changeNick';
 import Modal from '../../common/Modal';
 import ChangeButton from '../ChangeButton';
 import { NickFormWrapper, NickInput } from './styles';
@@ -39,10 +39,11 @@ const NickEditForm = () => {
     if (nickname.includes(' ')) {
       return alert('닉네임에 빈칸을 포함할 수 없어요.');
     }
-    dispatch({
-      type: CHANGE_NICK_REQUEST,
-      data: nickname,
-    });
+    // dispatch({
+    //   type: CHANGE_NICK_REQUEST,
+    //   data: nickname,
+    // });
+    dispatch(changeNickRequest(nickname));
   }, [nickname]);
 
   return (

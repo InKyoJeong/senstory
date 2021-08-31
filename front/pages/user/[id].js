@@ -13,8 +13,8 @@ import Layout from '../../components/common/Layout';
 import PostCard from '../../components/post/PostCard';
 import UserProfileForm from '../../components/profile/UserProfileForm';
 import { loadUserAllPostRequest, LOAD_USER_ALL_POST_REQUEST } from '../../reducers/post/loadUserAllPost';
-import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
-import { LOAD_USER_REQUEST } from '../../reducers/user/loadUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
+import { loadUserRequest, LOAD_USER_REQUEST } from '../../reducers/user/loadUser';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -97,13 +97,16 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   //   data: params.id,
   // });
   store.dispatch(loadUserAllPostRequest(params.id));
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
-  store.dispatch({
-    type: LOAD_USER_REQUEST,
-    data: params.id,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
+
+  // store.dispatch({
+  //   type: LOAD_USER_REQUEST,
+  //   data: params.id,
+  // });
+  store.dispatch(loadUserRequest(params.id));
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

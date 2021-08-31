@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import Layout from '../components/common/Layout';
@@ -17,8 +17,8 @@ import IntroEditForm from '../components/profile/IntroEditForm';
 import wrapper from '../store/configureStore';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
-import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { randomUserRequest, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const fetcher = (url) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
@@ -31,26 +31,13 @@ const Profile = () => {
     data: followerData,
     error: followerError,
     mutate: mutateFollower,
-  } = useSWR(
-    `http://localhost:3065/user/followers?limit=${followerLimit}`,
-    fetcher,
-    // { refreshInterval: 1000 }
-  );
+  } = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
 
   const {
     data: followingData,
     error: followingError,
     mutate: mutateFollowing,
   } = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_FOLLOWERS_REQUEST,
-  //   });
-  //   dispatch({
-  //     type: LOAD_FOLLOWINGS_REQUEST,
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (!(me && me.id)) {
@@ -112,12 +99,14 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
-  store.dispatch({
-    type: RANDOM_USER_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
+  // store.dispatch({
+  //   type: RANDOM_USER_REQUEST,
+  // });
+  store.dispatch(randomUserRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

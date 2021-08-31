@@ -9,8 +9,8 @@ import wrapper from '../../store/configureStore';
 import PostCard from '../../components/post/PostCard';
 import Layout from '../../components/common/Layout';
 import { loadHashtagPostsRequest, LOAD_HASHTAG_POSTS_REQUEST } from '../../reducers/post/loadHashtagPosts';
-import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
-import { RANDOM_USER_REQUEST } from '../../reducers/user/randomUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
+import { randomUserRequest, RANDOM_USER_REQUEST } from '../../reducers/user/randomUser';
 
 const Hashtag = () => {
   const dispatch = useDispatch();
@@ -51,12 +51,15 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   //   data: params.tag,
   // });
   store.dispatch(loadHashtagPostsRequest(params.tag));
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
-  store.dispatch({
-    type: RANDOM_USER_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
+  // store.dispatch({
+  //   type: RANDOM_USER_REQUEST,
+  // });
+  store.dispatch(randomUserRequest());
+
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

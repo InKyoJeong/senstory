@@ -7,7 +7,7 @@ import useInput from '../../../hooks/useInput';
 import Modal from '../../common/Modal';
 import { AreaFormWrapper, AreaInput } from './styles';
 import ChangeButton from '../ChangeButton';
-import { CHANGE_AREA_REQUEST } from '../../../reducers/user/changeArea';
+import { changeAreaRequest, CHANGE_AREA_REQUEST } from '../../../reducers/user/changeArea';
 
 const AreaEditForm = () => {
   const dispatch = useDispatch();
@@ -27,10 +27,11 @@ const AreaEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    dispatch({
-      type: CHANGE_AREA_REQUEST,
-      data: area,
-    });
+    // dispatch({
+    //   type: CHANGE_AREA_REQUEST,
+    //   data: area,
+    // });
+    dispatch(changeAreaRequest(area));
   }, [area]);
 
   return (

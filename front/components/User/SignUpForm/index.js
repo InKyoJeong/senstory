@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 import Conditional from '../../../hocs/Conditional';
 import MiniTitle from '../../common/MiniTitle';
 import { ErrorMessage, ButtonWrapper, SignUpInput, InputWrapper, SignUpFormWrapper } from './styles';
-import { SIGN_UP_REQUEST } from '../../../reducers/user/signup';
+import { signupRequest, SIGN_UP_REQUEST } from '../../../reducers/user/signup';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -43,10 +43,11 @@ const SignUpForm = () => {
     if (password !== passwordCheck) {
       return setPasswordError(true);
     }
-    dispatch({
-      type: SIGN_UP_REQUEST,
-      data: { email, password, nickname },
-    });
+    // dispatch({
+    //   type: SIGN_UP_REQUEST,
+    //   data: { email, password, nickname },
+    // });
+    dispatch(signupRequest({ email, password, nickname }));
   }, [email, password, passwordCheck, isValid]);
 
   return (

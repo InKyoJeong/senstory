@@ -7,7 +7,6 @@ import { CHANGE_INTRO_FAILURE, CHANGE_INTRO_REQUEST, CHANGE_INTRO_SUCCESS } from
 import { CHANGE_MBTI_FAILURE, CHANGE_MBTI_REQUEST, CHANGE_MBTI_SUCCESS } from './changeMbti';
 import { CHANGE_NICK_FAILURE, CHANGE_NICK_REQUEST, CHANGE_NICK_SUCCESS } from './changeNick';
 import { FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS } from './follow';
-import { LOAD_FOLLOWINGS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS } from './loadFollowings';
 import { LOAD_ME_FAILURE, LOAD_ME_REQUEST, LOAD_ME_SUCCESS } from './loadMe';
 import { LOAD_USER_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS } from './loadUser';
 import { LOG_IN_ERROR_FINISH, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS } from './login';
@@ -18,10 +17,10 @@ import { SAVE_AVATAR_FAILURE, SAVE_AVATAR_REQUEST, SAVE_AVATAR_SUCCESS } from '.
 import { SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS } from './signup';
 import { UNFOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS } from './unfollow';
 import { UPLOAD_AVATAR_FAILURE, UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS } from './uploadAvatar';
-import { LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS } from './loadFollowers';
 import { ADD_DIARY_TO_ME } from './addDiaryToMe';
 import { REMOVE_DIARY_OF_ME } from './removeDiaryOfMe';
 import { UserInitialState } from '../../interfaces/user';
+import { Post } from '../../interfaces/post';
 
 export const initialState: UserInitialState = {
   loadMeLoading: false, // 내 정보 가져오기
@@ -276,39 +275,11 @@ const reducer = (state: UserInitialState = initialState, action) => {
       case UNFOLLOW_SUCCESS:
         draft.unfollowLoading = false;
         draft.unfollowFinish = true;
-        draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data.UserId);
+        draft.me.Followings = draft.me.Followings.filter((v: Post) => v.id !== action.data.UserId);
         break;
       case UNFOLLOW_FAILURE:
         draft.unfollowLoading = false;
         draft.unfollowError = action.error;
-        break;
-      case LOAD_FOLLOWINGS_REQUEST:
-        draft.loadFollowingsLoading = true;
-        draft.loadFollowingsError = null;
-        draft.loadFollowingsFinish = false;
-        break;
-      case LOAD_FOLLOWINGS_SUCCESS:
-        draft.loadFollowingsLoading = false;
-        draft.me.Followings = action.data;
-        draft.loadFollowingsFinish = true;
-        break;
-      case LOAD_FOLLOWINGS_FAILURE:
-        draft.loadFollowingsLoading = false;
-        draft.loadFollowingsError = action.error;
-        break;
-      case LOAD_FOLLOWERS_REQUEST:
-        draft.loadFollowersLoading = true;
-        draft.loadFollowersError = null;
-        draft.loadFollowersFinish = false;
-        break;
-      case LOAD_FOLLOWERS_SUCCESS:
-        draft.loadFollowersLoading = false;
-        draft.me.Followers = action.data;
-        draft.loadFollowersFinish = true;
-        break;
-      case LOAD_FOLLOWERS_FAILURE:
-        draft.loadFollowersLoading = false;
-        draft.loadFollowersError = action.error;
         break;
       case REMOVE_FOLLOWER_REQUEST:
         draft.removeFollowerLoading = true;
@@ -317,7 +288,7 @@ const reducer = (state: UserInitialState = initialState, action) => {
         break;
       case REMOVE_FOLLOWER_SUCCESS:
         draft.removeFollowerLoading = false;
-        draft.me.Followers = draft.me.Followers.filter((v) => v.id !== action.data.UserId);
+        draft.me.Followers = draft.me.Followers.filter((v: Post) => v.id !== action.data.UserId);
         draft.removeFollowerFinish = true;
         break;
       case REMOVE_FOLLOWER_FAILURE:
@@ -328,7 +299,7 @@ const reducer = (state: UserInitialState = initialState, action) => {
         draft.me.Posts.unshift({ id: action.data });
         break;
       case REMOVE_POST_OF_ME:
-        draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
+        draft.me.Posts = draft.me.Posts.filter((v: Post) => v.id !== action.data);
         break;
       case ADD_DIARY_TO_ME:
         draft.me.Diaries.unshift({
@@ -337,7 +308,7 @@ const reducer = (state: UserInitialState = initialState, action) => {
         });
         break;
       case REMOVE_DIARY_OF_ME:
-        draft.me.Diaries = draft.me.Diaries.filter((v) => v.id !== action.data);
+        draft.me.Diaries = draft.me.Diaries.filter((v: Post) => v.id !== action.data);
         break;
       default:
         break;

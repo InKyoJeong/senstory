@@ -5,10 +5,12 @@ import post from './post';
 import diary from './diary';
 import { PostinitialState } from '../interfaces/post';
 import { DiaryInitialState } from '../interfaces/diary';
+import { UserInitialState } from '../interfaces/user';
 
 export interface RootState {
   post: PostinitialState;
   diary: DiaryInitialState;
+  user: UserInitialState;
 }
 
 const rootReducer = (state: RootState, action: AnyAction) => {

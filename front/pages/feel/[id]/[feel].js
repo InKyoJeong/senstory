@@ -16,7 +16,7 @@ import Loader from '../../../components/common/Loader';
 import FeelSelectForm from '../../../components/diary/FeelSelectForm';
 
 import { loadFeelDiarysRequest } from '../../../reducers/diary/loadFeelDiarys';
-import { LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 
 const Feel = () => {
   const dispatch = useDispatch();
@@ -76,10 +76,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   //   data2: params.feel,
   // });
   store.dispatch(loadFeelDiarysRequest(params.id, params.feel));
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
-
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

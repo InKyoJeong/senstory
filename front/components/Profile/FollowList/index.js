@@ -7,25 +7,27 @@ import { StopOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 
 import { ListWrapper, MoreButtonWrapper, FollowListWrapper, FollowInfoSection, FollowDelSection } from './styles';
-import { UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
-import { REMOVE_FOLLOWER_REQUEST } from '../../../reducers/user/removeFollower';
+import { unfollowRequest, UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
+import { removeFollowerRequest, REMOVE_FOLLOWER_REQUEST } from '../../../reducers/user/removeFollower';
 
 const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
   const dispatch = useDispatch();
   const onCancel = useCallback(
     (id) => () => {
       if (header === '팔로잉') {
-        dispatch({
-          type: UNFOLLOW_REQUEST,
-          data: id,
-        });
+        // dispatch({
+        //   type: UNFOLLOW_REQUEST,
+        //   data: id,
+        // });
+        dispatch(unfollowRequest(id));
         mutate((prev) => prev.filter((data) => data.id !== id));
       }
 
-      dispatch({
-        type: REMOVE_FOLLOWER_REQUEST,
-        data: id,
-      });
+      // dispatch({
+      //   type: REMOVE_FOLLOWER_REQUEST,
+      //   data: id,
+      // });
+      dispatch(removeFollowerRequest(id));
       mutate((prev) => prev.filter((data) => data.id !== id));
     },
     [],

@@ -10,7 +10,7 @@ import { END } from 'redux-saga';
 import Layout from '../../components/common/Layout';
 import PostCard from '../../components/post/PostCard';
 import { loadSinglePostRequest } from '../../reducers/post/loadSinglePost';
-import { LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
 
 const Post = () => {
   const router = useRouter();
@@ -47,9 +47,11 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
+
   // store.dispatch({
   //   type: LOAD_SINGLE_POST_REQUEST,
   //   data: params.id,

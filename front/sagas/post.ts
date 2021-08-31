@@ -82,8 +82,8 @@ import {
   REPOST_REQUEST,
 } from '../reducers/post/repost';
 import { SagaIterator } from 'redux-saga';
-import { ADD_POST_TO_ME } from '../reducers/user/addPostToMe';
-import { REMOVE_POST_OF_ME } from '../reducers/user/removePostOfMe';
+import { addPostToMeRequest } from '../reducers/user/addPostToMe';
+import { removePostOfMeRequest } from '../reducers/user/removePostOfMe';
 
 function likePostAPI(data: number) {
   return axios.patch(`/post/${data}/like`);
@@ -207,10 +207,7 @@ function* addPost(action: AddPostRequest): SagaIterator {
   try {
     const result = yield call(addPostAPI, action.data);
     yield put(addPostSuccess(result.data));
-    yield put({
-      type: ADD_POST_TO_ME,
-      data: result.data.id,
-    });
+    yield put(addPostToMeRequest(result.data.id));
   } catch (err) {
     console.error(err);
     yield put(addPostFailure(err.response.data));
@@ -227,10 +224,7 @@ function* removePost(action: RemovePostRequest): SagaIterator {
   try {
     const result = yield call(removePostAPI, action.data);
     yield put(removePostSuccess(result.data));
-    yield put({
-      type: REMOVE_POST_OF_ME,
-      data: action.data,
-    });
+    yield put(removePostOfMeRequest(action.data));
   } catch (err) {
     console.error(err);
     yield put(removePostFailure(err.response.data));

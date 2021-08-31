@@ -40,8 +40,8 @@ import {
   UPLOAD_PHOTO_REQUEST,
 } from '../reducers/diary/uploadPhoto';
 import { SagaIterator } from 'redux-saga';
-import { ADD_DIARY_TO_ME } from '../reducers/user/addDiaryToMe';
-import { REMOVE_DIARY_OF_ME } from '../reducers/user/removeDiaryOfMe';
+import { addDiaryToMeRequest } from '../reducers/user/addDiaryToMe';
+import { removeDiaryOfMeRequest } from '../reducers/user/removeDiaryOfMe';
 
 function loadUserDiarysAPI(data: number | string, lastId?: number) {
   return axios.get(`/diarys/${data}?lastId=${lastId || 0}`);
@@ -93,12 +93,9 @@ function* addDiary(action: AddDiaryRequest): SagaIterator {
   try {
     const result = yield call(addDiaryAPI, action.data);
     yield put(addDiarySuccess(result.data));
-    // yield put({
-    //   type: ADD_DIARY_TO_ME,
-    //   data: result.data,
-    // });
-    // yield put(addDiaryRequest(result.data));
+    yield put(addDiaryToMeRequest(result.data));
   } catch (err) {
+    console.error(err);
     yield put(addDiaryFailure(err.response.data));
   } finally {
     yield put(addDiaryErrorFinish());
@@ -113,10 +110,7 @@ function* removeDiary(action: RemoveDiaryRequest): SagaIterator {
   try {
     const result = yield call(removeDiaryAPI, action.data);
     yield put(removeDiarySuccess(result.data));
-    yield put({
-      type: REMOVE_DIARY_OF_ME,
-      data: action.data,
-    });
+    yield put(removeDiaryOfMeRequest(action.data));
   } catch (err) {
     console.error(err);
     yield put(removeDiaryFailure(err.response.data));

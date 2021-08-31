@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Conditional from '../../../hocs/Conditional';
 import useInput from '../../../hooks/useInput';
 import useToggle from '../../../hooks/useToggle';
-import { CHANGE_MBTI_REQUEST } from '../../../reducers/user/changeMbti';
+import { changeMbtiRequest, CHANGE_MBTI_REQUEST } from '../../../reducers/user/changeMbti';
 import Modal from '../../common/Modal';
 import ChangeButton from '../ChangeButton';
 import { MbtiFormWrapper } from './styles';
@@ -22,10 +22,11 @@ const MbtiEditForm = () => {
   }, [changeMbtiFinish]);
 
   const onSubmit = useCallback(() => {
-    dispatch({
-      type: CHANGE_MBTI_REQUEST,
-      data: mbti,
-    });
+    // dispatch({
+    //   type: CHANGE_MBTI_REQUEST,
+    //   data: mbti,
+    // });
+    dispatch(changeMbtiRequest(mbti));
   }, [mbti]);
 
   return (

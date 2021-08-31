@@ -9,7 +9,7 @@ import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { CardWrapper, LogoutButton, MyInfoWrapper, AvatarWrapper } from './styles';
 import HideWrapper from '../HideWrapper';
 import { LOG_OUT_REQUEST } from '../../../reducers/user/logout';
-import { UPLOAD_AVATAR_REQUEST } from '../../../reducers/user/uploadAvatar';
+import { uploadAvatarRequest, UPLOAD_AVATAR_REQUEST } from '../../../reducers/user/uploadAvatar';
 
 const MyProfileForm = ({ hide }) => {
   const dispatch = useDispatch();
@@ -32,10 +32,11 @@ const MyProfileForm = ({ hide }) => {
       imageFormData.append('image', f);
     });
 
-    dispatch({
-      type: UPLOAD_AVATAR_REQUEST,
-      data: imageFormData,
-    });
+    // dispatch({
+    //   type: UPLOAD_AVATAR_REQUEST,
+    //   data: imageFormData,
+    // });
+    dispatch(uploadAvatarRequest(imageFormData));
   }, []);
 
   return (

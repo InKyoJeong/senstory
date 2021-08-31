@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { FollowButtonContainer, FollowText } from './styles';
-import { FOLLOW_REQUEST } from '../../../reducers/user/follow';
-import { UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
+import { followRequest, FOLLOW_REQUEST } from '../../../reducers/user/follow';
+import { unfollowRequest, UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
 
 const FollowButton = ({ user }) => {
   const { me, followLoading, unfollowLoading } = useSelector((state) => state.user);
@@ -13,15 +13,17 @@ const FollowButton = ({ user }) => {
 
   const onClickButton = useCallback(() => {
     if (isFollowing) {
-      dispatch({
-        type: UNFOLLOW_REQUEST,
-        data: user.id,
-      });
+      // dispatch({
+      //   type: UNFOLLOW_REQUEST,
+      //   data: user.id,
+      // });
+      dispatch(unfollowRequest(user.id));
     } else {
-      dispatch({
-        type: FOLLOW_REQUEST,
-        data: user.id,
-      });
+      // dispatch({
+      //   type: FOLLOW_REQUEST,
+      //   data: user.id,
+      // });
+      dispatch(followRequest(user.id));
     }
   }, [isFollowing]);
 

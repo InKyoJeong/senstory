@@ -12,8 +12,8 @@ import axios from 'axios';
 import Loader from '../components/common/Loader';
 import { loadRelatedPostRequest } from '../reducers/post/loadRelatedPost';
 import Conditional from '../hocs/Conditional';
-import { LOAD_ME_REQUEST } from '../reducers/user/loadMe';
-import { RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { randomUserRequest, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const Related = () => {
   const dispatch = useDispatch();
@@ -77,17 +77,20 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
   // store.dispatch({
   //   type: LOAD_RELATED_POSTS_REQUEST,
   // });
   store.dispatch(loadRelatedPostRequest());
 
-  store.dispatch({
-    type: RANDOM_USER_REQUEST,
-  });
+  // store.dispatch({
+  //   type: RANDOM_USER_REQUEST,
+  // });
+  store.dispatch(randomUserRequest());
+
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

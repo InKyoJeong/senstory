@@ -19,8 +19,8 @@ import DiaryBlock from '../../../components/diary/DiaryBlock';
 import DiaryBlockContainer from '../../../components/diary/DiaryBlockContainer';
 import FeelSelectForm from '../../../components/diary/FeelSelectForm';
 import { loadUserDiarysRequest, LOAD_USER_DIARYS_REQUEST } from '../../../reducers/diary/loadUserDiarys';
-import { LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
-import { LOAD_USER_REQUEST } from '../../../reducers/user/loadUser';
+import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
+import { loadUserRequest, LOAD_USER_REQUEST } from '../../../reducers/user/loadUser';
 
 const Diary = () => {
   const router = useRouter();
@@ -98,13 +98,15 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   //   data: params.userId,
   // });
   store.dispatch(loadUserDiarysRequest(params.userId));
-  store.dispatch({
-    type: LOAD_USER_REQUEST,
-    data: params.userId,
-  });
-  store.dispatch({
-    type: LOAD_ME_REQUEST,
-  });
+  // store.dispatch({
+  //   type: LOAD_USER_REQUEST,
+  //   data: params.userId,
+  // });
+  store.dispatch(loadUserRequest(params.userId));
+  // store.dispatch({
+  //   type: LOAD_ME_REQUEST,
+  // });
+  store.dispatch(loadMeRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

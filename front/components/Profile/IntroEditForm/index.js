@@ -7,7 +7,7 @@ import useInput from '../../../hooks/useInput';
 import useToggle from '../../../hooks/useToggle';
 import Modal from '../../common/Modal';
 import { IntroFormWrapper, IntroButton, IntroInputWrapper } from './styles';
-import { CHANGE_INTRO_REQUEST } from '../../../reducers/user/changeIntro';
+import { changeIntroRequest, CHANGE_INTRO_REQUEST } from '../../../reducers/user/changeIntro';
 
 const IntroEditForm = () => {
   const dispatch = useDispatch();
@@ -27,10 +27,11 @@ const IntroEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    dispatch({
-      type: CHANGE_INTRO_REQUEST,
-      data: intro,
-    });
+    // dispatch({
+    //   type: CHANGE_INTRO_REQUEST,
+    //   data: intro,
+    // });
+    dispatch(changeIntroRequest(intro));
   }, [intro]);
 
   const introStyle = useMemo(
