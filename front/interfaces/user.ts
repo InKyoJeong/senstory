@@ -19,7 +19,7 @@ export interface UserPosts {
   id: number;
 }
 
-export interface RandomUser {
+export interface RandomUsers {
   id: number;
   email: string;
   nickname: string;
@@ -31,7 +31,7 @@ export interface RandomUser {
   updatedAt: Date;
 }
 
-export interface User extends RandomUser {
+export interface User extends RandomUsers {
   Posts: UserPosts[];
   Diaries: UserDiarys[];
   Followers: UserFollowers[];

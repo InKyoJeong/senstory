@@ -1,24 +1,28 @@
 import produce from 'immer';
-import { ADD_POST_TO_ME } from './addPostToMe';
-import { REMOVE_POST_OF_ME } from './removePostOfMe';
-
-import { CHANGE_AREA_FAILURE, CHANGE_AREA_REQUEST, CHANGE_AREA_SUCCESS } from './changeArea';
-import { CHANGE_INTRO_FAILURE, CHANGE_INTRO_REQUEST, CHANGE_INTRO_SUCCESS } from './changeIntro';
-import { CHANGE_MBTI_FAILURE, CHANGE_MBTI_REQUEST, CHANGE_MBTI_SUCCESS } from './changeMbti';
-import { CHANGE_NICK_FAILURE, CHANGE_NICK_REQUEST, CHANGE_NICK_SUCCESS } from './changeNick';
-import { FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS } from './follow';
-import { LOAD_ME_FAILURE, LOAD_ME_REQUEST, LOAD_ME_SUCCESS } from './loadMe';
-import { LOAD_USER_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS } from './loadUser';
-import { LOG_IN_ERROR_FINISH, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS } from './login';
-import { LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS } from './logout';
-import { RANDOM_USER_FAILURE, RANDOM_USER_REQUEST, RANDOM_USER_SUCCESS } from './randomUser';
-import { REMOVE_FOLLOWER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS } from './removeFollower';
-import { SAVE_AVATAR_FAILURE, SAVE_AVATAR_REQUEST, SAVE_AVATAR_SUCCESS } from './saveAvatar';
-import { SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS } from './signup';
-import { UNFOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS } from './unfollow';
-import { UPLOAD_AVATAR_FAILURE, UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS } from './uploadAvatar';
-import { ADD_DIARY_TO_ME } from './addDiaryToMe';
-import { REMOVE_DIARY_OF_ME } from './removeDiaryOfMe';
+import { AddPostToMe, ADD_POST_TO_ME } from './addPostToMe';
+import { RemovePostOfMe, REMOVE_POST_OF_ME } from './removePostOfMe';
+import { AddDiaryToMe, ADD_DIARY_TO_ME } from './addDiaryToMe';
+import { RemoveDiaryOfMe, REMOVE_DIARY_OF_ME } from './removeDiaryOfMe';
+import { ChangeArea, CHANGE_AREA_FAILURE, CHANGE_AREA_REQUEST, CHANGE_AREA_SUCCESS } from './changeArea';
+import { ChangeIntro, CHANGE_INTRO_FAILURE, CHANGE_INTRO_REQUEST, CHANGE_INTRO_SUCCESS } from './changeIntro';
+import { ChangeMbti, CHANGE_MBTI_FAILURE, CHANGE_MBTI_REQUEST, CHANGE_MBTI_SUCCESS } from './changeMbti';
+import { ChangeNick, CHANGE_NICK_FAILURE, CHANGE_NICK_REQUEST, CHANGE_NICK_SUCCESS } from './changeNick';
+import { Follow, FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS } from './follow';
+import { LoadMe, LOAD_ME_FAILURE, LOAD_ME_REQUEST, LOAD_ME_SUCCESS } from './loadMe';
+import { LoadUser, LOAD_USER_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS } from './loadUser';
+import { Login, LOG_IN_ERROR_FINISH, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS } from './login';
+import { Logout, LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS } from './logout';
+import { RandomUser, RANDOM_USER_FAILURE, RANDOM_USER_REQUEST, RANDOM_USER_SUCCESS } from './randomUser';
+import { SaveAvatar, SAVE_AVATAR_FAILURE, SAVE_AVATAR_REQUEST, SAVE_AVATAR_SUCCESS } from './saveAvatar';
+import { Signup, SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS } from './signup';
+import { Unfollow, UNFOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS } from './unfollow';
+import { UploadAvatar, UPLOAD_AVATAR_FAILURE, UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS } from './uploadAvatar';
+import {
+  RemoveFollower,
+  REMOVE_FOLLOWER_FAILURE,
+  REMOVE_FOLLOWER_REQUEST,
+  REMOVE_FOLLOWER_SUCCESS,
+} from './removeFollower';
 import { UserInitialState } from '../../interfaces/user';
 import { Post } from '../../interfaces/post';
 
@@ -80,7 +84,28 @@ export const initialState: UserInitialState = {
   randomUsers: [],
 };
 
-const reducer = (state: UserInitialState = initialState, action) => {
+export type UserReducerAction =
+  | AddDiaryToMe
+  | AddPostToMe
+  | ChangeArea
+  | ChangeIntro
+  | ChangeMbti
+  | ChangeNick
+  | Follow
+  | LoadMe
+  | LoadUser
+  | Login
+  | Logout
+  | RandomUser
+  | RemoveDiaryOfMe
+  | RemoveFollower
+  | RemovePostOfMe
+  | SaveAvatar
+  | Signup
+  | Unfollow
+  | UploadAvatar;
+
+const reducer = (state: UserInitialState = initialState, action: UserReducerAction) => {
   return produce(state, (draft: UserInitialState) => {
     switch (action.type) {
       case UPLOAD_AVATAR_REQUEST:

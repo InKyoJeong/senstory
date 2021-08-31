@@ -1,3 +1,5 @@
+import { RandomUsers } from '../../interfaces/user';
+
 export const RANDOM_USER_REQUEST = 'RANDOM_USER_REQUEST' as const;
 export const RANDOM_USER_SUCCESS = 'RANDOM_USER_SUCCESS' as const;
 export const RANDOM_USER_FAILURE = 'RANDOM_USER_FAILURE' as const;
@@ -8,7 +10,7 @@ export interface RandomUserRequest {
 
 export interface RandomUserSuccess {
   type: typeof RANDOM_USER_SUCCESS;
-  data: RandomUser;
+  data: RandomUsers;
 }
 
 export interface RandomUserFailure {
@@ -20,7 +22,7 @@ export const randomUserRequest = (): RandomUserRequest => ({
   type: RANDOM_USER_REQUEST,
 });
 
-export const randomUserSuccess = (data: RandomUser): RandomUserSuccess => ({
+export const randomUserSuccess = (data: RandomUsers): RandomUserSuccess => ({
   type: RANDOM_USER_SUCCESS,
   data,
 });

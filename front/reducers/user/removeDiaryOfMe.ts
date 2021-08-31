@@ -10,4 +10,4 @@ export const removeDiaryOfMeRequest = (data: number): RemoveDiaryOfMeRequest => 
   data,
 });
 
-export type RemoveDiary = RemoveDiaryOfMeRequest;
+export type RemoveDiaryOfMe = RemoveDiaryOfMeRequest;

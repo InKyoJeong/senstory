@@ -31,4 +31,4 @@ export const changeNickFailure = (error: string): ChangeNickFailure => ({
   error,
 });
 
-export type changeNick = ChangeNickRequest | ChangeNickSuccess | ChangeNickFailure;
+export type ChangeNick = ChangeNickRequest | ChangeNickSuccess | ChangeNickFailure;
