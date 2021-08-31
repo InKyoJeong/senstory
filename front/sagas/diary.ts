@@ -53,7 +53,7 @@ function* loadUserDiarys(action: LoadUserDiarysRequest): SagaIterator {
     yield put(loadUserDiarysSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put(loadUserDiarysFailure(err));
+    yield put(loadUserDiarysFailure(err.response.data));
   }
 }
 
@@ -67,7 +67,7 @@ function* loadDiary(action: LoadSingleDiaryRequest): SagaIterator {
     yield put(loadSingleDiarySuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put(loadSingleDiaryFailure(err));
+    yield put(loadSingleDiaryFailure(err.response.data));
   }
 }
 
@@ -81,7 +81,7 @@ function* loadFeelDiarys(action: LoadFeelDiarysRequest): SagaIterator {
     yield put(loadFeelDiarysSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put(loadFeelDiarysFailure(err));
+    yield put(loadFeelDiarysFailure(err.response.data));
   }
 }
 
@@ -93,12 +93,13 @@ function* addDiary(action: AddDiaryRequest): SagaIterator {
   try {
     const result = yield call(addDiaryAPI, action.data);
     yield put(addDiarySuccess(result.data));
-    yield put({
-      type: ADD_DIARY_TO_ME,
-      data: result.data,
-    });
+    // yield put({
+    //   type: ADD_DIARY_TO_ME,
+    //   data: result.data,
+    // });
+    // yield put(addDiaryRequest(result.data));
   } catch (err) {
-    yield put(addDiaryFailure(err));
+    yield put(addDiaryFailure(err.response.data));
   } finally {
     yield put(addDiaryErrorFinish());
   }
@@ -118,7 +119,7 @@ function* removeDiary(action: RemoveDiaryRequest): SagaIterator {
     });
   } catch (err) {
     console.error(err);
-    yield put(removeDiaryFailure(err));
+    yield put(removeDiaryFailure(err.response.data));
   }
 }
 
@@ -132,7 +133,7 @@ function* uploadPhotos(action: UploadPhotoRequest): SagaIterator {
     yield put(uploadPhotoSuccess(result.data));
   } catch (err) {
     console.error(err);
-    yield put(uploadPhotoFailure(err));
+    yield put(uploadPhotoFailure(err.response.data));
   }
 }
 
