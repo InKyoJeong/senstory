@@ -1,108 +1,26 @@
-import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
 
-import {
-  loginErrorFinish,
-  loginFailure,
-  loginSuccess,
-  LOG_IN_ERROR_FINISH,
-  LOG_IN_FAILURE,
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-} from '../reducers/user/login';
-import {
-  logoutFailure,
-  logoutSuccess,
-  LOG_OUT_FAILURE,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-} from '../reducers/user/logout';
-import {
-  signupFailure,
-  signupSuccess,
-  SIGN_UP_FAILURE,
-  SIGN_UP_REQUEST,
-  SIGN_UP_SUCCESS,
-} from '../reducers/user/signup';
-import {
-  changeNickFailure,
-  changeNickSuccess,
-  CHANGE_NICK_FAILURE,
-  CHANGE_NICK_REQUEST,
-  CHANGE_NICK_SUCCESS,
-} from '../reducers/user/changeNick';
-import {
-  changeIntroFailure,
-  changeIntroSuccess,
-  CHANGE_INTRO_FAILURE,
-  CHANGE_INTRO_REQUEST,
-  CHANGE_INTRO_SUCCESS,
-} from '../reducers/user/changeIntro';
-import {
-  changeAreaFailure,
-  changeAreaSuccess,
-  CHANGE_AREA_FAILURE,
-  CHANGE_AREA_REQUEST,
-  CHANGE_AREA_SUCCESS,
-} from '../reducers/user/changeArea';
-import {
-  uploadAvatarFailure,
-  uploadAvatarSuccess,
-  UPLOAD_AVATAR_FAILURE,
-  UPLOAD_AVATAR_REQUEST,
-  UPLOAD_AVATAR_SUCCESS,
-} from '../reducers/user/uploadAvatar';
-import {
-  changeMbtiFailure,
-  changeMbtiSuccess,
-  CHANGE_MBTI_FAILURE,
-  CHANGE_MBTI_REQUEST,
-  CHANGE_MBTI_SUCCESS,
-} from '../reducers/user/changeMbti';
+import { loginErrorFinish, loginFailure, loginSuccess, LOG_IN_REQUEST } from '../reducers/user/login';
+import { logoutFailure, logoutSuccess, LOG_OUT_REQUEST } from '../reducers/user/logout';
+import { signupFailure, signupSuccess, SIGN_UP_REQUEST } from '../reducers/user/signup';
+import { changeNickFailure, changeNickSuccess, CHANGE_NICK_REQUEST } from '../reducers/user/changeNick';
+import { changeIntroFailure, changeIntroSuccess, CHANGE_INTRO_REQUEST } from '../reducers/user/changeIntro';
+import { changeAreaFailure, changeAreaSuccess, CHANGE_AREA_REQUEST } from '../reducers/user/changeArea';
+import { uploadAvatarFailure, uploadAvatarSuccess, UPLOAD_AVATAR_REQUEST } from '../reducers/user/uploadAvatar';
+import { changeMbtiFailure, changeMbtiSuccess, CHANGE_MBTI_REQUEST } from '../reducers/user/changeMbti';
+import { unfollowFailure, unfollowSuccess, UNFOLLOW_REQUEST } from '../reducers/user/unfollow';
+import { loadMeFailure, loadMeSuccess, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
+import { removeFollowerFailure, removeFollowerSuccess, REMOVE_FOLLOWER_REQUEST } from '../reducers/user/removeFollower';
+import { randomUserFailure, randomUserSuccess, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
+import { loadUserFailure, loadUserSuccess, LOAD_USER_REQUEST } from '../reducers/user/loadUser';
+import { followSuccess, FOLLOW_REQUEST } from '../reducers/user/follow';
 import {
   saveAvatarFailure,
   saveAvatarRequest,
   saveAvatarSuccess,
-  SAVE_AVATAR_FAILURE,
   SAVE_AVATAR_REQUEST,
-  SAVE_AVATAR_SUCCESS,
 } from '../reducers/user/saveAvatar';
-import { followSuccess, FOLLOW_FAILURE, FOLLOW_REQUEST, FOLLOW_SUCCESS } from '../reducers/user/follow';
-import {
-  unfollowFailure,
-  unfollowSuccess,
-  UNFOLLOW_FAILURE,
-  UNFOLLOW_REQUEST,
-  UNFOLLOW_SUCCESS,
-} from '../reducers/user/unfollow';
-import {
-  loadMeFailure,
-  loadMeSuccess,
-  LOAD_ME_FAILURE,
-  LOAD_ME_REQUEST,
-  LOAD_ME_SUCCESS,
-} from '../reducers/user/loadMe';
-import {
-  removeFollowerFailure,
-  removeFollowerSuccess,
-  REMOVE_FOLLOWER_FAILURE,
-  REMOVE_FOLLOWER_REQUEST,
-  REMOVE_FOLLOWER_SUCCESS,
-} from '../reducers/user/removeFollower';
-import {
-  randomUserFailure,
-  randomUserSuccess,
-  RANDOM_USER_FAILURE,
-  RANDOM_USER_REQUEST,
-  RANDOM_USER_SUCCESS,
-} from '../reducers/user/randomUser';
-import {
-  loadUserFailure,
-  loadUserSuccess,
-  LOAD_USER_FAILURE,
-  LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS,
-} from '../reducers/user/loadUser';
 
 function loadMeAPI() {
   return axios.get('/user');

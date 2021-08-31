@@ -8,7 +8,7 @@ export interface ChangeNickRequest {
 
 export interface ChangeNickSuccess {
   type: typeof CHANGE_NICK_SUCCESS;
-  data: string;
+  data: { nickname: string };
 }
 
 export interface ChangeNickFailure {
@@ -21,7 +21,7 @@ export const changeNickRequest = (data: string): ChangeNickRequest => ({
   data,
 });
 
-export const changeNickSuccess = (data: string): ChangeNickSuccess => ({
+export const changeNickSuccess = (data: { nickname: string }): ChangeNickSuccess => ({
   type: CHANGE_NICK_SUCCESS,
   data,
 });

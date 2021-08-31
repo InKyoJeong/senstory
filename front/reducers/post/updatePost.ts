@@ -1,5 +1,3 @@
-import { Post } from '../../interfaces/post';
-
 export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST' as const;
 export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS' as const;
 export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE' as const;

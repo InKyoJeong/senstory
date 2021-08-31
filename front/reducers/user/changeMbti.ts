@@ -9,7 +9,7 @@ export interface ChangeMbtiRequest {
 
 export interface ChangeMbtiSuccess {
   type: typeof CHANGE_MBTI_SUCCESS;
-  data: string;
+  data: { mbti: string };
 }
 
 export interface ChangeMbtiFailure {
@@ -22,7 +22,7 @@ export const changeMbtiRequest = (data: string): ChangeMbtiRequest => ({
   data,
 });
 
-export const changeMbtiSuccess = (data: string): ChangeMbtiSuccess => ({
+export const changeMbtiSuccess = (data: { mbti: string }): ChangeMbtiSuccess => ({
   type: CHANGE_MBTI_SUCCESS,
   data,
 });

@@ -9,7 +9,7 @@ export interface ChangeAreaRequest {
 
 export interface ChangeAreaSuccess {
   type: typeof CHANGE_AREA_SUCCESS;
-  data: string;
+  data: { area: string };
 }
 
 export interface ChangeAreaFailure {
@@ -22,7 +22,7 @@ export const changeAreaRequest = (data: string): ChangeAreaRequest => ({
   data,
 });
 
-export const changeAreaSuccess = (data: string): ChangeAreaSuccess => ({
+export const changeAreaSuccess = (data: { area: string }): ChangeAreaSuccess => ({
   type: CHANGE_AREA_SUCCESS,
   data,
 });

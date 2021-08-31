@@ -93,5 +93,5 @@ export interface UserInitialState {
   me: User | null | any;
   userInfo: User | null;
   avatarPaths: string[];
-  randomUsers: RandomUser[];
+  randomUsers: RandomUsers[];
 }

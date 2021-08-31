@@ -9,7 +9,7 @@ export interface ChangeIntroRequest {
 
 export interface ChangeIntroSuccess {
   type: typeof CHANGE_INTRO_SUCCESS;
-  data: string;
+  data: { intro: string };
 }
 
 export interface ChangeIntroFailure {
@@ -22,7 +22,7 @@ export const changeIntroRequest = (data: string): ChangeIntroRequest => ({
   data,
 });
 
-export const changeIntroSuccess = (data: string): ChangeIntroSuccess => ({
+export const changeIntroSuccess = (data: { intro: string }): ChangeIntroSuccess => ({
   type: CHANGE_INTRO_SUCCESS,
   data,
 });

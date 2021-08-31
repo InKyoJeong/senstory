@@ -9,7 +9,7 @@ export interface FollowRequest {
 
 export interface FollowSuccess {
   type: typeof FOLLOW_SUCCESS;
-  data: number;
+  data: { UserId: number };
 }
 
 export interface FollowFailure {
@@ -22,7 +22,7 @@ export const followRequest = (data: number): FollowRequest => ({
   data,
 });
 
-export const followSuccess = (data: number): FollowSuccess => ({
+export const followSuccess = (data: { UserId: number }): FollowSuccess => ({
   type: FOLLOW_SUCCESS,
   data,
 });
