@@ -21,8 +21,9 @@ import { UPLOAD_AVATAR_FAILURE, UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS } f
 import { LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS } from './loadFollowers';
 import { ADD_DIARY_TO_ME } from './addDiaryToMe';
 import { REMOVE_DIARY_OF_ME } from './removeDiaryOfMe';
+import { UserInitialState } from '../../interfaces/user';
 
-export const initialState = {
+export const initialState: UserInitialState = {
   loadMeLoading: false, // 내 정보 가져오기
   loadMeFinish: false,
   loadMeError: null,
@@ -80,8 +81,8 @@ export const initialState = {
   randomUsers: [],
 };
 
-const reducer = (state = initialState, action) => {
-  return produce(state, (draft) => {
+const reducer = (state: UserInitialState = initialState, action) => {
+  return produce(state, (draft: UserInitialState) => {
     switch (action.type) {
       case UPLOAD_AVATAR_REQUEST:
         draft.uploadAvatarLoading = true;
@@ -284,12 +285,12 @@ const reducer = (state = initialState, action) => {
       case LOAD_FOLLOWINGS_REQUEST:
         draft.loadFollowingsLoading = true;
         draft.loadFollowingsError = null;
-        draft.loadFollowingsDone = false;
+        draft.loadFollowingsFinish = false;
         break;
       case LOAD_FOLLOWINGS_SUCCESS:
         draft.loadFollowingsLoading = false;
         draft.me.Followings = action.data;
-        draft.loadFollowingsDone = true;
+        draft.loadFollowingsFinish = true;
         break;
       case LOAD_FOLLOWINGS_FAILURE:
         draft.loadFollowingsLoading = false;
@@ -298,12 +299,12 @@ const reducer = (state = initialState, action) => {
       case LOAD_FOLLOWERS_REQUEST:
         draft.loadFollowersLoading = true;
         draft.loadFollowersError = null;
-        draft.loadFollowersDone = false;
+        draft.loadFollowersFinish = false;
         break;
       case LOAD_FOLLOWERS_SUCCESS:
         draft.loadFollowersLoading = false;
         draft.me.Followers = action.data;
-        draft.loadFollowersDone = true;
+        draft.loadFollowersFinish = true;
         break;
       case LOAD_FOLLOWERS_FAILURE:
         draft.loadFollowersLoading = false;
