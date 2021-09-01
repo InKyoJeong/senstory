@@ -21,7 +21,6 @@ const Home = () => {
     (state) => state.post,
   );
 
-  // console.log(mainPosts);
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -39,10 +38,6 @@ const Home = () => {
   useEffect(() => {
     if (inView && hasMorePosts && !loadAllPostLoading) {
       const lastId = mainPosts[mainPosts.length - 1]?.id;
-      // dispatch({
-      //   type: LOAD_ALL_POST_REQUEST,
-      //   lastId,
-      // });
       dispatch(loadAllPostRequest(lastId));
     }
   }, [inView, hasMorePosts, loadAllPostLoading, mainPosts]);
@@ -56,7 +51,6 @@ const Home = () => {
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} ref={hasMorePosts && !loadAllPostLoading ? ref : undefined} />
       ))}
-      {/* <div ref={hasMorePosts && !loadAllPostLoading ? ref : undefined} /> */}
     </Layout>
   );
 };
@@ -67,17 +61,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async ({
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
   store.dispatch(loadMeRequest());
-  // store.dispatch({
-  //   type: LOAD_ALL_POST_REQUEST,
-  // });
   store.dispatch(loadAllPostRequest());
-  // store.dispatch({
-  //   type: RANDOM_USER_REQUEST,
-  // });
   store.dispatch(randomUserRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();

@@ -1,27 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import Link from "next/link";
-import { Button } from "antd";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { Button } from 'antd';
 
-import Conditional from "../../../hocs/Conditional";
-import {
-  EditBtnWrapper,
-  PostContent,
-  PostEditWrapper,
-  PostEditInput,
-  TagWrapper,
-} from "./styles";
+import Conditional from '../../../hocs/Conditional';
+import { EditBtnWrapper, PostContent, PostEditWrapper, PostEditInput, TagWrapper } from './styles';
 
-const PostContents = ({
-  postData,
-  editMode = false,
-  onChangePost,
-  onCancelChange,
-}) => {
-  const { updatePostLoading, updatePostFinish } = useSelector(
-    (state) => state.post
-  );
+const PostContents = ({ postData, editMode = false, onChangePost, onCancelChange }) => {
+  const { updatePostLoading, updatePostFinish } = useSelector((state) => state.post);
   const [textEdit, setTextEdit] = useState(postData);
 
   const onChangeText = useCallback((e) => {
@@ -40,10 +27,7 @@ const PostContents = ({
         <PostEditWrapper>
           <PostEditInput value={textEdit} onChange={onChangeText} />
           <EditBtnWrapper>
-            <Button
-              loading={updatePostLoading}
-              onClick={onChangePost(textEdit)}
-            >
+            <Button loading={updatePostLoading} onClick={onChangePost(textEdit)}>
               완료
             </Button>
             <div />

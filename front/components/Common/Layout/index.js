@@ -1,24 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import { Row, Col } from "antd";
-import { Global } from "./styles";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'antd';
+import { Global } from './styles';
 
-import Header from "../Header";
-import Conditional from "../../../hocs/Conditional";
-import MyProfileForm from "../../common/MyProfileForm";
-import RandomUserForm from "../../home/RandomUserForm";
-import HashtagSearch from "../../home/HashtagSearch";
-import RelatedCheck from "../../home/RelatedCheck";
-import FeelSelectForm from "../../diary/FeelSelectForm";
+import Header from '../Header';
+import Conditional from '../../../hocs/Conditional';
+import MyProfileForm from '../../common/MyProfileForm';
+import RandomUserForm from '../../home/RandomUserForm';
+import HashtagSearch from '../../home/HashtagSearch';
+import RelatedCheck from '../../home/RelatedCheck';
+import FeelSelectForm from '../../diary/FeelSelectForm';
 
-const Layout = ({
-  children,
-  main = false,
-  profile = false,
-  related = false,
-  diary = false,
-}) => {
+const Layout = ({ children, main = false, profile = false, related = false, diary = false }) => {
   const { me } = useSelector((state) => state.user);
 
   return (

@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../../../reducers';
+import { loginRequest } from '../../../reducers/user/login';
 import useInput from '../../../hooks/useInput';
-import { loginRequest, LOG_IN_REQUEST } from '../../../reducers/user/login';
 import MiniTitle from '../../common/MiniTitle';
 import { FormWrapper, ButtonWrapper, LoginButton, LoginInput, InputWrapper } from './styles';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { logInLoading, logInError } = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state: RootState) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
@@ -19,10 +20,6 @@ const LoginForm = () => {
   }, [logInError]);
 
   const onSubmitForm = useCallback(() => {
-    // dispatch({
-    //   type: LOG_IN_REQUEST,
-    //   data: { email, password },
-    // });
     dispatch(loginRequest({ email, password }));
   }, [email, password]);
 

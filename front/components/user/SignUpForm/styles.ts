@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Input, Form } from "antd";
+import styled from 'styled-components';
+import { Input, Form } from 'antd';
 
 export const SignUpFormWrapper = styled(Form)`
   margin: 0px 20px;
@@ -17,7 +17,7 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const SignUpInput = styled(Input)`
+export const SignUpInput = styled(Input)<any>`
   border-radius: 10px;
   margin-top: 5px;
   color: white;
@@ -25,7 +25,7 @@ export const SignUpInput = styled(Input)`
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
 `;
 
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div<{ isValid: boolean }>`
   margin-top: 20px;
 
   & Button {

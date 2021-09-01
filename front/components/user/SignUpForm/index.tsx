@@ -1,22 +1,22 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
-
 import useInput from '../../../hooks/useInput';
 import Conditional from '../../../hocs/Conditional';
 import MiniTitle from '../../common/MiniTitle';
+import { signupRequest } from '../../../reducers/user/signup';
+import { RootState } from '../../../reducers';
 import { ErrorMessage, ButtonWrapper, SignUpInput, InputWrapper, SignUpFormWrapper } from './styles';
-import { signupRequest, SIGN_UP_REQUEST } from '../../../reducers/user/signup';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  const { signUpLoading, signUpError } = useSelector((state) => state.user);
+  const { signUpLoading, signUpError } = useSelector((state: RootState) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
     if (signUpError) {
@@ -43,10 +43,6 @@ const SignUpForm = () => {
     if (password !== passwordCheck) {
       return setPasswordError(true);
     }
-    // dispatch({
-    //   type: SIGN_UP_REQUEST,
-    //   data: { email, password, nickname },
-    // });
     dispatch(signupRequest({ email, password, nickname }));
   }, [email, password, passwordCheck, isValid]);
 

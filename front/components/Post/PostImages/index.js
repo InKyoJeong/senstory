@@ -1,18 +1,10 @@
-import React, { useCallback, useState } from "react";
-import PropTypes from "prop-types";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
+import { PlusOutlined } from '@ant-design/icons';
 
-import Conditional from "../../../hocs/Conditional";
-import ImagesZoom from "../ImagesZoom";
-import {
-  ImgWrapper,
-  LeftImg,
-  RightImg,
-  MoreImgWrapper,
-  MoreText,
-  MoreTextWrapper,
-  SigleImg,
-} from "./styles";
+import Conditional from '../../../hocs/Conditional';
+import ImagesZoom from '../ImagesZoom';
+import { ImgWrapper, LeftImg, RightImg, MoreImgWrapper, MoreText, MoreTextWrapper, SigleImg } from './styles';
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
@@ -72,19 +64,11 @@ const PostImages = ({ images }) => {
     <>
       <ImgWrapper onClick={onZoom}>
         <LeftImg>
-          <img
-            role="presentation"
-            src={`http://localhost:3065/${images[0].src}`}
-            alt={images[0].src}
-          />
+          <img role="presentation" src={`http://localhost:3065/${images[0].src}`} alt={images[0].src} />
         </LeftImg>
         <RightImg>
           <MoreImgWrapper>
-            <img
-              role="presentation"
-              src={`http://localhost:3065/${images[1].src}`}
-              alt={images[1].src}
-            />
+            <img role="presentation" src={`http://localhost:3065/${images[1].src}`} alt={images[1].src} />
 
             <MoreTextWrapper>
               <PlusOutlined />
