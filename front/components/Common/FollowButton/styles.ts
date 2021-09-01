@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
-import { Button } from "antd";
+import styled, { css } from 'styled-components';
+import { Button } from 'antd';
 
-const Unfollow = css`
+const Unfollow = css<{ unfollow: boolean }>`
   background-color: ${({ theme }) => theme.color.BLACK};
-  border-color: ${(props) => props.unfollow && "#d43578"};
-  color: ${(props) => props.unfollow && "#d43578"};
+  border-color: ${(props) => props.unfollow && '#d43578'};
+  color: ${(props) => props.unfollow && '#d43578'};
 `;
 
 export const FollowButtonContainer = styled(Button)`

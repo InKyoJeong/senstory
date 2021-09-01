@@ -1,7 +1,6 @@
 import React from 'react';
 import { CheckOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import PropTypes from 'prop-types';
 import { ModalForm, ModalOverlay } from './styles';
 
 interface ModalProps {
@@ -20,11 +19,6 @@ const Modal = ({ onToggleModal, title }: ModalProps) => {
       </ModalForm>
     </ModalOverlay>
   );
-};
-
-Modal.propTypes = {
-  onToggleModal: PropTypes.func,
-  title: PropTypes.string,
 };
 
 export default Modal;

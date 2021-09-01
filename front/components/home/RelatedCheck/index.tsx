@@ -1,11 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import PropTypes from 'prop-types';
 import { BorderOutlined, CheckSquareOutlined } from '@ant-design/icons';
 import Conditional from '../../../hocs/Conditional';
 import { RelatedForm } from './styles';
 
-const RelatedCheck = ({ check }) => {
+interface RelatedProps {
+  check: boolean;
+}
+
+const RelatedCheck = ({ check }: RelatedProps) => {
   return (
     <>
       <Conditional condition={check}>
@@ -31,10 +34,6 @@ const RelatedCheck = ({ check }) => {
       </Conditional>
     </>
   );
-};
-
-RelatedCheck.propTypes = {
-  check: PropTypes.bool,
 };
 
 export default RelatedCheck;

@@ -3,13 +3,12 @@ import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { Avatar } from 'antd';
 import { TeamOutlined } from '@ant-design/icons';
-
 import FollowButton from '../../common/FollowButton';
 import { RandomUserWrapper, RandomTitle, UserItem, RandomUsers, UserItemWrapper } from './styles';
+import { RootState } from '../../../reducers';
 
 const RandomUserForm = () => {
-  const { randomUsers } = useSelector((state) => state.user);
-  // console.log(randomUsers);
+  const { randomUsers } = useSelector((state: RootState) => state.user);
 
   return (
     <RandomUserWrapper>

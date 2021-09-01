@@ -1,28 +1,25 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { FollowButtonContainer, FollowText } from './styles';
-import { followRequest, FOLLOW_REQUEST } from '../../../reducers/user/follow';
-import { unfollowRequest, UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
+import { followRequest } from '../../../reducers/user/follow';
+import { unfollowRequest } from '../../../reducers/user/unfollow';
+import { RandomUsers, User, UserFollowers } from '../../../interfaces/user';
+import { RootState } from '../../../reducers';
 
-const FollowButton = ({ user }) => {
-  const { me, followLoading, unfollowLoading } = useSelector((state) => state.user);
+interface FollowButtonProps {
+  user: RandomUsers | User;
+}
+
+const FollowButton = ({ user }: FollowButtonProps) => {
+  const { me, followLoading, unfollowLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  const isFollowing = me?.Followings.find((v) => v.id === user.id);
+  const isFollowing = me?.Followings.find((v: UserFollowers) => v.id === user.id);
 
   const onClickButton = useCallback(() => {
     if (isFollowing) {
-      // dispatch({
-      //   type: UNFOLLOW_REQUEST,
-      //   data: user.id,
-      // });
       dispatch(unfollowRequest(user.id));
     } else {
-      // dispatch({
-      //   type: FOLLOW_REQUEST,
-      //   data: user.id,
-      // });
       dispatch(followRequest(user.id));
     }
   }, [isFollowing]);
@@ -46,18 +43,6 @@ const FollowButton = ({ user }) => {
       )}
     </FollowButtonContainer>
   );
-};
-
-FollowButton.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    avatar: PropTypes.string,
-    createdAt: PropTypes.string,
-    email: PropTypes.string,
-    intro: PropTypes.string,
-    nickname: PropTypes.string,
-    updatedAt: PropTypes.string,
-  }),
 };
 
 export default FollowButton;
