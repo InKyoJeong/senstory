@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Form, Button } from 'antd';
 import { FrownOutlined, LoadingOutlined, MehOutlined, SmileOutlined, StarOutlined } from '@ant-design/icons';
 import useInput from '../../../hooks/useInput';
 import Conditional from '../../../hocs/Conditional';
+import { addDiaryRequest } from '../../../reducers/diary/addDiary';
+import { uploadPhotoRequest } from '../../../reducers/diary/uploadPhoto';
+import { removeDiaryPhotoRequest } from '../../../reducers/diary/removeDiaryPhoto';
 import {
   DiaryContentInput,
   DiaryModalForm,
@@ -22,16 +24,17 @@ import {
   TempMax,
   TempWriteWrapper,
 } from './styles';
-import { addDiaryRequest, ADD_DIARY_REQUEST } from '../../../reducers/diary/addDiary';
-import { uploadPhotoRequest, UPLOAD_PHOTO_REQUEST } from '../../../reducers/diary/uploadPhoto';
-import { removeDiaryPhotoRequest } from '../../../reducers/diary/removeDiaryPhoto';
+import { RootState } from '../../../reducers';
 
 const WEATHER_API_KEY = '754396fc47cf98139cb846496c61d15d';
 
-const DiaryWriteForm = ({ closeModal }) => {
-  const dispatch = useDispatch();
-  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } = useSelector((state) => state.diary);
+interface DiaryWriteFormProps {
+  closeModal: () => void;
+}
 
+const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
+  const dispatch = useDispatch();
+  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } = useSelector((state: RootState) => state.diary);
   const [title, onChangeTitle, setTitle] = useInput('');
   const [content, onChangeContent, setContent] = useInput('');
   const [feel, setFeel] = useState(null);
@@ -45,7 +48,7 @@ const DiaryWriteForm = ({ closeModal }) => {
     }
   }, [addDiaryError]);
 
-  const imageInput = useRef();
+  const imageInput = useRef<HTMLInputElement>(null);
 
   const onGeoSuccess = useCallback(
     async (position) => {
@@ -125,27 +128,21 @@ const DiaryWriteForm = ({ closeModal }) => {
     formData.append('maxtemp', maxtemp);
     formData.append('mintemp', mintemp);
 
-    // return dispatch({
-    //   type: ADD_DIARY_REQUEST,
-    //   data: formData,
-    // });
     return dispatch(addDiaryRequest(formData));
   }, [title, content, feel, photoPaths, maxtemp, mintemp]);
 
   const onClickImageUpload = useCallback(() => {
+    if (!imageInput.current) {
+      return;
+    }
     imageInput.current.click();
   }, [imageInput.current]);
 
   const onChangeImages = useCallback((e) => {
-    // console.log("photos", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append('photo', f);
     });
-    // dispatch({
-    //   type: UPLOAD_PHOTO_REQUEST,
-    //   data: imageFormData,
-    // });
 
     dispatch(uploadPhotoRequest(imageFormData));
   }, []);
@@ -155,10 +152,6 @@ const DiaryWriteForm = ({ closeModal }) => {
   }, []);
 
   const onResetContents = useCallback((i) => {
-    // dispatch({
-    //   type: REMOVE_DIARY_PHOTO,
-    //   data: i,
-    // });
     dispatch(removeDiaryPhotoRequest(i));
   }, []);
 
@@ -184,7 +177,7 @@ const DiaryWriteForm = ({ closeModal }) => {
                   <LoadingOutlined />
                 </span>
               </Conditional>
-              <Conditional condition={maxtemp && mintemp}>
+              <Conditional condition={maxtemp !== null && mintemp !== null}>
                 <span>
                   <TempMin>{mintemp}°</TempMin> / <TempMax>{maxtemp}°</TempMax>
                 </span>
@@ -242,10 +235,6 @@ const DiaryWriteForm = ({ closeModal }) => {
       </DiaryModalForm>
     </DiaryWriteOverlay>
   );
-};
-
-DiaryWriteForm.propTypes = {
-  closeModal: PropTypes.func,
 };
 
 export default DiaryWriteForm;

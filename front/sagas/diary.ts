@@ -85,7 +85,7 @@ function* loadFeelDiarys(action: LoadFeelDiarysRequest): SagaIterator {
   }
 }
 
-function addDiaryAPI(data: DiaryContent) {
+function addDiaryAPI(data: DiaryContent | FormData) {
   return axios.post('/diary', data);
 }
 
@@ -117,7 +117,7 @@ function* removeDiary(action: RemoveDiaryRequest): SagaIterator {
   }
 }
 
-function uploadPhotosAPI(data: Photo) {
+function uploadPhotosAPI(data: Photo | FormData) {
   return axios.post('/diary/photos', data);
 }
 

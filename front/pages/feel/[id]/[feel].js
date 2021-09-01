@@ -7,16 +7,17 @@ import Router from 'next/router';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
-// import { LOAD_FEEL_DIARYS_REQUEST } from "../../../actions/diary";
 
 import Layout from '../../../components/common/Layout';
 import DiaryBlock from '../../../components/diary/DiaryBlock';
 import DiaryBlockContainer from '../../../components/diary/DiaryBlockContainer';
 import Loader from '../../../components/common/Loader';
 import FeelSelectForm from '../../../components/diary/FeelSelectForm';
+import DiaryEmpty from '../../../components/diary/DiaryEmpty';
 
 import { loadFeelDiarysRequest } from '../../../reducers/diary/loadFeelDiarys';
 import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
+import Conditional from '../../../hocs/Conditional';
 
 const Feel = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,11 @@ const Feel = () => {
     <Layout diary>
       <FeelSelectForm hide />
 
-      <DiaryBlockContainer selectFeel={feel}>
+      <Conditional condition={mainDiarys.length === 0}>
+        <DiaryEmpty />
+      </Conditional>
+
+      <DiaryBlockContainer>
         {mainDiarys.map((diary) => (
           <DiaryBlock key={diary.id} diary={diary} ref={hasMoreDiarys && !loadFeelDiarysLoading ? ref : undefined} />
         ))}

@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const GuageWrapper = styled.div`
+export const GuageWrapper = styled.div<{ percent: string }>`
   display: flex;
   justify-content: space-between;
 

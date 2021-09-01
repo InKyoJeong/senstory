@@ -6,9 +6,10 @@ import { followRequest } from '../../../reducers/user/follow';
 import { unfollowRequest } from '../../../reducers/user/unfollow';
 import { RandomUsers, User, UserFollowers } from '../../../interfaces/user';
 import { RootState } from '../../../reducers';
+import { PostUser } from '../../../interfaces/post';
 
 interface FollowButtonProps {
-  user: RandomUsers | User;
+  user: RandomUsers | User | PostUser;
 }
 
 const FollowButton = ({ user }: FollowButtonProps) => {

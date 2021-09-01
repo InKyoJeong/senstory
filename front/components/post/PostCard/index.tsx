@@ -47,7 +47,7 @@ interface PostCardProps {
   post: Post;
 }
 
-const PostCard = forwardRef(({ post }: PostCardProps, ref) => {
+const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HTMLDivElement>) => {
   const dispatch = useDispatch();
   const id = useSelector((state: RootState) => state.user.me?.id);
   const { removePostLoading } = useSelector((state: RootState) => state.post);

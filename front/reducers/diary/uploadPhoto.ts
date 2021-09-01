@@ -8,7 +8,7 @@ export interface Photo {
 
 export interface UploadPhotoRequest {
   type: typeof UPLOAD_PHOTO_REQUEST;
-  data: Photo;
+  data: Photo | FormData;
 }
 
 export interface UploadPhotoSuccess {
@@ -21,7 +21,7 @@ export interface UploadPhotoFailure {
   error: string;
 }
 
-export const uploadPhotoRequest = (data: Photo): UploadPhotoRequest => ({
+export const uploadPhotoRequest = (data: Photo | FormData): UploadPhotoRequest => ({
   type: UPLOAD_PHOTO_REQUEST,
   data,
 });

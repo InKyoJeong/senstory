@@ -21,6 +21,7 @@ import FeelSelectForm from '../../../components/diary/FeelSelectForm';
 import { loadUserDiarysRequest, LOAD_USER_DIARYS_REQUEST } from '../../../reducers/diary/loadUserDiarys';
 import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 import { loadUserRequest, LOAD_USER_REQUEST } from '../../../reducers/user/loadUser';
+import DiaryEmpty from '../../../components/diary/DiaryEmpty';
 
 const Diary = () => {
   const router = useRouter();
@@ -76,6 +77,10 @@ const Diary = () => {
 
       <Conditional condition={modalVisible}>
         <DiaryWriteForm closeModal={closeModal} />
+      </Conditional>
+
+      <Conditional condition={mainDiarys.length === 0}>
+        <DiaryEmpty />
       </Conditional>
 
       <DiaryBlockContainer>

@@ -5,6 +5,7 @@ import { ArrowLeftOutlined, FrownOutlined, MehOutlined, SmileOutlined, StarOutli
 import { todayOnlyNum } from '../../../utils';
 import Conditional from '../../../hocs/Conditional';
 import DiaryDropdown from '../DiaryDropdown';
+import { removeDiaryRequest } from '../../../reducers/diary/removeDiary';
 
 import {
   DiaryHeaderWrapper,
@@ -21,16 +22,17 @@ import {
   DiaryContentText,
   DiaryTempWrapper,
 } from './styles';
-import { removeDiaryRequest, REMOVE_DIARY_REQUEST } from '../../../reducers/diary/removeDiary';
+import { Diary } from '../../../interfaces/diary';
 
-const DiaryDetail = ({ diary, onBack }) => {
+interface DiaryDetailProps {
+  diary: Diary;
+  onBack: () => void;
+}
+
+const DiaryDetail = ({ diary, onBack }: DiaryDetailProps) => {
   const dispatch = useDispatch();
 
   const onRemoveDiary = useCallback(() => {
-    // dispatch({
-    //   type: REMOVE_DIARY_REQUEST,
-    //   data: diary.id,
-    // });
     dispatch(removeDiaryRequest(diary.id));
   }, []);
 
@@ -55,7 +57,7 @@ const DiaryDetail = ({ diary, onBack }) => {
             {diary.feel === 'Bad' && <FrownOutlined />}
           </div>
           <div>
-            <Conditional condition={diary.mintemp && diary.maxtemp}>
+            <Conditional condition={diary.mintemp !== null && diary.maxtemp !== null}>
               <DiaryTempWrapper>
                 <span>{diary.mintemp}°</span>
                 <span>/</span>

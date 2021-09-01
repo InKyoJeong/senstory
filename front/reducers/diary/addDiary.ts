@@ -10,13 +10,13 @@ export interface DiaryContent {
   title: string;
   content: string;
   feel: string;
-  maxtemp: string;
-  mintemp: string;
+  maxtemp: string | number;
+  mintemp: string | number;
 }
 
 export interface AddDiaryRequest {
   type: typeof ADD_DIARY_REQUEST;
-  data: DiaryContent;
+  data: DiaryContent | FormData;
 }
 
 export interface AddDiarySuccess {
@@ -33,7 +33,7 @@ export interface AddDiaryErrorFinish {
   type: typeof ADD_DIARY_ERROR_FINISH;
 }
 
-export const addDiaryRequest = (data: DiaryContent): AddDiaryRequest => ({
+export const addDiaryRequest = (data: DiaryContent | FormData): AddDiaryRequest => ({
   type: ADD_DIARY_REQUEST,
   data,
 });

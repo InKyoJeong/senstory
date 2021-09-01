@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const center = css`
   display: flex;
@@ -46,53 +46,53 @@ export const DiaryHeaderMenu = styled.div`
 
 // ----- Diary Contents-----
 
-export const DiaryContentsWrapper = styled.div`
+export const DiaryContentsWrapper = styled.div<{ feel?: string }>`
   border-radius: 20px;
   padding: 10px 20px 20px 20px;
   margin-bottom: 20px;
 
   background: -webkit-linear-gradient(
     135deg,
-    ${(props) => props.feel === "Special" && "#76bae8"},
-    ${(props) => props.feel === "Special" && "#e8bdf0"}
+    ${(props) => props.feel === 'Special' && '#76bae8'},
+    ${(props) => props.feel === 'Special' && '#e8bdf0'}
   );
   background: linear-gradient(
     135deg,
-    ${(props) => props.feel === "Special" && "#76bae8"},
-    ${(props) => props.feel === "Special" && "#e8bdf0"}
+    ${(props) => props.feel === 'Special' && '#76bae8'},
+    ${(props) => props.feel === 'Special' && '#e8bdf0'}
   );
 
   background: -webkit-linear-gradient(
     135deg,
-    ${(props) => props.feel === "Good" && "#adde9b"},
-    ${(props) => props.feel === "Good" && "#8ACF71"}
+    ${(props) => props.feel === 'Good' && '#adde9b'},
+    ${(props) => props.feel === 'Good' && '#8ACF71'}
   );
   background: linear-gradient(
     135deg,
-    ${(props) => props.feel === "Good" && "#adde9b"},
-    ${(props) => props.feel === "Good" && "#8ACF71"}
+    ${(props) => props.feel === 'Good' && '#adde9b'},
+    ${(props) => props.feel === 'Good' && '#8ACF71'}
   );
 
   background: -webkit-linear-gradient(
     135deg,
-    ${(props) => props.feel === "Soso" && "#ffe78f"},
-    ${(props) => props.feel === "Soso" && "#f2bf05"}
+    ${(props) => props.feel === 'Soso' && '#ffe78f'},
+    ${(props) => props.feel === 'Soso' && '#f2bf05'}
   );
   background: linear-gradient(
     135deg,
-    ${(props) => props.feel === "Soso" && "#ffe78f"},
-    ${(props) => props.feel === "Soso" && "#f2bf05"}
+    ${(props) => props.feel === 'Soso' && '#ffe78f'},
+    ${(props) => props.feel === 'Soso' && '#f2bf05'}
   );
 
   background: -webkit-linear-gradient(
     135deg,
-    ${(props) => props.feel === "Bad" && "#ffa1a7"},
-    ${(props) => props.feel === "Bad" && "#ff757f"}
+    ${(props) => props.feel === 'Bad' && '#ffa1a7'},
+    ${(props) => props.feel === 'Bad' && '#ff757f'}
   );
   background: linear-gradient(
     135deg,
-    ${(props) => props.feel === "Bad" && "#ffa1a7"},
-    ${(props) => props.feel === "Bad" && "#ff757f"}
+    ${(props) => props.feel === 'Bad' && '#ffa1a7'},
+    ${(props) => props.feel === 'Bad' && '#ff757f'}
   );
 `;
 
@@ -155,8 +155,7 @@ export const DiaryImgFrame = styled.div`
   padding: 15px 15px 30px 15px;
   width: 75%;
   height: 75%;
-  box-shadow: 0 10px 10px -4px rgba(0, 0, 0, 0.2),
-    0 5px 5px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 10px -4px rgba(0, 0, 0, 0.2), 0 5px 5px -5px rgba(0, 0, 0, 0.04);
 
   & img {
     width: 100%;

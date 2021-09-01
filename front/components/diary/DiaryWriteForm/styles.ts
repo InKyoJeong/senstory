@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import { Input } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import styled, { css } from 'styled-components';
+import { Input } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 const footerButton = css`
   width: 50%;
@@ -111,7 +111,7 @@ export const TempMax = styled.span`
   color: rgb(247, 161, 231);
 `;
 
-export const FeelButtonWrapper = styled.div`
+export const FeelButtonWrapper = styled.div<{ feel: string | null }>`
   margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -126,26 +126,26 @@ export const FeelButtonWrapper = styled.div`
   }
 
   & div:first-child {
-    /* background-color: ${(props) => props.feel === "Special" && "#96CBEF"}; */
+    /* background-color: ${(props) => props.feel === 'Special' && '#96CBEF'}; */
     background: -webkit-linear-gradient(
       to right,
-      ${(props) => props.feel === "Special" && "#76bae8"},
-      ${(props) => props.feel === "Special" && "#96cbef"}
+      ${(props) => props.feel === 'Special' && '#76bae8'},
+      ${(props) => props.feel === 'Special' && '#96cbef'}
     );
     background: linear-gradient(
       to right,
-      ${(props) => props.feel === "Special" && "#76bae8"},
-      ${(props) => props.feel === "Special" && "#96cbef"}
+      ${(props) => props.feel === 'Special' && '#76bae8'},
+      ${(props) => props.feel === 'Special' && '#96cbef'}
     );
   }
   & div:nth-child(2) {
-    background-color: ${(props) => props.feel === "Good" && "#8ACF71"};
+    background-color: ${(props) => props.feel === 'Good' && '#8ACF71'};
   }
   & div:nth-child(3) {
-    background-color: ${(props) => props.feel === "Soso" && "#FFE689"};
+    background-color: ${(props) => props.feel === 'Soso' && '#FFE689'};
   }
   & div:last-child {
-    background-color: ${(props) => props.feel === "Bad" && "#FF8D95"};
+    background-color: ${(props) => props.feel === 'Bad' && '#FF8D95'};
   }
 `;
 

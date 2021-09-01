@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const DiaryBlockWrapper = styled.div`
+export const DiaryBlockWrapper = styled.div<{ feel?: string }>`
   padding: 10px;
   border-radius: 5px;
   color: ${({ theme }) => theme.color.DARK_GRAY};

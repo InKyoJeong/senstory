@@ -1,14 +1,19 @@
-import React, { forwardRef, useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { todayDot } from '../../../utils';
 import { FrownOutlined, MehOutlined, SmileOutlined, StarOutlined } from '@ant-design/icons';
 
 import { BlockFeelText, BlockDateText, BlockTitleText, DiaryBlockWrapper, WhiteLabel } from './styles';
 import Router from 'next/router';
+import { Diary } from '../../../interfaces/diary';
+import { RootState } from '../../../reducers';
 
-const DiaryBlock = forwardRef(({ diary }, ref) => {
-  const { me } = useSelector((state) => state.user);
+interface DiaryBlockProps {
+  diary: Diary;
+}
+
+const DiaryBlock = forwardRef(({ diary }: DiaryBlockProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+  const { me } = useSelector((state: RootState) => state.user);
 
   const handleClickDiary = useCallback((id) => {
     Router.push(`/diary/${me.id}/${id}`);
@@ -38,17 +43,4 @@ const DiaryBlock = forwardRef(({ diary }, ref) => {
   );
 });
 
-DiaryBlock.propTypes = {
-  diary: PropTypes.shape({
-    id: PropTypes.number,
-    User: PropTypes.object,
-    UserId: PropTypes.number,
-    content: PropTypes.string,
-    createdAt: PropTypes.string,
-    feel: PropTypes.string,
-    Photos: PropTypes.arrayOf(PropTypes.object),
-    maxtemp: PropTypes.number,
-    mintemp: PropTypes.number,
-  }).isRequired,
-};
 export default DiaryBlock;
