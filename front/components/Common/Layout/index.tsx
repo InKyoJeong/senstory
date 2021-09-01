@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 import { Global } from './styles';
 
 import Header from '../Header';
 import Conditional from '../../../hocs/Conditional';
-import MyProfileForm from '../../common/MyProfileForm';
+import MyProfileForm from '../MyProfileForm';
 import RandomUserForm from '../../home/RandomUserForm';
 import HashtagSearch from '../../home/HashtagSearch';
 import RelatedCheck from '../../home/RelatedCheck';
 import FeelSelectForm from '../../diary/FeelSelectForm';
+import { RootState } from '../../../reducers';
 
-const Layout = ({ children, main = false, profile = false, related = false, diary = false }) => {
-  const { me } = useSelector((state) => state.user);
+interface LayoutProps {
+  children: ReactNode;
+  main?: boolean;
+  profile?: boolean;
+  related?: boolean;
+  diary?: boolean;
+}
+
+const Layout = ({ children, main = false, profile = false, related = false, diary = false }: LayoutProps) => {
+  const { me } = useSelector((state: RootState) => state.user);
 
   return (
     <div>
@@ -36,7 +44,7 @@ const Layout = ({ children, main = false, profile = false, related = false, diar
           </Conditional>
 
           <Conditional condition={me && me.id && main}>
-            <RelatedCheck />
+            <RelatedCheck check={false} />
             <MyProfileForm />
             <RandomUserForm />
             <HashtagSearch />
@@ -55,14 +63,6 @@ const Layout = ({ children, main = false, profile = false, related = false, diar
       </Row>
     </div>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  main: PropTypes.bool,
-  profile: PropTypes.bool,
-  related: PropTypes.bool,
-  diary: PropTypes.bool,
 };
 
 export default Layout;

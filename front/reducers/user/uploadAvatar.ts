@@ -7,7 +7,7 @@ export interface AvatarImage {
 }
 export interface UploadAvatarRequest {
   type: typeof UPLOAD_AVATAR_REQUEST;
-  data: AvatarImage;
+  data: AvatarImage | FormData;
 }
 
 export interface UploadAvatarSuccess {
@@ -20,7 +20,7 @@ export interface UploadAvatarFailure {
   error: string;
 }
 
-export const uploadAvatarRequest = (data: AvatarImage): UploadAvatarRequest => ({
+export const uploadAvatarRequest = (data: AvatarImage | FormData): UploadAvatarRequest => ({
   type: UPLOAD_AVATAR_REQUEST,
   data,
 });

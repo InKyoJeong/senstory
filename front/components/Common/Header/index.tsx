@@ -1,54 +1,50 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import Link from "next/link";
-import Image from "next/image";
-import { Menu } from "antd";
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Menu } from 'antd';
+import { RootState } from '../../../reducers';
 
 const Header = () => {
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector((state: RootState) => state.user);
 
   const menuStyle = useMemo(
     () => ({
-      backgroundColor: "#2d2d2e",
+      backgroundColor: '#2d2d2e',
     }),
-    []
+    [],
   );
 
   const logoWrapperStyle = useMemo(
     () => ({
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      margin: "auto",
-      backgroundColor: "#2d2d2e",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 'auto',
+      backgroundColor: '#2d2d2e',
     }),
-    []
+    [],
   );
 
   const logoTitleLeft = useMemo(
     () => ({
-      color: "#1890FF",
-      fontWeight: "bolder",
+      color: '#1890FF',
+      fontWeight: 'bolder',
     }),
-    []
+    [],
   );
 
   const logoTitleRight = useMemo(
     () => ({
-      fontWeight: "bolder",
+      fontWeight: 'bolder',
     }),
-    []
+    [],
   );
 
-  const HeaderRightMargin = useMemo(() => ({ marginRight: "auto" }), []);
+  const HeaderRightMargin = useMemo(() => ({ marginRight: 'auto' }), []);
 
   return (
-    <Menu
-      mode="horizontal"
-      theme="dark"
-      style={menuStyle}
-      triggerSubMenuAction="click"
-    >
+    <Menu mode="horizontal" theme="dark" style={menuStyle} triggerSubMenuAction="click">
       <Menu.Item
         key="home"
         icon={

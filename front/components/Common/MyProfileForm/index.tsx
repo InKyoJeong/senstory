@@ -1,42 +1,41 @@
 import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import Link from 'next/link';
 import { Card, Avatar, Form } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-
 import { CardWrapper, LogoutButton, MyInfoWrapper, AvatarWrapper } from './styles';
 import HideWrapper from '../HideWrapper';
-import { logoutRequest, LOG_OUT_REQUEST } from '../../../reducers/user/logout';
-import { uploadAvatarRequest, UPLOAD_AVATAR_REQUEST } from '../../../reducers/user/uploadAvatar';
+import { logoutRequest } from '../../../reducers/user/logout';
+import { uploadAvatarRequest } from '../../../reducers/user/uploadAvatar';
+import { RootState } from '../../../reducers';
 
-const MyProfileForm = ({ hide }) => {
+interface MyProfileFormProps {
+  hide?: boolean;
+}
+
+const MyProfileForm = ({ hide }: MyProfileFormProps) => {
   const dispatch = useDispatch();
-  const { me, logOutLoading } = useSelector((state) => state.user);
+  const { me, logOutLoading } = useSelector((state: RootState) => state.user);
 
-  const avatarInput = useRef();
+  const avatarInput = useRef<HTMLInputElement>(null);
 
   const onLogOut = useCallback(() => {
-    // dispatch({ type: LOG_OUT_REQUEST });
     dispatch(logoutRequest());
   }, []);
 
   const onClickAvatarUpload = useCallback(() => {
+    if (!avatarInput.current) {
+      return;
+    }
     avatarInput.current.click();
   }, [avatarInput.current]);
 
   const onChangeAvatar = useCallback((e) => {
-    // console.log("images", e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append('image', f);
     });
 
-    // dispatch({
-    //   type: UPLOAD_AVATAR_REQUEST,
-    //   data: imageFormData,
-    // });
     dispatch(uploadAvatarRequest(imageFormData));
   }, []);
 
@@ -97,10 +96,6 @@ const MyProfileForm = ({ hide }) => {
       </CardWrapper>
     </HideWrapper>
   );
-};
-
-MyProfileForm.propTypes = {
-  hide: PropTypes.bool,
 };
 
 export default MyProfileForm;

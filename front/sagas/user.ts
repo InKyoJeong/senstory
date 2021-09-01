@@ -213,7 +213,7 @@ function* removeFollower(action: RemoveFollowerRequest): SagaIterator {
   }
 }
 
-function uploadAvatarAPI(data: AvatarImage) {
+function uploadAvatarAPI(data: AvatarImage | FormData) {
   return axios.post('/user/images', data);
 }
 
