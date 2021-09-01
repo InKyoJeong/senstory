@@ -9,7 +9,7 @@ export interface RemoveFollowerRequest {
 
 export interface RemoveFollowerSuccess {
   type: typeof REMOVE_FOLLOWER_SUCCESS;
-  data: number;
+  data: { UserId: number };
 }
 
 export interface RemoveFollowerFailure {
@@ -22,7 +22,7 @@ export const removeFollowerRequest = (data: number): RemoveFollowerRequest => ({
   data,
 });
 
-export const removeFollowerSuccess = (data: number): RemoveFollowerSuccess => ({
+export const removeFollowerSuccess = (data: { UserId: number }): RemoveFollowerSuccess => ({
   type: REMOVE_FOLLOWER_SUCCESS,
   data,
 });

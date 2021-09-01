@@ -9,7 +9,7 @@ export interface SaveAvatarRequest {
 
 export interface SaveAvatarSuccess {
   type: typeof SAVE_AVATAR_SUCCESS;
-  data: string;
+  data: { avatar: string };
 }
 
 export interface SaveAvatarFailure {
@@ -22,7 +22,7 @@ export const saveAvatarRequest = (data: string): SaveAvatarRequest => ({
   data,
 });
 
-export const saveAvatarSuccess = (data: string): SaveAvatarSuccess => ({
+export const saveAvatarSuccess = (data: { avatar: string }): SaveAvatarSuccess => ({
   type: SAVE_AVATAR_SUCCESS,
   data,
 });

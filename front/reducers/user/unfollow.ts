@@ -9,7 +9,7 @@ export interface UnfollowRequest {
 
 export interface UnfollowSuccess {
   type: typeof UNFOLLOW_SUCCESS;
-  data: number;
+  data: { UserId: number };
 }
 
 export interface UnfollowFailure {
@@ -22,7 +22,7 @@ export const unfollowRequest = (data: number): UnfollowRequest => ({
   data,
 });
 
-export const unfollowSuccess = (data: number): UnfollowSuccess => ({
+export const unfollowSuccess = (data: { UserId: number }): UnfollowSuccess => ({
   type: UNFOLLOW_SUCCESS,
   data,
 });
