@@ -7,7 +7,7 @@ export interface LikeInfo {
 
 export interface PostLiker {
   id: number;
-  // Like: LikeInfo;
+  Like: LikeInfo;
 }
 
 export interface PostImage {
@@ -24,7 +24,7 @@ export interface PostUser {
   avatar: string;
 }
 
-export interface Comment {
+export interface PostComment {
   PostId: number;
   User: PostUser;
   UserId: number;

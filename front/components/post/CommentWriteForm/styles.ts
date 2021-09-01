@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Button, Input } from "antd";
+import styled from 'styled-components';
+import { Button, Input } from 'antd';
 
 export const WriteWrapper = styled.div`
   display: flex;
@@ -18,5 +18,4 @@ export const WriteButton = styled(Button)`
   height: 40px;
   border-radius: 10px;
   margin-left: 5px;
-  /* color: black; */
 `;

@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Form } from 'antd';
-import { EditFilled } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { EditFilled } from '@ant-design/icons';
+import { Form } from 'antd';
 import useInput from '../../../hooks/useInput';
+import { addCommentRequest } from '../../../reducers/post/addComment';
+import { RootState } from '../../../reducers';
+import { Post } from '../../../interfaces/post';
 import { WriteWrapper, WriteButton, WriteInput } from './styles';
-import { addCommentRequest, ADD_COMMENT_REQUEST } from '../../../reducers/post/addComment';
 
-const CommentWriteForm = ({ post }) => {
+interface CommentWriteProps {
+  post: Post;
+}
+
+const CommentWriteForm = ({ post }: CommentWriteProps) => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.me?.id);
-  const { addCommentFinish, addCommentLoading } = useSelector((state) => state.post);
-
+  const id = useSelector((state: RootState) => state.user.me?.id);
+  const { addCommentFinish, addCommentLoading } = useSelector((state: RootState) => state.post);
   const [commentText, onChangeCommentText, setCommentText] = useInput('');
 
   useEffect(() => {
@@ -29,10 +32,7 @@ const CommentWriteForm = ({ post }) => {
     if (!commentText || !commentText.trim()) {
       return alert('내용을 입력해주세요.');
     }
-    // dispatch({
-    //   type: ADD_COMMENT_REQUEST,
-    //   data: { content: commentText, postId: post.id, userId: id },
-    // });
+
     dispatch(addCommentRequest({ content: commentText, postId: post.id, userId: id }));
   }, [commentText, id]);
 
@@ -48,10 +48,6 @@ const CommentWriteForm = ({ post }) => {
       </Form.Item>
     </Form>
   );
-};
-
-CommentWriteForm.propTypes = {
-  post: PropTypes.object.isRequired,
 };
 
 export default CommentWriteForm;

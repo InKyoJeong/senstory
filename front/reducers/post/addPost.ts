@@ -12,7 +12,7 @@ export interface PostContent {
 
 export interface AddPostRequest {
   type: typeof ADD_POST_REQUEST;
-  data: PostContent;
+  data: PostContent | FormData;
 }
 
 export interface AddPostSuccess {
@@ -29,7 +29,7 @@ export interface AddPostErrorFinish {
   type: typeof ADD_POST_ERROR_FINISH;
 }
 
-export const addPostRequest = (data: PostContent): AddPostRequest => ({
+export const addPostRequest = (data: PostContent | FormData): AddPostRequest => ({
   type: ADD_POST_REQUEST,
   data,
 });

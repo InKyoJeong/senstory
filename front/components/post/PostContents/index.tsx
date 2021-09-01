@@ -1,19 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button } from 'antd';
-
 import Conditional from '../../../hocs/Conditional';
+import { RootState } from '../../../reducers';
 import { EditBtnWrapper, PostContent, PostEditWrapper, PostEditInput, TagWrapper } from './styles';
 
-const PostContents = ({ postData, editMode = false, onChangePost, onCancelChange }) => {
-  const { updatePostLoading, updatePostFinish } = useSelector((state) => state.post);
+interface PostContentsProps {
+  postData: string;
+  editMode?: boolean;
+  onChangePost: (textEdit: string) => () => void;
+  onCancelChange: () => void;
+}
+
+const PostContents = ({ postData, editMode = false, onChangePost, onCancelChange }: PostContentsProps) => {
+  const { updatePostLoading, updatePostFinish } = useSelector((state: RootState) => state.post);
   const [textEdit, setTextEdit] = useState(postData);
 
   const onChangeText = useCallback((e) => {
     setTextEdit(e.target.value);
-  });
+  }, []);
 
   useEffect(() => {
     if (updatePostFinish) {
@@ -50,12 +56,6 @@ const PostContents = ({ postData, editMode = false, onChangePost, onCancelChange
       </Conditional>
     </TagWrapper>
   );
-};
-
-PostContents.propTypes = {
-  postData: PropTypes.string.isRequired,
-  editMode: PropTypes.bool,
-  onCancelChange: PropTypes.func.isRequired,
 };
 
 export default PostContents;

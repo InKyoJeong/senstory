@@ -1,11 +1,15 @@
-import React from "react";
-import { Avatar, Comment } from "antd";
-import Link from "next/link";
-import PropTypes from "prop-types";
-import { fromNow } from "../../../utils";
-import { CommentAuthor, CommentDate } from "./styles";
+import React from 'react';
+import { Avatar, Comment } from 'antd';
+import Link from 'next/link';
+import { fromNow } from '../../../utils';
+import { CommentAuthor, CommentDate } from './styles';
+import { PostComment } from '../../../interfaces/post';
 
-const CommentItem = ({ item }) => {
+interface CommentItemProps {
+  item: PostComment;
+}
+
+const CommentItem = ({ item }: CommentItemProps) => {
   return (
     <li>
       <Comment
@@ -30,15 +34,6 @@ const CommentItem = ({ item }) => {
       />
     </li>
   );
-};
-
-CommentItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number,
-    User: PropTypes.object,
-    content: PropTypes.string,
-    createdAt: PropTypes.string,
-  }),
 };
 
 export default CommentItem;

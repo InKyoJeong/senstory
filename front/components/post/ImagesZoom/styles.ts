@@ -1,5 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { CloseCircleOutlined, CloseOutlined } from "@ant-design/icons";
+import styled, { createGlobalStyle } from 'styled-components';
+import { CloseOutlined } from '@ant-design/icons';
 
 export const Overlay = styled.div`
   position: fixed;
@@ -19,7 +19,7 @@ export const CloseBtn = styled(CloseOutlined)`
   line-height: 14px;
   cursor: pointer;
   z-index: 999;
-  background-color: #e89b9b;
+  background-color: gray;
   color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-radius: 100px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
@@ -32,7 +32,6 @@ export const SlickWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  /* padding-top: 20px; */
   text-align: center;
 
   & img {
@@ -44,7 +43,6 @@ export const ImageWrapper = styled.div`
 export const Indicator = styled.div`
   display: flex;
   text-align: center;
-  /* margin-top: 15px; */
   position: absolute;
   top: 15px;
   left: 15px;
@@ -56,7 +54,6 @@ export const Indicator = styled.div`
     line-height: 30px;
     border-radius: 15px;
     background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
-    /* background: #313131; */
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 
     display: inline-block;

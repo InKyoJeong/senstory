@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { List, Button, Card } from "antd";
+import styled, { css } from 'styled-components';
+import { List, Button, Card } from 'antd';
 
 const cardStyle = css`
   overflow: hidden;
@@ -31,15 +31,13 @@ export const RepostTitle = styled.span`
   margin-left: 5px;
 `;
 
-export const CommonCard = styled(Card)`
+export const CommonCard = styled(Card)<{ radius: string }>`
   ${cardStyle}
   border: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-top-left-radius: ${(props) =>
-    props.repost === "true" ? "0px" : "10px"};
-  border-top-right-radius: ${(props) =>
-    props.repost === "true" ? "0px" : "10px"};
+  border-top-left-radius: ${(props) => props.radius};
+  border-top-right-radius: ${(props) => props.radius};
 `;
 
 export const LikeActive = styled.div`
@@ -106,17 +104,16 @@ export const DropdownWrapper = styled.div`
   border-radius: 10px;
 `;
 
-export const DropdownButton = styled(Button)`
-  background-color: ${(props) =>
-    props.edit === "true" ? "#1890FF" : "#eb7575"};
+export const DropdownButton = styled(Button)<{ edit?: boolean }>`
+  background-color: ${(props) => (props.edit ? '#1890FF' : '#eb7575')};
   color: white;
   margin: 5px 0px;
   border-radius: 10px;
   border-color: white;
 
   &:hover {
-    background-color: ${(props) => props.edit === "true" || "#e89b9b"};
-    border-color: ${(props) => props.edit === "true" || "#e89b9b"};
+    background-color: ${(props) => (props.edit ? '' : '#e89b9b')};
+    border-color: ${(props) => (props.edit ? '' : '#e89b9b')};
     color: white;
   }
 `;

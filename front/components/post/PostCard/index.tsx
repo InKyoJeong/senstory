@@ -1,6 +1,5 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Card, Avatar } from 'antd';
 import {
@@ -12,9 +11,7 @@ import {
   ExportOutlined,
 } from '@ant-design/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 import { fromNow } from '../../../utils';
-import useToggle from '../../../hooks/useToggle';
 import Conditional from '../../../hocs/Conditional';
 import Modal from '../../common/Modal';
 import FollowButton from '../../common/FollowButton';
@@ -23,6 +20,11 @@ import CommentWriteForm from '../CommentWriteForm';
 import PostContents from '../PostContents';
 import PostDropdown from './PostDropdown';
 import CommentItem from '../CommentItem';
+import { removePostRequest } from '../../../reducers/post/removePost';
+import { updatePostRequest } from '../../../reducers/post/updatePost';
+import { likePostRequest } from '../../../reducers/post/likePost';
+import { unlikePostRequest } from '../../../reducers/post/unlikePost';
+import { repostRequest } from '../../../reducers/post/repost';
 import {
   PostCardWrapper,
   CommentList,
@@ -38,30 +40,35 @@ import {
   InActive,
   IconCount,
 } from './styles';
-import { removePostRequest } from '../../../reducers/post/removePost';
-import { updatePostRequest } from '../../../reducers/post/updatePost';
-import { likePostRequest, LIKE_POST_REQUEST } from '../../../reducers/post/likePost';
-import { unlikePostRequest } from '../../../reducers/post/unlikePost';
-import { repostRequest } from '../../../reducers/post/repost';
+import { RootState } from '../../../reducers';
+import { Post } from '../../../interfaces/post';
 
-const PostCard = forwardRef(({ post }, ref) => {
+interface PostCardProps {
+  post: Post;
+}
+
+const PostCard = forwardRef(({ post }: PostCardProps, ref) => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.me?.id);
-  const { removePostLoading } = useSelector((state) => state.post);
+  const id = useSelector((state: RootState) => state.user.me?.id);
+  const { removePostLoading } = useSelector((state: RootState) => state.post);
   const liked = post.Likers.find((v) => v.id === id);
 
   const [editMode, setEditMode] = useState(false);
-  const [commentOpen, onToggleComment] = useToggle(false);
-  const [modalOpen, onToggleModal] = useToggle(false);
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onToggleModal = useCallback(() => {
+    setModalOpen((prev) => !prev);
+  }, []);
+
+  const onToggleComment = useCallback(() => {
+    setCommentOpen((prev) => !prev);
+  }, []);
 
   const onLike = useCallback(() => {
     if (!id) {
       return alert('로그인이 필요합니다.');
     }
-    // return dispatch({
-    //   type: LIKE_POST_REQUEST,
-    //   data: post.id,
-    // });
     return dispatch(likePostRequest(post.id));
   }, [id]);
 
@@ -69,10 +76,6 @@ const PostCard = forwardRef(({ post }, ref) => {
     if (!id) {
       return alert('로그인이 필요합니다.');
     }
-    // return dispatch({
-    //   type: UNLIKE_POST_REQUEST,
-    //   data: post.id,
-    // });
     return dispatch(unlikePostRequest(post.id));
   }, [id]);
 
@@ -80,10 +83,6 @@ const PostCard = forwardRef(({ post }, ref) => {
     if (!id) {
       return alert('로그인이 필요합니다.');
     }
-    // return dispatch({
-    //   type: REMOVE_POST_REQUEST,
-    //   data: post.id,
-    // });
     return dispatch(removePostRequest(post.id));
   }, [id]);
 
@@ -91,10 +90,6 @@ const PostCard = forwardRef(({ post }, ref) => {
     if (!id) {
       return alert('로그인이 필요합니다.');
     }
-    // return dispatch({
-    //   type: REPOST_REQUEST,
-    //   data: post.id,
-    // });
     return dispatch(repostRequest(post.id));
   }, [id]);
 
@@ -108,13 +103,6 @@ const PostCard = forwardRef(({ post }, ref) => {
 
   const onChangePost = useCallback(
     (textEdit) => () => {
-      // dispatch({
-      //   type: UPDATE_POST_REQUEST,
-      // data: {
-      //   PostId: post.id,
-      //   content: textEdit,
-      // },
-      // });
       dispatch(
         updatePostRequest({
           PostId: post.id,
@@ -151,7 +139,7 @@ const PostCard = forwardRef(({ post }, ref) => {
       )}
 
       <CommonCard
-        repost={post.RepostId && post.Repost && 'true'}
+        radius={post.RepostId !== null ? '0px' : '10px'}
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
@@ -176,11 +164,7 @@ const PostCard = forwardRef(({ post }, ref) => {
               <IconCount> {post.Comments.length}</IconCount>
             </InActive>
           ),
-          <RetweetOutlined
-            key="re"
-            onClick={onRepost}
-            style={{ color: post.User.id === id && post.RepostId && '#1890FF' }}
-          />,
+          <RetweetOutlined key="re" onClick={onRepost} />,
           <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
             <ExportOutlined key="share" onClick={onToggleModal} />
           </CopyToClipboard>,
@@ -263,7 +247,7 @@ const PostCard = forwardRef(({ post }, ref) => {
           <CommentList
             itemLayout="horizontal"
             dataSource={post.Comments}
-            renderItem={(item) => <CommentItem {...{ item }} />}
+            renderItem={(item: any) => <CommentItem {...{ item }} />}
           />
         </>
       </Conditional>
@@ -276,19 +260,5 @@ const PostCard = forwardRef(({ post }, ref) => {
     </PostCardWrapper>
   );
 });
-
-PostCard.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    User: PropTypes.object,
-    content: PropTypes.string,
-    createdAt: PropTypes.string,
-    Comments: PropTypes.arrayOf(PropTypes.object),
-    Images: PropTypes.arrayOf(PropTypes.object),
-    Likers: PropTypes.arrayOf(PropTypes.object),
-    RepostId: PropTypes.number,
-    Repost: PropTypes.objectOf(PropTypes.any),
-  }).isRequired,
-};
 
 export default PostCard;

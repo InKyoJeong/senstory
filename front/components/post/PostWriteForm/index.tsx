@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { MutableRefObject, RefObject, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditFilled, PictureFilled } from '@ant-design/icons';
 import useInput from '../../../hooks/useInput';
@@ -13,11 +13,12 @@ import {
 } from './styles';
 import { addPostRequest } from '../../../reducers/post/addPost';
 import { uploadImagesRequest } from '../../../reducers/post/uploadImages';
-import { removeImageRequest, REMOVE_IMAGE } from '../../../reducers/post/removeImage';
+import { removeImageRequest } from '../../../reducers/post/removeImage';
+import { RootState } from '../../../reducers';
 
 const PostWriteForm = () => {
   const dispatch = useDispatch();
-  const { imagePaths, addPostFinish, addPostLoading, addPostError } = useSelector((state) => state.post);
+  const { imagePaths, addPostFinish, addPostLoading, addPostError } = useSelector((state: RootState) => state.post);
   const [text, onChangeText, setText] = useInput('');
 
   useEffect(() => {
@@ -41,40 +42,30 @@ const PostWriteForm = () => {
       formData.append('image', v);
     });
     formData.append('content', text);
-    // console.log("formData", formData);
-    // return dispatch({
-    //   type: ADD_POST_REQUEST,
-    //   data: formData,
-    // });
+
     return dispatch(addPostRequest(formData));
   }, [text, imagePaths]);
 
-  const imageInput = useRef();
+  const imageInput = useRef<HTMLInputElement>(null);
 
   const onClickImageUpload = useCallback(() => {
+    if (!imageInput.current) {
+      return;
+    }
     imageInput.current.click();
   }, [imageInput.current]);
 
   const onChangeImages = useCallback((e) => {
-    console.log('images', e.target.files);
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (f) => {
       imageFormData.append('image', f);
     });
 
-    // dispatch({
-    //   type: UPLOAD_IMAGES_REQUEST,
-    //   data: imageFormData,
-    // });
     dispatch(uploadImagesRequest(imageFormData));
   }, []);
 
   const onRemoveImage = useCallback(
-    (index) => () => {
-      // dispatch({
-      //   type: REMOVE_IMAGE,
-      //   data: index,
-      // });
+    (index: number) => () => {
       dispatch(removeImageRequest(index));
     },
     [],

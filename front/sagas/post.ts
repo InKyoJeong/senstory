@@ -199,7 +199,7 @@ function* loadHashtagPosts(action: LoadHashtagPostsRequest): SagaIterator {
   }
 }
 
-function addPostAPI(data: PostContent) {
+function addPostAPI(data: PostContent | FormData) {
   return axios.post('/post', data);
 }
 
@@ -259,7 +259,7 @@ function* addComment(action: AddCommentRequest): SagaIterator {
   }
 }
 
-function uploadImagesAPI(data: Image) {
+function uploadImagesAPI(data: Image | FormData) {
   return axios.post('/post/images', data);
 }
 

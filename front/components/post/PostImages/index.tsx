@@ -1,12 +1,16 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
+import { PostImage } from '../../../interfaces/post';
 import Conditional from '../../../hocs/Conditional';
 import ImagesZoom from '../ImagesZoom';
 import { ImgWrapper, LeftImg, RightImg, MoreImgWrapper, MoreText, MoreTextWrapper, SigleImg } from './styles';
 
-const PostImages = ({ images }) => {
+interface PostImagesProps {
+  images: PostImage[];
+}
+
+const PostImages = ({ images }: PostImagesProps) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
 
   const onZoom = useCallback(() => {
@@ -83,10 +87,6 @@ const PostImages = ({ images }) => {
       </Conditional>
     </>
   );
-};
-
-PostImages.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PostImages;
