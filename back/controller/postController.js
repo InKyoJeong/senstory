@@ -91,6 +91,17 @@ module.exports.getPost = async (req, res, next) => {
           as: "Likers",
           attributes: ["id"],
         },
+        {
+          model: Post,
+          as: "Repost",
+          include: [
+            {
+              model: User,
+              attributes: ["id", "nickname", "avatar"],
+            },
+            { model: Image },
+          ],
+        },
       ],
     });
     res.status(200).json(post);
