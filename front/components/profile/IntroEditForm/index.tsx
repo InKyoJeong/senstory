@@ -1,19 +1,23 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Input, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Conditional from '../../../hocs/Conditional';
 import useInput from '../../../hooks/useInput';
-import useToggle from '../../../hooks/useToggle';
 import Modal from '../../common/Modal';
 import { IntroFormWrapper, IntroButton, IntroInputWrapper } from './styles';
-import { changeIntroRequest, CHANGE_INTRO_REQUEST } from '../../../reducers/user/changeIntro';
+import { changeIntroRequest } from '../../../reducers/user/changeIntro';
+import { RootState } from '../../../reducers';
 
 const IntroEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeIntroLoading, changeIntroFinish } = useSelector((state) => state.user);
+  const { me, changeIntroLoading, changeIntroFinish } = useSelector((state: RootState) => state.user);
   const [intro, onChangeIntro, setIntro] = useInput(me?.intro || '');
-  const [modalOpen, onToggleModal] = useToggle(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onToggleModal = useCallback(() => {
+    setModalOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (changeIntroFinish) {
@@ -27,10 +31,6 @@ const IntroEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    // dispatch({
-    //   type: CHANGE_INTRO_REQUEST,
-    //   data: intro,
-    // });
     dispatch(changeIntroRequest(intro));
   }, [intro]);
 

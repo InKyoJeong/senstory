@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form, Input, Button } from "antd";
+import styled from 'styled-components';
+import { Form, Input } from 'antd';
 
 export const NickFormWrapper = styled(Form)`
   margin-bottom: 20px;

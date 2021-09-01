@@ -1,19 +1,23 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Conditional from '../../../hocs/Conditional';
-import useToggle from '../../../hooks/useToggle';
 import useInput from '../../../hooks/useInput';
 import Modal from '../../common/Modal';
 import { AreaFormWrapper, AreaInput } from './styles';
 import ChangeButton from '../ChangeButton';
-import { changeAreaRequest, CHANGE_AREA_REQUEST } from '../../../reducers/user/changeArea';
+import { changeAreaRequest } from '../../../reducers/user/changeArea';
+import { RootState } from '../../../reducers';
 
 const AreaEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeAreaLoading, changeAreaFinish } = useSelector((state) => state.user);
+  const { me, changeAreaLoading, changeAreaFinish } = useSelector((state: RootState) => state.user);
   const [area, onChangeArea, setArea] = useInput(me?.area || '');
-  const [modalOpen, onToggleModal] = useToggle(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onToggleModal = useCallback(() => {
+    setModalOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (changeAreaFinish) {
@@ -27,10 +31,6 @@ const AreaEditForm = () => {
   }
 
   const onSubmit = useCallback(() => {
-    // dispatch({
-    //   type: CHANGE_AREA_REQUEST,
-    //   data: area,
-    // });
     dispatch(changeAreaRequest(area));
   }, [area]);
 

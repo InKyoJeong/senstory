@@ -8,7 +8,7 @@ import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { CardWrapper, LogoutButton, MyInfoWrapper, AvatarWrapper } from './styles';
 import HideWrapper from '../HideWrapper';
-import { LOG_OUT_REQUEST } from '../../../reducers/user/logout';
+import { logoutRequest, LOG_OUT_REQUEST } from '../../../reducers/user/logout';
 import { uploadAvatarRequest, UPLOAD_AVATAR_REQUEST } from '../../../reducers/user/uploadAvatar';
 
 const MyProfileForm = ({ hide }) => {
@@ -18,7 +18,8 @@ const MyProfileForm = ({ hide }) => {
   const avatarInput = useRef();
 
   const onLogOut = useCallback(() => {
-    dispatch({ type: LOG_OUT_REQUEST });
+    // dispatch({ type: LOG_OUT_REQUEST });
+    dispatch(logoutRequest());
   }, []);
 
   const onClickAvatarUpload = useCallback(() => {

@@ -1,19 +1,23 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Conditional from '../../../hocs/Conditional';
+import { RootState } from '../../../reducers';
+import { changeNickRequest } from '../../../reducers/user/changeNick';
 import useInput from '../../../hooks/useInput';
-import useToggle from '../../../hooks/useToggle';
-import { changeNickRequest, CHANGE_NICK_REQUEST } from '../../../reducers/user/changeNick';
+import Conditional from '../../../hocs/Conditional';
 import Modal from '../../common/Modal';
 import ChangeButton from '../ChangeButton';
 import { NickFormWrapper, NickInput } from './styles';
 
 const NickEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeNickLoading, changeNickFinish, changeNickError } = useSelector((state) => state.user);
+  const { me, changeNickLoading, changeNickFinish, changeNickError } = useSelector((state: RootState) => state.user);
   const [nickname, onChangeNickname, setNickname] = useInput(me?.nickname || '');
-  const [modalOpen, onToggleModal] = useToggle(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onToggleModal = useCallback(() => {
+    setModalOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (changeNickFinish) {
@@ -39,10 +43,6 @@ const NickEditForm = () => {
     if (nickname.includes(' ')) {
       return alert('닉네임에 빈칸을 포함할 수 없어요.');
     }
-    // dispatch({
-    //   type: CHANGE_NICK_REQUEST,
-    //   data: nickname,
-    // });
     dispatch(changeNickRequest(nickname));
   }, [nickname]);
 

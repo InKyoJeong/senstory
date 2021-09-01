@@ -1,19 +1,23 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Conditional from '../../../hocs/Conditional';
 import useInput from '../../../hooks/useInput';
-import useToggle from '../../../hooks/useToggle';
-import { changeMbtiRequest, CHANGE_MBTI_REQUEST } from '../../../reducers/user/changeMbti';
+import { RootState } from '../../../reducers';
+import { changeMbtiRequest } from '../../../reducers/user/changeMbti';
 import Modal from '../../common/Modal';
 import ChangeButton from '../ChangeButton';
 import { MbtiFormWrapper } from './styles';
 
 const MbtiEditForm = () => {
   const dispatch = useDispatch();
-  const { me, changeMbtiFinish, changeMbtiLoading } = useSelector((state) => state.user);
+  const { me, changeMbtiFinish, changeMbtiLoading } = useSelector((state: RootState) => state.user);
   const [mbti, onChangeMbti] = useInput(me?.mbti || '');
-  const [modalOpen, onToggleModal] = useToggle(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onToggleModal = useCallback(() => {
+    setModalOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (changeMbtiFinish) {
@@ -22,10 +26,6 @@ const MbtiEditForm = () => {
   }, [changeMbtiFinish]);
 
   const onSubmit = useCallback(() => {
-    // dispatch({
-    //   type: CHANGE_MBTI_REQUEST,
-    //   data: mbti,
-    // });
     dispatch(changeMbtiRequest(mbti));
   }, [mbti]);
 

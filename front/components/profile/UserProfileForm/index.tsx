@@ -1,6 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Avatar, Card } from "antd";
+import React from 'react';
+import { Avatar, Card } from 'antd';
 import {
   UserProfileWrapper,
   UserInfoWrapper,
@@ -10,10 +9,15 @@ import {
   UserHalfTitle,
   UserIntroTop,
   UserInfoNick,
-} from "./styles";
-import Conditional from "../../../hocs/Conditional";
+} from './styles';
+import Conditional from '../../../hocs/Conditional';
+import { UserInfo } from '../../../interfaces/user';
 
-const UserProfileForm = ({ userInfo }) => {
+interface UserProfileProps {
+  userInfo: UserInfo;
+}
+
+const UserProfileForm = ({ userInfo }: UserProfileProps) => {
   return (
     <>
       <UserHeader>{userInfo.nickname}님의 프로필</UserHeader>
@@ -35,7 +39,7 @@ const UserProfileForm = ({ userInfo }) => {
             <div>
               <UserHalfTitle>활동 지역</UserHalfTitle>
               <div>{userInfo.area}</div>
-              <Conditional condition={userInfo.area === ""}>
+              <Conditional condition={userInfo.area === ''}>
                 <span>등록중</span>
               </Conditional>
             </div>
@@ -43,7 +47,7 @@ const UserProfileForm = ({ userInfo }) => {
             <div>
               <UserHalfTitle>MBTI</UserHalfTitle>
               <div>{userInfo.mbti}</div>
-              <Conditional condition={userInfo.mbti === ""}>
+              <Conditional condition={userInfo.mbti === ''}>
                 <span>등록중</span>
               </Conditional>
             </div>
@@ -52,7 +56,7 @@ const UserProfileForm = ({ userInfo }) => {
           <div>
             <UserIntroTitle>소개</UserIntroTitle>
             <div>{userInfo.intro}</div>
-            <Conditional condition={userInfo.intro === ""}>
+            <Conditional condition={userInfo.intro === ''}>
               <span>등록중</span>
             </Conditional>
           </div>
@@ -75,23 +79,6 @@ const UserProfileForm = ({ userInfo }) => {
       </UserProfileWrapper>
     </>
   );
-};
-
-UserProfileForm.propTypes = {
-  userInfo: PropTypes.shape({
-    id: PropTypes.number,
-    Followings: PropTypes.number,
-    Followers: PropTypes.number,
-    Posts: PropTypes.number,
-    avatar: PropTypes.string,
-    createdAt: PropTypes.string,
-    email: PropTypes.string,
-    intro: PropTypes.string,
-    area: PropTypes.string,
-    mbti: PropTypes.string,
-    nickname: PropTypes.string,
-    updatedAt: PropTypes.string,
-  }),
 };
 
 export default UserProfileForm;

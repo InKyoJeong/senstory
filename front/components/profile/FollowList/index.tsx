@@ -1,34 +1,33 @@
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button, Avatar, List } from 'antd';
 import { StopOutlined } from '@ant-design/icons';
 
 import { useDispatch } from 'react-redux';
-
+import { unfollowRequest } from '../../../reducers/user/unfollow';
+import { removeFollowerRequest } from '../../../reducers/user/removeFollower';
+import { UserFollowList } from '../../../interfaces/user';
 import { ListWrapper, MoreButtonWrapper, FollowListWrapper, FollowInfoSection, FollowDelSection } from './styles';
-import { unfollowRequest, UNFOLLOW_REQUEST } from '../../../reducers/user/unfollow';
-import { removeFollowerRequest, REMOVE_FOLLOWER_REQUEST } from '../../../reducers/user/removeFollower';
 
-const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
+interface FollowListProps {
+  header: string;
+  data: UserFollowList[];
+  loading: boolean;
+  mutate: (prev: any) => void;
+  onClickMore: () => void;
+}
+
+const FollowList = ({ header, data, onClickMore, loading, mutate }: FollowListProps) => {
   const dispatch = useDispatch();
   const onCancel = useCallback(
     (id) => () => {
       if (header === '팔로잉') {
-        // dispatch({
-        //   type: UNFOLLOW_REQUEST,
-        //   data: id,
-        // });
         dispatch(unfollowRequest(id));
-        mutate((prev) => prev.filter((data) => data.id !== id));
+        mutate((prev: UserFollowList[]) => prev.filter((data) => data.id !== id));
       }
 
-      // dispatch({
-      //   type: REMOVE_FOLLOWER_REQUEST,
-      //   data: id,
-      // });
       dispatch(removeFollowerRequest(id));
-      mutate((prev) => prev.filter((data) => data.id !== id));
+      mutate((prev: UserFollowList[]) => prev.filter((data) => data.id !== id));
     },
     [],
   );
@@ -46,7 +45,7 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
       }
       bordered
       dataSource={data}
-      renderItem={(item) => (
+      renderItem={(item: any) => (
         <List.Item>
           <FollowListWrapper>
             <FollowInfoSection>
@@ -72,13 +71,6 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }) => {
       )}
     />
   );
-};
-
-FollowList.propTypes = {
-  header: PropTypes.string.isRequired,
-  // data: PropTypes.any.isRequired,
-  onClickMore: PropTypes.func.isRequired,
-  // loading: PropTypes.bool.isRequired,
 };
 
 export default FollowList;

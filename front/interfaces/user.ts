@@ -38,6 +38,16 @@ export interface User extends RandomUsers {
   Followings: UserFollowers[];
 }
 
+export interface UserInfo extends RandomUsers {
+  Posts: number;
+  Followers: number;
+  Followings: number;
+}
+
+export interface UserFollowList extends RandomUsers {
+  Follow: UserFollow;
+}
+
 export interface UserInitialState {
   loadMeLoading: boolean; // 내 정보 가져오기
   loadMeFinish: boolean;
