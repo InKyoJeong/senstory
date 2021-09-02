@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import { Button } from 'antd';
-import HideWrapper from '../../common/HideWrapper';
-import FeelChartBar from '../FeelChartBar';
 import { ChartWrapper, FeelSelectWrapper, SelectBtnWrapper, TotalDiary } from './styles';
 import { RootState } from '../../../reducers';
 import { Diary } from '../../../interfaces/diary';
+import HideWrapper from '../../common/HideWrapper/index';
+import FeelChartBar from '../FeelChartBar';
 
 interface FeelSelectProps {
   hide?: boolean;
