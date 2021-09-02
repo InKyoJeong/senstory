@@ -7,7 +7,7 @@ const Unfollow = css<{ unfollow: boolean }>`
   color: ${(props) => props.unfollow && '#d43578'};
 `;
 
-export const FollowButtonContainer = styled(Button)`
+export const FollowButtonContainer = styled(Button)<{ unfollow: boolean }>`
   background-color: ${({ theme }) => theme.color.BLACK};
   color: white;
   border-radius: 20px;
