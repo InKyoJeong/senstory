@@ -25,9 +25,10 @@ const AreaEditForm = () => {
     }
   }, [changeAreaFinish]);
 
-  if (area.length > 20) {
+  if (area.length > 10) {
     setArea(area.slice(0, 10));
-    return alert('최대 10자로 입력해주세요.');
+    alert('최대 10자로 입력해주세요.');
+    // return;
   }
 
   const onSubmit = useCallback(() => {

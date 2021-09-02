@@ -71,3 +71,5 @@ useRef에 있는 current 내에 값을 사용하기 위해선 null 체킹을 반
   }, [imageInput.current]);
 
 ``` -->
+
+<!-- 이런방법도있다  const enteredText = todoTextInputRef.current!.value; // not null -->

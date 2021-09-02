@@ -4,24 +4,26 @@ import { END } from 'redux-saga';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
-
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
-import Conditional from '../../hocs/Conditional';
 
+import Conditional from '../../hocs/Conditional';
 import Layout from '../../components/common/Layout';
 import PostCard from '../../components/post/PostCard';
 import UserProfileForm from '../../components/profile/UserProfileForm';
-import { loadUserAllPostRequest, LOAD_USER_ALL_POST_REQUEST } from '../../reducers/post/loadUserAllPost';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
-import { loadUserRequest, LOAD_USER_REQUEST } from '../../reducers/user/loadUser';
+import { loadUserAllPostRequest } from '../../reducers/post/loadUserAllPost';
+import { loadMeRequest } from '../../reducers/user/loadMe';
+import { loadUserRequest } from '../../reducers/user/loadUser';
+import { RootState } from '../../reducers';
 
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
-  const { repostError, mainPosts, hasMorePosts, loadUserAllPostLoading } = useSelector((state) => state.post);
-  const { userInfo } = useSelector((state) => state.user);
+  const { repostError, mainPosts, hasMorePosts, loadUserAllPostLoading } = useSelector(
+    (state: RootState) => state.post,
+  );
+  const { userInfo } = useSelector((state: RootState) => state.user);
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -33,12 +35,7 @@ const User = () => {
   useEffect(() => {
     if (inView && hasMorePosts && !loadUserAllPostLoading) {
       const lastId = mainPosts[mainPosts.length - 1]?.id;
-      // dispatch({
-      //   type: LOAD_USER_ALL_POST_REQUEST,
-      //   lastId,
-      //   data: id,
-      // });
-      dispatch(loadUserAllPostRequest(id, lastId));
+      dispatch(loadUserAllPostRequest(id as string, lastId));
     }
   }, [inView, hasMorePosts, loadUserAllPostLoading, mainPosts, id]);
 
@@ -66,7 +63,7 @@ const User = () => {
 
   return (
     <Layout>
-      <Conditional condition={userInfo}>
+      <Conditional condition={!!userInfo}>
         <Head>
           <title>{userInfo.nickname}님 | SenStory</title>
           <meta name="description" content={`${userInfo.nickname}님`} />
@@ -86,26 +83,15 @@ const User = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, params }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store): any => async ({ req, params }: any) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  // store.dispatch({
-  //   type: LOAD_USER_ALL_POST_REQUEST,
-  //   data: params.id,
-  // });
-  store.dispatch(loadUserAllPostRequest(params.id));
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
-  store.dispatch(loadMeRequest());
 
-  // store.dispatch({
-  //   type: LOAD_USER_REQUEST,
-  //   data: params.id,
-  // });
+  store.dispatch(loadUserAllPostRequest(params.id));
+  store.dispatch(loadMeRequest());
   store.dispatch(loadUserRequest(params.id));
   store.dispatch(END);
   await store.sagaTask.toPromise();

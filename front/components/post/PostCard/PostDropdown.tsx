@@ -14,7 +14,7 @@ const PostDropdown = ({ onRemovePost, removePostLoading, isRepost, onClickUpdate
   const menu = (
     <DropdownWrapper>
       {isRepost && (
-        <DropdownButton edit={true} type="primary" onClick={onClickUpdate}>
+        <DropdownButton edit="edit" type="primary" onClick={onClickUpdate}>
           수정
         </DropdownButton>
       )}

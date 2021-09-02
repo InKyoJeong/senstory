@@ -1,7 +1,7 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { Input } from "antd";
+import styled, { createGlobalStyle } from 'styled-components';
+import { Input } from 'antd';
 
-export const Global = createGlobalStyle`
+export const Global = createGlobalStyle<{ theme: any }>`
   body{
      background-color: ${({ theme }) => theme.color.BLACK};
    }

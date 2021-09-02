@@ -33,7 +33,7 @@ const NickEditForm = () => {
 
   if (nickname.length > 20) {
     setNickname(nickname.slice(0, 20));
-    return alert('닉네임은 최대 20자 입니다.');
+    alert('닉네임은 최대 20자 입니다.');
   }
 
   const onSubmit = useCallback(() => {

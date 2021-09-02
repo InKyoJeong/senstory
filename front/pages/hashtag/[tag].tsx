@@ -8,26 +8,23 @@ import wrapper from '../../store/configureStore';
 
 import PostCard from '../../components/post/PostCard';
 import Layout from '../../components/common/Layout';
-import { loadHashtagPostsRequest, LOAD_HASHTAG_POSTS_REQUEST } from '../../reducers/post/loadHashtagPosts';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../../reducers/user/loadMe';
-import { randomUserRequest, RANDOM_USER_REQUEST } from '../../reducers/user/randomUser';
+import { loadHashtagPostsRequest } from '../../reducers/post/loadHashtagPosts';
+import { loadMeRequest } from '../../reducers/user/loadMe';
+import { randomUserRequest } from '../../reducers/user/randomUser';
+import { RootState } from '../../reducers';
 
 const Hashtag = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { tag } = router.query;
-  const { mainPosts, hasMorePosts, loadHashtagPostsLoading } = useSelector((state) => state.post);
+  const { mainPosts, hasMorePosts, loadHashtagPostsLoading } = useSelector((state: RootState) => state.post);
   const [ref, inView] = useInView();
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadHashtagPostsLoading) {
       const lastId = mainPosts[mainPosts.length - 1]?.id;
-      // dispatch({
-      //   type: LOAD_HASHTAG_POSTS_REQUEST,
-      //   lastId,
-      //   data: tag,
-      // });
-      dispatch(loadHashtagPostsRequest(tag, lastId));
+
+      dispatch(loadHashtagPostsRequest(tag as string, lastId));
     }
   }, [inView, hasMorePosts, loadHashtagPostsLoading, mainPosts, tag]);
 
@@ -40,26 +37,16 @@ const Hashtag = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, params }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store): any => async ({ req, params }: any) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  // store.dispatch({
-  //   type: LOAD_HASHTAG_POSTS_REQUEST,
-  //   data: params.tag,
-  // });
-  store.dispatch(loadHashtagPostsRequest(params.tag));
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
-  store.dispatch(loadMeRequest());
-  // store.dispatch({
-  //   type: RANDOM_USER_REQUEST,
-  // });
-  store.dispatch(randomUserRequest());
 
+  store.dispatch(loadHashtagPostsRequest(params.tag));
+  store.dispatch(loadMeRequest());
+  store.dispatch(randomUserRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();
 });

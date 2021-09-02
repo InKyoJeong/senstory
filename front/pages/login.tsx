@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useSelector } from 'react-redux';
-import wrapper from '../store/configureStore';
 import axios from 'axios';
 import { END } from 'redux-saga';
+import wrapper from '../store/configureStore';
+import { loadMeRequest } from '../reducers/user/loadMe';
+import { RootState } from '../reducers';
+import { GetServerSideProps } from 'next';
 
 import LoginForm from '../components/user/LoginForm';
 import Layout from '../components/common/Layout';
 import Loader from '../components/common/Loader';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
 
 const Login = () => {
-  const { me, logInFinish, logInLoading, loginError } = useSelector((state) => state.user);
+  const { me, logInFinish, logInLoading, logInError } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (loginError) {
-      alert(loginError);
+    if (logInError) {
+      alert(logInError);
     }
-  }, [loginError]);
+  }, [logInError]);
 
   useEffect(() => {
     if (me && me.id) {
@@ -53,19 +55,19 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
-  const cookie = req ? req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
-  store.dispatch(loadMeRequest());
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+  (store): any =>
+    async ({ req }: any) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.Cookie = '';
+      if (req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+      }
 
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+      store.dispatch(loadMeRequest());
+      store.dispatch(END);
+      await store.sagaTask.toPromise();
+    },
+);
 
 export default Login;

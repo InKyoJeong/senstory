@@ -104,16 +104,16 @@ export const DropdownWrapper = styled.div`
   border-radius: 10px;
 `;
 
-export const DropdownButton = styled(Button)<{ edit?: boolean }>`
-  background-color: ${(props) => (props.edit ? '#1890FF' : '#eb7575')};
+export const DropdownButton = styled(Button)<{ edit?: string }>`
+  background-color: ${(props) => (props.edit === 'edit' ? '#1890FF' : '#eb7575')};
   color: white;
   margin: 5px 0px;
   border-radius: 10px;
   border-color: white;
 
   &:hover {
-    background-color: ${(props) => (props.edit ? '' : '#e89b9b')};
-    border-color: ${(props) => (props.edit ? '' : '#e89b9b')};
+    background-color: ${(props) => (props.edit === 'edit' ? '' : '#e89b9b')};
+    border-color: ${(props) => (props.edit === 'edit' ? '' : '#e89b9b')};
     color: white;
   }
 `;

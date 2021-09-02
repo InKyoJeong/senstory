@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'antd';
 import { RootState } from '../../../reducers';
+import { LogoTitleLeft, LogoTitleRight } from './styles';
 
 const Header = () => {
   const { me } = useSelector((state: RootState) => state.user);
@@ -26,20 +27,20 @@ const Header = () => {
     [],
   );
 
-  const logoTitleLeft = useMemo(
-    () => ({
-      color: '#1890FF',
-      fontWeight: 'bolder',
-    }),
-    [],
-  );
+  // const logoTitleLeft = useMemo(
+  //   () => ({
+  //     color: '#1890FF',
+  //     fontWeight: 'bolder',
+  //   }),
+  //   [],
+  // );
 
-  const logoTitleRight = useMemo(
-    () => ({
-      fontWeight: 'bolder',
-    }),
-    [],
-  );
+  // const logoTitleRight = useMemo(
+  //   () => ({
+  //     fontWeight: 'bolder',
+  //   }),
+  //   [],
+  // );
 
   const HeaderRightMargin = useMemo(() => ({ marginRight: 'auto' }), []);
 
@@ -52,7 +53,8 @@ const Header = () => {
             <Image src="/logo.png" alt="mainLogo" width="40" height="40" />
             <Link href="/">
               <a>
-                <i style={logoTitleLeft}>en</i>
+                {/* <i style={logoTitleLeft}>en</i> */}
+                <LogoTitleLeft>en</LogoTitleLeft>
               </a>
             </Link>
           </>
@@ -61,7 +63,8 @@ const Header = () => {
       >
         <Link href="/">
           <a>
-            <i style={logoTitleRight}>Story</i>
+            {/* <i style={logoTitleRight}>Story</i> */}
+            <LogoTitleRight>Story</LogoTitleRight>
           </a>
         </Link>
       </Menu.Item>

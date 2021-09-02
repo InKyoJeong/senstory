@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { END } from 'redux-saga';
+import axios from 'axios';
 import Router from 'next/router';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
 import { EditFilled } from '@ant-design/icons';
-
-import axios from 'axios';
 import wrapper from '../../../store/configureStore';
+import { loadUserDiarysRequest } from '../../../reducers/diary/loadUserDiarys';
+import { loadMeRequest } from '../../../reducers/user/loadMe';
+import { loadUserRequest } from '../../../reducers/user/loadUser';
+import { RootState } from '../../../reducers';
 
 import Conditional from '../../../hocs/Conditional';
 import Layout from '../../../components/common/Layout';
@@ -18,18 +21,15 @@ import DiaryWriteForm from '../../../components/diary/DiaryWriteForm';
 import DiaryBlock from '../../../components/diary/DiaryBlock';
 import DiaryBlockContainer from '../../../components/diary/DiaryBlockContainer';
 import FeelSelectForm from '../../../components/diary/FeelSelectForm';
-import { loadUserDiarysRequest, LOAD_USER_DIARYS_REQUEST } from '../../../reducers/diary/loadUserDiarys';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
-import { loadUserRequest, LOAD_USER_REQUEST } from '../../../reducers/user/loadUser';
 import DiaryEmpty from '../../../components/diary/DiaryEmpty';
 
 const Diary = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userId } = router.query;
-  const parseId = parseInt(userId, 10);
-  const { mainDiarys, hasMoreDiarys, loadUserDiarysLoading } = useSelector((state) => state.diary);
-  const { me } = useSelector((state) => state.user);
+  const parseId = parseInt(userId as string, 10);
+  const { mainDiarys, hasMoreDiarys, loadUserDiarysLoading } = useSelector((state: RootState) => state.diary);
+  const { me } = useSelector((state: RootState) => state.user);
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, inView] = useInView();
 
@@ -42,12 +42,7 @@ const Diary = () => {
   useEffect(() => {
     if (inView && hasMoreDiarys && !loadUserDiarysLoading) {
       const lastId = mainDiarys[mainDiarys.length - 1]?.id;
-      // dispatch({
-      //   type: LOAD_USER_DIARYS_REQUEST,
-      //   lastId,
-      //   data: userId,
-      // });
-      dispatch(loadUserDiarysRequest(userId, lastId));
+      dispatch(loadUserDiarysRequest(userId as string, lastId));
     }
   }, [inView, hasMoreDiarys, loadUserDiarysLoading, mainDiarys, userId]);
 
@@ -92,25 +87,15 @@ const Diary = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, params }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store): any => async ({ req, params }: any) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  // store.dispatch({
-  //   type: LOAD_USER_DIARYS_REQUEST,
-  //   data: params.userId,
-  // });
+
   store.dispatch(loadUserDiarysRequest(params.userId));
-  // store.dispatch({
-  //   type: LOAD_USER_REQUEST,
-  //   data: params.userId,
-  // });
   store.dispatch(loadUserRequest(params.userId));
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
   store.dispatch(loadMeRequest());
   store.dispatch(END);
   await store.sagaTask.toPromise();

@@ -11,10 +11,10 @@ import {
   UserInfoNick,
 } from './styles';
 import Conditional from '../../../hocs/Conditional';
-import { UserInfo } from '../../../interfaces/user';
+import { User, UserInfo } from '../../../interfaces/user';
 
 interface UserProfileProps {
-  userInfo: UserInfo;
+  userInfo: UserInfo | User;
 }
 
 const UserProfileForm = ({ userInfo }: UserProfileProps) => {

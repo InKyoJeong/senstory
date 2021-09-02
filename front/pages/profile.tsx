@@ -1,8 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Head from 'next/head';
-import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWR from 'swr';
+import Head from 'next/head';
+import Router from 'next/router';
+import wrapper from '../store/configureStore';
+import { END } from 'redux-saga';
+import axios from 'axios';
+import { loadMeRequest } from '../reducers/user/loadMe';
+import { randomUserRequest } from '../reducers/user/randomUser';
+import { RootState } from '../reducers';
+import { GetServerSideProps } from 'next';
 
 import Layout from '../components/common/Layout';
 import Loader from '../components/common/Loader';
@@ -14,16 +21,10 @@ import FollowList from '../components/profile/FollowList';
 import AreaEditForm from '../components/profile/AreaEditForm';
 import IntroEditForm from '../components/profile/IntroEditForm';
 
-import wrapper from '../store/configureStore';
-import { END } from 'redux-saga';
-import axios from 'axios';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
-import { randomUserRequest, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
-
-const fetcher = (url) => axios.get(url, { withCredentials: true }).then((result) => result.data);
+const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
 const Profile = () => {
-  const { me } = useSelector((state) => state.user);
+  const { me } = useSelector((state: RootState) => state.user);
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
@@ -93,22 +94,20 @@ const Profile = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
-  const cookie = req ? req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
-  store.dispatch(loadMeRequest());
-  // store.dispatch({
-  //   type: RANDOM_USER_REQUEST,
-  // });
-  store.dispatch(randomUserRequest());
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+  (store): any =>
+    async ({ req }: any) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.Cookie = '';
+      if (req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+      }
+
+      store.dispatch(loadMeRequest());
+      store.dispatch(randomUserRequest());
+      store.dispatch(END);
+      await store.sagaTask.toPromise();
+    },
+);
 
 export default Profile;

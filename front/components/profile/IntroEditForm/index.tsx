@@ -27,7 +27,7 @@ const IntroEditForm = () => {
 
   if (intro.length > 100) {
     setIntro(intro.slice(0, 100));
-    return alert('100자 이내로 입력해주세요.');
+    alert('100자 이내로 입력해주세요.');
   }
 
   const onSubmit = useCallback(() => {

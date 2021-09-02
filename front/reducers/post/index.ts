@@ -201,7 +201,10 @@ const reducer = (state: PostinitialState = initialState, action: PostReducerActi
       case UPDATE_POST_SUCCESS:
         draft.updatePostLoading = false;
         draft.updatePostFinish = true;
-        draft.mainPosts.find((v) => v.id === action.data.PostId).content = action.data.content;
+        let findPost = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        if (findPost) {
+          findPost.content = action.data.content;
+        }
         break;
       case UPDATE_POST_FAILURE:
         draft.updatePostLoading = false;
@@ -273,7 +276,7 @@ const reducer = (state: PostinitialState = initialState, action: PostReducerActi
           post.Likers = post.Likers.filter((v) => v.id !== action.data.UserId);
         }
         if (draft.singlePost?.Likers) {
-          const index = draft.singlePost.Likers.find((v) => v.id === action.data.UserId);
+          const index: any = draft.singlePost.Likers.find((v) => v.id === action.data.UserId);
           draft.singlePost.Likers.splice(index, 1);
         }
         draft.unlikePostLoading = false;

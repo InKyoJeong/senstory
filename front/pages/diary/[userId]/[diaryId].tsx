@@ -6,21 +6,24 @@ import Head from 'next/head';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import { END } from 'redux-saga';
+import { loadSingleDiaryRequest } from '../../../reducers/diary/loadSingleDiary';
+import { backToDiaryRequest } from '../../../reducers/diary/backToDiary';
+import { loadMeRequest } from '../../../reducers/user/loadMe';
+import { RootState } from '../../../reducers';
 
 import Layout from '../../../components/common/Layout';
 import Loader from '../../../components/common/Loader';
 import DiaryDetail from '../../../components/diary/DiaryDetail';
-import { loadSingleDiaryRequest, LOAD_SINGLE_DIARY_REQUEST } from '../../../reducers/diary/loadSingleDiary';
-import { backToDiaryRequest, BACK_TO_DIARY } from '../../../reducers/diary/backToDiary';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../../../reducers/user/loadMe';
 
 const DiaryDetailPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { diaryId, userId } = router.query;
-  const parseUserId = parseInt(userId, 10);
-  const { singleDiary, removeDiaryLoading, removeDiaryFinish, backTodiary } = useSelector((state) => state.diary);
-  const { me } = useSelector((state) => state.user);
+  const parseUserId = parseInt(userId as string, 10);
+  const { singleDiary, removeDiaryLoading, removeDiaryFinish, backTodiary } = useSelector(
+    (state: RootState) => state.diary,
+  );
+  const { me } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (!me?.id || parseUserId !== me?.id || !singleDiary?.id) {
@@ -39,9 +42,6 @@ const DiaryDetailPage = () => {
   }, [removeDiaryFinish]);
 
   const onBack = useCallback(() => {
-    // dispatch({
-    //   type: BACK_TO_DIARY,
-    // });
     dispatch(backToDiaryRequest());
   }, []);
 
@@ -65,20 +65,14 @@ const DiaryDetailPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req, params }) => {
+export const getServerSideProps = wrapper.getServerSideProps((store): any => async ({ req, params }: any) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
+
   store.dispatch(loadMeRequest());
-  // store.dispatch({
-  //   type: LOAD_SINGLE_DIARY_REQUEST,
-  //   data: params.diaryId,
-  // });
   store.dispatch(loadSingleDiaryRequest(params.diaryId));
   store.dispatch(END);
 

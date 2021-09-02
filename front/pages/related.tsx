@@ -1,24 +1,27 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+import axios from 'axios';
 import Router from 'next/router';
+import wrapper from '../store/configureStore';
+import { END } from 'redux-saga';
+import { loadMeRequest } from '../reducers/user/loadMe';
+import { randomUserRequest } from '../reducers/user/randomUser';
+import { loadRelatedPostRequest } from '../reducers/post/loadRelatedPost';
+import { RootState } from '../reducers';
+import { GetServerSideProps } from 'next';
 
 import Layout from '../components/common/Layout';
 import PostCard from '../components/post/PostCard';
-
-import wrapper from '../store/configureStore';
-import { END } from 'redux-saga';
-import axios from 'axios';
 import Loader from '../components/common/Loader';
-import { loadRelatedPostRequest } from '../reducers/post/loadRelatedPost';
 import Conditional from '../hocs/Conditional';
-import { loadMeRequest, LOAD_ME_REQUEST } from '../reducers/user/loadMe';
-import { randomUserRequest, RANDOM_USER_REQUEST } from '../reducers/user/randomUser';
 
 const Related = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
-  const { mainPosts, hasMorePosts, loadRelatedPostsLoading, repostError } = useSelector((state) => state.post);
+  const { me } = useSelector((state: RootState) => state.user);
+  const { mainPosts, hasMorePosts, loadRelatedPostsLoading, repostError } = useSelector(
+    (state: RootState) => state.post,
+  );
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -30,10 +33,7 @@ const Related = () => {
   useEffect(() => {
     if (inView && hasMorePosts && !loadRelatedPostsLoading) {
       const lastId = mainPosts[mainPosts.length - 1]?.id;
-      // dispatch({
-      //   type: LOAD_RELATED_POSTS_REQUEST,
-      //   lastId,
-      // });
+
       dispatch(loadRelatedPostRequest(lastId));
     }
   }, [inView, hasMorePosts, loadRelatedPostsLoading, mainPosts]);
@@ -71,28 +71,21 @@ const Related = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
-  const cookie = req ? req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  // store.dispatch({
-  //   type: LOAD_ME_REQUEST,
-  // });
-  store.dispatch(loadMeRequest());
-  // store.dispatch({
-  //   type: LOAD_RELATED_POSTS_REQUEST,
-  // });
-  store.dispatch(loadRelatedPostRequest());
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+  (store): any =>
+    async ({ req }: any) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.Cookie = '';
+      if (req && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+      }
 
-  // store.dispatch({
-  //   type: RANDOM_USER_REQUEST,
-  // });
-  store.dispatch(randomUserRequest());
-
-  store.dispatch(END);
-  await store.sagaTask.toPromise();
-});
+      store.dispatch(loadMeRequest());
+      store.dispatch(loadRelatedPostRequest());
+      store.dispatch(randomUserRequest());
+      store.dispatch(END);
+      await store.sagaTask.toPromise();
+    },
+);
 
 export default Related;
