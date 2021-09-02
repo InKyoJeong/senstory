@@ -264,7 +264,6 @@ function uploadImagesAPI(data: Image | FormData) {
 function* uploadImages(action: UploadImagesRequest): SagaIterator {
   try {
     const result = yield call(uploadImagesAPI, action.data);
-    console.log(result);
     yield put(uploadImagesSuccess(result.data));
   } catch (err: any) {
     console.error(err);

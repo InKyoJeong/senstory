@@ -1,14 +1,10 @@
 import { createWrapper } from 'next-redux-wrapper';
-import { applyMiddleware, compose, createStore, Store } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import createSagaMiddleware, { Task } from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 
-import reducer, { RootState } from '../reducers';
+import reducer from '../reducers';
 import rootSaga from '../sagas';
-
-// export interface SagaStore extends Store {
-//   sagaTask?: Task;
-// }
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
