@@ -54,3 +54,22 @@ Page                              Size     First Load JS
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
    (ISR)     incremental static regeneration (uses revalidate in getStaticProps) -->
+
+<!--
+### ts
+
+useRef에 있는 current 내에 값을 사용하기 위해선 null 체킹을 반드시 해주어야 한다.
+
+```js
+  const imageInput = useRef<HTMLInputElement>(null);
+
+  const onClickImageUpload = useCallback(() => {
+    if (!imageInput.current) {   // null check
+      return;
+    }
+    imageInput.current.click();
+  }, [imageInput.current]);
+
+``` -->
+
+<!-- 이런방법도있다  const enteredText = todoTextInputRef.current!.value; // not null -->
