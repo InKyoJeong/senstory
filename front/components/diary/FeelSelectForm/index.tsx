@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import { Button } from 'antd';
-import { ChartWrapper, FeelSelectWrapper, SelectBtnWrapper, TotalDiary } from './styles';
+import { ChartWrapper, FeelSelectWrapper, HideFeelForm, SelectBtnWrapper, TotalDiary } from './styles';
 import { RootState } from '../../../reducers';
 import { Diary } from '../../../interfaces/diary';
-import HideWrapper from '../../common/HideWrapper';
+// import HideWrapper from '../../common/HideWrapper';
 import FeelChartBar from '../FeelChartBar';
 
 interface FeelSelectProps {
@@ -26,7 +26,8 @@ const FeelSelectForm = ({ hide }: FeelSelectProps) => {
   const badLength = me.Diaries.filter((diary: Diary) => diary.feel === 'Bad').length;
 
   return (
-    <HideWrapper hide={hide}>
+    // <HideWrapper hide={hide}>
+    <HideFeelForm hide={hide}>
       <FeelSelectWrapper>
         <SelectBtnWrapper onClick={onSelect}>
           <Button>Special</Button>
@@ -44,7 +45,8 @@ const FeelSelectForm = ({ hide }: FeelSelectProps) => {
         <div></div>
         <TotalDiary>총 {me.Diaries.length}개</TotalDiary>
       </FeelSelectWrapper>
-    </HideWrapper>
+    </HideFeelForm>
+    // </HideWrapper>
   );
 };
 

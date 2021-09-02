@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FeelSelectWrapper = styled.div`
   display: grid;
@@ -63,9 +63,16 @@ export const ChartWrapper = styled.div`
 `;
 
 export const TotalDiary = styled.div`
-  color: "white";
+  color: 'white';
   opacity: 0.7;
   display: flex;
   justify-content: flex-end;
   font-size: 0.7rem;
+`;
+
+export const HideFeelForm = styled.div<{ hide?: boolean }>`
+  @media screen and (min-width: 992px) {
+    margin-top: 20px;
+    display: ${(props) => props.hide && 'none'};
+  }
 `;
