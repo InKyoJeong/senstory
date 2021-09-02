@@ -56,7 +56,7 @@ export interface Post {
   updatedAt: Date;
   Likers: PostLiker[];
   Repost: null | PostRepost;
-  Comments: Comment[];
+  Comments: PostComment[];
 }
 
 export interface PostinitialState {
