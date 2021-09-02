@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Card, Avatar, Form } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { CardWrapper, LogoutButton, MyInfoWrapper, AvatarWrapper } from './styles';
-import HideComponentWrapper from '../HideComponentWrapper';
+import HideWrapper from '../HideWrapper';
 import { logoutRequest } from '../../../reducers/user/logout';
 import { uploadAvatarRequest } from '../../../reducers/user/uploadAvatar';
 import { RootState } from '../../../reducers';
@@ -40,7 +40,7 @@ const MyProfileForm = ({ hide }: MyProfileFormProps) => {
   }, []);
 
   return (
-    <HideComponentWrapper hide={hide}>
+    <HideWrapper hide={hide}>
       <CardWrapper>
         <Card.Meta
           avatar={
@@ -94,7 +94,7 @@ const MyProfileForm = ({ hide }: MyProfileFormProps) => {
           </div>
         </MyInfoWrapper>
       </CardWrapper>
-    </HideComponentWrapper>
+    </HideWrapper>
   );
 };
 

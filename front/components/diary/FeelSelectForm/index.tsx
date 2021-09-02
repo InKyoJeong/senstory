@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { ChartWrapper, FeelSelectWrapper, SelectBtnWrapper, TotalDiary } from './styles';
 import { RootState } from '../../../reducers';
 import { Diary } from '../../../interfaces/diary';
-import HideComponentWrapper from '../../common/HideComponentWrapper';
+import HideWrapper from '../../common/HideWrapper';
 import FeelChartBar from '../FeelChartBar';
 
 interface FeelSelectProps {
@@ -26,7 +26,7 @@ const FeelSelectForm = ({ hide }: FeelSelectProps) => {
   const badLength = me.Diaries.filter((diary: Diary) => diary.feel === 'Bad').length;
 
   return (
-    <HideComponentWrapper hide={hide}>
+    <HideWrapper hide={hide}>
       <FeelSelectWrapper>
         <SelectBtnWrapper onClick={onSelect}>
           <Button>Special</Button>
@@ -44,7 +44,7 @@ const FeelSelectForm = ({ hide }: FeelSelectProps) => {
         <div></div>
         <TotalDiary>총 {me.Diaries.length}개</TotalDiary>
       </FeelSelectWrapper>
-    </HideComponentWrapper>
+    </HideWrapper>
   );
 };
 
