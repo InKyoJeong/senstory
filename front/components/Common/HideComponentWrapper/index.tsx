@@ -6,8 +6,8 @@ interface HideWrapperProps {
   hide?: boolean;
 }
 
-const HideWrapper = ({ hide, children }: HideWrapperProps) => {
+const HideComponentWrapper = ({ hide, children }: HideWrapperProps) => {
   return <HideForm hide={hide}>{children}</HideForm>;
 };
 
-export default HideWrapper;
+export default HideComponentWrapper;
