@@ -1,4 +1,4 @@
-import { Comment } from '../../interfaces/post';
+import { PostComment } from '../../interfaces/post';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
@@ -17,7 +17,7 @@ export interface AddCommentRequest {
 
 export interface AddCommentSuccess {
   type: typeof ADD_COMMENT_SUCCESS;
-  data: Comment;
+  data: PostComment;
 }
 
 export interface AddCommentFailure {
@@ -30,7 +30,7 @@ export const addCommentRequest = (data: CommentContent): AddCommentRequest => ({
   data,
 });
 
-export const addCommentSuccess = (data: Comment): AddCommentSuccess => ({
+export const addCommentSuccess = (data: PostComment): AddCommentSuccess => ({
   type: ADD_COMMENT_SUCCESS,
   data,
 });

@@ -64,8 +64,8 @@ const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
         const data = await response.json();
         setMaxtemp(Math.round(data.main.temp_max));
         setMintemp(Math.round(data.main.temp_min));
-      } catch (error) {
-        alert(error.message);
+      } catch (err) {
+        throw err;
       }
     },
     [maxtemp, mintemp],
