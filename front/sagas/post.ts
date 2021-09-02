@@ -7,7 +7,6 @@ import {
   LOAD_ALL_POST_REQUEST,
 } from '../reducers/post/loadAllPost';
 import {
-  LoadSinglePost,
   loadSinglePostFailure,
   LoadSinglePostRequest,
   loadSinglePostSuccess,
@@ -20,7 +19,6 @@ import {
   LOAD_USER_ALL_POST_REQUEST,
 } from '../reducers/post/loadUserAllPost';
 import {
-  LoadRelatedPost,
   loadRelatedPostFailure,
   LoadRelatedPostRequest,
   loadRelatedPostSuccess,
@@ -93,7 +91,7 @@ function* likePost(action: LikePostRequest): SagaIterator {
   try {
     const result = yield call(likePostAPI, action.data);
     yield put(likePostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(likePostFailure(err.response.data));
   }
@@ -107,7 +105,7 @@ function* unlikePost(action: UnlikePostRequest): SagaIterator {
   try {
     const result = yield call(unlikePostAPI, action.data);
     yield put(unlikePostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(unlikePostFailure(err.response.data));
   }
@@ -121,7 +119,7 @@ function* repost(action: RepostRequest): SagaIterator {
   try {
     const result = yield call(repostAPI, action.data);
     yield put(repostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(repostFailure(err.response.data));
   } finally {
@@ -137,7 +135,7 @@ function* loadPosts(action: LoadAllPostRequest): SagaIterator {
   try {
     const result = yield call(loadPostsAPI, action.lastId);
     yield put(loadAllPostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(loadAllPostFailure(err.response.data));
   }
@@ -151,7 +149,7 @@ function* loadRelatedPosts(action: LoadRelatedPostRequest): SagaIterator {
   try {
     const result = yield call(loadRelatedPostsAPI, action.lastId);
     yield put(loadRelatedPostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(loadRelatedPostFailure(err.response.data));
   }
@@ -165,7 +163,7 @@ function* loadPost(action: LoadSinglePostRequest): SagaIterator {
   try {
     const result = yield call(loadPostAPI, action.data);
     yield put(loadSinglePostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(loadSinglePostFailure(err.response.data));
   }
@@ -179,7 +177,7 @@ function* loadUserPosts(action: LoadUserAllPostRequest): SagaIterator {
   try {
     const result = yield call(loadUserPostsAPI, action.data, action.lastId);
     yield put(loadUserAllPostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(loadUserAllPostFailure(err.response.data));
   }
@@ -193,7 +191,7 @@ function* loadHashtagPosts(action: LoadHashtagPostsRequest): SagaIterator {
   try {
     const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
     yield put(loadHashtagPostsSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(loadHashtagPostsFailure(err.response.data));
   }
@@ -208,7 +206,7 @@ function* addPost(action: AddPostRequest): SagaIterator {
     const result = yield call(addPostAPI, action.data);
     yield put(addPostSuccess(result.data));
     yield put(addPostToMeRequest(result.data.id));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(addPostFailure(err.response.data));
   } finally {
@@ -225,7 +223,7 @@ function* removePost(action: RemovePostRequest): SagaIterator {
     const result = yield call(removePostAPI, action.data);
     yield put(removePostSuccess(result.data));
     yield put(removePostOfMeRequest(action.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(removePostFailure(err.response.data));
   }
@@ -239,7 +237,7 @@ function* updatePost(action: UpdatePostRequest): SagaIterator {
   try {
     const result = yield call(updatePostAPI, action.data);
     yield put(updatePostSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(updatePostFailure(err.response.data));
   }
@@ -253,7 +251,7 @@ function* addComment(action: AddCommentRequest): SagaIterator {
   try {
     const result = yield call(addCommentAPI, action.data);
     yield put(addCommentSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(addCommentFailure(err.response.data));
   }
@@ -268,7 +266,7 @@ function* uploadImages(action: UploadImagesRequest): SagaIterator {
     const result = yield call(uploadImagesAPI, action.data);
     console.log(result);
     yield put(uploadImagesSuccess(result.data));
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
     yield put(uploadImagesFailure(err.response.data));
   }

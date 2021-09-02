@@ -13,7 +13,7 @@ export interface RootState {
   user: UserInitialState;
 }
 
-const rootReducer = (state: RootState, action: AnyAction) => {
+const rootReducer = (state: RootState | undefined, action: AnyAction) => {
   switch (action.type) {
     case HYDRATE:
       console.log('HYDRATE: ', action);

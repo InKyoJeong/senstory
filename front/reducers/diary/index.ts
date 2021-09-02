@@ -1,8 +1,11 @@
 import { produce } from 'immer';
 import { DiaryInitialState } from '../../interfaces/diary';
 
-import { AddDiary, ADD_DIARY_ERROR_FINISH, ADD_DIARY_FAILURE, ADD_DIARY_REQUEST, ADD_DIARY_SUCCESS } from './addDiary';
 import { BackToDiary, BACK_TO_DIARY, BACK_TO_DIARY_FINISH } from './backToDiary';
+import { RemoveDiaryPhoto, REMOVE_DIARY_PHOTO } from './removeDiaryPhoto';
+import { AddDiary, ADD_DIARY_ERROR_FINISH, ADD_DIARY_FAILURE, ADD_DIARY_REQUEST, ADD_DIARY_SUCCESS } from './addDiary';
+import { RemoveDiary, REMOVE_DIARY_FAILURE, REMOVE_DIARY_REQUEST, REMOVE_DIARY_SUCCESS } from './removeDiary';
+import { UploadPhoto, UPLOAD_PHOTO_FAILURE, UPLOAD_PHOTO_REQUEST, UPLOAD_PHOTO_SUCCESS } from './uploadPhoto';
 import {
   LoadFeelDiarys,
   LOAD_FEEL_DIARYS_FAILURE,
@@ -21,9 +24,6 @@ import {
   LOAD_USER_DIARYS_REQUEST,
   LOAD_USER_DIARYS_SUCCESS,
 } from './loadUserDiarys';
-import { RemoveDiary, REMOVE_DIARY_FAILURE, REMOVE_DIARY_REQUEST, REMOVE_DIARY_SUCCESS } from './removeDiary';
-import { RemoveDiaryPhoto, REMOVE_DIARY_PHOTO } from './removeDiaryPhoto';
-import { UploadPhoto, UPLOAD_PHOTO_FAILURE, UPLOAD_PHOTO_REQUEST, UPLOAD_PHOTO_SUCCESS } from './uploadPhoto';
 
 export const initialState: DiaryInitialState = {
   mainDiarys: [],

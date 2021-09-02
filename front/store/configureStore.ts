@@ -6,9 +6,9 @@ import createSagaMiddleware, { Task } from 'redux-saga';
 import reducer, { RootState } from '../reducers';
 import rootSaga from '../sagas';
 
-export interface SagaStore extends Store {
-  sagaTask?: Task;
-}
+// export interface SagaStore extends Store {
+//   sagaTask?: Task;
+// }
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
@@ -18,11 +18,11 @@ const configureStore = () => {
       ? compose(applyMiddleware(...middlewares))
       : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
-  (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
+  store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };
 
-const wrapper = createWrapper<Store<RootState>>(configureStore, {
+const wrapper = createWrapper(configureStore, {
   debug: process.env.NODE_ENV === 'development',
 });
 
