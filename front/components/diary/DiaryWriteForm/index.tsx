@@ -37,9 +37,9 @@ const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
   const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } = useSelector((state: RootState) => state.diary);
   const [title, onChangeTitle, setTitle] = useInput('');
   const [content, onChangeContent, setContent] = useInput('');
-  const [feel, setFeel] = useState(null);
-  const [maxtemp, setMaxtemp] = useState(null);
-  const [mintemp, setMintemp] = useState(null);
+  const [feel, setFeel] = useState<string | null>(null);
+  const [maxtemp, setMaxtemp] = useState<any>(null);
+  const [mintemp, setMintemp] = useState<any>(null);
   const [geoError, setGeoError] = useState(false);
 
   useEffect(() => {

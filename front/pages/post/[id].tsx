@@ -11,6 +11,7 @@ import PostCard from '../../components/post/PostCard';
 import { loadSinglePostRequest } from '../../reducers/post/loadSinglePost';
 import { loadMeRequest } from '../../reducers/user/loadMe';
 import { RootState } from '../../reducers';
+import CustomError from '../../components/common/CustomError';
 
 const Post = () => {
   const router = useRouter();
@@ -22,6 +23,10 @@ const Post = () => {
       alert(repostError);
     }
   }, [repostError]);
+
+  if (!singlePost) {
+    return <CustomError errorContent="존재하지 않는 게시글 입니다." />;
+  }
 
   return (
     <Layout>

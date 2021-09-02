@@ -2,7 +2,7 @@ import React from 'react';
 import { ErrorIcon, ErrorPageWrapper } from './styles';
 
 interface CustomErrorProps {
-  errorTitle: string;
+  errorTitle?: string;
   errorContent: string;
 }
 

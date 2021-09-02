@@ -10,8 +10,8 @@ export interface DiaryContent {
   title: string;
   content: string;
   feel: string;
-  maxtemp: string | number;
-  mintemp: string | number;
+  maxtemp: string | number | null;
+  mintemp: string | number | null;
 }
 
 export interface AddDiaryRequest {
