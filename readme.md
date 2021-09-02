@@ -7,17 +7,7 @@
 
 ## 사용 기술
 
-- Front : reactjs(next), redux-saga
+- Front : react(next), redux-saga
 - Back : nodejs(express), sequelize
 
 ## 스크린샷
-
-<br>
-
-## 개발 이슈들 정리
-
-- [https://github.com/InKyoJeong/senstory/issues](https://github.com/InKyoJeong/senstory/issues)
-
-<br>
-
-## 느낀점

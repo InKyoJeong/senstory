@@ -13,7 +13,7 @@
 $ npm run dev
 ```
 
-## sequelize setting
+<!-- ## sequelize setting
 
 ```bash
 $ npx sequelize init
@@ -24,8 +24,8 @@ $ npx sequelize init
 ```bash
 $ npx sequelize db:create
 
-```
-
+``` -->
+<!--
 ## db 재생성
 
 ```js
@@ -35,7 +35,7 @@ db.sequelize
     console.log("db 연결성공");
   })
   .catch(console.error);
-```
+``` -->
 
 <br>
 

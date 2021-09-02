@@ -46,8 +46,10 @@ const UserProfileForm = ({ userInfo }: UserProfileProps) => {
 
             <div>
               <UserHalfTitle>MBTI</UserHalfTitle>
-              <div>{userInfo.mbti}</div>
-              <Conditional condition={userInfo.mbti === ''}>
+              <Conditional condition={userInfo.mbti !== 'x'}>
+                <div>{userInfo.mbti}</div>
+              </Conditional>
+              <Conditional condition={userInfo.mbti === 'x'}>
                 <span>등록중</span>
               </Conditional>
             </div>
