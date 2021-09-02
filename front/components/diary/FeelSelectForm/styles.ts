@@ -69,10 +69,3 @@ export const TotalDiary = styled.div`
   justify-content: flex-end;
   font-size: 0.7rem;
 `;
-
-export const HideFeelForm = styled.div<{ hide?: boolean }>`
-  @media screen and (min-width: 992px) {
-    margin-top: 20px;
-    display: ${(props) => props.hide && 'none'};
-  }
-`;
