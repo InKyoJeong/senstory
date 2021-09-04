@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: ["http://localhost:3060", "senstory.com", "http://3.34.132.251"],
+    origin: ["http://localhost:3060", "senstory.com", "http://13.125.188.1"],
     credentials: true,
   })
 );
