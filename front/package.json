@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next -p 3060",
-    "build": "cross-env ANALYZE=true NODE_ENV=production next build",
+    "build": "cross-env ANALYZE=true NODE_ENV=production --max_old_space_size=4096 next build",
     "start": "cross-env NODE_ENV=production next start -p 80"
   },
   "author": "Inkyo",
