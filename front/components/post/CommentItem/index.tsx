@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { fromNow } from '../../../utils';
 import { CommentAuthor, CommentDate } from './styles';
 import { PostComment } from '../../../interfaces/post';
+import { backUrl } from '../../../config/config';
 
 interface CommentItemProps {
   item: PostComment;
@@ -18,7 +19,7 @@ const CommentItem = ({ item }: CommentItemProps) => {
           <Link href={`/user/${item.User.id}`}>
             <a>
               {item.User.avatar ? (
-                <Avatar src={`http://localhost:3065/${item.User.avatar}`} />
+                <Avatar src={`${backUrl}/${item.User.avatar}`} />
               ) : (
                 <Avatar>{item.User.nickname[0]}</Avatar>
               )}

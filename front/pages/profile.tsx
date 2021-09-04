@@ -20,6 +20,7 @@ import MbtiEditForm from '../components/profile/MbtiEditForm';
 import FollowList from '../components/profile/FollowList';
 import AreaEditForm from '../components/profile/AreaEditForm';
 import IntroEditForm from '../components/profile/IntroEditForm';
+import { backUrl } from '../config/config';
 
 const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
@@ -32,13 +33,13 @@ const Profile = () => {
     data: followerData,
     error: followerError,
     mutate: mutateFollower,
-  } = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  } = useSWR(`${backUrl}/user/followers?limit=${followerLimit}`, fetcher);
 
   const {
     data: followingData,
     error: followingError,
     mutate: mutateFollowing,
-  } = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
+  } = useSWR(`${backUrl}/user/followings?limit=${followingLimit}`, fetcher);
 
   useEffect(() => {
     if (!(me && me.id)) {

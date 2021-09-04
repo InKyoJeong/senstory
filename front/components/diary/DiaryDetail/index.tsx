@@ -23,6 +23,7 @@ import {
   DiaryTempWrapper,
 } from './styles';
 import { Diary } from '../../../interfaces/diary';
+import { backUrl } from '../../../config/config';
 
 interface DiaryDetailProps {
   diary: Diary;
@@ -76,7 +77,7 @@ const DiaryDetail = ({ diary, onBack }: DiaryDetailProps) => {
                 <Image src="/clip.png" alt="clip" width="80" height="100" />
               </DiaryImgClip>
               <DiaryImgFrame>
-                <img src={`http://localhost:3065/${diary.Photos[0].src}`} />
+                <img src={`${backUrl}/${diary.Photos[0].src}`} />
               </DiaryImgFrame>
             </DiaryImgWrapper>
           )}
