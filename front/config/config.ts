@@ -1,1 +1,1 @@
-export const backUrl = 'http://52.79.159.67';
+export const backUrl = 'http://api.senstory.kr';

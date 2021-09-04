@@ -9,7 +9,7 @@ exports.modules = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "T": () => (/* binding */ backUrl)
 /* harmony export */ });
-const backUrl = 'http://52.79.159.67';
+const backUrl = 'http://api.senstory.kr';
 
 /***/ }),
 

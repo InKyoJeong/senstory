@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: ["http://localhost:3060", "senstory.com", "http://13.125.188.1"],
+    origin: ["http://localhost:3060", "http://senstory.kr"],
     credentials: true,
   })
 );
@@ -57,6 +57,11 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      domain: process.env.NODE_ENV === "production" && ".senstory.kr",
+    },
   })
 );
 app.use(passport.initialize());
