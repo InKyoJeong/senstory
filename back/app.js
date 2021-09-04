@@ -17,6 +17,8 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
+const hpp = require("hpp");
+const helmet = require("helmet");
 
 dotenv.config();
 const app = express();
@@ -31,10 +33,17 @@ db.sequelize
 
 passportConfig();
 
-app.use(morgan("dev"));
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan("dev"));
+}
+
 app.use(
   cors({
-    origin: true, //http://localhost:3060
+    origin: ["http://localhost:3060", "senstory.com"],
     credentials: true,
   })
 );
@@ -66,6 +75,6 @@ app.use("/diarys", diarysRouter);
 app.use("/diary", diaryRouter);
 app.use("/feel", feelRouter);
 
-app.listen(3065, () => {
+app.listen(80, () => {
   console.log("서버 실행중");
 });
