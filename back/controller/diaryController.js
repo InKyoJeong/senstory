@@ -58,7 +58,7 @@ module.exports.getDiary = async (req, res, next) => {
 
 module.exports.postAddPhotos = (req, res, next) => {
   // console.log(req.files);
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location));
 };
 
 module.exports.deleteDiary = async (req, res, next) => {
