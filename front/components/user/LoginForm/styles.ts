@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form, Button, Input } from "antd";
+import styled from 'styled-components';
+import { Form, Button, Input } from 'antd';
 
 export const FormWrapper = styled(Form)`
   margin: 0px 20px;
@@ -23,15 +23,4 @@ export const InputWrapper = styled.div`
   & label {
     color: white;
   }
-`;
-
-export const ButtonWrapper = styled.div`
-  margin-top: 20px;
-`;
-
-export const LoginButton = styled(Button)`
-  width: 100%;
-  height: 40px;
-  border-radius: 10px;
-  margin-top: 5px;
 `;

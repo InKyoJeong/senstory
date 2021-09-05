@@ -24,15 +24,3 @@ export const SignUpInput = styled(Input)<any>`
   border-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
 `;
-
-export const ButtonWrapper = styled.div<{ isValid: boolean }>`
-  margin-top: 20px;
-
-  & Button {
-    border-radius: 10px;
-    width: 100%;
-    height: 40px;
-    background-color: ${(props) => props.isValid || props.theme.color.INVALID};
-    border-color: ${(props) => props.isValid || props.theme.color.INVALID};
-  }
-`;

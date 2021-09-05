@@ -42,6 +42,7 @@ import {
 } from './styles';
 import { RootState } from '../../../reducers';
 import { Post } from '../../../interfaces/post';
+import { backUrl } from '../../../config/config';
 
 interface PostCardProps {
   post: Post;
@@ -122,7 +123,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
               <Link href={`/user/${post.User.id}`}>
                 <a>
                   {post.User.avatar ? (
-                    <Avatar src={`http://localhost:3065/${post.User.avatar}`} />
+                    <Avatar src={`${backUrl}/${post.User.avatar}`} />
                   ) : (
                     <Avatar>{post.User.nickname[0]}</Avatar>
                   )}
@@ -178,7 +179,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
                   <Link href={`/user/${post.Repost.User.id}`}>
                     <a>
                       {post.Repost.User.avatar ? (
-                        <Avatar src={`http://localhost:3065/${post.Repost.User.avatar}`} />
+                        <Avatar src={`${backUrl}/${post.Repost.User.avatar}`} />
                       ) : (
                         <Avatar>{post.User.nickname[0]}</Avatar>
                       )}
@@ -203,7 +204,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
               <Link href={`/user/${post.User.id}`}>
                 <a>
                   {post.User.avatar ? (
-                    <Avatar src={`http://localhost:3065/${post.User.avatar}`} />
+                    <Avatar src={`${backUrl}/${post.User.avatar}`} />
                   ) : (
                     <Avatar>{post.User.nickname[0]}</Avatar>
                   )}

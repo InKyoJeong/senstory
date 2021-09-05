@@ -14,13 +14,7 @@ import Layout from '../components/common/Layout';
 import Loader from '../components/common/Loader';
 
 const Login = () => {
-  const { me, logInFinish, logInLoading, logInError } = useSelector((state: RootState) => state.user);
-
-  useEffect(() => {
-    if (logInError) {
-      alert(logInError);
-    }
-  }, [logInError]);
+  const { me, logInFinish, logInLoading } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (me && me.id) {

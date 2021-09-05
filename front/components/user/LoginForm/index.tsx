@@ -1,23 +1,29 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../reducers';
 import { loginRequest } from '../../../reducers/user/login';
 import useInput from '../../../hooks/useInput';
 import MiniTitle from '../../common/MiniTitle';
-import { FormWrapper, ButtonWrapper, LoginButton, LoginInput, InputWrapper } from './styles';
+import { FormWrapper, LoginInput, InputWrapper } from './styles';
+import FormButton from '../FormButton';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { logInLoading, logInError } = useSelector((state: RootState) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
     if (logInError) {
       alert(logInError);
     }
   }, [logInError]);
+
+  useEffect(() => {
+    setIsValid(email.length != 0 && password.length != 0);
+  }, [email, password]);
 
   const onSubmitForm = useCallback(() => {
     dispatch(loginRequest({ email, password }));
@@ -49,11 +55,7 @@ const LoginForm = () => {
         </div>
       </InputWrapper>
 
-      <ButtonWrapper>
-        <LoginButton type="primary" htmlType="submit" loading={logInLoading}>
-          로그인
-        </LoginButton>
-      </ButtonWrapper>
+      <FormButton buttonText="로그인" loading={logInLoading} isValid={isValid} />
     </FormWrapper>
   );
 };

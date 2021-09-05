@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'antd';
 import useInput from '../../../hooks/useInput';
 import Conditional from '../../../hocs/Conditional';
 import MiniTitle from '../../common/MiniTitle';
 import { signupRequest } from '../../../reducers/user/signup';
 import { RootState } from '../../../reducers';
-import { ErrorMessage, ButtonWrapper, SignUpInput, InputWrapper, SignUpFormWrapper } from './styles';
+import { ErrorMessage, SignUpInput, InputWrapper, SignUpFormWrapper } from './styles';
+import FormButton from '../FormButton';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -87,11 +87,7 @@ const SignUpForm = () => {
         </Conditional>
       </InputWrapper>
 
-      <ButtonWrapper isValid={isValid}>
-        <Button type="primary" htmlType="submit" loading={signUpLoading}>
-          가입하기
-        </Button>
-      </ButtonWrapper>
+      <FormButton buttonText="가입하기" loading={signUpLoading} isValid={isValid} />
     </SignUpFormWrapper>
   );
 };
