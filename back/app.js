@@ -34,12 +34,13 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet());
   app.use(
     cors({
-      origin: "http://senstory.kr",
+      origin: "https://senstory.kr",
       credentials: true,
     })
   );
@@ -62,9 +63,10 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
+    proxy: true,
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: true,
       domain: process.env.NODE_ENV === "production" && ".senstory.kr",
     },
   })
@@ -85,6 +87,6 @@ app.use("/diarys", diarysRouter);
 app.use("/diary", diaryRouter);
 app.use("/feel", feelRouter);
 
-app.listen(3065, () => {
+app.listen(80, () => {
   console.log("서버 실행중");
 });
