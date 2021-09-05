@@ -18,6 +18,7 @@ interface UserProfileProps {
 }
 
 const UserProfileForm = ({ userInfo }: UserProfileProps) => {
+  console.log(userInfo);
   return (
     <>
       <UserHeader>{userInfo.nickname}님의 프로필</UserHeader>
@@ -33,7 +34,7 @@ const UserProfileForm = ({ userInfo }: UserProfileProps) => {
             <div>
               <UserHalfTitle>활동 지역</UserHalfTitle>
               <div>{userInfo.area}</div>
-              <Conditional condition={userInfo.area === ''}>
+              <Conditional condition={userInfo.area === '' || userInfo.area === null}>
                 <span>등록중</span>
               </Conditional>
             </div>
@@ -43,7 +44,7 @@ const UserProfileForm = ({ userInfo }: UserProfileProps) => {
               <Conditional condition={userInfo.mbti !== 'x'}>
                 <div>{userInfo.mbti}</div>
               </Conditional>
-              <Conditional condition={userInfo.mbti === 'x'}>
+              <Conditional condition={userInfo.mbti === '' || userInfo.mbti === null}>
                 <span>등록중</span>
               </Conditional>
             </div>
@@ -52,8 +53,8 @@ const UserProfileForm = ({ userInfo }: UserProfileProps) => {
           <div>
             <UserIntroTitle>소개</UserIntroTitle>
             <div>{userInfo.intro}</div>
-            <Conditional condition={userInfo.intro === ''}>
-              <span>등록중</span>
+            <Conditional condition={userInfo.intro === '' || userInfo.intro === null}>
+              <span>등록된 소개가 없습니다.</span>
             </Conditional>
           </div>
         </UserIntroWrapper>

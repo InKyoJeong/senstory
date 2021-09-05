@@ -89,7 +89,7 @@ const PostWriteForm = () => {
       <ImagesWrapper>
         {imagePaths.map((v, i) => (
           <div key={v}>
-            <img src={v} alt={v} />
+            <img src={v.replace(/\/thumb\//, '/original/')} alt={v} />
             <ImageDeleteBtn onClick={onRemoveImage(i)} />
           </div>
         ))}

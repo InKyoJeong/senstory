@@ -61,7 +61,7 @@ module.exports.postAddPost = async (req, res, next) => {
 
 module.exports.postImages = (req, res, next) => {
   // console.log(req.files);
-  res.json(req.files.map((v) => v.location));
+  res.json(req.files.map((v) => v.location.replace(/\/original\//, "/thumb/")));
 };
 
 module.exports.getPost = async (req, res, next) => {
