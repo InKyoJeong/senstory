@@ -25,3 +25,21 @@ export const InputWrapper = styled.div`
     color: white;
   }
 `;
+
+export const TestButton = styled(Button)`
+  background-color: ${({ theme }) => theme.color.INVALID};
+  color: white;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+
+  &:hover {
+    background-color: #779bbf;
+    color: white;
+  }
+`;

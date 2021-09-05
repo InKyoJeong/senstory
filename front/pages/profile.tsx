@@ -12,7 +12,6 @@ import { RootState } from '../reducers';
 import { GetServerSideProps } from 'next';
 
 import Layout from '../components/common/Layout';
-import Loader from '../components/common/Loader';
 import MyProfileForm from '../components/common/MyProfileForm';
 import CustomError from '../components/common/CustomError';
 import NickEditForm from '../components/profile/NickEditForm';
@@ -55,9 +54,9 @@ const Profile = () => {
     setFollowerLimit((prev) => prev + 3);
   }, []);
 
-  if (!me) {
-    return <Loader text="로그인 페이지로 이동중..." />;
-  }
+  // if (!me) {
+  //   return <Loader text="로그인 페이지로 이동중..." />;
+  // }
 
   if (followerError || followingError) {
     console.error(followerError || followingError);

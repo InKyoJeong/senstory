@@ -3,23 +3,35 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../reducers';
 import { loginRequest } from '../../../reducers/user/login';
-import useInput from '../../../hooks/useInput';
 import MiniTitle from '../../common/MiniTitle';
-import { FormWrapper, LoginInput, InputWrapper } from './styles';
+import { FormWrapper, LoginInput, InputWrapper, TestButton } from './styles';
 import FormButton from '../FormButton';
+import { Button } from 'antd';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { logInLoading, logInError } = useSelector((state: RootState) => state.user);
-  const [email, onChangeEmail] = useInput('');
-  const [password, onChangePassword] = useInput('');
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  }, []);
 
   useEffect(() => {
     if (logInError) {
       alert(logInError);
     }
   }, [logInError]);
+
+  const onClickTest = useCallback(() => {
+    setEmail('testy@test.com');
+    setPassword('testemailpassword');
+  }, []);
 
   const onSubmitForm = useCallback(() => {
     dispatch(loginRequest({ email, password }));
@@ -52,6 +64,10 @@ const LoginForm = () => {
       </InputWrapper>
 
       <FormButton buttonText="로그인" loading={logInLoading} />
+
+      <TestButton onClick={onClickTest} type="default" htmlType="submit">
+        테스트 계정으로 로그인
+      </TestButton>
     </FormWrapper>
   );
 };
