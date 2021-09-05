@@ -12,7 +12,6 @@ import {
 } from './styles';
 import Conditional from '../../../hocs/Conditional';
 import { User, UserInfo } from '../../../interfaces/user';
-import { backUrl } from '../../../config/config';
 
 interface UserProfileProps {
   userInfo: UserInfo | User;
@@ -25,9 +24,7 @@ const UserProfileForm = ({ userInfo }: UserProfileProps) => {
 
       <UserProfileWrapper>
         <Card.Meta
-          avatar={
-            userInfo.avatar ? <Avatar src={`${backUrl}/${userInfo.avatar}`} /> : <Avatar>{userInfo.nickname[0]}</Avatar>
-          }
+          avatar={userInfo.avatar ? <Avatar src={`${userInfo.avatar}`} /> : <Avatar>{userInfo.nickname[0]}</Avatar>}
           title={<UserInfoNick>{userInfo.nickname}</UserInfoNick>}
         />
 

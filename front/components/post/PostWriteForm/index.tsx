@@ -15,7 +15,6 @@ import { addPostRequest } from '../../../reducers/post/addPost';
 import { uploadImagesRequest } from '../../../reducers/post/uploadImages';
 import { removeImageRequest } from '../../../reducers/post/removeImage';
 import { RootState } from '../../../reducers';
-import { backUrl } from '../../../config/config';
 
 const PostWriteForm = () => {
   const dispatch = useDispatch();
@@ -90,7 +89,7 @@ const PostWriteForm = () => {
       <ImagesWrapper>
         {imagePaths.map((v, i) => (
           <div key={v}>
-            <img src={`${backUrl}/${v}`} alt={v} />
+            <img src={v} alt={v} />
             <ImageDeleteBtn onClick={onRemoveImage(i)} />
           </div>
         ))}

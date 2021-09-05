@@ -25,7 +25,6 @@ import {
   TempWriteWrapper,
 } from './styles';
 import { RootState } from '../../../reducers';
-import { backUrl } from '../../../config/config';
 
 const WEATHER_API_KEY = '754396fc47cf98139cb846496c61d15d';
 
@@ -209,7 +208,7 @@ const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
             <PhotoDisplay>
               {photoPaths.map((v, i) => (
                 <div key={v}>
-                  <img src={`${backUrl}/${v}`} alt={v} />
+                  <img src={`${v}`} alt={v} />
                   <PhotoDeleteBtn onClick={() => onResetContents(i)} />
                 </div>
               ))}

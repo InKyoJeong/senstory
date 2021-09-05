@@ -8,7 +8,6 @@ import HideWrapper from '../HideWrapper';
 import { logoutRequest } from '../../../reducers/user/logout';
 import { uploadAvatarRequest } from '../../../reducers/user/uploadAvatar';
 import { RootState } from '../../../reducers';
-import { backUrl } from '../../../config/config';
 
 interface MyProfileFormProps {
   hide?: boolean;
@@ -47,7 +46,7 @@ const MyProfileForm = ({ hide }: MyProfileFormProps) => {
           avatar={
             <AvatarWrapper>
               <Link href={`/user/${me.id}`}>
-                <a>{me.avatar ? <Avatar src={`${backUrl}/${me.avatar}`} /> : <Avatar icon={<UserOutlined />} />}</a>
+                <a>{me.avatar ? <Avatar src={`${me.avatar}`} /> : <Avatar icon={<UserOutlined />} />}</a>
               </Link>
               <Form encType="multipart/form-data">
                 <input type="file" name="image" hidden ref={avatarInput} onChange={onChangeAvatar} />

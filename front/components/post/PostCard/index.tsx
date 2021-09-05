@@ -42,7 +42,7 @@ import {
 } from './styles';
 import { RootState } from '../../../reducers';
 import { Post } from '../../../interfaces/post';
-import { backUrl, frontUrl } from '../../../config/config';
+import { frontUrl } from '../../../config/config';
 
 interface PostCardProps {
   post: Post;
@@ -122,11 +122,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
             <div>
               <Link href={`/user/${post.User.id}`}>
                 <a>
-                  {post.User.avatar ? (
-                    <Avatar src={`${backUrl}/${post.User.avatar}`} />
-                  ) : (
-                    <Avatar>{post.User.nickname[0]}</Avatar>
-                  )}
+                  {post.User.avatar ? <Avatar src={`${post.User.avatar}`} /> : <Avatar>{post.User.nickname[0]}</Avatar>}
                 </a>
               </Link>
               <RepostTitle>{post.User.nickname}님이 공유했습니다.</RepostTitle>
@@ -179,7 +175,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
                   <Link href={`/user/${post.Repost.User.id}`}>
                     <a>
                       {post.Repost.User.avatar ? (
-                        <Avatar src={`${backUrl}/${post.Repost.User.avatar}`} />
+                        <Avatar src={`${post.Repost.User.avatar}`} />
                       ) : (
                         <Avatar>{post.User.nickname[0]}</Avatar>
                       )}
@@ -203,11 +199,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
             avatar={
               <Link href={`/user/${post.User.id}`}>
                 <a>
-                  {post.User.avatar ? (
-                    <Avatar src={`${backUrl}/${post.User.avatar}`} />
-                  ) : (
-                    <Avatar>{post.User.nickname[0]}</Avatar>
-                  )}
+                  {post.User.avatar ? <Avatar src={`${post.User.avatar}`} /> : <Avatar>{post.User.nickname[0]}</Avatar>}
                 </a>
               </Link>
             }

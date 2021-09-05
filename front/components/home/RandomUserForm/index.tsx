@@ -6,7 +6,6 @@ import { TeamOutlined } from '@ant-design/icons';
 import FollowButton from '../../common/FollowButton';
 import { RandomUserWrapper, RandomTitle, UserItem, RandomUsers, UserItemWrapper } from './styles';
 import { RootState } from '../../../reducers';
-import { backUrl } from '../../../config/config';
 
 const RandomUserForm = () => {
   const { randomUsers } = useSelector((state: RootState) => state.user);
@@ -23,9 +22,7 @@ const RandomUserForm = () => {
           <UserItemWrapper key={user.id}>
             <UserItem>
               <Link href={`/user/${user.id}`}>
-                <a>
-                  {user.avatar ? <Avatar src={`${backUrl}/${user.avatar}`} /> : <Avatar>{user.nickname[0]}</Avatar>}
-                </a>
+                <a>{user.avatar ? <Avatar src={`${user.avatar}`} /> : <Avatar>{user.nickname[0]}</Avatar>}</a>
               </Link>
               <div>{user.nickname}</div>
             </UserItem>

@@ -3,7 +3,6 @@ import Slick from 'react-slick';
 
 import { Overlay, Global, CloseBtn, ImageWrapper, Indicator, SlickWrapper } from './styles';
 import { PostImage } from '../../../interfaces/post';
-import { backUrl } from '../../../config/config';
 
 interface ImageZoomProps {
   images: PostImage[];
@@ -31,7 +30,7 @@ const ImagesZoom = ({ images, onClose }: ImageZoomProps) => {
           >
             {images.map((v) => (
               <ImageWrapper key={v.src}>
-                <img src={`${backUrl}/${v.src}`} alt={v.src} />
+                <img src={`${v.src}`} alt={v.src} />
               </ImageWrapper>
             ))}
           </Slick>

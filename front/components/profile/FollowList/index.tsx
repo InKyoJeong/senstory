@@ -8,7 +8,6 @@ import { unfollowRequest } from '../../../reducers/user/unfollow';
 import { removeFollowerRequest } from '../../../reducers/user/removeFollower';
 import { UserFollowList } from '../../../interfaces/user';
 import { ListWrapper, MoreButtonWrapper, FollowListWrapper, FollowInfoSection, FollowDelSection } from './styles';
-import { backUrl } from '../../../config/config';
 
 interface FollowListProps {
   header: string;
@@ -52,9 +51,7 @@ const FollowList = ({ header, data, onClickMore, loading, mutate }: FollowListPr
             <FollowInfoSection>
               <div>
                 <Link href={`/user/${item.id}`}>
-                  <a>
-                    {item.avatar ? <Avatar src={`${backUrl}/${item.avatar}`} /> : <Avatar>{item.nickname[0]}</Avatar>}
-                  </a>
+                  <a>{item.avatar ? <Avatar src={`${item.avatar}`} /> : <Avatar>{item.nickname[0]}</Avatar>}</a>
                 </Link>
               </div>
               <div>{item.nickname}</div>
