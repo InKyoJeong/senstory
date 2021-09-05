@@ -102,7 +102,7 @@ const LoginForm = () => {
     setEmail(e.target.value);
   }, []);
   const onChangePassword = (0,external_react_.useCallback)(e => {
-    setEmail(e.target.value);
+    setPassword(e.target.value);
   }, []);
   (0,external_react_.useEffect)(() => {
     if (logInError) {

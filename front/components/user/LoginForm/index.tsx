@@ -18,7 +18,7 @@ const LoginForm = () => {
   }, []);
 
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setPassword(e.target.value);
   }, []);
 
   useEffect(() => {
