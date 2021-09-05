@@ -35,7 +35,9 @@ interface DiaryWriteFormProps {
 
 const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
   const dispatch = useDispatch();
-  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError } = useSelector((state: RootState) => state.diary);
+  const { photoPaths, addDiaryLoading, addDiaryFinish, addDiaryError, uploadPhotosLoading } = useSelector(
+    (state: RootState) => state.diary,
+  );
   const [title, onChangeTitle, setTitle] = useInput('');
   const [content, onChangeContent, setContent] = useInput('');
   const [feel, setFeel] = useState<string | null>(null);
@@ -218,7 +220,7 @@ const DiaryWriteForm = ({ closeModal }: DiaryWriteFormProps) => {
               <Conditional condition={photoPaths.length === 0}>
                 <PhotoBorder onClick={onClickImageUpload}>
                   <div>+</div>
-                  <div>사진 추가</div>
+                  {uploadPhotosLoading ? <div>로딩중..</div> : <div>사진 추가</div>}
                 </PhotoBorder>
               </Conditional>
             </PhotoEnrollWrapper>

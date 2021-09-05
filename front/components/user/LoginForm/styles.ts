@@ -15,6 +15,7 @@ export const LoginInput = styled(Input)`
   color: white;
   border-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
+  font-size: 16px;
 `;
 
 export const InputWrapper = styled.div`

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Form, Button, Input } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import styled from 'styled-components';
+import { Form, Button, Input } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 export const FormWrapper = styled(Form)`
   background-color: ${({ theme }) => theme.color.DARK_GRAY};
@@ -11,6 +11,7 @@ export const FormWrapper = styled(Form)`
 `;
 
 export const PostWriteInput = styled(Input.TextArea)`
+  font-size: 16px;
   margin-bottom: 8px;
   background-color: ${({ theme }) => theme.color.LIGHT_GRAY};
   border-color: ${({ theme }) => theme.color.LIGHT_GRAY};

@@ -3,14 +3,13 @@ import { ButtonWrapper, FormBtn } from './styles';
 
 interface FormBtnProps {
   loading: boolean;
-  isValid: boolean;
   buttonText: string;
 }
 
-const FormButton = ({ loading, isValid, buttonText }: FormBtnProps) => {
+const FormButton = ({ loading, buttonText }: FormBtnProps) => {
   return (
     <ButtonWrapper>
-      <FormBtn type="primary" htmlType="submit" loading={loading} isValid={isValid}>
+      <FormBtn type="primary" htmlType="submit" loading={loading}>
         {buttonText}
       </FormBtn>
     </ButtonWrapper>

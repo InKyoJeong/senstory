@@ -41,6 +41,7 @@ const IntroEditForm = () => {
       borderColor: 'gray',
       color: 'white',
       borderRadius: 10,
+      fontSize: 16,
     }),
     [],
   );

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form, Input } from "antd";
+import styled from 'styled-components';
+import { Form, Input } from 'antd';
 
 export const AreaFormWrapper = styled(Form)`
   margin-bottom: 20px;
@@ -16,6 +16,7 @@ export const AreaFormWrapper = styled(Form)`
 `;
 
 export const AreaInput = styled(Input)`
+  font-size: 16px;
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-color: gray;
   color: white;

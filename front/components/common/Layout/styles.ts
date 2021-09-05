@@ -5,6 +5,8 @@ export const Global = createGlobalStyle<{ theme: any }>`
   body{
      background-color: ${({ theme }) => theme.color.BLACK};
    }
+
+   
    
   .ant-row{
     margin-right: 0 !important;

@@ -87,7 +87,7 @@ const SignUpForm = () => {
         </Conditional>
       </InputWrapper>
 
-      <FormButton buttonText="가입하기" loading={signUpLoading} isValid={isValid} />
+      <FormButton buttonText="가입하기" loading={signUpLoading} />
     </SignUpFormWrapper>
   );
 };

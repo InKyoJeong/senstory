@@ -73,6 +73,7 @@ export const DiaryWriteInner = styled.div`
 `;
 
 export const DiaryTitleInput = styled(Input)`
+  font-size: 16px;
   width: 100%;
   height: 40px;
   background-color: ${({ theme }) => theme.color.DARK_GRAY};
@@ -82,6 +83,7 @@ export const DiaryTitleInput = styled(Input)`
 `;
 
 export const DiaryContentInput = styled(Input.TextArea)`
+  font-size: 16px;
   margin-top: 10px;
   background-color: ${({ theme }) => theme.color.DARK_GRAY};
   border-color: #4e4e4f;

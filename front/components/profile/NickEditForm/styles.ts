@@ -16,6 +16,7 @@ export const NickFormWrapper = styled(Form)`
 `;
 
 export const NickInput = styled(Input)`
+  font-size: 16px;
   background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
   border-color: gray;
   color: white;

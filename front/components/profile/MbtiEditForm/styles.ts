@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form } from "antd";
+import styled from 'styled-components';
+import { Form } from 'antd';
 
 export const MbtiFormWrapper = styled(Form)`
   margin-bottom: 20px;
@@ -18,6 +18,7 @@ export const MbtiFormWrapper = styled(Form)`
     background-color: ${({ theme }) => theme.color.MIDDLE_GRAY};
     border-radius: 10px;
     color: white;
+    font-size: 16px;
 
     &:focus {
       outline: none;

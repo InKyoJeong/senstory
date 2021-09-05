@@ -6,6 +6,7 @@ export const WriteWrapper = styled.div`
 `;
 
 export const WriteInput = styled(Input)`
+  font-size: 16px;
   width: 100%;
   height: 40px;
   background-color: gray;

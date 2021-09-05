@@ -21,10 +21,6 @@ const LoginForm = () => {
     }
   }, [logInError]);
 
-  useEffect(() => {
-    setIsValid(email.length != 0 && password.length != 0);
-  }, [email, password]);
-
   const onSubmitForm = useCallback(() => {
     dispatch(loginRequest({ email, password }));
   }, [email, password]);
@@ -55,7 +51,7 @@ const LoginForm = () => {
         </div>
       </InputWrapper>
 
-      <FormButton buttonText="로그인" loading={logInLoading} isValid={isValid} />
+      <FormButton buttonText="로그인" loading={logInLoading} />
     </FormWrapper>
   );
 };
