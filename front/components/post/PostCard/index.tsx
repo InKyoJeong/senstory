@@ -42,7 +42,7 @@ import {
 } from './styles';
 import { RootState } from '../../../reducers';
 import { Post } from '../../../interfaces/post';
-import { backUrl } from '../../../config/config';
+import { backUrl, frontUrl } from '../../../config/config';
 
 interface PostCardProps {
   post: Post;
@@ -166,7 +166,7 @@ const PostCard = forwardRef(({ post }: PostCardProps, ref: React.ForwardedRef<HT
             </InActive>
           ),
           <RetweetOutlined key="re" onClick={onRepost} />,
-          <CopyToClipboard text={`http://localhost:3060/post/${post.id}`}>
+          <CopyToClipboard text={`${frontUrl}/post/${post.id}`}>
             <ExportOutlined key="share" onClick={onToggleModal} />
           </CopyToClipboard>,
         ]}

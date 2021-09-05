@@ -15,6 +15,7 @@ import { loadUserAllPostRequest } from '../../reducers/post/loadUserAllPost';
 import { loadMeRequest } from '../../reducers/user/loadMe';
 import { loadUserRequest } from '../../reducers/user/loadUser';
 import { RootState } from '../../reducers';
+import { frontUrl } from '../../config/config';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -69,8 +70,8 @@ const User = () => {
           <meta name="description" content={`${userInfo.nickname}님`} />
           <meta property="og:title" content={`${userInfo.nickname}님`} />
           <meta property="og:description" content={`${userInfo.nickname}님`} />
-          <meta property="og:image" content="http://localhost:3060/favicon.ico" />
-          <meta property="og:url" content={`http://localhost:3060/user/${id}`} />
+          <meta property="og:image" content={`${frontUrl}/favicon.ico`} />
+          <meta property="og:url" content={`${frontUrl}/user/${id}`} />
         </Head>
 
         <UserProfileForm userInfo={userInfo} />

@@ -12,6 +12,7 @@ import { loadSinglePostRequest } from '../../reducers/post/loadSinglePost';
 import { loadMeRequest } from '../../reducers/user/loadMe';
 import { RootState } from '../../reducers';
 import CustomError from '../../components/common/CustomError';
+import { frontUrl } from '../../config/config';
 
 const Post = () => {
   const router = useRouter();
@@ -37,9 +38,9 @@ const Post = () => {
         <meta property="og:description" content={singlePost?.content} />
         <meta
           property="og:image"
-          content={singlePost?.Images[0] ? singlePost?.Images[0].src : 'http://localhost:3060/favicon.ico'}
+          content={singlePost?.Images[0] ? singlePost?.Images[0].src : `${frontUrl}/favicon.ico`}
         />
-        <meta property="og:url" content={`http://localhost:3060/post/${id}`} />
+        <meta property="og:url" content={`${frontUrl}/post/${id}`} />
       </Head>
       <PostCard post={singlePost} />
     </Layout>

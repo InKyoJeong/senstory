@@ -6,7 +6,6 @@ import { loginRequest } from '../../../reducers/user/login';
 import MiniTitle from '../../common/MiniTitle';
 import { FormWrapper, LoginInput, InputWrapper, TestButton } from './styles';
 import FormButton from '../FormButton';
-import { Button } from 'antd';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
