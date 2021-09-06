@@ -530,9 +530,9 @@ const Layout = ({
         md: 0,
         lg: 7,
         xxl: 6,
-        children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(Conditional/* default */.Z, {
+        children: [/*#__PURE__*/jsx_runtime_.jsx(Conditional/* default */.Z, {
           condition: me && me.id && profile,
-          children: [/*#__PURE__*/jsx_runtime_.jsx(MyProfileForm/* default */.Z, {}), /*#__PURE__*/jsx_runtime_.jsx(home_RandomUserForm, {})]
+          children: /*#__PURE__*/jsx_runtime_.jsx(MyProfileForm/* default */.Z, {})
         }), /*#__PURE__*/(0,jsx_runtime_.jsxs)(Conditional/* default */.Z, {
           condition: me && me.id && main,
           children: [/*#__PURE__*/jsx_runtime_.jsx(home_RelatedCheck, {

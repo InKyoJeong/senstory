@@ -39,8 +39,6 @@ var external_axios_ = __webpack_require__(2376);
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 // EXTERNAL MODULE: ./reducers/user/loadMe.ts
 var loadMe = __webpack_require__(1130);
-// EXTERNAL MODULE: ./reducers/user/randomUser.ts
-var randomUser = __webpack_require__(8947);
 // EXTERNAL MODULE: ./components/common/Layout/index.tsx + 9 modules
 var Layout = __webpack_require__(5394);
 // EXTERNAL MODULE: ./components/common/MyProfileForm/index.tsx + 1 modules
@@ -586,6 +584,8 @@ const IntroEditForm = () => {
 /* harmony default export */ const profile_IntroEditForm = (IntroEditForm);
 // EXTERNAL MODULE: ./config/config.ts
 var config = __webpack_require__(4299);
+// EXTERNAL MODULE: ./components/common/Loader/index.tsx + 1 modules
+var Loader = __webpack_require__(2620);
 ;// CONCATENATED MODULE: ./pages/profile.tsx
 
 
@@ -595,6 +595,7 @@ var config = __webpack_require__(4299);
 
 
 
+ // import { randomUserRequest } from '../reducers/user/randomUser';
 
 
 
@@ -637,16 +638,22 @@ const Profile = () => {
     mutate: mutateFollowing
   } = external_swr_default()(`${config/* backUrl */.T}/user/followings?limit=${followingLimit}`, fetcher);
   (0,external_react_.useEffect)(() => {
-    if (!me) {
-      router_default().push('/login');
+    if (!(me && me.id)) {
+      router_default().push('/');
     }
-  }, [me]);
+  }, [me && me.id]);
   const loadMoreFollowings = (0,external_react_.useCallback)(() => {
     setFollowingLimit(prev => prev + 3);
   }, []);
   const loadMoreFollowers = (0,external_react_.useCallback)(() => {
     setFollowerLimit(prev => prev + 3);
   }, []);
+
+  if (!me) {
+    return /*#__PURE__*/jsx_runtime_.jsx(Loader/* default */.Z, {
+      text: "\uB85C\uADF8\uC778 \uD398\uC774\uC9C0\uB85C \uC774\uB3D9\uC911..."
+    });
+  }
 
   if (followerError || followingError) {
     console.error(followerError || followingError);
@@ -692,8 +699,8 @@ const getServerSideProps = configureStore/* default.getServerSideProps */.Z.getS
     (external_axios_default()).defaults.headers.Cookie = cookie;
   }
 
-  store.dispatch((0,loadMe/* loadMeRequest */.a4)());
-  store.dispatch((0,randomUser/* randomUserRequest */.hL)());
+  store.dispatch((0,loadMe/* loadMeRequest */.a4)()); // store.dispatch(randomUserRequest());
+
   store.dispatch(external_redux_saga_.END);
   await store.sagaTask.toPromise();
 });
@@ -911,7 +918,7 @@ module.exports = require("styled-components");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [61,51,790,442,370], () => (__webpack_exec__(9163)));
+var __webpack_exports__ = __webpack_require__.X(0, [61,51,790,620,442,370], () => (__webpack_exec__(9163)));
 module.exports = __webpack_exports__;
 
 })();

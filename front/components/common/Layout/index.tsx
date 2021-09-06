@@ -40,7 +40,7 @@ const Layout = ({ children, main = false, profile = false, related = false, diar
         <Col xs={0} sm={0} md={0} lg={7} xxl={6}>
           <Conditional condition={me && me.id && profile}>
             <MyProfileForm />
-            <RandomUserForm />
+            {/* <RandomUserForm /> */}
           </Conditional>
 
           <Conditional condition={me && me.id && main}>
