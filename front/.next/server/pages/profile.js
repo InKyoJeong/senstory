@@ -637,18 +637,16 @@ const Profile = () => {
     mutate: mutateFollowing
   } = external_swr_default()(`${config/* backUrl */.T}/user/followings?limit=${followingLimit}`, fetcher);
   (0,external_react_.useEffect)(() => {
-    if (!(me && me.id)) {
+    if (!(me && me !== null && me !== void 0 && me.id)) {
       router_default().push('/login');
     }
-  }, [me && me.id]);
+  }, [me && (me === null || me === void 0 ? void 0 : me.id)]);
   const loadMoreFollowings = (0,external_react_.useCallback)(() => {
     setFollowingLimit(prev => prev + 3);
   }, []);
   const loadMoreFollowers = (0,external_react_.useCallback)(() => {
     setFollowerLimit(prev => prev + 3);
-  }, []); // if (!me) {
-  //   return <Loader text="로그인 페이지로 이동중..." />;
-  // }
+  }, []);
 
   if (followerError || followingError) {
     console.error(followerError || followingError);
