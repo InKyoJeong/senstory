@@ -3,7 +3,7 @@ const sharp = require("sharp");
 
 const s3 = new AWS.S3();
 
-exports.handler = (event, context, callback) => {
+exports.handler = async (event, context, callback) => {
   const Bucket = event.Records[0].s3.bucket.name;
   const Key = decodeURIComponent(event.Records[0].s3.object.key);
   const filename = Key.split("/")[Key.split("/").length - 1];
@@ -14,9 +14,7 @@ exports.handler = (event, context, callback) => {
   try {
     const s3Object = await s3.getObject({ Bucket, Key }).promise();
     const resizedImage = await sharp(s3Object.Body)
-      .resize(400, 400, {
-        fit: "inside",
-      })
+      .resize(400, 400, { fit: "inside" })
       .toFormat(requiredFormat)
       .toBuffer();
     await s3
