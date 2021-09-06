@@ -20,7 +20,6 @@ import FollowList from '../components/profile/FollowList';
 import AreaEditForm from '../components/profile/AreaEditForm';
 import IntroEditForm from '../components/profile/IntroEditForm';
 import { backUrl } from '../config/config';
-import Loader from '../components/common/Loader';
 
 const fetcher = (url: string) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
@@ -42,10 +41,10 @@ const Profile = () => {
   } = useSWR(`${backUrl}/user/followings?limit=${followingLimit}`, fetcher);
 
   useEffect(() => {
-    if (!(me && me?.id)) {
+    if (!me) {
       Router.push('/login');
     }
-  }, [me && me?.id]);
+  }, [me]);
 
   const loadMoreFollowings = useCallback(() => {
     setFollowingLimit((prev) => prev + 3);

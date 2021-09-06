@@ -637,10 +637,10 @@ const Profile = () => {
     mutate: mutateFollowing
   } = external_swr_default()(`${config/* backUrl */.T}/user/followings?limit=${followingLimit}`, fetcher);
   (0,external_react_.useEffect)(() => {
-    if (!(me && me !== null && me !== void 0 && me.id)) {
+    if (!me) {
       router_default().push('/login');
     }
-  }, [me && (me === null || me === void 0 ? void 0 : me.id)]);
+  }, [me]);
   const loadMoreFollowings = (0,external_react_.useCallback)(() => {
     setFollowingLimit(prev => prev + 3);
   }, []);
