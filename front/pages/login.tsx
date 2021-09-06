@@ -17,10 +17,10 @@ const Login = () => {
   const { me, logInFinish, logInLoading } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    if (me && me.id) {
+    if (me && me?.id) {
       Router.replace('/');
     }
-  }, [me && me.id]);
+  }, [me && me?.id]);
 
   useEffect(() => {
     if (logInFinish) {
@@ -32,7 +32,7 @@ const Login = () => {
     return <Loader text="로그인 중..." />;
   }
 
-  if (me && me.id) {
+  if (me && me?.id) {
     return <Loader text="로그인 되었습니다. 홈으로 이동 중..." />;
   }
 

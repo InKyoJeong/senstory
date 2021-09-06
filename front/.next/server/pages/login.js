@@ -191,10 +191,10 @@ const Login = () => {
     logInLoading
   } = (0,external_react_redux_.useSelector)(state => state.user);
   (0,external_react_.useEffect)(() => {
-    if (me && me.id) {
+    if (me && me !== null && me !== void 0 && me.id) {
       router_default().replace('/');
     }
-  }, [me && me.id]);
+  }, [me && (me === null || me === void 0 ? void 0 : me.id)]);
   (0,external_react_.useEffect)(() => {
     if (logInFinish) {
       router_default().replace('/');
@@ -207,7 +207,7 @@ const Login = () => {
     });
   }
 
-  if (me && me.id) {
+  if (me && me !== null && me !== void 0 && me.id) {
     return /*#__PURE__*/jsx_runtime_.jsx(Loader/* default */.Z, {
       text: "\uB85C\uADF8\uC778 \uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uD648\uC73C\uB85C \uC774\uB3D9 \uC911..."
     });
