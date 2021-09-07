@@ -13,6 +13,12 @@
 $ npm run dev
 ```
 
+## Start(ubuntu)
+
+```
+$ sudo npm start
+```
+
 <!-- ## sequelize setting
 
 ```bash

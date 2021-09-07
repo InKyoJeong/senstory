@@ -6,7 +6,7 @@
   <img src="https://user-images.githubusercontent.com/48676844/132283332-7fbd302f-bdcf-4854-b466-d2308098c38d.png" width='100px' height='100px' alt="senstory" >
   <h3 align="center">Sense + Story</h3>
   <h4 align="center">사람들과 소통하는 공간과 나만의 감정을 기록하는 공간을 더한 sns 프로젝트</h4>
-  <p align="center">2021.07.04 ~ 2021.09.06</p>
+  <!-- <p align="center">2021.07.04 ~ 2021.09.06</p> -->
   <br />
 </p>
 
@@ -16,7 +16,7 @@
 - [스크린 샷](#screenshots)
 - [에러해결과 알게된 것들](#myerror)
 - [자잘한 실수들](#mistake)
-- [배포 이후 업데이트](#update)
+- [업데이트 사항](#update)
 
 <br>
 
@@ -62,13 +62,13 @@
 
 ### 다이어리 상세
 
-- 각 블럭을 누르면 기록했던 자세한 내용들을 볼수있다.
+- 각 블럭을 누르면 기록했던 내용들을 볼수있다.
 
 ![detail](https://user-images.githubusercontent.com/48676844/132283184-5b4aa5b9-8e4b-45f7-b6c6-88f1e50b2bf9.png)
 
 ### 개인 프로필
 
-- 프로필 사진을 누르면 사용자의 프로필을 볼 수 있다.
+- 프로필 사진 클릭시 특정 사용자의 프로필을 볼 수 있다.
 
 ![user](https://user-images.githubusercontent.com/48676844/132283224-adc8e72b-8bd9-4445-9fc6-c0e1c26ba5b4.png)
 
@@ -80,7 +80,7 @@
 
 ## 📌 <a name="myerror"></a>에러해결과 알게된 것들
 
-#### 1) 뷰에서 특정 에러 경고창을 띄울때, 다른 페이지를 갔다가 다시 홈에 방문하면 동일하게 에러 경고창이 뜨는 문제
+#### 1) 페이지에서 에러 경고창을 띄울때, 다른 페이지를 갔다가 다시 홈에 방문하면 동일하게 에러 경고창이 뜨는 문제
 
 ```js
 useEffect(() => {
@@ -90,9 +90,9 @@ useEffect(() => {
 }, [repostError]);
 ```
 
-- 이런식으로 뷰에서 특정 에러 경고창을 띄울때, 다른 페이지를 갔다가 다시 홈에 방문하면 동일하게 에러 경고창이 뜨는 문제가 있었다.
-- error상태가 계속 FAILURE 라서 뜨는 문제니까, 한번 경고창을 띄운 이후에는 에러값을 없애야 할거같다고 생각했다.
-- 그래서 **ERROR_FINISH** 라는 액션을 하나 더 만들어서 `finally`로 error를 null로 변경해서 해결했다.
+- 이런식으로 특정 에러 경고창을 띄울때, 다른 페이지를 갔다가 다시 홈에 방문하면 동일하게 에러 경고창이 뜨는 문제가 있었다.
+- 상태가 계속 FAILURE 인 것이 문제이므로, 한번 경고창을 띄운 이후에는 에러값을 없애야 할거같다고 생각했다.
+- 그래서 **ERROR_FINISH** 라는 액션을 하나 더 만들어서 `finally`로 _error_ 를 _null_ 로 변경해서 해결했다.
 
 ```js
 // saga
@@ -120,13 +120,12 @@ case REPOST_ERROR_FINISH:
 #### 2) Warning: Prop className did not match. Server: "..." Client: "..."
 
 - 경고
+  - next에서 _styled-components_ 를 사용할 경우 첫 로딩 이후 새로고침 시 발생
+  - 첫 페이지는 SSR로 작동하며 이후 CSR로 화면을 렌더링하는데, 서버에서 받은 해시+클래스명과 이후 클라이언트에서 작동하는 해시+클래스 명이 달라지면서 스타일을 불러올수 없는 문제였다.
 
 ```
 Warning: Prop `className` did not match. Server: "sc-dlnjwi jMrkpW" Client: "sc-bdnxRM kUqbXD"
 ```
-
-- next에서 _styled-components_ 를 사용할 경우 첫 로딩 이후 새로고침 시 발생
-- 첫 페이지는 SSR로 작동하며 이후 CSR로 화면을 렌더링하는데, 서버에서 받은 해시+클래스명과 이후 클라이언트에서 작동하는 해시+클래스 명이 달라지면서 스타일을 불러올수 없는 문제였다.
 
 - 해결
 
@@ -224,7 +223,7 @@ const comment = await Comment.create({
 
 ![errorbuild](https://user-images.githubusercontent.com/48676844/132298788-5f18e73d-323e-444e-a627-1b2ffcc3ceb1.png)
 
-이런 에러가 먼저 떴는데, 아래 명령어로 설치하라는 문구를 따라 설치하고 나서 빌드를 했지만 위의 에러가 발생했다.
+이런 에러가 먼저 발생했는데, 아래 명령어로 설치하라는 문구를 따라서 설치하고 나서 다시 빌드를 했지만 위의 에러가 발생했다.
 
 ```
 $ npm install --save-dev eslint-config-next
@@ -277,7 +276,7 @@ export const FollowButtonContainer = styled(Button)<{ unfollow: boolean }>
 - aws 프리티어인 메모리1기가(t2.micro)를 사용해서 그런지 메모리 부족으로 인한 에러가 발생했다.
 - 빌드시 _**GENERATE_SOURCEMAP=false**_ 를 넣어 옵션을 끄는방법, 하드디스크를 가상메모리로 전환시켜 사용한다는 **swap 메모리**를 지정하는 방법 등도 있었다.
 - 그러나 첫번째로는 해결되지않았고 두번째는 가상메모리를 쓰면 성능에 문제가 생길수도 있을거같아서 빌드 결과물인 **.next**를 _git lfs_ 를 이용하여 올리고 서버로 전송해서 실행시켜 보았다.
-- 일단 임시적으로 해결한 방법이라서 aws 메모리를 늘리는법 말고도 빌드 규모를 줄이기 위한 코드 스플리팅 등의 방법도 알아봐야겠다.
+- 일단 임시적으로 해결한 방법이라서 aws 메모리를 늘리는법 말고도 빌드 규모를 줄이기 위한 코드 스플리팅 등의 방법도 학습해봐야겠다.
 
 <br>
 
@@ -285,7 +284,7 @@ export const FollowButtonContainer = styled(Button)<{ unfollow: boolean }>
 
 ![httpscors](https://user-images.githubusercontent.com/48676844/132301027-cb658db2-6f32-4588-9aae-574184afdb8c.png)
 
-- https를 적용 후에, 포스트 등록은 에러가 발생하지 않지만 사진파일을 올리면 cors 에러가 발생했다. cors 설정에는 문제가 없는 것 같은데 어떤 부분이 문제인지 몰라서 힘들었다. 그런데 nginx 설정이 되어 있는 배포 환경에서 이미지 용량이 커도 cors 에러가 발생한다고 한다.
+- **https**를 적용 후에, 포스트 등록은 에러가 발생하지 않지만 사진파일을 올리면 cors 에러가 발생했다. cors 설정에는 문제가 없는 것 같은데 어떤 부분이 문제인지 몰라서 힘들었다. 그런데 nginx 설정이 되어 있는 배포 환경에서 이미지 용량이 커도 cors 에러가 발생한다고 한다.
 - nginx의 기본설정에 **_client_max_body_size_** 는 1mb로 설정 되어있기 때문이다.
 - front/back 서버의 _nginx.conf_ 파일 http 부분에 다음 코드를 추가하였다.
 
@@ -377,7 +376,7 @@ $ kill -9 [PID_NUM]
 
 <br>
 
-## 📌 <a name="update"></a>배포 이후 업데이트
+## 📌 <a name="update"></a>배포 이후 업데이트 사항
 
 - 프로필페이지에서 로그아웃시 에러창이 뜨는 문제
   - 랜덤 사용자 추천을 프로필 페이지에서는 제거
@@ -386,3 +385,36 @@ $ kill -9 [PID_NUM]
   - 폰트크기가 작으면 자동으로 확대를 하므로, 16px으로 수정
 - 람다로 이미지를 리사이징했는데, 세로 사진이 가로로 회전하는 문제
   - sharp 옵션에서 `.withMetadata()` 를 추가하여 회전되지 않게 수정
+
+<!-- ## nginx 관련 명령어
+
+- /etc/nginx/nginx.conf가 바뀔 때마다 재시작이 필요
+
+```bash
+// 시작
+$ sudo service nginx start
+$ sudo systemctl start nginx
+$ sudo /etc/init.d/nginx start
+
+// 재시작
+$ sudo service nginx restart
+$ sudo systemctl restart nginx
+$ sudo /etc/init.d/nginx restart
+
+// 중지
+$ sudo service nginx stop
+$ sudo systemctl stop nginx
+$ sudo /etc/init.d/nginx stop
+
+// 상태
+$ sudo service nginx status
+$ sudo systemctl status nginx
+
+// 설정 reload
+$ sudo service nginx reload
+$ sudo systemctl reload nginx
+$ sudo nginx -s reload
+
+// 설정파일 문법 체크
+$ sudo nginx -t
+``` -->

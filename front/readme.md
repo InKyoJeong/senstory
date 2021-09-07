@@ -10,6 +10,12 @@ $ npm run dev
 $ npm run build
 ```
 
+## Start(ubuntu)
+
+```
+$ sudo npx pm2 start npm -- start
+```
+
 <!-- ### antd
 
 - xs screen < 576px
