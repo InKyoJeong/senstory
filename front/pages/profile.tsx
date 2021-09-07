@@ -56,7 +56,7 @@ const Profile = () => {
   }, []);
 
   if (!me) {
-    return <Loader text="로그인 페이지로 이동중..." />;
+    return <Loader text="홈으로 이동중..." />;
   }
 
   if (followerError || followingError) {

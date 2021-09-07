@@ -265,7 +265,7 @@ Type error: Cannot find module '../../common/FollowButton' or its corresponding 
 - 해결
   - styled-component에서 props의 타입을 지정하고 ubuntu에서도 결국 빌드가 성공했다.
 
-```
+```js
 export const FollowButtonContainer = styled(Button)<{ unfollow: boolean }>
 ```
 
@@ -380,8 +380,9 @@ $ kill -9 [PID_NUM]
 ## 📌 <a name="update"></a>배포 이후 업데이트
 
 - 프로필페이지에서 로그아웃시 에러창이 뜨는 문제
-  - randomUser추천을 프로필페이지에서는 제거하고, 로그아웃하여 유저정보가 없다면 홈으로 이동하게 수정
+  - 랜덤 사용자 추천을 프로필 페이지에서는 제거
+  - 로그아웃하여 유저정보가 없다면 홈으로 이동하게 수정
 - 인풋창 클릭시 모바일에서 자동으로 스크린이 zoom되는 현상 수정
-  - 폰트크기가 16px이하면 자동으로 확대를 하므로, 16으로 수정
+  - 폰트크기가 작으면 자동으로 확대를 하므로, 16px으로 수정
 - 람다로 이미지를 리사이징했는데, 세로 사진이 가로로 회전하는 문제
   - sharp 옵션에서 `.withMetadata()` 를 추가하여 회전되지 않게 수정
