@@ -1,4 +1,4 @@
-## [Senstroy](https://senstory.kr)
+## [Senstory](https://senstory.kr)
 
 <br>
 
@@ -286,7 +286,8 @@ export const FollowButtonContainer = styled(Button)<{ unfollow: boolean }>
 
 - **https**를 적용 후에, 포스트 등록은 에러가 발생하지 않지만 사진파일을 올리면 cors 에러가 발생했다. cors 설정에는 문제가 없는 것 같은데 어떤 부분이 문제인지 몰라서 힘들었다. 그런데 nginx 설정이 되어 있는 배포 환경에서 이미지 용량이 커도 cors 에러가 발생한다고 한다.
 - nginx의 기본설정에 **_client_max_body_size_** 는 1mb로 설정 되어있기 때문이다.
-- front/back 서버의 _nginx.conf_ 파일 http 부분에 다음 코드를 추가하였다.
+  - [http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
+- front/back 서버의 _nginx.conf_ 파일 http 부분에 다음 코드를 추가하여 20mb로 크기를 변경했다.
 
 ```bash
 # sudo vim /etc/nginx/nginx.conf
